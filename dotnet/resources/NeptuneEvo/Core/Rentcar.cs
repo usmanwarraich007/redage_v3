@@ -308,9 +308,9 @@ namespace NeptuneEvo.Core
             new RentCarData(98, "coach", 20, new List<RentCarId>() { RentCarId.JobBus }, JobsId.Bus), 
  
             // 
-            new RentCarData(99, "pounder", 0, new List<RentCarId>() { RentCarId.JobTrucker }, JobsId.Trucker), 
-            new RentCarData(100, "benson", 0, new List<RentCarId>() { RentCarId.JobTrucker }, JobsId.Trucker), 
-            new RentCarData(101, "rallytruck", 0, new List<RentCarId>() { RentCarId.JobTrucker }, JobsId.Trucker), 
+            new RentCarData(99, "pounder", 100, new List<RentCarId>() { RentCarId.JobTrucker }, JobsId.Trucker), 
+            new RentCarData(100, "benson", 250, new List<RentCarId>() { RentCarId.JobTrucker }, JobsId.Trucker), 
+            new RentCarData(101, "rallytruck", 750, new List<RentCarId>() { RentCarId.JobTrucker }, JobsId.Trucker), 
  
             // 
             new RentCarData(102, "stockade", 10, new List<RentCarId>() { RentCarId.JobCollector }, JobsId.CashCollector), 
@@ -489,10 +489,17 @@ namespace NeptuneEvo.Core
             new RentCarSpawn(28, new Vector3(-369.13602, -192.6861, 37.23995), new Vector3(-2.2892237, 1.984975, 114.70944)),
             new RentCarSpawn(29, new Vector3(1691.1672, 4782.2334, 42.027508), new Vector3(-0.0001255144, 0.031130577, 90.62616)),
 
-            new RentCarSpawn(30, new Vector3(433.10574, -602.8735, 28.106157), new Vector3(-0.8563, -1.3178291, 28.106157)),
-            new RentCarSpawn(30, new Vector3(433.45776, -605.58044, 28.106354), new Vector3(-0.8563, -1.3178291, 28.106354)),
-            new RentCarSpawn(30, new Vector3(433.2148, -608.30786, 26.106222), new Vector3(-0.8563, -1.3178291, 26.106222)),
-             new RentCarSpawn(30, new Vector3(432.78452, -610.89014, 28.106138), new Vector3(-0.8563, -1.3178291, 28.106138)),
+            new RentCarSpawn(30, new Vector3(902.8164, -191.28867, 73.90146), new Vector3(-0.027476171, 0.1384309, 57.97243)),
+            new RentCarSpawn(30, new Vector3(898.3195, -184.01509, 73.89375), new Vector3(1.1147208, 1.2942469, -121.70208)),
+            new RentCarSpawn(30, new Vector3(899.8642, -180.81726, 73.964355), new Vector3(2.363212, 1.3178126, -121.72175)),
+            new RentCarSpawn(30, new Vector3(904.24, -188.6237, 73.917786), new Vector3(-0.16111109, -1.857971, 58.03828)),
+            new RentCarSpawn(30, new Vector3(905.93585, -185.80649, 74.099236), new Vector3(-0.70865935, -3.5652447, 58.61184)),
+            new RentCarSpawn(30, new Vector3(908.05286, -182.84102, 74.27756), new Vector3(-0.71112895, -1.2539438, 57.55628)),
+            new RentCarSpawn(30, new Vector3(914.0668, -160.31645, 74.86101), new Vector3(-3.011666, 2.961873, -166.9159)),
+            new RentCarSpawn(30, new Vector3(911.6437, -164.16058, 74.451675), new Vector3(-2.2028284, 4.2686715, -167.0033)),
+            new RentCarSpawn(30, new Vector3(919.3124, -163.84875, 74.89035), new Vector3(-2.6110318, -1.199865, 99.85049)),
+            new RentCarSpawn(30, new Vector3(917.83545, -167.19456, 74.68027), new Vector3(-4.4208026, -0.9922294, 101.08802)),
+            new RentCarSpawn(30, new Vector3(914.87036, -170.95316, 74.47221), new Vector3(-2.322488, 0.40433708, 100.489685)),
 
             new RentCarSpawn(31, new Vector3(-1330.758, 44.09792, 53.48625), new Vector3(1.926815, -0.7770224, 272.733)),
             new RentCarSpawn(31, new Vector3(-1331.057, 45.90104, 53.48906), new Vector3(1.926815, -0.7770224, 272.733)),
@@ -504,19 +511,27 @@ namespace NeptuneEvo.Core
             new RentCarSpawn(32, new Vector3(460.96286, -619.0856, 28.486208), new Vector3(-0.0284836, 0.0007392637, 34.50727)),
             new RentCarSpawn(32, new Vector3(460.36304, -626.06683, 28.473759), new Vector3(-0.0414436, -0.04651098, 34.50727)),
 
-            new RentCarSpawn(33, new Vector3(475.4551, -581.0132, 28.572805), new Vector3(-0.02752222, 0.001027761, -95.00352)), //Trucker
-            new RentCarSpawn(33, new Vector3(474.9516, -586.224, 28.570614), new Vector3(-0.0284836, 0.0007392637, -95.00352)),
-            new RentCarSpawn(33, new Vector3(474.65176, -591.8634, 28.57178), new Vector3(-0.0414436, -0.04651098, -95.00352)),
+            new RentCarSpawn(33, new Vector3(1035.6702, -2502.8691, 28.976217), new Vector3(-0.32226002, -1.2020961, 86.26333)), //Trucker
+            new RentCarSpawn(33, new Vector3(981.342, -2514.422, 28.874794), new Vector3(-0.30495864, 0.030388767, -5.5115523)),
+            new RentCarSpawn(33, new Vector3(993.47327, -2542.1565, 28.877434), new Vector3(-0.28843352, -0.39391035, -4.709389)),
+            new RentCarSpawn(33, new Vector3(988.2242, -2543.508, 28.875763), new Vector3(-0.30184668, -0.0022361565, -5.125958)),
+            new RentCarSpawn(33, new Vector3(982.9293, -2543.0437, 28.875128), new Vector3(-0.31403106, -0.013987683, -5.1128516)),
+            new RentCarSpawn(33, new Vector3(977.26227, -2542.8386, 28.874996), new Vector3(-0.3078568, -0.018375935, -4.5746417)),
+            new RentCarSpawn(33, new Vector3(971.58997, -2542.7356, 28.87525), new Vector3(-0.300278, 0.0011830402, -4.473188)),
+            new RentCarSpawn(33, new Vector3(966.72253, -2493.0432, 28.875286), new Vector3(-0.29982027, 0.018019041, -95.18963)),
 
 
-            new RentCarSpawn(34, new Vector3(408.09454, -651.9381, 28.107466), new Vector3(0, 0, -90.16944)),
-            new RentCarSpawn(34, new Vector3(408.2031, -646.3877, 28.105696), new Vector3(0, 0, -89.16944)),
-            new RentCarSpawn(34, new Vector3(408.5927, -641.38855, 28.10735), new Vector3(0, 0, -89.16944)),
+            new RentCarSpawn(34, new Vector3(-251.7521, -800.73, 32.06821), new Vector3(-0.07124979, -0.6522369, 70.50944)),
+            new RentCarSpawn(34, new Vector3(-253.78963, -806.3217, 31.997648), new Vector3(-0.75878817, -1.0553579, 70.19326)),
+            new RentCarSpawn(34, new Vector3(-255.43657, -810.9291, 31.910107), new Vector3(-0.82312196, -1.3626906, 68.64489)),
+            new RentCarSpawn(34, new Vector3(-183.51378, -833.24915, 30.606346), new Vector3(-2.5574489, -0.053839557, 161.146)),
 
 
-            new RentCarSpawn(35, new Vector3(432.19687, -616.2206, 28.212759), new Vector3(-0.4174736, -0.398448, -93.879036)),
-            new RentCarSpawn(35, new Vector3(431.44775, -620.1358, 28.213644), new Vector3(-1.748471, 0.07867802, -93.879036)),
-            new RentCarSpawn(35, new Vector3(431.3113, -624.54877, 28.212446), new Vector3(0.1475076, -0.6247618, -93.879036)),
+            new RentCarSpawn(35, new Vector3(-214.27658, -1396.4149, 31.479969), new Vector3(-0.0070513403, 0.24732511, -1.8451166)),
+            new RentCarSpawn(35, new Vector3(-211.02673, -1395.2876, 31.460701), new Vector3(0.05056099, 0.21844293, -2.5574648)),
+            new RentCarSpawn(35, new Vector3(-207.78726, -1393.2866, 31.460423), new Vector3(0.09259284, -0.056687277, -4.7259603)),
+            new RentCarSpawn(35, new Vector3(-204.34955, -1390.8542, 31.464195), new Vector3(0.118800394, -0.014325082, -4.841728)),
+            new RentCarSpawn(35, new Vector3(-200.95221, -1389.2278, 31.467638), new Vector3(0.19828947, -0.027469337, -3.9036434)),
 
 
             new RentCarSpawn(36, new Vector3(1026.7847, 2655.2761, 39.033 ), new Vector3(1.4389486, -10.552636, 3.4545832)),
@@ -543,11 +558,12 @@ namespace NeptuneEvo.Core
             new RentCarSpawn(57, new Vector3(1394.9974, -2070.8127, 51.47276), new Vector3(0.9165503, -14.998191, 42.2178)),
             
             //
-            new RentCarSpawn(58, new Vector3(416.29645, -643.93823, 28.281652), new Vector3(-4.6620817, 4.7889757, 89.40946)),
-            new RentCarSpawn(58, new Vector3(416.27982, -649.317, 28.283028), new Vector3(-4.6620817, 4.7889757, 89.40946)),
-            new RentCarSpawn(58, new Vector3(416.46463, -654.5794, 28.281485), new Vector3(-4.6620817, 4.7889757, 89.40946)),
+            new RentCarSpawn(58, new Vector3(143.00418, 88.87534, 84.470924), new Vector3(11.759784, 11.679694, -108.32673)),
+            new RentCarSpawn(58, new Vector3(115.86591, 99.75133, 81.20775), new Vector3(2.0681894, 2.7572758, -109.89315)),
+            new RentCarSpawn(58, new Vector3(78.28004, 105.85141, 79.4785), new Vector3(1.6316543, 0.6632541, -110.39596)),
+            new RentCarSpawn(58, new Vector3(89.00515, 101.92234, 79.38229), new Vector3(-1.5315505, 1.6411599, -110.40726)),
             //
-            new RentCarSpawn(59, new Vector3(-472.08853, -312.73453, 34.352623), new Vector3(2.2234323, 0.110054456, 22.536076)),
+           new RentCarSpawn(59, new Vector3(-472.08853, -312.73453, 34.352623), new Vector3(2.2234323, 0.110054456, 22.536076)),
             new RentCarSpawn(59, new Vector3(-469.5927, -311.55832, 34.356796), new Vector3(2.2234323, 0.110054456, 22.536076)),
             new RentCarSpawn(59, new Vector3(-481.6924, -316.39682, 34.369534), new Vector3(2.2234323, 0.110054456, 22.536076)),
             new RentCarSpawn(59, new Vector3(-479.127, -315.04065, 34.377766), new Vector3(2.2234323, 0.110054456, 22.536076)),
@@ -593,12 +609,12 @@ namespace NeptuneEvo.Core
             //new RentZoneData(28, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-389.61102, -196.51826, 36.54216), -159.795135f, RentCarId.Civilian),
             //new RentZoneData(29, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1695.415, 4785.0933, 41.996357), 52.643776f, RentCarId.Civilian),
 
-            new RentZoneData(30, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.TaxiRent), new Vector3(437.08667, -627.85693, 28.707752), 70.70735f, RentCarId.JobTaxi),
+            new RentZoneData(30, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.TaxiRent), new Vector3(899.3858, -172.74521, 74.01804), -149.6f, RentCarId.JobTaxi),
             new RentZoneData(31, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.LandmowerRent), new Vector3(-1330.482, 42.12986, 53.48915), 0.0f, RentCarId.JobLawnmower),
             new RentZoneData(32, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.BusRent), new Vector3(435.23758, -653.01117, 28.730534), 78.42807f, RentCarId.JobBus),
-            new RentZoneData(33, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FuraRent), new Vector3(438.97568, -606.2591, 28.713915), 109.040101f, RentCarId.JobTrucker),
-  	        new RentZoneData(34, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FurgonRent), new Vector3(438.951, -613.8331, 28.71138), 78.51024f, RentCarId.JobCollector),          
-            new RentZoneData(35, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.MechanikRent), new Vector3(440.13922, -599.6496, 28.714296), 78.0f, RentCarId.JobMechanic),
+            new RentZoneData(33, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FuraRent), new Vector3(1018.9361, -2511.5688, 28.480877), 142.21999f, RentCarId.JobTrucker),
+  	        new RentZoneData(34, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FurgonRent), new Vector3(-196.52617, -830.6757, 30.771637), -65.649086f, RentCarId.JobCollector),          
+            new RentZoneData(35, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.MechanikRent), new Vector3(-229.61082, -1378.2086, 31.258224), 179.0f, RentCarId.JobMechanic),
 
          // new RentZoneData(36, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1024.0071, 2651.1096, 39.55115), 3.2891867f, RentCarId.Civilian),
          // new RentZoneData(37, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1711.9036, 3320.435, 41.146633), 105.430374f, RentCarId.Civilian),
@@ -623,7 +639,7 @@ namespace NeptuneEvo.Core
             new RentZoneData(56, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-1237.501, -1395.8168, 4.141041), 122.99152f, RentCarId.Civilian),
             new RentZoneData(57, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1389.4164, -2073.133, 51.99858), 53.371437f, RentCarId.Civilian),
             //
-            new RentZoneData(58, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FurgonRent2), new Vector3(437.9226, -621.9111, 28.7092), 83.0f, RentCarId.JobPostman),
+            new RentZoneData(58, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FurgonRent2), new Vector3(136.40952, 94.93223, 83.507645), 102.5f, RentCarId.JobPostman), // Postal NPC
             new RentZoneData(59, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-478.59937, -304.3146, 35.113594), -157f, RentCarId.Civilian),
             new RentZoneData(60, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-227.15689, -2666.8054, 6.0002985),  7.2f, RentCarId.Civilian), // НУПАУАУАУ
           //  new RentZoneData(61, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-2334.4495, 3422.5938, 29.965755), 104.25f, RentCarId.Civilian),
