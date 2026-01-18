@@ -75,17 +75,17 @@ namespace NeptuneEvo.Fractions.Table.Vehicle
                 var vData = fractionData.Vehicles[number];
                 if (vData.rank > memberFractionData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantUpToRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantUpToRank), 3000);
                     return;
                 }
                 if (rank > memberFractionData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantUpVehicleRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantUpVehicleRank), 3000);
                     return;
                 }
                 if (rank < 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantSetNullRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantSetNullRank), 3000);
                     return;
                 }
                 Commands.SetFracVehRank(player, vehicle, rank);
@@ -118,23 +118,23 @@ namespace NeptuneEvo.Fractions.Table.Vehicle
                 {
                     if (characterData.Money < 20)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoneyNeed, 20 - characterData.Money), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoneyNeed, 20 - characterData.Money), 3000);
                         return;
                     }
                     if (vehicleLocalData.Occupants.Count >= 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarUsed), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarUsed), 3000);
                         return;
                     }
                     if (vehicleLocalData.CanMats || vehicleLocalData.CanDrugs || vehicleLocalData.CanMedKits)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarCantOtognat), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarCantOtognat), 3000);
                         return;
                     }
                     Admin.RespawnFractionCar(vehicle);
                     MoneySystem.Wallet.Change(player, -20);
                     GameLog.Money($"player({characterData.UUID})", $"server", 20, $"fracCarEvac");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarOtognana), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarOtognana), 3000);
                     GetVehicles(player);
                 }
             }
@@ -159,7 +159,7 @@ namespace NeptuneEvo.Fractions.Table.Vehicle
                 if (vehicleLocalData.Fraction == memberFractionData.Id && memberFractionData.Rank >= vehicleLocalData.MinRank)
                 {
                     Trigger.ClientEvent(player, "createWaypoint", vehicle.Position.X, vehicle.Position.Y);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GPSOtmechenoCarFraction), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GPSOtmechenoCarFraction), 3000);
                 }
             }
             catch (Exception e)
@@ -203,7 +203,7 @@ namespace NeptuneEvo.Fractions.Table.Vehicle
                     Commands.SetFracVehRank(player, vehicle, fractionVehicles[vehicleNumber].defaultRank);
                 }
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucResetDefaultVehRanks), 4500);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucResetDefaultVehRanks), 4500);
             }
             catch (Exception e)
             {

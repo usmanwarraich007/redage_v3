@@ -127,7 +127,7 @@ namespace NeptuneEvo.Jobs
                 if (characterData == null) return;
                 if (characterData.WorkID != (int)JobsId.Electrician)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoElectrician), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoElectrician), 3000);
                     return;
                 }
 
@@ -177,7 +177,7 @@ namespace NeptuneEvo.Jobs
             sessionData.WorkData.OnWork = true;
             Trigger.ClientEvent(player, "createCheckpoint", 15, 1, Checkpoints[check].Position, 1, 0, 255, 0, 0);
             Trigger.ClientEvent(player, "createWorkBlip", Checkpoints[check].Position);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.StartWorkDay), 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.StartWorkDay), 3000);
         }
 
         public static bool EndWork(ExtPlayer player)
@@ -188,7 +188,7 @@ namespace NeptuneEvo.Jobs
             
             if (sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                 sessionData.WorkData.OnWork = false;
                 Customization.ApplyCharacter(player);
                 Trigger.ClientEvent(player, "deleteCheckpoint", 15);
@@ -257,13 +257,13 @@ namespace NeptuneEvo.Jobs
                     {
                         qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                         qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                     }
                     else
                     {
                         qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                         //todo translate (было DataName.PointsQuestGot)
-                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                     }
                 }
 

@@ -614,7 +614,7 @@ namespace NeptuneEvo.Houses
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
                     
                         foreach (var number in vehiclesNumber)
                             await VehicleManager.SaveSql(db, number);
@@ -1002,7 +1002,7 @@ namespace NeptuneEvo.Houses
                 
                 if (!garage.IsCarNumber(vehicleData.SqlId))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEnterGarageVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEnterGarageVeh), 3000);
                     return;
                 }
                 var vehicleLocalData = vehicle.GetVehicleLocalData();
@@ -1011,7 +1011,7 @@ namespace NeptuneEvo.Houses
             
                 if (vehicleData.Health < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarDestroyed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarDestroyed), 3000);
                     return;
                 }
                 VehicleManager.WarpPlayerOutOfVehicle(player, false);
@@ -1041,19 +1041,19 @@ namespace NeptuneEvo.Houses
                 var vehiclesNumber = VehicleManager.GetVehiclesCarNumberToPlayer(house.Owner);
                 if (vehiclesNumber.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoCars), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoCars), 3000);
                     return;
                 }
                 var number = vehiclesNumber[0];
                 var vehicleData = VehicleManager.GetVehicleToNumber(number);
                 if (vehicleData == null || vehicleData.Health < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarDestroyed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarDestroyed), 3000);
                     return;
                 }
                 if (!garage.IsGarageToNumber(vehicleData.SqlId))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarInState), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarInState), 3000);
                     return;
                 }
                 if (player.IsInVehicle) return;
@@ -1064,12 +1064,12 @@ namespace NeptuneEvo.Houses
             {
                 if (sessionData.Following != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                     return;
                 }
                 if (sessionData.Follower != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OtpustiteChela), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OtpustiteChela), 3000);
                     return;
                 }
                 garage.SendPlayer(player);
@@ -1232,19 +1232,19 @@ namespace NeptuneEvo.Houses
             var house = HouseManager.GetHouse(player);
             if (house == null)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GarageError), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GarageError), 3000);
                 return;
             }
             
             if (!Garages.ContainsKey(house.GarageID))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GarageError), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GarageError), 3000);
                 return;
             }
             
             if (house.GarageID != characterData.InsideGarageID)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GarageError), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GarageError), 3000);
                 return;
             }
             
@@ -1252,7 +1252,7 @@ namespace NeptuneEvo.Houses
 
             if (garage == null)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GarageError), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GarageError), 3000);
                 return;
             }
 
@@ -1306,7 +1306,7 @@ namespace NeptuneEvo.Houses
                     
                 if ((vehicle1 != null && vehicleLocalData1.Access != VehicleAccess.Garage) || (vehicle2 != null && vehicleLocalData2.Access != VehicleAccess.Garage))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TwoCarsInGarage), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TwoCarsInGarage), 3000);
                     Trigger.ClientEvent(player, "client.phone.cars.error");
                     return;
                 }
@@ -1341,7 +1341,7 @@ namespace NeptuneEvo.Houses
                 }*/
                 if (vehicle != null && localData?.Access != VehicleAccess.Garage)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarMustInGarage), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarMustInGarage), 3000);
                     Trigger.ClientEvent(player, "client.phone.cars.error");
                     return;
                 }

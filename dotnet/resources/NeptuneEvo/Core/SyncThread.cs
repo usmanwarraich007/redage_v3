@@ -37,7 +37,7 @@ namespace NeptuneEvo.Core
                 var promoCodes = new ConcurrentDictionary<string, Main.PromoCodesData>();
                 var media = new List<int>();
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var promocodes = await db.PromocodesNew
                     .ToListAsync();
@@ -103,7 +103,7 @@ namespace NeptuneEvo.Core
             {
                 var bonusCodes = new ConcurrentDictionary<string, Main.BonusCodesData>();
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var bonuscodes = await db.Bonuscodes
                     .ToListAsync();
@@ -155,15 +155,15 @@ namespace NeptuneEvo.Core
                     foreachPlayer.RemoveFractionMemberData();
                     foreachPlayer.ClearAccessories();
                     Customization.ApplyCharacter(foreachPlayer);
-                    
-                    Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, $"Администратор {player.Name} очистил фракцию, в которой Вы находились.", 3000);
+
+                    Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, $"Administrator {player.Name} has cleared the faction you were in.", 3000);
                 }
-                
+
                 Trigger.SetTask(async () =>
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Fracranks
                             .Where(r => r.Id == fracId)
@@ -181,9 +181,9 @@ namespace NeptuneEvo.Core
                 if (characterData == null) 
                     return;
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно очистили {Manager.FractionNames[fracId]}", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You have successfully cleared {Manager.FractionNames[fracId]}", 3000);
 
-                Admin.AdminLog(characterData.AdminLVL, $"{player.Name} ({player.Value}) очистил фракцию {Manager.FractionNames[fracId]}");
+                Admin.AdminLog(characterData.AdminLVL, $"{player.Name} ({player.Value}) cleared the faction {Manager.FractionNames[fracId]}");
             }
             catch (Exception e)
             {

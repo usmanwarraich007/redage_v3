@@ -286,19 +286,19 @@ namespace NeptuneEvo.NewCasino
                 if (characterData == null) return;
                 if (!FunctionsAccess.IsWorking("blackjack"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 if (!DealerData.ContainsKey(Index)) DealerData.Add(Index, new BlackjackDealerInfo());
                 if (!characterData.InCasino || !characterData.IsAlive || sessionData.CuffedData.Cuffed || DealerData[Index].Players.Contains(player)) return;
                 if (characterData.Money < 500)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Table500Bucks), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Table500Bucks), 3000);
                     return;
                 }
                 if (DealerData[Index].Chairs.Contains(SlotId))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlaceOwned), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlaceOwned), 3000);
                     return;
                 }
                 qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage23, 2, isUpdateHud: true);
@@ -367,16 +367,16 @@ namespace NeptuneEvo.NewCasino
                 else if (UpdateData.CanIChange(player, money, true) != 255) return;
                 if (!BlackJackWorking)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 BlackjackPlayerInfo bInfo = PlayerData[player];
                 if (DealerData[bInfo.Index].GameRunning)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantBetByGame), 5000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantBetByGame), 5000);
                     return;
                 }
-                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BetSuc), 1000);
+                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BetSuc), 1000);
                 MoneySystem.Wallet.Change(player, -money);
                 GameLog.CasinoBJLog(-money);
                 GameLog.Money($"player({characterData.UUID})", $"system", money, $"BJBet");

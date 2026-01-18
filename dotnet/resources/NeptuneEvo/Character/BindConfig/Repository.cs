@@ -168,7 +168,7 @@ namespace NeptuneEvo.Character.BindConfig
                 //if (adminConfig.Invisible)
                 //   player.SetSharedData("INVISIBLE", true);
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.UniqAdminSettings), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.UniqAdminSettings), 3000);
 
                 if (!Main.AllAdminsOnline.Contains (player)) 
                     Main.AllAdminsOnline.Add(player); 
@@ -196,7 +196,7 @@ namespace NeptuneEvo.Character.BindConfig
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Characters
                             .Where(c => c.Uuid == characterData.UUID)
@@ -221,7 +221,7 @@ namespace NeptuneEvo.Character.BindConfig
 
                 ReportSys.onAdminUnLoad(player);
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.UniqAdminSettings), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.UniqAdminSettings), 3000);
             }
             catch (Exception e)
             {

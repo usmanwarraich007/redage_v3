@@ -103,7 +103,7 @@ namespace NeptuneEvo.Events
                 StreetRaceList.Add(player.Value, new StreetRaceData(player, target));
                 PlayerToStreetRaceId.Add(player.Value, player.Value);
                 PlayerToStreetRaceId.Add(target.Value, player.Value);
-                Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.StreetRace), LangFunc.GetText(LangType.Ru, DataName.EnterStavka0to100k), 6, "streetrace");
+                Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.StreetRace), LangFunc.GetText(LangType.En, DataName.EnterStavka0to100k), 6, "streetrace");
             }
             catch (Exception e)
             {
@@ -186,58 +186,58 @@ namespace NeptuneEvo.Events
                 switch (messageId)
                 {
                     case 0:
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
-                        Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
+                        Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                         break;
                     case 1:
                         if (streetRaceData.Status)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouDiedLose), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VragDiedWin), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouDiedLose), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VragDiedWin), 3000);
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VragDiedCancel), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VragDkSWin), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VragDiedCancel), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VragDkSWin), 3000);
                         }
                         break;
                     case 2:
-                        Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VragDkWin), 3000);
+                        Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VragDkWin), 3000);
                         break;
                     case 3:
                         if (streetRaceData.Status)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLeftTsLose), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VragLeftTsWin), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLeftTsLose), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VragLeftTsWin), 3000);
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouleftTsCancel), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VragLeftTsCancel), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouleftTsCancel), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VragLeftTsCancel), 3000);
                         }
                         break;
                     case 4:
                         if (streetRaceData.Status)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMustTsLose), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMustTsLose), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMustTsLose), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMustTsLose), 3000);
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VragLeftTsWinS), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLeftTsCancel), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VragLeftTsWinS), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OpponentLeftTsCancel), 3000);
                         }
                         break;
                     case 5:
                         if (streetRaceData.Status)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerFarWin), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouFarCancel), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerFarWin), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouFarCancel), 3000);
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerFarWin), 3000);
-                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouFarCancel), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerFarWin), 3000);
+                            Notify.Send(WinPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouFarCancel), 3000);
                         }
                         break;
                     default:
@@ -270,21 +270,21 @@ namespace NeptuneEvo.Events
                     {
                         if (targetSessionData.RequestData.IsRequested)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHavBeenBusy), 7000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHavBeenBusy), 7000);
                             return;
                         }
                         targetSessionData.RequestData.IsRequested = true;
                         targetSessionData.RequestData.Request = "StreetRace";
                         targetSessionData.RequestData.From = player;
                         targetSessionData.RequestData.Time = DateTime.Now.AddSeconds(10);
-                        //Notify.Send(streetRaceData.joined, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerOFferGonka, player.Value, streetRaceData.rate), 15000);
-                        EventSys.SendCoolMsg(streetRaceData.joined,"Гонка", "Вызов на гонку", $"{LangFunc.GetText(LangType.Ru, DataName.PlayerOFferGonka, player.Value, streetRaceData.rate)}", "", 10000);
-                        EventSys.SendCoolMsg(player,"Гонка", "Вызов на гонку", $"{LangFunc.GetText(LangType.Ru, DataName.YouOfferGonka, streetRaceData.joined.Value)}", "", 10000);
-                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouOfferGonka, streetRaceData.joined.Value), 8000);
+                        //Notify.Send(streetRaceData.joined, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerOFferGonka, player.Value, streetRaceData.rate), 15000);
+                        EventSys.SendCoolMsg(streetRaceData.joined,"Гонка", "Вызов на гонку", $"{LangFunc.GetText(LangType.En, DataName.PlayerOFferGonka, player.Value, streetRaceData.rate)}", "", 10000);
+                        EventSys.SendCoolMsg(player,"Гонка", "Вызов на гонку", $"{LangFunc.GetText(LangType.En, DataName.YouOfferGonka, streetRaceData.joined.Value)}", "", 10000);
+                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouOfferGonka, streetRaceData.joined.Value), 8000);
                     }
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantGonkaNow), 3000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantGonkaNow), 3000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantGonkaNow), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantGonkaNow), 3000);
             }
             catch (Exception e)
             {
@@ -360,12 +360,12 @@ namespace NeptuneEvo.Events
                 StreetRaceData streetRaceData = StreetRaceList[streetRaceId];
                 int cost = Convert.ToInt32(streetRaceData.rate * 2 * 0.9);
                 Wallet.Change(player, cost);
-                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWinGonka, cost), 8000);
-                EventSys.SendCoolMsg(player,"Гонка", "Победа!", $"{LangFunc.GetText(LangType.Ru, DataName.YouWinGonka, cost)}", "", 10000);
+                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWinGonka, cost), 8000);
+                EventSys.SendCoolMsg(player,"Гонка", "Победа!", $"{LangFunc.GetText(LangType.En, DataName.YouWinGonka, cost)}", "", 10000);
                 StreetRaceList[streetRaceId].Status = false;
                 ExtPlayer LosePlayer = streetRaceData.created.Value == player.Value ? streetRaceData.joined : streetRaceData.created;
-                //Notify.Send(LosePlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLoseGonka), 8000);
-                EventSys.SendCoolMsg(LosePlayer,"Гонка", "Поражение :(", $"{LangFunc.GetText(LangType.Ru, DataName.YouLoseGonka, cost)}", "", 10000);
+                //Notify.Send(LosePlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLoseGonka), 8000);
+                EventSys.SendCoolMsg(LosePlayer,"Гонка", "Поражение :(", $"{LangFunc.GetText(LangType.En, DataName.YouLoseGonka, cost)}", "", 10000);
                 ClearData(LosePlayer, -1);
                 BattlePass.Repository.UpdateReward(player, 35);
                 BattlePass.Repository.UpdateReward(LosePlayer, 35);

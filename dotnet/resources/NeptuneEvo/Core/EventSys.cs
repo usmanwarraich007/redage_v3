@@ -37,12 +37,12 @@ namespace NeptuneEvo.Core
             public ExtPlayer Winner { get; set; }
             public uint Reward { get; set; }
             public ExtColShape Zone { get; set; } = null;
-            public byte EventState { get; set; } = 0; // 0 - МП не создано, 1 - Создано, но не началось, 2 - Создано и началось.
+            public byte EventState { get; set; } = 0; // 0 - MP not created, 1 - Created but not started, 2 - Created and started.
             public DateTime Started { get; set; }
             public int RewardLimit { get; set; } = 0;
             public Dictionary<ExtPlayer, PlayerData> EventMembers = new Dictionary<ExtPlayer, PlayerData>();
         }
-        public static CustomEvent AdminEvent = new CustomEvent(); // Одновременно можно будет создать только одно мероприятие.
+        public static CustomEvent AdminEvent = new CustomEvent(); // Only one event can be created at a time.
         private static readonly nLog Log = new nLog("Core.EventSys");
 
         public static void Init()
@@ -112,7 +112,7 @@ namespace NeptuneEvo.Core
             return false;
         }
 
-        [Command(AdminCommands.Createmp, "Используйте: /createmp [Лимит участников] [Радиус зоны] [Название мероприятия]", GreedyArg = true)]
+        [Command(AdminCommands.Createmp, "Usage: /createmp [Participant limit] [Zone radius] [Event name]", GreedyArg = true)]
         public static void CreateEvent(ExtPlayer player, ushort members, float radius, string eventname)
         {
             try
@@ -134,17 +134,17 @@ namespace NeptuneEvo.Core
                         AdminEvent.Dimension = UpdateData.GetPlayerDimension(player);
                         AdminEvent.Admin = player;
                         AddAdminEventLog();
-                        
-                        //SendPlayersToEvent("Мероприятие", eventname, $"Пропишите /mp чтобы принять участие!", "", 8000);
-                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.EventStart, Chars.Models.ChatColors.AMP, eventname));
-                        if (members != 0) NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.EventMemberLimit, Chars.Models.ChatColors.AMP, members));
-                        else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.LimitMemberNoStart, Chars.Models.ChatColors.AMP));
-                        if (AdminEvent.Zone != null) NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.MpRadiusTp, Chars.Models.ChatColors.AMP, radius));
-                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.TpMpTp, Chars.Models.ChatColors.AMP));
+
+                        //SendPlayersToEvent("Мероприятие", eventname, $"Type /mp to participate!", "", 8000);
+                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.EventStart, Chars.Models.ChatColors.AMP, eventname));
+                        if (members != 0) NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.EventMemberLimit, Chars.Models.ChatColors.AMP, members));
+                        else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.LimitMemberNoStart, Chars.Models.ChatColors.AMP));
+                        if (AdminEvent.Zone != null) NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.MpRadiusTp, Chars.Models.ChatColors.AMP, radius));
+                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.TpMpTp, Chars.Models.ChatColors.AMP));
                     }
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.TooLongMpName));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.TooLongMpName));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.OneMpExists));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.OneMpExists));
             }
             catch (Exception e)
             {
@@ -181,12 +181,12 @@ namespace NeptuneEvo.Core
         {
             if (!player.IsCharacterData()) return;
             if (AdminEvent.EventState == 2)
-            { // Проверяет только после начала мп, когда телепорт закрыт
+            { // Runs the check only after the event has started and the teleport is closed
 
                 if (AdminEvent.EventMembers.ContainsKey(player))
                 {
                     ExitFromMP(player);
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.LeftMpTer));
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.LeftMpTer));
                 }
             }
         }
@@ -201,13 +201,13 @@ namespace NeptuneEvo.Core
                     if (AdminEvent.EventMembers.Count >= 1)
                     {
                         AdminEvent.EventState = 2;
-                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.MpNameStarted, Chars.Models.ChatColors.AMP, AdminEvent.Name));
-                        //SendPlayersToEvent("Мероприятие", AdminEvent.Name, $"Событие началось, телепорт закрыт. Участников: {AdminEvent.EventMembers.Count}. Всем удачи!", "", 10000);
-                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.MpPlayers, Chars.Models.ChatColors.AMP, AdminEvent.EventMembers.Count));
+                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.MpNameStarted, Chars.Models.ChatColors.AMP, AdminEvent.Name));
+                        //SendPlayersToEvent("Event", AdminEvent.Name, $"The event has started, teleport is closed. Participants: {AdminEvent.EventMembers.Count}. Good luck to everyone!", "", 10000);
+                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.MpPlayers, Chars.Models.ChatColors.AMP, AdminEvent.EventMembers.Count));
                     }
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.CantStartMpWithout));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.CantStartMpWithout));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MpNotStarted));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MpNotStarted));
             }
             catch (Exception e)
             {
@@ -215,7 +215,7 @@ namespace NeptuneEvo.Core
             }
         }
 
-        [Command(AdminCommands.Stopmp, "Используйте: /stopmp [ID Победителя] [Награда #1] [ID Победителя2?] [Награда #2?] [ID Победителя3?] [Награда #3?]")] // ne vishlo
+        [Command(AdminCommands.Stopmp, "Usage: /stopmp [Winner ID] [Reward #1] [Winner ID 2?] [Reward #2?] [Winner ID 3?] [Reward #3?]")] // didn't work out
         public static void MPReward(ExtPlayer player, int pid, uint reward, int pid2 = -1, uint reward2 = 0, int pid3 = -1, uint reward3 = 0)
         {
             try
@@ -223,7 +223,7 @@ namespace NeptuneEvo.Core
                 if (!CommandsAccess.CanUseCmd(player, AdminCommands.Stopmp) || pid < 0) return;
                 if(pid2 != -1 && (pid == pid2 || (pid3 != -1 && (pid2 == pid3 || pid == pid3))))
                 {
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.OneWinnerMpCant));
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.OneWinnerMpCant));
                     return;
                 }
                 if (AdminEvent.EventState == 2)
@@ -236,15 +236,15 @@ namespace NeptuneEvo.Core
                             if (target != null)
                             {
                                 if (AdminEvent.EventMembers.ContainsKey(target) || AdminEvent.Admin == target) CloseAdminEvent(target, reward, pid2, reward2, pid3, reward3);
-                                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.PlayerNotFoundMp));
+                                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.PlayerNotFoundMp));
                             }
-                            else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId));
+                            else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId));
                         }
-                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.WinnerBilNaznachen));
+                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.WinnerBilNaznachen));
                     }
-                    else Trigger.SendChatMessage(player, "Награда не может превышать выставленный лимит: " + AdminEvent.RewardLimit + ".");
+                    else Trigger.SendChatMessage(player, "The reward cannot exceed the set limit: " + AdminEvent.RewardLimit + ".");
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MpNotStarted));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MpNotStarted));
             }
             catch (Exception e)
             {
@@ -252,7 +252,7 @@ namespace NeptuneEvo.Core
             }
         }
 
-        [Command(AdminCommands.Mpveh, "Используйте: /mpveh [Название модели] [Цвет] [Цвет] [Количество машин]")]
+        [Command(AdminCommands.Mpveh, "Usage: /mpveh [Model name] [Color] [Color] [Number of vehicles]")]
         public static void CreateMPVehs(ExtPlayer player, string model, byte c1, byte c2, byte count)
         {
             try
@@ -261,7 +261,7 @@ namespace NeptuneEvo.Core
 
                 if (UpdateData.GetPlayerDimension(player) == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUse0Dim), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUse0Dim), 3000);
                     return;
                 }
                 
@@ -285,7 +285,7 @@ namespace NeptuneEvo.Core
                         }
                         else
                         {
-                            if (characterData.AdminLVL <= 5) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoVehThatName), 3000);
+                            if (characterData.AdminLVL <= 5) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoVehThatName), 3000);
                             else
                             {
                                 uint model1 = NAPI.Util.GetHashKey(model);
@@ -300,9 +300,9 @@ namespace NeptuneEvo.Core
                             return;
                         }
                     }
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.OneTime10vehs));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.OneTime10vehs));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.VehOnlyMp));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.VehOnlyMp));
             }
             catch (Exception e)
             {
@@ -310,7 +310,7 @@ namespace NeptuneEvo.Core
             }
         }
 
-        [Command(AdminCommands.mpskin, "Используйте: /mpskin [ID] [SKIN]")]
+        [Command(AdminCommands.mpskin, "Usage: /mpskin [ID] [SKIN]")]
         public static void GiveMPSkin(ExtPlayer player, int pid, string pedModel)
         {
             try
@@ -319,7 +319,7 @@ namespace NeptuneEvo.Core
 
                 if (UpdateData.GetPlayerDimension(player) == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUse0Dim), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUse0Dim), 3000);
                     return;
                 }
                 
@@ -332,7 +332,7 @@ namespace NeptuneEvo.Core
                     if (AdminEvent.EventMembers.ContainsKey(target)) 
                     {
                         AdminEvent.Admin = player;
-                        Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.AdminMpChangedSkin, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, target.Name, pedModel));
+                        Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.AdminMpChangedSkin, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, target.Name, pedModel));
                         
                         if (pedModel.Equals("-1"))
                         {
@@ -340,9 +340,9 @@ namespace NeptuneEvo.Core
                             {
                                 targetSessionData.AdminSkin = false;
                                 target.SetDefaultSkin();
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VisualPlayerReturned), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VisualPlayerReturned), 3000);
                             }
-                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VisualPlayerNotChanged), 3000);
+                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VisualPlayerNotChanged), 3000);
                         }
                         else
                         {
@@ -359,17 +359,17 @@ namespace NeptuneEvo.Core
                             }
                         }
                     }
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerIdFoundButNotMp), 3000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerIdFoundButNotMp), 3000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 3000);
             }
             catch (Exception e)
             {
                 Log.Write($"GiveMPSkin Exception: {e.ToString()}");
             }
         }
-        
-        [Command(AdminCommands.mpskins, "Используйте: /mpskins [SKIN] [RADIUS]")]
+
+        [Command(AdminCommands.mpskins, "Usage: /mpskins [SKIN] [RADIUS]")]
         public static void GiveMPSkins(ExtPlayer player, string pedModel, int radius)
         {
             try
@@ -378,7 +378,7 @@ namespace NeptuneEvo.Core
 
                 if (UpdateData.GetPlayerDimension(player) == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUse0Dim), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUse0Dim), 3000);
                     return;
                 }
                 
@@ -422,7 +422,7 @@ namespace NeptuneEvo.Core
                     }
                 }
                     
-                Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.AdminMpChangedSkinRadius, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, pedModel, radius));
+                Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.AdminMpChangedSkinRadius, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, pedModel, radius));
             }
             catch (Exception e)
             {
@@ -439,7 +439,7 @@ namespace NeptuneEvo.Core
 
                 if (UpdateData.GetPlayerDimension(player) == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUse0Dim), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUse0Dim), 3000);
                     return;
                 }
                 
@@ -454,9 +454,9 @@ namespace NeptuneEvo.Core
                     }
                     
                     Trigger.ClientEvent(player, "createMPWaypoint", player.Value, player.Position.X, player.Position.Y, UpdateData.GetPlayerDimension(player));
-                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.PostavilMetkuVsem, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name));
+                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.PostavilMetkuVsem, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name));
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MetkuCanPostaviTposleMp), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MetkuCanPostaviTposleMp), 3000);
             }
             catch (Exception e)
             {
@@ -464,7 +464,7 @@ namespace NeptuneEvo.Core
             }
         }
 
-        [Command(AdminCommands.Mpreward, "Используйте: /mpreward [Новый лимит]")]
+        [Command(AdminCommands.Mpreward, "Usage: /mpreward [New limit]")]
         public static void SetMPReward(ExtPlayer player, int newreward)
         {
             try
@@ -481,14 +481,14 @@ namespace NeptuneEvo.Core
                         };
                         cmd.Parameters.AddWithValue("@val0", newreward);
                         MySQL.Query(cmd);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MpReward, newreward), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MpReward, newreward), 3000);
                     }
                     catch (Exception e)
                     {
                         Log.Write($"SetMPReward #2 Exception: {e.ToString()}");
                     }
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MpRewardLimit));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MpRewardLimit));
             }
             catch (Exception e)
             {
@@ -517,7 +517,7 @@ namespace NeptuneEvo.Core
                         }
                     }
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MpGlobalrError));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MpGlobalrError));
             }
             catch (Exception e)
             {
@@ -537,7 +537,7 @@ namespace NeptuneEvo.Core
 
                 if (characterData.IsBannedMP == true)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BlacklistedMp, characterData.BanMPReason), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BlacklistedMp, characterData.BanMPReason), 5000);
                     return;
                 }
                 
@@ -558,15 +558,15 @@ namespace NeptuneEvo.Core
                                 });
                                 player.Position = AdminEvent.Position;
                                 Trigger.Dimension(player, AdminEvent.Dimension);
-                                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouTpedMp, AdminEvent.Name));
+                                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouTpedMp, AdminEvent.Name));
                             }
-                            else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MpListFull));
+                            else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MpListFull));
                         }
-                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyMped));
+                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouAlreadyMped));
                     }
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.TpClosed));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.TpClosed));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.TpUnavaible));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.TpUnavaible));
             }
             catch (Exception e)
             {
@@ -574,7 +574,7 @@ namespace NeptuneEvo.Core
             }
         }
 
-        [Command(AdminCommands.Mpkick, "Используйте: /mpkick [ID игрока] [Причина]", GreedyArg = true)]
+        [Command(AdminCommands.Mpkick, "Usage: /mpkick [Player ID] [Reason]", GreedyArg = true)]
         public static void MPKick(ExtPlayer player, int pid, string reason)
         {
             try
@@ -588,30 +588,30 @@ namespace NeptuneEvo.Core
                         if (AdminEvent.EventMembers.ContainsKey(target))
                         {
                             AdminEvent.Admin = player;
-                            Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.AdminKickedMpS, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, target.Name, reason));
+                            Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.AdminKickedMpS, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, target.Name, reason));
                             lock (AdminEvent.EventMembers)
                             {
                                 foreach (ExtPlayer foreachPlayer in AdminEvent.EventMembers.Keys)
                                 {
                                     if (foreachPlayer == null) continue;
-                                    Trigger.SendChatMessage(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.AdminKickedMpS, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, target.Name, reason));
+                                    Trigger.SendChatMessage(foreachPlayer, LangFunc.GetText(LangType.En, DataName.AdminKickedMpS, Chars.Models.ChatColors.AMP, AdminEvent.Name, player.Name, target.Name, reason));
                                 }
                             }
                             ExitFromMP(target);
                         }
-                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.PlayerIdFoundButNotMp));
+                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.PlayerIdFoundButNotMp));
                     }
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.VignatMozhno));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.VignatMozhno));
             }
             catch (Exception e)
             {
                 Log.Write($"MPKick Exception: {e.ToString()}");
             }
         }
-        
-        [Command(AdminCommands.Banmp, "Используйте: /banmp [ID игрока] [Причина]", GreedyArg = true)]
+
+        [Command(AdminCommands.Banmp, "Usage: /banmp [Player ID] [Reason]", GreedyArg = true)]
         public static void BanMP(ExtPlayer player, int pid, string reason)
         {
             try
@@ -624,11 +624,11 @@ namespace NeptuneEvo.Core
                 {
                     if (targetCharacterData.IsBannedMP == true)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerBlocked), 5000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerBlocked), 5000);
                         return;
                     }
                     
-                    Trigger.SendPunishment(LangFunc.GetText(LangType.Ru, DataName.AdminBlockedMpS, CommandsAccess.AdminPrefix, player.Name, target.Name, target.Value, reason), target);
+                    Trigger.SendPunishment(LangFunc.GetText(LangType.En, DataName.AdminBlockedMpS, CommandsAccess.AdminPrefix, player.Name, target.Name, target.Value, reason), target);
                     GameLog.Admin($"{player.Name}", $"banmp({reason})", $"{target.Name}");
                     targetCharacterData.IsBannedMP = true;
                     targetCharacterData.BanMPReason = reason;
@@ -636,15 +636,15 @@ namespace NeptuneEvo.Core
                     if (AdminEvent.EventState == 1 && AdminEvent.EventMembers.ContainsKey(target))
                         ExitFromMP(target);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 5000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 5000);
             }
             catch (Exception e)
             {
                 Log.Write($"BanMP Exception: {e.ToString()}");
             }
         }
-        
-        [Command(AdminCommands.Unbanmp, "Используйте: /unbanmp [ID игрока]")]
+
+        [Command(AdminCommands.Unbanmp, "Usage: /unbanmp [Player ID]")]
         public static void UnbanMP(ExtPlayer player, int pid)
         {
             try
@@ -660,15 +660,15 @@ namespace NeptuneEvo.Core
                 {
                     if (targetCharacterData.IsBannedMP == false)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerHasntBlocked), 5000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerHasntBlocked), 5000);
                         return;
                     }
                     
-                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.AdminUnblockedMp, player.Name, player.Value, target.Name, target.Value));
-                    Trigger.SendChatMessage(target, LangFunc.GetText(LangType.Ru, DataName.AdminBlockedMp, player.Name));
+                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.AdminUnblockedMp, player.Name, player.Value, target.Name, target.Value));
+                    Trigger.SendChatMessage(target, LangFunc.GetText(LangType.En, DataName.AdminBlockedMp, player.Name));
                     targetCharacterData.IsBannedMP = false;
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 5000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 5000);
             }
             catch (Exception e)
             {
@@ -687,7 +687,7 @@ namespace NeptuneEvo.Core
                     if (AdminEvent.EventMembers.ContainsKey(player))
                     {
                         ExitFromMP(player);
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucLeaveMp), 5000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucLeaveMp), 5000);
                     }
                 }
             }
@@ -697,7 +697,7 @@ namespace NeptuneEvo.Core
             }
         }
 
-        [Command(AdminCommands.Mphp, "Используйте: /mphp [Количество HP]")]
+        [Command(AdminCommands.Mphp, "Usage: /mphp [Amount of HP]")]
         public static void MPHeal(ExtPlayer player, byte health)
         {
             try
@@ -713,11 +713,11 @@ namespace NeptuneEvo.Core
                             if(foreachPlayer == null) continue;
                             NAPI.Player.SetPlayerHealth(foreachPlayer, health);
                         }
-                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouFilledHp, health));
+                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouFilledHp, health));
                     }
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.HpOneTo100));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.HpOneTo100));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.HpOnlyUnderStart));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.HpOnlyUnderStart));
             }
             catch (Exception e)
             {
@@ -743,13 +743,13 @@ namespace NeptuneEvo.Core
                                 if(foreachPlayer == null) continue;
                                 Trigger.SendChatMessage(player, "ID: " + foreachPlayer.Value + " | Имя: " + foreachPlayer.Name);
                             }
-                            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.PlayersOnMp, memcount));
+                            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.PlayersOnMp, memcount));
                         }
-                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.PlayersOnMp, memcount));
+                        else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.PlayersOnMp, memcount));
                     }
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.NoMpPlayers));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.NoMpPlayers));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MpNotSozdano));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MpNotSozdano));
             }
             catch (Exception e)
             {
@@ -804,17 +804,17 @@ namespace NeptuneEvo.Core
                 AdminEvent.Reward = reward;
                 AdminEvent.EventState = 0;
                 UpdateLastAdminEventLog();
-                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.MpEnded, Chars.Models.ChatColors.AMP, AdminEvent.Name));
-                //SendPlayersToEvent($"Мероприятие", AdminEvent.Name, "Событие закончилось, спасибо за участие!", "", 10000);
-                
+                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.MpEnded, Chars.Models.ChatColors.AMP, AdminEvent.Name));
+                //SendPlayersToEvent("Event", AdminEvent.Name, "The event has ended, thank you for participating!", "", 10000);
+
                 if (winner != AdminEvent.Admin)
                 {
                     if (reward != 0)
                     {
-                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.MpWinner1, Chars.Models.ChatColors.AMP, winner.Name, MoneySystem.Wallet.Format(reward)));
+                        NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.MpWinner1, Chars.Models.ChatColors.AMP, winner.Name, MoneySystem.Wallet.Format(reward)));
                         MoneySystem.Wallet.Change(winner, (int)reward);
                     }
-                    else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.WinnerMp1, Chars.Models.ChatColors.AMP, winner.Name));
+                    else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.WinnerMp1, Chars.Models.ChatColors.AMP, winner.Name));
 
                     int winnernum = 2;
                     if (winnerid2 != -1)
@@ -824,10 +824,10 @@ namespace NeptuneEvo.Core
                         {
                             if(reward2 != 0 && reward2 <= AdminEvent.RewardLimit)
                             {
-                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.MpWinner, Chars.Models.ChatColors.AMP, winnernum, winner2.Name, MoneySystem.Wallet.Format(reward2)));
+                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.MpWinner, Chars.Models.ChatColors.AMP, winnernum, winner2.Name, MoneySystem.Wallet.Format(reward2)));
                                 MoneySystem.Wallet.Change(winner2, (int)reward2);
                             }
-                            else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.WinnerMp, Chars.Models.ChatColors.AMP, winnernum, winner2.Name));
+                            else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.WinnerMp, Chars.Models.ChatColors.AMP, winnernum, winner2.Name));
                             winnernum++;
                         }
                     }
@@ -839,10 +839,10 @@ namespace NeptuneEvo.Core
                         {
                             if (reward3 != 0 && reward3 <= AdminEvent.RewardLimit)
                             {
-                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.MpWinner, Chars.Models.ChatColors.AMP, winnernum, winner3.Name, MoneySystem.Wallet.Format(reward3)));
+                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.MpWinner, Chars.Models.ChatColors.AMP, winnernum, winner3.Name, MoneySystem.Wallet.Format(reward3)));
                                 MoneySystem.Wallet.Change(winner3, (int)reward3);
                             }
-                            else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.WinnerMp, Chars.Models.ChatColors.AMP, winnernum, winner3.Name));
+                            else NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.WinnerMp, Chars.Models.ChatColors.AMP, winnernum, winner3.Name));
                         }
                     }
                 }
@@ -854,8 +854,8 @@ namespace NeptuneEvo.Core
                         {
                             if (foreachPlayer == null) continue;
                             ExitFromMP(foreachPlayer, false);
-                            //Notify.Send(foreachPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SpsMp), 3000);
-                            SendCoolMsg(foreachPlayer,"Мероприятие", AdminEvent.Name, $"{LangFunc.GetText(LangType.Ru, DataName.SpsMp)}", "", 10000);
+                            //Notify.Send(foreachPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SpsMp), 3000);
+                            SendCoolMsg(foreachPlayer,"Мероприятие", AdminEvent.Name, $"{LangFunc.GetText(LangType.En, DataName.SpsMp)}", "", 10000);
                         }
                     }
                 }

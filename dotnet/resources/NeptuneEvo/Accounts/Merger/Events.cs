@@ -15,7 +15,7 @@ namespace NeptuneEvo.Accounts.Merger
         {                
             if (!FunctionsAccess.IsWorking("merger") || !Main.ServerSettings.IsMerger)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             Trigger.SetTask(async () =>

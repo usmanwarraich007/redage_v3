@@ -72,7 +72,7 @@ namespace NeptuneEvo.PedSystem.Pet
         {
             if (!FunctionsAccess.IsWorking("pet"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             Repository.Create(player, index);

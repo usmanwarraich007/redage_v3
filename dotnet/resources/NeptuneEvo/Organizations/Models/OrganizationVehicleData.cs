@@ -34,7 +34,7 @@ namespace NeptuneEvo.Organizations.Models
                 try
                 {
 	
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Orgvehicles
                         .Where(o => o.Number == number)

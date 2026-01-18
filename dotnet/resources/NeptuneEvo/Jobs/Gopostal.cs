@@ -28,10 +28,10 @@ namespace NeptuneEvo.Jobs
             try
             {
                 CustomColShape.CreateCylinderColShape(Coords[0], 1, 2, 0, ColShapeEnums.JobGoPosta); // start work
-                NAPI.TextLabel.CreateTextLabel(LangFunc.GetText(LangType.Ru, DataName.PostHouse), Coords[0] + new Vector3(0, 0, 0.3), 10F, 0.6F, 0, new Color(0, 180, 0));
+                NAPI.TextLabel.CreateTextLabel(LangFunc.GetText(LangType.En, DataName.PostHouse), Coords[0] + new Vector3(0, 0, 0.3), 10F, 0.6F, 0, new Color(0, 180, 0));
 
                 //CustomColShape.CreateCylinderColShape(Coords[1], 3, 2, 0, ColShapeEnums.JobGoPostaCar); // get car
-                //NAPI.TextLabel.CreateTextLabel(LangFunc.GetText(LangType.Ru, DataName.TakeWorkVeh), Coords[1] + new Vector3(0, 0, 0.3), 10F, 0.6F, 0, new Color(0, 180, 0));
+                //NAPI.TextLabel.CreateTextLabel(LangFunc.GetText(LangType.En, DataName.TakeWorkVeh), Coords[1] + new Vector3(0, 0, 0.3), 10F, 0.6F, 0, new Color(0, 180, 0));
 
                 NAPI.Marker.CreateMarker(1, Coords[0] - new Vector3(0, 0, 1.5), new Vector3(), new Vector3(), 1f, new Color(255, 255, 255, 220));
                 //NAPI.Marker.CreateMarker(1, Coords[1] - new Vector3(0, 0, 2.0), new Vector3(), new Vector3(), 3f, new Color(255, 255, 255, 220));
@@ -68,16 +68,16 @@ namespace NeptuneEvo.Jobs
                 }
                 
                 var frameList = new FrameListData(); 
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.Warehouse); 
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.Warehouse); 
                 frameList.Callback = callback_gpStartMenu;
 
                 if (sessionData.WorkData.OnWork)
                 {
-                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.EndJob), "finish"));
-                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.TakeParcels), "get"));
+                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.EndJob), "finish"));
+                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.TakeParcels), "get"));
                     
                 }else
-                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.StartJob), "start"));
+                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.StartJob), "start"));
 
                 Players.Popup.List.Repository.Open(player, frameList);  
                 
@@ -111,17 +111,17 @@ namespace NeptuneEvo.Jobs
                     case "get":
                         if (characterData.WorkID != (int)JobsId.Postman)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPostman), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoPostman), 3000);
                             return;
                         }
                         if (!sessionData.WorkData.OnWork)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                             return;
                         }
                         if (sessionData.WorkData.Packages != 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNotRazdaliPosilki, sessionData.WorkData.Packages), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNotRazdaliPosilki, sessionData.WorkData.Packages), 3000);
                             return;
                         }          
                         
@@ -164,7 +164,7 @@ namespace NeptuneEvo.Jobs
             else if (jobLevelInfo.Item1 >= 4) count = 20;
 
             sessionData.WorkData.Packages = Main.ServerNumber == 0 ? 2 : count;
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PostmanStartJob, count), 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PostmanStartJob, count), 3000);
             sessionData.WorkData.OnWork = true;
             
             SetHousePoint(player);
@@ -196,7 +196,7 @@ namespace NeptuneEvo.Jobs
             
             if (sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                 sessionData.WorkData.OnWork = false;
                 sessionData.WorkData.Packages = 0;
                 Customization.ApplyCharacter(player);
@@ -298,7 +298,7 @@ namespace NeptuneEvo.Jobs
                 
                 if (NAPI.Player.IsPlayerInAnyVehicle(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LeaveJobVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LeaveJobVeh), 3000);
                     return;
                 }
                 if (sessionData.WorkData.Packages == 0 || !Attachments.HasAttachment(player, Attachments.AttachmentsName.Postal))
@@ -314,7 +314,7 @@ namespace NeptuneEvo.Jobs
                     var vehiclePost = sessionData.RentData?.Vehicle;
                     if (vehiclePost == null || !vehiclePost.Exists || player.Position.DistanceTo(vehiclePost.Position) >= 50)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.JobVehFar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.JobVehFar), 3000);
                         return;
                     }
                 }
@@ -323,7 +323,7 @@ namespace NeptuneEvo.Jobs
                 DateTime lastTime = sessionData.WorkData.Time;
                 if (Main.ServerNumber != 0 && DateTime.Now < lastTime.AddSeconds(coef * 2))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHozyain), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHozyain), 3000);
                     return;
                 }
                 int payment = Convert.ToInt32(coef * Main.PostalPayment * Group.GroupPayAdd[accountData.VipLvl] * Main.ServerSettings.MoneyMultiplier);
@@ -345,7 +345,7 @@ namespace NeptuneEvo.Jobs
                 
                 if (sessionData.WorkData.Packages >= 1)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MailsLeft, sessionData.WorkData.Packages), 8000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MailsLeft, sessionData.WorkData.Packages), 8000);
                     
                     SetHousePoint(player);
 
@@ -360,7 +360,7 @@ namespace NeptuneEvo.Jobs
                     
                     Trigger.PlayAnimation(player, "anim@heists@narcotics@trash", "drop_side", -1, false);
                     sessionData.WorkData.Packages = 0;
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMails), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMails), 3000);
                     
                 }
                 
@@ -374,13 +374,13 @@ namespace NeptuneEvo.Jobs
                     {
                         qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                         qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                     }
                     else
                     {
                         qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                         //todo translate (было DataName.PointsQuestGot)
-                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                     }
                 }
                 

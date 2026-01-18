@@ -211,12 +211,12 @@ namespace NeptuneEvo.Core
                 
                 if (!FunctionsAccess.IsWorking("checkMafiaLobby"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 /*else if (characterData.LVL < 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.lvl3forgame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.lvl3forgame), 3000);
                     return;
                 }*/
 
@@ -225,17 +225,17 @@ namespace NeptuneEvo.Core
                 
                 if (sessionData.WorkData.OnDuty || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 else if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -284,7 +284,7 @@ namespace NeptuneEvo.Core
                         sessionData.InMafiaLobby = -1;
                         LobbyList[lobbyId].MafiaPlayers.Remove(player);
                         Wallet.Change(player, Math.Abs(LobbyList[lobbyId].LobbyPrice));
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LeftLobby), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LeftLobby), 3000);
 
                         if (LobbyList[lobbyId].MafiaPlayers.Count < 1)
                         {
@@ -314,12 +314,12 @@ namespace NeptuneEvo.Core
                 
                 if (!FunctionsAccess.IsWorking("CreateMafiaLobby"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 /*else if (characterData.LVL < 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.lvl3forgame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.lvl3forgame), 3000);
                     return;
                 }*/
 
@@ -328,30 +328,30 @@ namespace NeptuneEvo.Core
                 
                 if (sessionData.WorkData.OnDuty || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 else if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
                 
                 if (LobbyList.ContainsKey(player.Value))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyAlreadyCreated), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyAlreadyCreated), 3000);
                     return;
                 }
                 
                 if (characterData.Money < lobby_price)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GameStartPrice, lobby_price), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GameStartPrice, lobby_price), 3000);
                     return;
                 }
 
@@ -390,36 +390,36 @@ namespace NeptuneEvo.Core
                 
                 if (!FunctionsAccess.IsWorking("joinMafiaLobby"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 /*else if (characterData.LVL < 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.lvl3forgame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.lvl3forgame), 3000);
                     return;
                 }*/
 
                 var sessionData = player.GetSessionData();
                 if (sessionData.WorkData.OnDuty || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 else if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
                 
                 if (!LobbyList.ContainsKey(index))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyNotFound), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyNotFound), 3000);
                     return;
                 }
                 
@@ -431,25 +431,25 @@ namespace NeptuneEvo.Core
                 
                 if (LobbyList[index].LobbyPassword != null && LobbyList[index].LobbyPassword != password)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyIncorrectPassowrd), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyIncorrectPassowrd), 3000);
                     return;
                 }
                 
                 if (LobbyList[index].MafiaPlayers.Count >= LobbyList[index].MaxPlayers)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxPlayersOn), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxPlayersOn), 3000);
                     return;
                 }
 
                 if (LobbyList[index].GameStatus == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoGameStarted), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoGameStarted), 5000);
                     return;
                 }
 
                 if (LobbyList[index].GameStatus >= 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GameIsOn), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GameIsOn), 5000);
                     return;
                 }
 
@@ -457,7 +457,7 @@ namespace NeptuneEvo.Core
 
                 if (characterData.Money < LobbyList[index].LobbyPrice)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GameStartCost, LobbyList[index].LobbyPrice), 5000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GameStartCost, LobbyList[index].LobbyPrice), 5000);
                     return;
                 }
                 
@@ -467,7 +467,7 @@ namespace NeptuneEvo.Core
                 LobbyList[index].MafiaPlayers.Add(player);
                 sessionData.InMafiaLobby = index;
                 Wallet.Change(player, -Math.Abs(LobbyList[index].LobbyPrice));
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GameReg), 8000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GameReg), 8000);
 
                 UpdateMafiaLobbyStats(index);
                 
@@ -496,19 +496,19 @@ namespace NeptuneEvo.Core
                 {
                     if (player.Value == target_id && player.GetSharedData<int>("mafiaGameRole") != 3)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantVoteYourself), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantVoteYourself), 3000);
                         return;
                     }
 
                     if (player.Value == target_id && player.GetSharedData<int>("mafiaGameRole") == 3 && LobbyList[lobbyId].doctorHealedYourself)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHealYourself), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHealYourself), 3000);
                         return;
                     }
 
                     if (!LobbyList[lobbyId].MafiaGamePlayersInfo.ContainsKey(target_id))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPlayerGame), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoPlayerGame), 3000);
                         return;
                     }
 
@@ -523,7 +523,7 @@ namespace NeptuneEvo.Core
                             mafiaGameTimerFunction(lobbyId);
                         }
 
-                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.Ru, DataName.VoteOk));
+                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.En, DataName.VoteOk));
                         Trigger.ClientEvent(player, "updateVoteStatusMafiaGame", false);
                     }
                     else if (LobbyList[lobbyId].mafiaGameVoteStatus == 6 && player.GetSharedData<int>("mafiaGameRole") == 2)
@@ -536,8 +536,8 @@ namespace NeptuneEvo.Core
                                 {
                                     if (MafiaPlayer.Value == target_id)
                                     {
-                                        if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 1) SendTextInfoForPlayer(player, LangFunc.GetText(LangType.Ru, DataName.PlayerIsMafia), 10000);
-                                        else SendTextInfoForPlayer(player, LangFunc.GetText(LangType.Ru, DataName.PlayerNotMafia), 10000);
+                                        if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 1) SendTextInfoForPlayer(player, LangFunc.GetText(LangType.En, DataName.PlayerIsMafia), 10000);
+                                        else SendTextInfoForPlayer(player, LangFunc.GetText(LangType.En, DataName.PlayerNotMafia), 10000);
                                     }
                                 }
                             }
@@ -556,7 +556,7 @@ namespace NeptuneEvo.Core
                     {
                         if (LobbyList[lobbyId].doctorLastHealNumber == target_id && LobbyList[lobbyId].doctorLastHealNumberNightStatus > 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHealedPlayerNight), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHealedPlayerNight), 3000);
                             return;
                         }
                         
@@ -574,7 +574,7 @@ namespace NeptuneEvo.Core
                                         LobbyList[lobbyId].wasHealed = target_id;
                                         LobbyList[lobbyId].doctorLastHealNumber = target_id;
                                         LobbyList[lobbyId].doctorLastHealNumberNightStatus = 2;
-                                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.Ru, DataName.VoteOk));
+                                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.En, DataName.VoteOk));
                                     }
                                 }
                             }
@@ -600,7 +600,7 @@ namespace NeptuneEvo.Core
                                     if (MafiaPlayer.Value == target_id)
                                     {
                                         LobbyList[lobbyId].wasFucked = target_id;
-                                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.Ru, DataName.VoteOk));
+                                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.En, DataName.VoteOk));
                                     }
                                 }
                             }
@@ -625,7 +625,7 @@ namespace NeptuneEvo.Core
                             mafiaGameTimerFunction(lobbyId);
                         }
 
-                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.Ru, DataName.VoteOk));
+                        SendTextInfoForPlayer(player, LangFunc.GetText(LangType.En, DataName.VoteOk));
                         Trigger.ClientEvent(player, "updateVoteStatusMafiaGame", false);
                     }
                 }
@@ -656,7 +656,7 @@ namespace NeptuneEvo.Core
                                 
                                 if (MafiaPlayer.IsCharacterData() && foreachSessionData != null)
                                 {
-                                    Notify.Send(MafiaPlayer, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPlayersMafia), 3000);
+                                    Notify.Send(MafiaPlayer, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoPlayersMafia), 3000);
                                     Trigger.ClientEvent(MafiaPlayer, "mafiaLobbyFunctions_client", 2);
                                     Wallet.Change(MafiaPlayer, +Math.Abs(LobbyList[index].LobbyPrice));
                                     foreachSessionData.InMafiaLobby = -1;
@@ -805,7 +805,7 @@ namespace NeptuneEvo.Core
                                     Trigger.ClientEvent(MafiaPlayer, "setTimeCmd", 0, 0, 0);
 
                                     if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 1)
-                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, false, LangFunc.GetText(LangType.Ru, DataName.MafiaKillsMaf), LangFunc.GetText(LangType.Ru, DataName.YouHave30Sec));
+                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, false, LangFunc.GetText(LangType.En, DataName.MafiaKillsMaf), LangFunc.GetText(LangType.En, DataName.YouHave30Sec));
                                 }
                             }
                             catch (Exception e)
@@ -831,9 +831,9 @@ namespace NeptuneEvo.Core
                                     if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 1)
                                     {
                                         Trigger.ClientEvent(MafiaPlayer, "mafia_updateMicroStatus", 2);
-                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, false, LangFunc.GetText(LangType.Ru, DataName.MafiaKillsMaf), LangFunc.GetText(LangType.Ru, DataName.YouHave1Min));
+                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, false, LangFunc.GetText(LangType.En, DataName.MafiaKillsMaf), LangFunc.GetText(LangType.En, DataName.YouHave1Min));
 
-                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.YouHave1MinDiscuss), 10000);
+                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.YouHave1MinDiscuss), 10000);
                                     }
                                 }
                             }
@@ -865,7 +865,7 @@ namespace NeptuneEvo.Core
                                     Trigger.ClientEvent(MafiaPlayer, "mafia_updateMicroStatus", 1);
                                     Trigger.ClientEvent(MafiaPlayer, "updateVoteStatusMafiaGame", true);
 
-                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafiaTakeChoice), 10000);
+                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafiaTakeChoice), 10000);
                                 }
                             }
                         }
@@ -948,8 +948,8 @@ namespace NeptuneEvo.Core
 
                                     if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 2)
                                     {
-                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), false, true, false, LangFunc.GetText(LangType.Ru, DataName.TryToFindMaf), LangFunc.GetText(LangType.Ru, DataName.YouHave30Sec));
-                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.YouCanProverit), 10000);
+                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), false, true, false, LangFunc.GetText(LangType.En, DataName.TryToFindMaf), LangFunc.GetText(LangType.En, DataName.YouHave30Sec));
+                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.YouCanProverit), 10000);
                                     }
                                 }
                             }
@@ -994,8 +994,8 @@ namespace NeptuneEvo.Core
 
                                     if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 3)
                                     {
-                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), false, true, false, LangFunc.GetText(LangType.Ru, DataName.MafYouCanHeal), LangFunc.GetText(LangType.Ru, DataName.YouHave30Sec));
-                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafTryHeal), 10000);
+                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), false, true, false, LangFunc.GetText(LangType.En, DataName.MafYouCanHeal), LangFunc.GetText(LangType.En, DataName.YouHave30Sec));
+                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafTryHeal), 10000);
                                     }
                                 }
                             }
@@ -1064,8 +1064,8 @@ namespace NeptuneEvo.Core
 
                                     if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 4)
                                     {
-                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), false, true, false, LangFunc.GetText(LangType.Ru, DataName.MafSexGo), LangFunc.GetText(LangType.Ru, DataName.YouHave30Sec));
-                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafSexTry), 10000);
+                                        Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), false, true, false, LangFunc.GetText(LangType.En, DataName.MafSexGo), LangFunc.GetText(LangType.En, DataName.YouHave30Sec));
+                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafSexTry), 10000);
                                     }
                                 }
                             }
@@ -1088,7 +1088,7 @@ namespace NeptuneEvo.Core
                                     if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 3)
                                     {
                                         if (LobbyList[index].wasHealed == -1)
-                                            SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafHealTimeOut));
+                                            SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafHealTimeOut));
 
                                         Trigger.ClientEvent(MafiaPlayer, "mafia_closeGameMenu");
                                     }
@@ -1112,7 +1112,7 @@ namespace NeptuneEvo.Core
                             if (MafiaPlayer.IsCharacterData())
                             {
                                 if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 4 && LobbyList[index].wasFucked == -1)
-                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafSexTimeout));
+                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafSexTimeout));
 
                                 Trigger.ClientEvent(MafiaPlayer, "mafia_closeGameMenu");
                             }
@@ -1151,13 +1151,13 @@ namespace NeptuneEvo.Core
 
                                 if (LobbyList[index].wasKilled > -1 && LobbyList[index].wasKilled != LobbyList[index].wasHealed)
                                 {
-                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafDied, LobbyList[index].wasKilled), 10000);
+                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafDied, LobbyList[index].wasKilled), 10000);
 
                                     if (MafiaPlayer.Value == LobbyList[index].wasKilled)
                                         playerToKick = MafiaPlayer;
                                     BattlePass.Repository.UpdateReward(MafiaPlayer, 131);
                                 }
-                                else SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafNoDied), 10000);
+                                else SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafNoDied), 10000);
                             }
                         }
                         catch (Exception e)
@@ -1242,21 +1242,21 @@ namespace NeptuneEvo.Core
                                     Trigger.ClientEvent(MafiaPlayer, "mafia_startSoundSpeech", "day_discussion");
                                     Trigger.ClientEvent(MafiaPlayer, "setTimeCmd", 12, 0, 0);
                                     Trigger.ClientEvent(MafiaPlayer, "mafia_updateMicroStatus", 3);
-                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.EveryHave30Sec), 10000);
+                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.EveryHave30Sec), 10000);
                                 }
 
                                 if (LobbyList[index].mafiaGameDiscussionStatus > 0)
                                 {
-                                    Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, true, LangFunc.GetText(LangType.Ru, DataName.DayMafiaVote), LangFunc.GetText(LangType.Ru, DataName.VseHave30Sec));
+                                    Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, true, LangFunc.GetText(LangType.En, DataName.DayMafiaVote), LangFunc.GetText(LangType.En, DataName.VseHave30Sec));
                                     
                                     if (MafiaPlayer == turnPlayer) Trigger.ClientEvent(MafiaPlayer, "mafia_updateMicroStatus", 2);
                                     else Trigger.ClientEvent(MafiaPlayer, "mafia_updateMicroStatus", 3);
                                     
-                                    Notify.Send(MafiaPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OcheredChela, turnPlayerValue), 3000);
+                                    Notify.Send(MafiaPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OcheredChela, turnPlayerValue), 3000);
                                 }
                                 else
                                 {
-                                    Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, true, LangFunc.GetText(LangType.Ru, DataName.DayVoteing), LangFunc.GetText(LangType.Ru, DataName.VseHave1Min));
+                                    Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, false, true, LangFunc.GetText(LangType.En, DataName.DayVoteing), LangFunc.GetText(LangType.En, DataName.VseHave1Min));
                                     Trigger.ClientEvent(MafiaPlayer, "mafia_updateMicroStatus", 2);
                                 }
                             }
@@ -1297,9 +1297,9 @@ namespace NeptuneEvo.Core
                             {
                                 Trigger.ClientEvent(MafiaPlayer, "mafia_startSoundSpeech", "day_vote");
                                 Trigger.ClientEvent(MafiaPlayer, "setTimeCmd", 12, 0, 0);
-                                Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, true, true, LangFunc.GetText(LangType.Ru, DataName.DayPlayerChoice), LangFunc.GetText(LangType.Ru, DataName.VseHave15Sec));
+                                Trigger.ClientEvent(MafiaPlayer, "showMafiaGameMenu", JsonConvert.SerializeObject(LobbyList[index].MafiaGamePlayersInfo), true, true, true, LangFunc.GetText(LangType.En, DataName.DayPlayerChoice), LangFunc.GetText(LangType.En, DataName.VseHave15Sec));
                                 Trigger.ClientEvent(MafiaPlayer, "mafia_updateMicroStatus", 1);
-                                SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.VoteJail15), 10000);
+                                SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.VoteJail15), 10000);
                             }
                         }
                         catch (Exception e)
@@ -1344,13 +1344,13 @@ namespace NeptuneEvo.Core
 
                                         if (mostCommon >= 0)
                                         {
-                                            SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.SomebodyJail, mostCommon), 10000);
+                                            SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.SomebodyJail, mostCommon), 10000);
                                             
                                             if (MafiaPlayer.Value == mostCommon)
                                                 playerToKick = MafiaPlayer;
                                             BattlePass.Repository.UpdateReward(MafiaPlayer, 131);
                                         }
-                                        else SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.VoteEquals), 10000);
+                                        else SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.VoteEquals), 10000);
                                     }
                                 }
                                 catch (Exception e)
@@ -1403,7 +1403,7 @@ namespace NeptuneEvo.Core
                                     if (MafiaPlayer.IsCharacterData())
                                     {
                                         Trigger.ClientEvent(MafiaPlayer, "mafia_closeGameMenu");
-                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.VoteEquals), 10000);
+                                        SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.VoteEquals), 10000);
                                     }
                                 }
                                 catch (Exception e)
@@ -1424,7 +1424,7 @@ namespace NeptuneEvo.Core
                             {
                                 if (MafiaPlayer.IsCharacterData())
                                 {
-                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.NoJail));
+                                    SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.NoJail));
                                     Trigger.ClientEvent(MafiaPlayer, "mafia_closeGameMenu");
                                 }
                             }
@@ -1471,7 +1471,7 @@ namespace NeptuneEvo.Core
                             if (state == 1)
                             {
                                 Trigger.ClientEvent(MafiaPlayer, "mafia_startSoundSpeech", "mafia_win");
-                                SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MafiaWin, current_reward), 10000);
+                                SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MafiaWin, current_reward), 10000);
 
                                 if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") == 1)
                                     Wallet.Change(MafiaPlayer, +Math.Abs(current_reward));
@@ -1479,7 +1479,7 @@ namespace NeptuneEvo.Core
                             else if (state == 2)
                             {
                                 Trigger.ClientEvent(MafiaPlayer, "mafia_startSoundSpeech", "peaceful_win");
-                                SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.Ru, DataName.MirWin, current_reward), 10000);
+                                SendTextInfoForPlayer(MafiaPlayer, LangFunc.GetText(LangType.En, DataName.MirWin, current_reward), 10000);
 
                                 if (MafiaPlayer.GetSharedData<int>("mafiaGameRole") > 1)
                                     Wallet.Change(MafiaPlayer, +Math.Abs(current_reward));
@@ -1556,7 +1556,7 @@ namespace NeptuneEvo.Core
                                     var foreachSessionData = MafiaPlayer.GetSessionData();
                                     if (MafiaPlayer.IsCharacterData() && foreachSessionData != null)
                                     {
-                                        Notify.Send(MafiaPlayer, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OstalosMaloPla), 3000);
+                                        Notify.Send(MafiaPlayer, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OstalosMaloPla), 3000);
 
                                         MafiaPlayer.SetSharedData("mafiaGameRole", 0);
 

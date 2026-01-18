@@ -190,7 +190,7 @@ namespace NeptuneEvo.Core
         }
 
         #region Remote Events
-        //Админ взял репорт на себя
+        //Admin has taken the report
         [RemoteEvent("takereport")]
         public static void ReportTake(ExtPlayer player, int id)
         {
@@ -213,7 +213,7 @@ namespace NeptuneEvo.Core
                 }
                 else if (Reports.Values.Any(a => a.BlockedBy == player.Name && a.ID != id))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы уже взяли один репорт.", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You already have an active report.", 3000);
                     return;
                 }
 
@@ -249,7 +249,7 @@ namespace NeptuneEvo.Core
                 if (characterData.AdminLVL <= 0) return;
                 if (!Reports.ContainsKey(ID)) return;
                 ExtPlayer target = (ExtPlayer) NAPI.Player.GetPlayerFromName(Reports[ID].Author);
-                if (!target.IsCharacterData()) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "Игрок не найден!", 3000);
+                if (!target.IsCharacterData()) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "Player not found!", 3000);
                 else
                 {
                     switch (funcName)
@@ -302,7 +302,7 @@ namespace NeptuneEvo.Core
                 if (!Reports[ID].Status) AddAnswer(player, ID, answer);
                 else
                 {
-                    Trigger.SendChatMessage(player, "Эта жалоба более недоступна для изменения.");
+                    Trigger.SendChatMessage(player, "This report can no longer be modified.");
                     Remove(ID, player);
                 }
             }
@@ -322,7 +322,7 @@ namespace NeptuneEvo.Core
                 if (!player.IsCharacterData()) return;
                 if (question.Length >= 150)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вопрос содержит более 150 символов, задайте вопрос более коротко.", 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "The question contains more than 150 characters. Please ask a shorter question.", 5000);
                     return;
                 }
                 question = Main.BlockSymbols(question);
@@ -333,17 +333,17 @@ namespace NeptuneEvo.Core
                     sessionData.TimingsData.NextReport = DateTime.Now.AddMinutes(1);
                 }
 
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Ваш вопрос {Reports.Count + 1} в очереди.", 5000);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Ваш вопрос: {question}", 5000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Your question is number {Reports.Count + 1} in the queue.", 5000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Your question: {question}", 5000);
 
                 if (Main.AllAdminsOnline.Count <= 2) 
-                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, "В данный момент администрация может отвечать чуть дольше обычного, извиняемся за возможное ожидание и благодарим за понимание.", 8000);
+                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, "At the moment, the administration may take a bit longer to respond. We apologize for the possible delay and thank you for your understanding.", 8000);
 
                 Trigger.SetTask(async () =>
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         var id = await db.InsertWithInt32IdentityAsync(new Questions
                         {
@@ -381,7 +381,7 @@ namespace NeptuneEvo.Core
                                         var foreachCharacterData = foreachPlayer.GetCharacterData();
                                         if (foreachCharacterData == null) continue;
                                         if (foreachCharacterData.AdminLVL == 0) continue;
-                                        NAPI.Notification.SendNotificationToPlayer(foreachPlayer, $"В системе ~r~{Reports.Count} ~s~репортов!", true);
+                                        NAPI.Notification.SendNotificationToPlayer(foreachPlayer, $"There are ~r~{Reports.Count} ~s~reports in the system!", true);
                                         //Sounds.Play2d(foreachPlayer, "sounds/icq.mp3",  2.3f / 100);
                                         Trigger.ClientEvent(foreachPlayer, "StartDangerButtonSound_client", "sounds/icq.mp3");
                                     }
@@ -432,29 +432,29 @@ namespace NeptuneEvo.Core
                 if (response.Length >= 300)
                 {
                     ReportTake(player, repID);
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "Ответ слишком длинный (более 300 символов).", 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "The response is too long (more than 300 characters).", 3000);
                     return;
                 }
                 DateTime now = DateTime.Now;
                 ExtPlayer target = (ExtPlayer) NAPI.Player.GetPlayerFromName(Reports[repID].Author);
-                if (!target.IsCharacterData()) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "Игрок не найден!", 3000);
+                if (!target.IsCharacterData()) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "Player not found!", 3000);
                 else
                 {
-                    Trigger.SendChatMessage(target, $"~o~Ваш вопрос: {Reports[repID].Question}");
-                    Trigger.SendChatMessage(target, $"{ChatColors.Report}Администратор {player.Name} ({player.Value}): {response}");
+                    Trigger.SendChatMessage(target, $"~o~Your question: {Reports[repID].Question}");
+                    Trigger.SendChatMessage(target, $"{ChatColors.Report}Administrator {player.Name} ({player.Value}): {response}");
                     TimeSpan responsetime = Reports[repID].OpenedDate - now;
-                    //Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Ответ от {player.Name}: {response}", 7000);
-                    EventSys.SendCoolMsg(target,"Ответ на репорт", player.Name, $"{response}", "", 10000);
+                    //Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"Response from {player.Name}: {response}", 7000);
+                    EventSys.SendCoolMsg(target, "Report Response", player.Name, $"{response}", "", 10000);
                     Trigger.ClientEvent(target, "StartDangerButtonSound_client", "sounds/icq.mp3");
                     
-                    Trigger.SendToAdmins(Main.ServerSettings.MinAdminLvlReport, $"{ChatColors.Report}[A][{responsetime.ToString("mm\\:ss")}] {player.Name}({player.Value}) для {target.Name}({target.Value}): {response}");
+                    Trigger.SendToAdmins(Main.ServerSettings.MinAdminLvlReport, $"{ChatColors.Report}[A][{responsetime.ToString("mm\\:ss")}] {player.Name}({player.Value}) to {target.Name}({target.Value}): {response}");
                 }
 
                 Trigger.SetTask(async () =>
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Questions
                             .Where(v => v.ID == repID)

@@ -127,7 +127,7 @@ namespace NeptuneEvo.Character.Spawn
                     if (characterData.Warns > 0) characterData.Unwarn = DateTime.Now.AddDays(14);
                     characterData.WarnInfo.Admin[characterData.Warns] = "-1";
                     characterData.WarnInfo.Reason[characterData.Warns] = "-1";
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OneWarnSnyat, characterData.Warns), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OneWarnSnyat, characterData.Warns), 3000);
                 }
                 
                 //

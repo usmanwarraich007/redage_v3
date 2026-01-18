@@ -31,12 +31,12 @@ namespace NeptuneEvo.Chars
                 if (characterData == null) return;
                 if (DateTime.Now <= sessionData.RequestData.Time && sessionData.RequestData.IsRequested)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveActiveOrders), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveActiveOrders), 3000);
                     return;
                 }
                 if ((sessionData.SellItemData.Seller != null || sessionData.SellItemData.Buyer != null) && Repository.TradeGet(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantTrade), 3000);
                     return;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -45,12 +45,12 @@ namespace NeptuneEvo.Chars
                 if (targetCharacterData == null) return;
                 else if (DateTime.Now <= targetSessionData.RequestData.Time && targetSessionData.RequestData.IsRequested)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHavBeenBusy), 7000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHavBeenBusy), 7000);
                     return;
                 }
                 else if ((targetSessionData.SellItemData.Seller != null || targetSessionData.SellItemData.Buyer != null) && Repository.TradeGet(target))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonCantTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonCantTrade), 3000);
                     return;
                 }
 
@@ -59,23 +59,23 @@ namespace NeptuneEvo.Chars
                     var vehiclesCount = VehicleManager.GetVehiclesCarCountToPlayer(player.Name);
                     if (vehiclesCount == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoCar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoCar), 3000);
                         return;
                     }
                     vehiclesCount = VehicleManager.GetVehiclesCarCountToPlayer(target.Name);
                     if (vehiclesCount == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHaveNoCar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHaveNoCar), 3000);
                         return;
                     }
                     targetSessionData.RequestData.IsRequested = true;
                     targetSessionData.RequestData.Request = "trade_vehicle";
                     targetSessionData.RequestData.From = player;
                     targetSessionData.RequestData.Time = DateTime.Now.AddSeconds(10);
-                    //Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWantTradeVeh), 3000);
-                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonWantTradeVeh, player.Value), 3000);
-                    EventSys.SendCoolMsg(player,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.YouWantTradeVeh)}", "", 10000);
-                    EventSys.SendCoolMsg(target,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.PersonWantTradeVeh, player.Value)}", "", 10000);
+                    //Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWantTradeVeh), 3000);
+                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonWantTradeVeh, player.Value), 3000);
+                    EventSys.SendCoolMsg(player,"Offer", "Trade", $"{LangFunc.GetText(LangType.En, DataName.YouWantTradeVeh)}", "", 10000);
+                    EventSys.SendCoolMsg(target,"Offer", "Trade", $"{LangFunc.GetText(LangType.En, DataName.PersonWantTradeVeh, player.Value)}", "", 10000);
                 }
                 else if (type == "house")
                 {
@@ -83,14 +83,14 @@ namespace NeptuneEvo.Chars
                     var house = HouseManager.GetHouse(player, true);
                     if (house == null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                         return;
                     }
                     House houseTarget = HouseManager.GetHouse(target, true);
 
                     if (houseTarget == null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonNoHome), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonNoHome), 3000);
                         return;
                     }
 
@@ -98,31 +98,31 @@ namespace NeptuneEvo.Chars
                     targetSessionData.RequestData.Request = "trade_house";
                     targetSessionData.RequestData.From = player;
                     targetSessionData.RequestData.Time = DateTime.Now.AddSeconds(10);
-                    //Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWantTradeHouse), 3000);
-                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonWantTradeHouse), 3000);
-                    EventSys.SendCoolMsg(player,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.YouWantTradeHouse)}", "", 10000);
-                    EventSys.SendCoolMsg(target,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.PersonWantTradeHouse)}", "", 10000);
+                    //Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWantTradeHouse), 3000);
+                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonWantTradeHouse), 3000);
+                    EventSys.SendCoolMsg(player,"Offer", "Trade", $"{LangFunc.GetText(LangType.En, DataName.YouWantTradeHouse)}", "", 10000);
+                    EventSys.SendCoolMsg(target,"Offer", "Trade", $"{LangFunc.GetText(LangType.En, DataName.PersonWantTradeHouse)}", "", 10000);
                 }
                 else if (type == "business")
                 {
                     if (characterData.BizIDs.Count == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                         return;
                     }
                     else if (targetCharacterData.BizIDs.Count == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHaveNoBusiness), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHaveNoBusiness), 3000);
                         return;
                     }
                     targetSessionData.RequestData.IsRequested = true;
                     targetSessionData.RequestData.Request = "trade_business";
                     targetSessionData.RequestData.From = player;
                     targetSessionData.RequestData.Time = DateTime.Now.AddSeconds(10);
-                    //Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWantTradeBiz), 3000);
-                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonWantTradeBiz), 3000);
-                    EventSys.SendCoolMsg(player,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.YouWantTradeBiz)}", "", 10000);
-                    EventSys.SendCoolMsg(target,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.PersonWantTradeBiz)}", "", 10000);
+                    //Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWantTradeBiz), 3000);
+                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonWantTradeBiz), 3000);
+                    EventSys.SendCoolMsg(player,"Offer", "Trade", $"{LangFunc.GetText(LangType.En, DataName.YouWantTradeBiz)}", "", 10000);
+                    EventSys.SendCoolMsg(target,"Offer", "Trade", $"{LangFunc.GetText(LangType.En, DataName.PersonWantTradeBiz)}", "", 10000);
                 }
             }
             catch (Exception e)
@@ -244,17 +244,17 @@ namespace NeptuneEvo.Chars
                 if (ArrayName == "fastSlots") return;
                 if (DateTime.Now < sessionData.TimingsData.NextDropItem)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CooldownItemDrop), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CooldownItemDrop), 3000);
                     return;
                 }
                 else if (player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDropFromCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDropFromCar), 3000);
                     return;
                 }
                 else if (sessionData.AntiAnimDown)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantDrop), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantDrop), 3000);
                     return;
                 }
                 Repository.ItemsDropToIndex(player, ArrayName, Index, true, posZ: posZ);
@@ -351,7 +351,7 @@ namespace NeptuneEvo.Chars
                     Index = Index,
                     Value = Value
                 };
-                Trigger.ClientEvent(player, "openDialog", "buy_tent", LangFunc.GetText(LangType.Ru, DataName.DialogBuyFromTent, Repository.ItemsInfo[Item.ItemId].Name, MoneySystem.Wallet.Format(Item.Price )));
+                Trigger.ClientEvent(player, "openDialog", "buy_tent", LangFunc.GetText(LangType.En, DataName.DialogBuyFromTent, Repository.ItemsInfo[Item.ItemId].Name, MoneySystem.Wallet.Format(Item.Price )));
 
                 //Repository.ItemBuy(player, ArrayName, Index, Value);
             }
@@ -408,7 +408,7 @@ namespace NeptuneEvo.Chars
                 if (!player.IsCharacterData()) return;
                 if (player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDropFromCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDropFromCar), 3000);
                     return;
                 }
                 Repository.ItemsDropToEditor(player, arrayName, index, posX, posY, posZ, rotX, rotY, rotZ);

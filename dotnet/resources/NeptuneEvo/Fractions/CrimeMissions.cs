@@ -365,7 +365,7 @@ namespace NeptuneEvo.Fractions
                             }
                             else if (fracId != vehicleLocalData.DeliveryData.Fraction)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000);
                                 VehicleManager.WarpPlayerOutOfVehicle(player);
                             }
                             else
@@ -387,7 +387,7 @@ namespace NeptuneEvo.Fractions
                             }
                             else if (fracId != vehicleLocalData.DeliveryData.Fraction)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000);
                                 VehicleManager.WarpPlayerOutOfVehicle(player);
                             }
                             else

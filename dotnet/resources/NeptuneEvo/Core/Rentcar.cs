@@ -133,7 +133,7 @@ namespace NeptuneEvo.Core
                 {                 
                     if (sessionData.RentData != null && sessionData.RentData.Vehicle == vehicle) return;
                     if (vehicleLocalData.WorkDriver == characterData.UUID) return;
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyRented), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyRented), 3000);
                     VehicleManager.WarpPlayerOutOfVehicle(player);
                 }
             }
@@ -162,7 +162,7 @@ namespace NeptuneEvo.Core
                     {
                         sessionData.RentData = null;
                         if (prefix != String.Empty) 
-                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RentCarWas, prefix), 3000);
+                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RentCarWas, prefix), 3000);
 
                         return player;
                     } 
@@ -579,70 +579,70 @@ namespace NeptuneEvo.Core
 
         public static RentZoneData[] RentPedsData = new RentZoneData[]
         {
-            //new RentZoneData(1, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.EliteRent), new Vector3(-153.19, -158.982, 43.62119), 112.6956f, RentCarId.Elite),
-            new RentZoneData(2, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-280.0288, -889.7692, 31.0806), 252.4524f, RentCarId.Civilian),
-           // new RentZoneData(3, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.RaceRent), new Vector3(-37.98943, -2095.628, 16.70483), 112.7483f, RentCarId.Rally),
-            //new RentZoneData(4, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-1869.13, -359.697, 49.30879), 322.3027f, RentCarId.Civilian),
-            // new RentZoneData(5, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.EventRent), new Vector3(-905.1248, -2337.17, 6.709028), 0.0f, RentCarId.Holiday),
-            new RentZoneData(6, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(453.2874, -1149.766, 29.29178), 180.0f, RentCarId.Civilian),
-            new RentZoneData(7, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(461.9777, 217.6612, 103.1002), 0.0f, RentCarId.Civilian),
-            //new RentZoneData(8, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-1313.945, 282.8484, 64.09132), 0.0f, RentCarId.Civilian),
-            //new RentZoneData(9, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-513.6987, 43.07299, 52.57989), 0.0f, RentCarId.Civilian),
-           //new RentZoneData(10, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.BikeRent), new Vector3(-1109.3678, -1694.4069, 4.5645723), 0.0f, RentCarId.Cycling),
-            //new RentZoneData(11, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.OffRoadRent), new Vector3(-2040.9161, -130.33661, 27.593317), 175.0f, RentCarId.OffRoad),
-            //new RentZoneData(12, "s_m_m_pilot_01", LangFunc.GetText(LangType.Ru, DataName.HeliRent), new Vector3(-736.5372, -1458.0835, 5.00052), 0.0f, RentCarId.Helicopter),
-            //new RentZoneData(13, "s_m_m_pilot_01", LangFunc.GetText(LangType.Ru, DataName.PlaneRent), new Vector3(-993.7938, -2947.3257, 13.957196), 0.0f, RentCarId.Aeroplane),
-            new RentZoneData(14, "s_m_y_uscg_01", LangFunc.GetText(LangType.Ru, DataName.BoatRent), new Vector3(-1606.993, -1127.9418, 2.1554325), 0.0f, RentCarId.WaterBased),
-            //new RentZoneData(15, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1699.369, 3774.0999, 34.731514), -126.795135f, RentCarId.Civilian),
-            //new RentZoneData(16, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1037.1823, -765.38556, 57.977104), -120.06861f, RentCarId.Civilian),
-            //new RentZoneData(17, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(934.37427, 148.65912, 80.83027), -88.601776f, RentCarId.Civilian),
-            new RentZoneData(18, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-1541.2733, -437.8889, 35.596672), -79.82406f, RentCarId.Civilian),
-            new RentZoneData(19, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-820.0671, -1100.6382, 11.156218), -59.84502f, RentCarId.Civilian),
-            //new RentZoneData(20, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(657.36163, 687.5908, 129.04634), 160.71507f, RentCarId.Civilian),
-            //ew RentZoneData(21, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(219.64946, 1192.6567, 225.55067), -78.82406f, RentCarId.Civilian),
-            //new RentZoneData(22, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-2294.3545, 429.43195, 174.60149), 81.051025f, RentCarId.Civilian),
-            new RentZoneData(23, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(394.68338, -633.62024, 28.70693), -88.82406f, RentCarId.Civilian),
-            //new RentZoneData(24, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(583.3127, 2739.7866, 42.095203), -171.795135f, RentCarId.Civilian),
-            //new RentZoneData(25, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(2752.168, 3467.383, 55.74715), -117.795135f, RentCarId.Civilian),
-            //new RentZoneData(26, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-72.81145, 6346.49, 31.586294), 0.0f, RentCarId.Civilian),
-            //new RentZoneData(27, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-3140.1387, 1130.3076, 20.851465), -120.795135f, RentCarId.Civilian),
-            //new RentZoneData(28, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-389.61102, -196.51826, 36.54216), -159.795135f, RentCarId.Civilian),
-            //new RentZoneData(29, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1695.415, 4785.0933, 41.996357), 52.643776f, RentCarId.Civilian),
+            //new RentZoneData(1, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.EliteRent), new Vector3(-153.19, -158.982, 43.62119), 112.6956f, RentCarId.Elite),
+            new RentZoneData(2, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-280.0288, -889.7692, 31.0806), 252.4524f, RentCarId.Civilian),
+           // new RentZoneData(3, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.RaceRent), new Vector3(-37.98943, -2095.628, 16.70483), 112.7483f, RentCarId.Rally),
+            //new RentZoneData(4, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-1869.13, -359.697, 49.30879), 322.3027f, RentCarId.Civilian),
+            // new RentZoneData(5, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.EventRent), new Vector3(-905.1248, -2337.17, 6.709028), 0.0f, RentCarId.Holiday),
+            new RentZoneData(6, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(453.2874, -1149.766, 29.29178), 180.0f, RentCarId.Civilian),
+            new RentZoneData(7, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(461.9777, 217.6612, 103.1002), 0.0f, RentCarId.Civilian),
+            //new RentZoneData(8, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-1313.945, 282.8484, 64.09132), 0.0f, RentCarId.Civilian),
+            //new RentZoneData(9, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-513.6987, 43.07299, 52.57989), 0.0f, RentCarId.Civilian),
+           //new RentZoneData(10, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.BikeRent), new Vector3(-1109.3678, -1694.4069, 4.5645723), 0.0f, RentCarId.Cycling),
+            //new RentZoneData(11, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.OffRoadRent), new Vector3(-2040.9161, -130.33661, 27.593317), 175.0f, RentCarId.OffRoad),
+            //new RentZoneData(12, "s_m_m_pilot_01", LangFunc.GetText(LangType.En, DataName.HeliRent), new Vector3(-736.5372, -1458.0835, 5.00052), 0.0f, RentCarId.Helicopter),
+            //new RentZoneData(13, "s_m_m_pilot_01", LangFunc.GetText(LangType.En, DataName.PlaneRent), new Vector3(-993.7938, -2947.3257, 13.957196), 0.0f, RentCarId.Aeroplane),
+            new RentZoneData(14, "s_m_y_uscg_01", LangFunc.GetText(LangType.En, DataName.BoatRent), new Vector3(-1606.993, -1127.9418, 2.1554325), 0.0f, RentCarId.WaterBased),
+            //new RentZoneData(15, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1699.369, 3774.0999, 34.731514), -126.795135f, RentCarId.Civilian),
+            //new RentZoneData(16, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1037.1823, -765.38556, 57.977104), -120.06861f, RentCarId.Civilian),
+            //new RentZoneData(17, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(934.37427, 148.65912, 80.83027), -88.601776f, RentCarId.Civilian),
+            new RentZoneData(18, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-1541.2733, -437.8889, 35.596672), -79.82406f, RentCarId.Civilian),
+            new RentZoneData(19, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-820.0671, -1100.6382, 11.156218), -59.84502f, RentCarId.Civilian),
+            //new RentZoneData(20, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(657.36163, 687.5908, 129.04634), 160.71507f, RentCarId.Civilian),
+            //ew RentZoneData(21, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(219.64946, 1192.6567, 225.55067), -78.82406f, RentCarId.Civilian),
+            //new RentZoneData(22, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-2294.3545, 429.43195, 174.60149), 81.051025f, RentCarId.Civilian),
+            new RentZoneData(23, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(394.68338, -633.62024, 28.70693), -88.82406f, RentCarId.Civilian),
+            //new RentZoneData(24, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(583.3127, 2739.7866, 42.095203), -171.795135f, RentCarId.Civilian),
+            //new RentZoneData(25, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(2752.168, 3467.383, 55.74715), -117.795135f, RentCarId.Civilian),
+            //new RentZoneData(26, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-72.81145, 6346.49, 31.586294), 0.0f, RentCarId.Civilian),
+            //new RentZoneData(27, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-3140.1387, 1130.3076, 20.851465), -120.795135f, RentCarId.Civilian),
+            //new RentZoneData(28, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-389.61102, -196.51826, 36.54216), -159.795135f, RentCarId.Civilian),
+            //new RentZoneData(29, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1695.415, 4785.0933, 41.996357), 52.643776f, RentCarId.Civilian),
 
-            new RentZoneData(30, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.TaxiRent), new Vector3(899.3858, -172.74521, 74.01804), -149.6f, RentCarId.JobTaxi),
-            new RentZoneData(31, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.LandmowerRent), new Vector3(-1330.482, 42.12986, 53.48915), 0.0f, RentCarId.JobLawnmower),
-            new RentZoneData(32, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.BusRent), new Vector3(435.23758, -653.01117, 28.730534), 78.42807f, RentCarId.JobBus),
-            new RentZoneData(33, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FuraRent), new Vector3(1018.9361, -2511.5688, 28.480877), 142.21999f, RentCarId.JobTrucker),
-  	        new RentZoneData(34, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FurgonRent), new Vector3(-196.52617, -830.6757, 30.771637), -65.649086f, RentCarId.JobCollector),          
-            new RentZoneData(35, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.MechanikRent), new Vector3(-229.61082, -1378.2086, 31.258224), 179.0f, RentCarId.JobMechanic),
+            new RentZoneData(30, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.TaxiRent), new Vector3(899.3858, -172.74521, 74.01804), -149.6f, RentCarId.JobTaxi),
+            new RentZoneData(31, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.LandmowerRent), new Vector3(-1330.482, 42.12986, 53.48915), 0.0f, RentCarId.JobLawnmower),
+            new RentZoneData(32, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.BusRent), new Vector3(435.23758, -653.01117, 28.730534), 78.42807f, RentCarId.JobBus),
+            new RentZoneData(33, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.FuraRent), new Vector3(1018.9361, -2511.5688, 28.480877), 142.21999f, RentCarId.JobTrucker),
+  	        new RentZoneData(34, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.FurgonRent), new Vector3(-196.52617, -830.6757, 30.771637), -65.649086f, RentCarId.JobCollector),          
+            new RentZoneData(35, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.MechanikRent), new Vector3(-229.61082, -1378.2086, 31.258224), 179.0f, RentCarId.JobMechanic),
 
-         // new RentZoneData(36, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1024.0071, 2651.1096, 39.55115), 3.2891867f, RentCarId.Civilian),
-         // new RentZoneData(37, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1711.9036, 3320.435, 41.146633), 105.430374f, RentCarId.Civilian),
-         // new RentZoneData(38, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1725.8662, 3029.0952, 62.1895), 70.05024f, RentCarId.Civilian),
-         // new RentZoneData(39, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(145.26793, 6646.386, 31.503784), -168.58095f, RentCarId.Civilian),
-         // new RentZoneData(40, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1436.4434, 6331.325, 23.934277), 95.294754f, RentCarId.Civilian),
-         // new RentZoneData(41, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(268.53894, 2573.1646, 45.064144), 42.072704f, RentCarId.Civilian),
-         // new RentZoneData(42, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-2172.9595, 4281.6562, 49.09), -121.75311f, RentCarId.Civilian),
-         // new RentZoneData(43, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(2553.2017, 4639.9536, 34.07682), -10.622228f, RentCarId.Civilian),
-         // new RentZoneData(44, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(2531.4392, 4113.914, 38.756462), -113.949425f, RentCarId.Civilian),
-         // new RentZoneData(45, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(2034.2146, 3180.105, 45.25282), 154.2865f, RentCarId.Civilian),
-         // new RentZoneData(46, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-1125.9249, 2694.8164, 18.800394), 93.99415f, RentCarId.Civilian),
-         // new RentZoneData(47, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-2647.9492, 2532.6375, 3.0417547), 33.042896f, RentCarId.Civilian),
-         // new RentZoneData(48, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-1837.5392, 4714.268, 4.317833), -139.0106f, RentCarId.Civilian),
-         // new RentZoneData(49, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1651.5188, 4828.98, 42.023285), -169.2284f, RentCarId.Civilian),
-         // new RentZoneData(50, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(3304.9111, 5424.6646, 15.494226), -124.61217f, RentCarId.Civilian),
-            new RentZoneData(51, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(2830.9817, -710.8333, 1.97693), 81.07968f, RentCarId.Civilian),
-          //  new RentZoneData(52, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1419.0496, 3654.1768, 34.52287), 116.757744f, RentCarId.Civilian),
-          //  new RentZoneData(53, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(834.9719, -3204.43, 5.9008045), -174.2475f, RentCarId.Civilian),
-            new RentZoneData(54, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-330.19974, -2464.6208, 6.0006385), 142.68982f, RentCarId.Civilian),
-         //   new RentZoneData(55, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(619.00146, 2785.884, 43.48116), 7.0879054f, RentCarId.Civilian),
-            new RentZoneData(56, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-1237.501, -1395.8168, 4.141041), 122.99152f, RentCarId.Civilian),
-            new RentZoneData(57, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(1389.4164, -2073.133, 51.99858), 53.371437f, RentCarId.Civilian),
+         // new RentZoneData(36, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1024.0071, 2651.1096, 39.55115), 3.2891867f, RentCarId.Civilian),
+         // new RentZoneData(37, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1711.9036, 3320.435, 41.146633), 105.430374f, RentCarId.Civilian),
+         // new RentZoneData(38, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1725.8662, 3029.0952, 62.1895), 70.05024f, RentCarId.Civilian),
+         // new RentZoneData(39, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(145.26793, 6646.386, 31.503784), -168.58095f, RentCarId.Civilian),
+         // new RentZoneData(40, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1436.4434, 6331.325, 23.934277), 95.294754f, RentCarId.Civilian),
+         // new RentZoneData(41, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(268.53894, 2573.1646, 45.064144), 42.072704f, RentCarId.Civilian),
+         // new RentZoneData(42, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-2172.9595, 4281.6562, 49.09), -121.75311f, RentCarId.Civilian),
+         // new RentZoneData(43, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(2553.2017, 4639.9536, 34.07682), -10.622228f, RentCarId.Civilian),
+         // new RentZoneData(44, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(2531.4392, 4113.914, 38.756462), -113.949425f, RentCarId.Civilian),
+         // new RentZoneData(45, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(2034.2146, 3180.105, 45.25282), 154.2865f, RentCarId.Civilian),
+         // new RentZoneData(46, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-1125.9249, 2694.8164, 18.800394), 93.99415f, RentCarId.Civilian),
+         // new RentZoneData(47, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-2647.9492, 2532.6375, 3.0417547), 33.042896f, RentCarId.Civilian),
+         // new RentZoneData(48, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-1837.5392, 4714.268, 4.317833), -139.0106f, RentCarId.Civilian),
+         // new RentZoneData(49, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1651.5188, 4828.98, 42.023285), -169.2284f, RentCarId.Civilian),
+         // new RentZoneData(50, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(3304.9111, 5424.6646, 15.494226), -124.61217f, RentCarId.Civilian),
+            new RentZoneData(51, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(2830.9817, -710.8333, 1.97693), 81.07968f, RentCarId.Civilian),
+          //  new RentZoneData(52, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1419.0496, 3654.1768, 34.52287), 116.757744f, RentCarId.Civilian),
+          //  new RentZoneData(53, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(834.9719, -3204.43, 5.9008045), -174.2475f, RentCarId.Civilian),
+            new RentZoneData(54, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-330.19974, -2464.6208, 6.0006385), 142.68982f, RentCarId.Civilian),
+         //   new RentZoneData(55, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(619.00146, 2785.884, 43.48116), 7.0879054f, RentCarId.Civilian),
+            new RentZoneData(56, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-1237.501, -1395.8168, 4.141041), 122.99152f, RentCarId.Civilian),
+            new RentZoneData(57, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(1389.4164, -2073.133, 51.99858), 53.371437f, RentCarId.Civilian),
             //
-            new RentZoneData(58, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.FurgonRent2), new Vector3(136.40952, 94.93223, 83.507645), 102.5f, RentCarId.JobPostman), // Postal NPC
-            new RentZoneData(59, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-478.59937, -304.3146, 35.113594), -157f, RentCarId.Civilian),
-            new RentZoneData(60, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-227.15689, -2666.8054, 6.0002985),  7.2f, RentCarId.Civilian), // НУПАУАУАУ
-          //  new RentZoneData(61, "a_m_y_genstreet_01", LangFunc.GetText(LangType.Ru, DataName.CarRent), new Vector3(-2334.4495, 3422.5938, 29.965755), 104.25f, RentCarId.Civilian),
+            new RentZoneData(58, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.FurgonRent2), new Vector3(136.40952, 94.93223, 83.507645), 102.5f, RentCarId.JobPostman), // Postal NPC
+            new RentZoneData(59, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-478.59937, -304.3146, 35.113594), -157f, RentCarId.Civilian),
+            new RentZoneData(60, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-227.15689, -2666.8054, 6.0002985),  7.2f, RentCarId.Civilian), // НУПАУАУАУ
+          //  new RentZoneData(61, "a_m_y_genstreet_01", LangFunc.GetText(LangType.En, DataName.CarRent), new Vector3(-2334.4495, 3422.5938, 29.965755), 104.25f, RentCarId.Civilian),
         };
         private class RentBlipData
         {
@@ -660,22 +660,22 @@ namespace NeptuneEvo.Core
 
         private static IReadOnlyDictionary<RentCarId, RentBlipData> RentBlipsData = new Dictionary<RentCarId, RentBlipData>()
         {
-            { RentCarId.Civilian, new RentBlipData(76, LangFunc.GetText(LangType.Ru, DataName.CarRent), 9) },
-            { RentCarId.Cycling, new RentBlipData(512, LangFunc.GetText(LangType.Ru, DataName.BikeRent), 9) },
-            { RentCarId.OffRoad, new RentBlipData(757, LangFunc.GetText(LangType.Ru, DataName.OffRoadRent), 9) },
-            { RentCarId.WaterBased, new RentBlipData(76, LangFunc.GetText(LangType.Ru, DataName.BoatRent), 9) },
-            { RentCarId.Helicopter, new RentBlipData(753, LangFunc.GetText(LangType.Ru, DataName.HeliRent), 9) },
-            { RentCarId.Aeroplane, new RentBlipData(579, LangFunc.GetText(LangType.Ru, DataName.PlaneRent), 9) },
-            //{ RentCarId.Holiday, new RentBlipData(747, LangFunc.GetText(LangType.Ru, DataName.EventRent), 9) },
-            //{ RentCarId.Elite, new RentBlipData(633, LangFunc.GetText(LangType.Ru, DataName.EliteRent), 9) },
-            //{ RentCarId.Rally, new RentBlipData(726, LangFunc.GetText(LangType.Ru, DataName.RaceRent), 9) },
-           { RentCarId.JobTaxi, new RentBlipData(2, LangFunc.GetText(LangType.Ru, DataName.Taxi), 46) },
-            { RentCarId.JobLawnmower, new RentBlipData(109, LangFunc.GetText(LangType.Ru, DataName.Landmower), 4) },
-            { RentCarId.JobBus, new RentBlipData(2, LangFunc.GetText(LangType.Ru, DataName.Bus), 26) },
-            { RentCarId.JobTrucker, new RentBlipData(2, LangFunc.GetText(LangType.Ru, DataName.Gruzovik), 4) },
-            { RentCarId.JobCollector, new RentBlipData(2, LangFunc.GetText(LangType.Ru, DataName.Inkass), 63) },
-            { RentCarId.JobMechanic, new RentBlipData(2, LangFunc.GetText(LangType.Ru, DataName.Mechanik), 4) },
-            { RentCarId.JobPostman, new RentBlipData(2, LangFunc.GetText(LangType.Ru, DataName.Postman), 4) },
+            { RentCarId.Civilian, new RentBlipData(76, LangFunc.GetText(LangType.En, DataName.CarRent), 9) },
+            { RentCarId.Cycling, new RentBlipData(512, LangFunc.GetText(LangType.En, DataName.BikeRent), 9) },
+            { RentCarId.OffRoad, new RentBlipData(757, LangFunc.GetText(LangType.En, DataName.OffRoadRent), 9) },
+            { RentCarId.WaterBased, new RentBlipData(76, LangFunc.GetText(LangType.En, DataName.BoatRent), 9) },
+            { RentCarId.Helicopter, new RentBlipData(753, LangFunc.GetText(LangType.En, DataName.HeliRent), 9) },
+            { RentCarId.Aeroplane, new RentBlipData(579, LangFunc.GetText(LangType.En, DataName.PlaneRent), 9) },
+            //{ RentCarId.Holiday, new RentBlipData(747, LangFunc.GetText(LangType.En, DataName.EventRent), 9) },
+            //{ RentCarId.Elite, new RentBlipData(633, LangFunc.GetText(LangType.En, DataName.EliteRent), 9) },
+            //{ RentCarId.Rally, new RentBlipData(726, LangFunc.GetText(LangType.En, DataName.RaceRent), 9) },
+           { RentCarId.JobTaxi, new RentBlipData(2, LangFunc.GetText(LangType.En, DataName.Taxi), 46) },
+            { RentCarId.JobLawnmower, new RentBlipData(109, LangFunc.GetText(LangType.En, DataName.Landmower), 4) },
+            { RentCarId.JobBus, new RentBlipData(2, LangFunc.GetText(LangType.En, DataName.Bus), 26) },
+            { RentCarId.JobTrucker, new RentBlipData(2, LangFunc.GetText(LangType.En, DataName.Gruzovik), 4) },
+            { RentCarId.JobCollector, new RentBlipData(2, LangFunc.GetText(LangType.En, DataName.Inkass), 63) },
+            { RentCarId.JobMechanic, new RentBlipData(2, LangFunc.GetText(LangType.En, DataName.Mechanik), 4) },
+            { RentCarId.JobPostman, new RentBlipData(2, LangFunc.GetText(LangType.En, DataName.Postman), 4) },
         };
 
         private static Dictionary<int, int> PedsToRentCarId = new Dictionary<int, int>();
@@ -714,7 +714,7 @@ namespace NeptuneEvo.Core
                 if (!PedsToRentCarId.ContainsKey(Index)) return;
                 if (!FunctionsAccess.IsWorking("RentCar"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
@@ -763,13 +763,13 @@ namespace NeptuneEvo.Core
                 if (player.IsInVehicle)
                 {
                     //Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете арендовать т/с находясь в авто.", 3000);
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.Ru, DataName.CantRentAuto), DateTime.Now); 
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.En, DataName.CantRentAuto), DateTime.Now); 
                     return;
                 }
                 if(sessionData.RentData != null)
                 {
                     //Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы уже арендуете т/с.", 3000);
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.Ru, DataName.AlreadyRent), DateTime.Now); 
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.En, DataName.AlreadyRent), DateTime.Now); 
                     return;
                 }
                 else if(0 > carId || carId >= RentCarsData.Length) return;
@@ -780,13 +780,13 @@ namespace NeptuneEvo.Core
                     case JobsId.Taxi:
                         if (Main.ServerSettings.IsCheckJobLicC && !characterData.Licenses[2])
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoLicenceC), 10000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoLicenceC), 10000);
                             return;
                         }
                         
                         if (characterData.WorkID != (int)JobsId.Taxi)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BeforeNeedToWork), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BeforeNeedToWork), 3000);
                             return;
                         }
 
@@ -794,7 +794,7 @@ namespace NeptuneEvo.Core
                         if (jobLevelInfo.Item1 <= 1 && rentCarsData.Model != "taxi" ||
                             jobLevelInfo.Item1 >= 2 && jobLevelInfo.Item1 <= 4 && rentCarsData.Model != "cognoscenti" && rentCarsData.Model != "bmwm5")
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
                             return;
                         }
 
@@ -802,19 +802,19 @@ namespace NeptuneEvo.Core
                     case JobsId.Trucker:
                         if (Main.ServerSettings.IsCheckJobLicC && !characterData.Licenses[2])
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoLicenceC), 10000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoLicenceC), 10000);
                             return;
                         }
 
                         if (characterData.WorkID != (int)JobsId.Trucker)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BeforeNeedToWork), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BeforeNeedToWork), 3000);
                             return;
                         }
                         
                         /*if (characterData.BizIDs.Count > 0)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantStartWork), 6000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantStartWork), 6000);
                             return;
                         }*/
                         
@@ -822,7 +822,7 @@ namespace NeptuneEvo.Core
                         if (jobLevelInfo.Item1 <= 1 && rentCarsData.Model != "pounder" ||
                             jobLevelInfo.Item1 >= 2 && jobLevelInfo.Item1 <= 3 && rentCarsData.Model != "pounder" && rentCarsData.Model != "benson")
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
                             return;
                         }
 
@@ -830,13 +830,13 @@ namespace NeptuneEvo.Core
                     case JobsId.Bus:
                         if (Main.ServerSettings.IsCheckJobLicC && !characterData.Licenses[2])
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoLicenceC), 10000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoLicenceC), 10000);
                             return;
                         }
 
                         if (characterData.WorkID != (int)JobsId.Bus)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BeforeNeedToWork), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BeforeNeedToWork), 3000);
                             return;
                         }
 
@@ -844,7 +844,7 @@ namespace NeptuneEvo.Core
                         if (jobLevelInfo.Item1 <= 2 && rentCarsData.Model != "airbus" ||
                             jobLevelInfo.Item1 >= 3 && jobLevelInfo.Item1 <= 4 && rentCarsData.Model != "airbus" && rentCarsData.Model != "bus")
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
                             return;
                         }
 
@@ -852,13 +852,13 @@ namespace NeptuneEvo.Core
                     case JobsId.CashCollector:
                         if (Main.ServerSettings.IsCheckJobLicC && !characterData.Licenses[2])
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoLicenceC), 10000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoLicenceC), 10000);
                             return;
                         }
 
                         if (characterData.WorkID != (int)JobsId.CashCollector)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BeforeNeedToWork), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BeforeNeedToWork), 3000);
                             return;
                         }
 
@@ -866,7 +866,7 @@ namespace NeptuneEvo.Core
                         if (jobLevelInfo.Item1 <= 2 && rentCarsData.Model != "stockade" ||
                             jobLevelInfo.Item1 >= 3 && jobLevelInfo.Item1 <= 4 && rentCarsData.Model != "stockade" && rentCarsData.Model != "terbyte")
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehicleNotAvaible, rentCarsData.Model, jobLevelInfo.Item1), 8000);
                             return;
                         }
 
@@ -876,13 +876,13 @@ namespace NeptuneEvo.Core
                     case JobsId.Postman:
                         if (Main.ServerSettings.IsCheckJobLicC && !characterData.Licenses[2])
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoLicenceC), 10000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoLicenceC), 10000);
                             return;
                         }
 
                         if (rentCarsData.Job != (JobsId)characterData.WorkID)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BeforeNeedToWork), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BeforeNeedToWork), 3000);
                             return;
                         }
 
@@ -989,12 +989,12 @@ namespace NeptuneEvo.Core
                 Trigger.ClientEvent(player, "client.rentcar.point", vehicleCreate.Value);
                 //Trigger.ClientEvent(player, "createWaypoint", _rentCarsSpawn.Position.X, _rentCarsSpawn.Position.Y);
 
-                string correctMessage = LangFunc.GetText(LangType.Ru, DataName.hours);
-                if (hour == 1) correctMessage = LangFunc.GetText(LangType.Ru, DataName.hour);
-                else if (hour == 2 || hour == 3 || hour == 4) correctMessage = LangFunc.GetText(LangType.Ru, DataName.houra);
+                string correctMessage = LangFunc.GetText(LangType.En, DataName.hours);
+                if (hour == 1) correctMessage = LangFunc.GetText(LangType.En, DataName.hour);
+                else if (hour == 2 || hour == 3 || hour == 4) correctMessage = LangFunc.GetText(LangType.En, DataName.houra);
 
-                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccRentVehJob, hour, correctMessage), 8000);
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.Ru, DataName.SuccRentVehJob, rentCarsData.Model), DateTime.Now);
+                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccRentVehJob, hour, correctMessage), 8000);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.En, DataName.SuccRentVehJob, rentCarsData.Model), DateTime.Now);
                 BattlePass.Repository.UpdateReward(player, 26);
 
                 sessionData.RentData = new RentData(rentCarsData.Price, DateTime.Now.AddMinutes(60 * hour), vehicleCreate, rentCarsData.Model, number, rentCarsData.Job != JobsId.None);
@@ -1170,7 +1170,7 @@ namespace NeptuneEvo.Core
                     sessionData.RentData = null;
 
                     if (msg) 
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.Ru, DataName.CancelledRent), DateTime.Now);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Rent, LangFunc.GetText(LangType.En, DataName.CancelledRent), DateTime.Now);
 
                     if (sessionData.WorkData.OnWork)
                         Jobs.Repository.JobEnd(player);
@@ -1207,14 +1207,14 @@ namespace NeptuneEvo.Core
                 {
                     case "gpstrack":
                         Trigger.ClientEvent(player, "createWaypoint", rent.Vehicle.Position.X, rent.Vehicle.Position.Y);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MarkSelected), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MarkSelected), 3000);
                         return;
                     case "datetime":
                         int price = GetRentCarCash (accountData.VipLvl, characterData.LVL, rent.Price);
-                        Trigger.ClientEvent(player, "openDialog", "RENTCARI_DATETIME", LangFunc.GetText(LangType.Ru, DataName.RentExpandConfirm, rent.Date, MoneySystem.Wallet.Format(price)));
+                        Trigger.ClientEvent(player, "openDialog", "RENTCARI_DATETIME", LangFunc.GetText(LangType.En, DataName.RentExpandConfirm, rent.Date, MoneySystem.Wallet.Format(price)));
                         return;
                     case "stoprent":
-                        Trigger.ClientEvent(player, "openDialog", "RENTCARI_STOPRENT", LangFunc.GetText(LangType.Ru, DataName.RentCancelConfirm, rent.Date));
+                        Trigger.ClientEvent(player, "openDialog", "RENTCARI_STOPRENT", LangFunc.GetText(LangType.En, DataName.RentCancelConfirm, rent.Date));
                         return;
                 }
             }

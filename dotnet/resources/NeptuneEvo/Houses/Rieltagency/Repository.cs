@@ -25,7 +25,7 @@ namespace NeptuneEvo.Houses.Rieltagency
 
         public static void OnResourceStart()
         {
-            Main.CreateBlip(new Main.BlipData(374, LangFunc.GetText(LangType.Ru, DataName.Rieltorskoye), new Vector3(-710.49, 267.8656, 83.14731), 2, true));
+            Main.CreateBlip(new Main.BlipData(374, LangFunc.GetText(LangType.En, DataName.Rieltorskoye), new Vector3(-710.49, 267.8656, 83.14731), 2, true));
             PedSystem.Repository.CreateQuest("a_m_y_business_02", new Vector3(-710.49, 267.8656, 83.14731), -92.04525f, title: "~y~NPC~w~ Илон Таск\nРиэлтор", colShapeEnums: ColShapeEnums.Rieltagency);
         }
         
@@ -43,12 +43,12 @@ namespace NeptuneEvo.Houses.Rieltagency
 
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;
@@ -210,13 +210,13 @@ namespace NeptuneEvo.Houses.Rieltagency
                 
                 if (house == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotFindHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotFindHome), 3000);
                     return;
                 }
                 
                 if (house.Owner != String.Empty)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HomeAlreadyBought), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HomeAlreadyBought), 3000);
                     return;
                 }
 
@@ -224,20 +224,20 @@ namespace NeptuneEvo.Houses.Rieltagency
 
                 if (UpdateData.CanIChange(player, price, true) != 255) return;
                     
-                Trigger.ClientEvent(player, "client.rieltagency.addBlip", 374, 82, id, house.Position.X, house.Position.Y, LangFunc.GetText(LangType.Ru, DataName.Rieltorskoye));
+                Trigger.ClientEvent(player, "client.rieltagency.addBlip", 374, 82, id, house.Position.X, house.Position.Y, LangFunc.GetText(LangType.En, DataName.Rieltorskoye));
             }
             else
             {
                 if (!BusinessManager.BizList.ContainsKey(id))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotFindBiz), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotFindBiz), 3000);
                     return;
                 }
 
                 var business = BusinessManager.BizList[id];
                 if (business.IsOwner())
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizAlreadyBought), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizAlreadyBought), 3000);
                     return;
                 }
                 
@@ -245,11 +245,11 @@ namespace NeptuneEvo.Houses.Rieltagency
                 
                 if (UpdateData.CanIChange(player, price, true) != 255) return;
                 
-                Trigger.ClientEvent(player, "client.rieltagency.addBlip", 464, 82, id, business.EnterPoint.X, business.EnterPoint.Y, LangFunc.GetText(LangType.Ru, DataName.Rieltorskoye));
+                Trigger.ClientEvent(player, "client.rieltagency.addBlip", 464, 82, id, business.EnterPoint.X, business.EnterPoint.Y, LangFunc.GetText(LangType.En, DataName.Rieltorskoye));
                 
             }
-            EventSys.SendCoolMsg(player,"Риэлтор", "Покупка информации", $"{LangFunc.GetText(LangType.Ru, DataName.YouBoughtInfo)}", "", 15000);
-           // Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBoughtInfo), 10000);
+            EventSys.SendCoolMsg(player,"Риэлтор", "Покупка информации", $"{LangFunc.GetText(LangType.En, DataName.YouBoughtInfo)}", "", 15000);
+           // Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBoughtInfo), 10000);
             BattlePass.Repository.UpdateReward(player, 43);
             
             GameLog.Money($"player({characterData.UUID})", $"buyRieltagency({type})", price, $"buyRieltagency({id},{type}))");

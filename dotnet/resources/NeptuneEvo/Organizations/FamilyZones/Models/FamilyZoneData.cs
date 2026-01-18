@@ -27,7 +27,7 @@ namespace NeptuneEvo.Organizations.FamilyZones.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Familyzones
                         .Where(v => v.Id == this.Id)

@@ -706,13 +706,13 @@ namespace NeptuneEvo.Jobs
                             {
                                 qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                                 qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                                Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                                Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                             }
                             else
                             {
                                 qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                                 //todo translate (было DataName.PointsQuestGot)
-                                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                             }
                         }
                     }
@@ -723,13 +723,13 @@ namespace NeptuneEvo.Jobs
                         Trigger.ClientEvent(player, "deleteWorkBlip");
                         Trigger.ClientEvent(player, "freeze", true);
                         sessionData.WorkData.BusOnStop = true;
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BusStop), 6000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BusStop), 6000);
                         var mypos = player.Position;
                         sessionData.TimersData.BusTimer = Timers.StartOnce(5000, () => timer_busStop(player, way, check, mypos), true);
                         foreach (ExtPlayer foreachPlayer in Main.GetPlayersInRadiusOfPosition(mypos, 30))
                         {
                             if (!foreachPlayer.IsCharacterData()) continue;
-                            Trigger.SendChatMessage(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.NextBus, BusWaysNames[way]));
+                            Trigger.SendChatMessage(foreachPlayer, LangFunc.GetText(LangType.En, DataName.NextBus, BusWaysNames[way]));
                         }
                     }
                 }
@@ -756,7 +756,7 @@ namespace NeptuneEvo.Jobs
                     sessionData.TimersData.BusTimer = null;
                 }
                 sessionData.WorkData.BusOnStop = false;
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCanGoNext), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCanGoNext), 3000);
                 int payment = Convert.ToInt32(Main.BuswaysPayments[way] * Group.GroupPayAdd[accountData.VipLvl] * Main.ServerSettings.MoneyMultiplier);
 
                 (byte, float) jobLevelInfo = characterData.JobSkills.ContainsKey((int)JobsId.Bus) ? Main.GetPlayerJobLevelBonus((int)JobsId.Bus, characterData.JobSkills[(int)JobsId.Bus]) : (0, 1);
@@ -792,20 +792,20 @@ namespace NeptuneEvo.Jobs
                     {
                         qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                         qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                     }
                     else
                     {
                         qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                         //todo translate (было DataName.PointsQuestGot)
-                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                     }
                 }
 
                 foreach (ExtPlayer foreachPlayer in Main.GetPlayersInRadiusOfPosition(mypos, 30))
                 {
                     if (!foreachPlayer.IsCharacterData()) continue;
-                    Notify.Send(foreachPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BusStartsWay, BusWaysNames[way]), 1000);
+                    Notify.Send(foreachPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BusStartsWay, BusWaysNames[way]), 1000);
                 }
             }
             catch (Exception e)
@@ -825,7 +825,7 @@ namespace NeptuneEvo.Jobs
             
             if (sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                 sessionData.WorkData.OnWork = false;
                 Trigger.ClientEvent(player, "deleteCheckpoint", 3, 0);
                 Trigger.ClientEvent(player, "deleteWorkBlip");
@@ -885,7 +885,7 @@ namespace NeptuneEvo.Jobs
             Trigger.ClientEvent(player, "createCheckpoint", 3, 1, BusWays[way][0].Pos - new Vector3(0, 0, 1.12), 4, 0, 255, 0, 0, BusWays[way][1].Pos - new Vector3(0, 0, 1.12));
             Trigger.ClientEvent(player, "createWaypoint", BusWays[way][0].Pos.X, BusWays[way][0].Pos.Y);
             Trigger.ClientEvent(player, "createWorkBlip", BusWays[way][0].Pos);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouRentBus, BusWaysNames[way]), 10000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouRentBus, BusWaysNames[way]), 10000);
         }
 
         [ServerEvent(Event.PlayerEnterVehicle)]
@@ -908,7 +908,7 @@ namespace NeptuneEvo.Jobs
             
             if (characterData.Money >= Main.BusPay)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BusPayed, Main.BusPay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BusPayed, Main.BusPay), 3000);
                 BattlePass.Repository.UpdateReward(player, 63);
                 MoneySystem.Wallet.Change(player, -Main.BusPay);
                 
@@ -920,7 +920,7 @@ namespace NeptuneEvo.Jobs
             }
             else
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                 VehicleManager.WarpPlayerOutOfVehicle(player);
             }
         }

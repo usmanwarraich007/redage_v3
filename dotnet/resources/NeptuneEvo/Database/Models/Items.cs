@@ -35,7 +35,7 @@ namespace NeptuneEvo.Database.Models
 
                     if (updateListData.Count > 0 || dellListData.Count > 0)
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке 
+                        await using var db = new ServerBD("MainDB");//On Separate Thread 
 
                         await ItemUpdate(db, updateListData);
                         

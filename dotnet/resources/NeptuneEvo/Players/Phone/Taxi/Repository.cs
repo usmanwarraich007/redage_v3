@@ -51,7 +51,7 @@ namespace NeptuneEvo.Players.Phone.Taxi
             
             if (!FunctionsAccess.IsWorking("phonetaxi"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
@@ -64,7 +64,7 @@ namespace NeptuneEvo.Players.Phone.Taxi
             
             if (OrdersList.Any(ol => ol.Player == player || ol.Driver == player))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyTaxiOrdered), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyTaxiOrdered), 3000);
                 return;
             }
             
@@ -91,14 +91,14 @@ namespace NeptuneEvo.Players.Phone.Taxi
                 
                 OrdersList.Add(taxiData);
                 
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WaitForTaxi, taxiCount), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WaitForTaxi, taxiCount), 3000);
                 Trigger.ClientEvent(player, "client.phone.taxi.successOrder");
                 
                 //Trigger.ClientEvent(player, "client.phone.taxi.");
                 BattlePass.Repository.UpdateReward(player, 62);
                 
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoTaxiHere), 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoTaxiHere), 3000);
 
         }
 
@@ -113,7 +113,7 @@ namespace NeptuneEvo.Players.Phone.Taxi
             if (taxiData == null)
             {
                 if (!isDisconnect) 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouDoesntCallTaxi), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouDoesntCallTaxi), 3000);
                 return;
             }
             
@@ -136,7 +136,7 @@ namespace NeptuneEvo.Players.Phone.Taxi
                     taxiData.DriverTimer = null;
                     
                     if (!isDisconnect)
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TripCanceled), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TripCanceled), 3000);
                 }
 
                 if (!isDisconnect)
@@ -158,7 +158,7 @@ namespace NeptuneEvo.Players.Phone.Taxi
 
 
                     if (!isDisconnect) 
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCancelTrip), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCancelTrip), 3000);
                 }
 
                 if (!isDisconnect) 
@@ -184,7 +184,7 @@ namespace NeptuneEvo.Players.Phone.Taxi
                         }
                         
                         Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter,
-                            LangFunc.GetText(LangType.Ru, DataName.DriverCancelTrip), 3000);
+                            LangFunc.GetText(LangType.En, DataName.DriverCancelTrip), 3000);
                         
                         Trigger.ClientEvent(target, "client.phone.taxi.successOrder");
                     }
@@ -194,7 +194,7 @@ namespace NeptuneEvo.Players.Phone.Taxi
                 else
                 {
                     if (isNotRemove)
-                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PassengerCancel), 3000);
+                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PassengerCancel), 3000);
                     
                     Trigger.ClientEvent(target, "client.phone.taxijob.successCancel");
                 }

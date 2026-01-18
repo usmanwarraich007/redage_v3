@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GTANetworkAPI;
@@ -7,6 +7,7 @@ using NeptuneEvo.Chars;
 using NeptuneEvo.Functions;
 using NeptuneEvo.Handles;
 using NeptuneEvo.Players;
+using Localization;
 
 namespace NeptuneEvo.World.PayDayBonus
 {
@@ -80,14 +81,14 @@ namespace NeptuneEvo.World.PayDayBonus
                     if (foreachSessionData == null) 
                         return;
                 
-                    UpdateData.RedBucks(foreachPlayer, Main.DonateSettings.HappyHoursRB, msg: "СЧАСТЛИВЫЕ ЧАСЫ");
-                    Trigger.ClientEvent(foreachPlayer, "hud.info", "Удача на твоей стороне!", $"Поздравляем с победой в розыгрыше! {Main.DonateSettings.HappyHoursRB} RedBucks уже зачислены на твой аккаунт.", "СЧАСТЛИВЫЕ ЧАСЫ", "https://cloud.redage.net/cloud/img/time.png");
+                    UpdateData.RedBucks(foreachPlayer, Main.DonateSettings.HappyHoursRB, msg: LangFunc.GetText(LangType.En, DataName.HappyHours));
+                    Trigger.ClientEvent(foreachPlayer, "hud.info", LangFunc.GetText(LangType.En, DataName.LuckOnYourSide), LangFunc.GetText(LangType.En, DataName.CongratsOnWinning, Main.DonateSettings.HappyHoursRB), LangFunc.GetText(LangType.En, DataName.HappyHours), "https://cloud.redage.net/cloud/img/time.png");
 
                     winersName += $" {foreachSessionData.Name}";
                 }
-            
-                NAPI.Chat.SendChatMessageToAll($"~o~[СЧАСТЛИВЫЕ ЧАСЫ] Розыгрыш {Main.DonateSettings.HappyHoursRB} RedBucks проводится каждый час только среди активных игроков.");
-                NAPI.Chat.SendChatMessageToAll($"~o~[СЧАСТЛИВЫЕ ЧАСЫ] Победителями этого часа становятся: {winersName}. Они получают по {Main.DonateSettings.HappyHoursRB}, поздравляем!");   
+
+                NAPI.Chat.SendChatMessageToAll($"~o~[HAPPY HOURS] A draw for {Main.DonateSettings.HappyHoursRB} RedBucks is held every hour, exclusively for active players.");
+                NAPI.Chat.SendChatMessageToAll($"~o~[HAPPY HOURS] This hour's winners are: {winersName}. They each receive {Main.DonateSettings.HappyHoursRB}, congratulations!");
             }
         }
 

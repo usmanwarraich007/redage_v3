@@ -39,7 +39,7 @@ namespace NeptuneEvo.Accounts.Registration
                 login = login.ToLower();
                 email = email.ToLower();
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var account = await db.Accounts
                     .Where(v => v.Login.ToLower() == login || v.Email.ToLower() == email || v.Socialclub == sessionData.SocialClubName || v.Socialclub == sessionData.RealSocialClub)

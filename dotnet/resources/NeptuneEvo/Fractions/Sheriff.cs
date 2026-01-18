@@ -112,17 +112,17 @@ namespace NeptuneEvo.Fractions
  
                 if (sessionData.CuffedData.Cuffed) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000); 
                     return; 
                 } 
                 else if (sessionData.DeathData.InDeath) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000); 
                     return; 
                 } 
                 else if (Main.IHaveDemorgan(player, true)) return; 
  
-                Trigger.ClientEvent(player, "openDialog", "CallSheriffMemberDialog", LangFunc.GetText(LangType.Ru, DataName.AreYouWantToCallGov)); 
+                Trigger.ClientEvent(player, "openDialog", "CallSheriffMemberDialog", LangFunc.GetText(LangType.En, DataName.AreYouWantToCallGov)); 
             } 
             catch (Exception e) 
             { 
@@ -138,12 +138,12 @@ namespace NeptuneEvo.Fractions
             
             if (sessionData.CuffedData.Cuffed) 
             { 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000); 
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000); 
                 return; 
             } 
             else if (sessionData.DeathData.InDeath) 
             { 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000); 
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000); 
                 return; 
             } 
             else if (Main.IHaveDemorgan(player, true)) return; 
@@ -158,17 +158,17 @@ namespace NeptuneEvo.Fractions
                 var fractionData = player.GetFractionData();
                 if (fractionData == null || fractionData.Id != (int) Models.Fractions.SHERIFF) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPolice), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoPolice), 3000); 
                     return; 
                 } 
                 if (!fractionData.IsOpenStock) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseClosed), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseClosed), 3000); 
                     return; 
                 } 
                 if (!sessionData.WorkData.OnDuty) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000); 
                     return; 
                 } 
                 OpenPoliceGunMenu(player); 
@@ -182,13 +182,13 @@ namespace NeptuneEvo.Fractions
             InventoryItemData Bags = Chars.Repository.GetItemData(player, "accessories", 8); 
             if (Bags.ItemId != ItemId.BagWithDrill && Bags.ItemId != ItemId.BagWithMoney) 
             { 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBagDrillMoney), 3000); 
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBagDrillMoney), 3000); 
                 return; 
             } 
             Chars.Repository.RemoveIndex(player, "accessories", 8); 
             MoneySystem.Wallet.Change(player, Main.PoliceAward); 
             GameLog.Money($"server", $"player({characterData.UUID})", Main.PoliceAward, $"policeAward"); 
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Reward, Main.PoliceAward), 3000); 
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Reward, Main.PoliceAward), 3000); 
             return; 
         } 
         [ServerEvent(Event.PlayerExitVehicle)] 
@@ -220,7 +220,7 @@ namespace NeptuneEvo.Fractions
                 var fractionData = player.GetFractionData();
                 if (fractionData == null || fractionData.Id != (int) Models.Fractions.SHERIFF) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPolice), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoPolice), 3000); 
                     return; 
                 } 
                 switch (interact) 
@@ -231,12 +231,12 @@ namespace NeptuneEvo.Fractions
                     case 3: 
                         if (!sessionData.WorkData.OnDuty) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000); 
                             return; 
                         } 
                         if (!is_warg) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEmergency), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEmergency), 3000); 
                             return; 
                         } 
                         OpenSpecialPoliceMenu(player); 
@@ -259,12 +259,12 @@ namespace NeptuneEvo.Fractions
                     case 5: 
                         if (!sessionData.WorkData.OnDuty) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000); 
                             return; 
                         } 
                         if (!fractionData.IsOpenGunStock) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Warehouse2Closed), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Warehouse2Closed), 3000); 
                             return; 
                         } 
                         if (!player.IsFractionAccess(RankToAccess.OpenWeaponStock)) return; 
@@ -274,32 +274,32 @@ namespace NeptuneEvo.Fractions
                     case 6: 
                         if (!sessionData.WorkData.OnDuty) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000); 
                             return; 
                         } 
                         if (!player.IsInVehicle || (player.Vehicle.Model != NAPI.Util.GetHashKey("police") && 
                             player.Vehicle.Model != NAPI.Util.GetHashKey("police2") && player.Vehicle.Model != NAPI.Util.GetHashKey("police3") && player.Vehicle.Model != NAPI.Util.GetHashKey("police4"))) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustCarPolice), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustCarPolice), 3000); 
                             return; 
                         } 
                         player.Vehicle.SetSharedData("BOOST", 20); 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarBoost), 3000); 
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarBoost), 3000); 
                         return; 
                     case 7: 
                         if (!sessionData.WorkData.OnDuty) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000); 
                             return; 
                         } 
                         if (!player.IsInVehicle) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000); 
                             return; 
                         } 
                         if (player.Vehicle.Class == 15 || player.Vehicle.Class == 16) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RepairFlatVeh), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RepairFlatVeh), 3000); 
                             return; 
                         } 
                         if (DateTime.Now < Main.NextFixcarSheriffVeh) 
@@ -307,8 +307,8 @@ namespace NeptuneEvo.Fractions
                             long ticks = Main.NextFixcarSheriffVeh.Ticks - DateTime.Now.Ticks; 
                             if (ticks <= 0) return; 
                             DateTime g = new DateTime(ticks); 
-                            if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NextRepair1h, g.Hour, g.Minute, g.Second), 3000); 
-                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NextRepair,  g.Minute, g.Second), 3000); 
+                            if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NextRepair1h, g.Hour, g.Minute, g.Second), 3000); 
+                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NextRepair,  g.Minute, g.Second), 3000); 
                             return; 
                         } 
                         var vehicle = (ExtVehicle)player.Vehicle; 
@@ -319,12 +319,12 @@ namespace NeptuneEvo.Fractions
                             { 
                                 Main.NextFixcarSheriffVeh = DateTime.Now.AddMinutes(3); 
                                 VehicleManager.RepairCar(vehicle); 
-                                Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.RepairedVeh)); 
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucRepairVeh), 3000); 
+                                Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.RepairedVeh)); 
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucRepairVeh), 3000); 
                             } 
                             else 
                             { 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustCarPolice), 3000); 
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustCarPolice), 3000); 
                                 return; 
                             } 
                         } 
@@ -441,7 +441,7 @@ namespace NeptuneEvo.Fractions
                 } 
                 if (player.Position.DistanceTo(CloakroomSpecialPosition) >= 5 && player.Position.DistanceTo(SecondCloakroomSpecialPosition) >= 5) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFarFromVidacha), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFarFromVidacha), 3000); 
                     return; 
                 } 
                 if (player.GetFractionId() != (int) Models.Fractions.SHERIFF) return; 

@@ -50,12 +50,12 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses.Orders
             if (characterData.WorkID != (int)JobsId.Trucker)
             {
                 Trigger.ClientEvent(player, "client.phone.truck.init", JsonConvert.SerializeObject(selectedOrders), JsonConvert.SerializeObject(orders));
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAreNotDalnoboy), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAreNotDalnoboy), 3000);
                 return;
             }
             /*if (!sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNotWorkingNow), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNotWorkingNow), 3000);
                 return;
             }*/
 
@@ -122,20 +122,20 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses.Orders
             
             if (!FunctionsAccess.IsWorking("phonetruck"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
             if (sessionData.OrderData.Order != -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyTakeOrder), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyTakeOrder), 3000);
                 Open(player);
                 return;
             }
 
             if (!Truckers.IsPointProduct(player.Position))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMustBeAtZagruzka), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMustBeAtZagruzka), 3000);
 
                 var pos = Truckers.GetNearestGetProduct(player.Position);
                 Trigger.ClientEvent(player, "createWaypoint", pos.X, pos.Y);
@@ -146,14 +146,14 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses.Orders
             var vehicleLocalData = vehicle.GetVehicleLocalData(); 
             if (vehicleLocalData == null || vehicleLocalData.WorkId != JobsId.Trucker) 
             { 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkCar), 3000); 
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkCar), 3000); 
                 return; 
             } 
             
             //Trigger.ClientEvent(player, "createWaypoint", biz.UnloadPoint.X, biz.UnloadPoint.Y);
             if (!BusinessManager.Orders.ContainsKey(uid))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoOrderExists), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoOrderExists), 3000);
                 Open(player);
                 return;
             }
@@ -163,13 +163,13 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses.Orders
             var bizOrder = biz.Orders.FirstOrDefault(o => o.UID == uid);
             if (bizOrder == null || bizOrder.Taked)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ThisOrderTaken), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ThisOrderTaken), 3000);
                 Open(player);
                 return;
             }
             bizOrder.Taked = true;
             sessionData.OrderData.Order = uid;
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OrderDeliveryTaken, bizOrder.Name, BusinessManager.BusinessTypeNames[biz.Type]), 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OrderDeliveryTaken, bizOrder.Name, BusinessManager.BusinessTypeNames[biz.Type]), 3000);
             Truckers.playerGotProducts(player);
             Open(player);
         }

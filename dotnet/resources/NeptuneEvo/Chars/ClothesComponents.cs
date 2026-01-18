@@ -175,20 +175,20 @@ namespace NeptuneEvo.Chars
                         {
                             BusinessManager.UpdateBusProd(BusinessManager.BizList[b]);
                         }
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Refreshprod), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Refreshprod), 3000);
                         break;
                     case "ores":
                         Jobs.Miner.UpdateOres();
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Refreshore), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Refreshore), 3000);
                         break;
                     case "settings":
                     case "st":
                         Main.LoadServerSettings();
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы обновили настройки", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You have updated the settings", 3000);
                         break;
                     case "roulette":
                         Repository.InitRoulette();
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы обновили рулетку", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You have updated the roulette", 3000);
 
                         break;
                 }
@@ -805,7 +805,7 @@ namespace NeptuneEvo.Chars
             }
         }
         /// <summary>
-        /// Все эти json идут на интерфейс в папку json
+        /// All these JSON files go to the interface in the 'json' folder.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="clothesData"></param>
@@ -875,7 +875,7 @@ namespace NeptuneEvo.Chars
         }
 
         /// <summary>
-        /// Проверка на вернюю одежду
+        /// Check for outerwear
         /// </summary>
         /// <param name="Cloth"></param>
         /// <returns></returns>
@@ -883,11 +883,11 @@ namespace NeptuneEvo.Chars
         {
             return
             (
-                !(Cloth.Type == -1) // Или если же это и не жакет или батонед, и у этой одежды нет undershirt`а, то это верх.
+                !(Cloth.Type == -1) // Or if it is neither a jacket nor a buttoned shirt, and this clothing has no undershirt, then it is considered outerwear.
             );
         }
         /// <summary>
-        /// Проверка на нижнюю одежду
+        /// Checking for bottom clothing
         /// </summary>
         /// <param name="cloth"></param>
         /// <returns></returns>
@@ -902,13 +902,13 @@ namespace NeptuneEvo.Chars
                 {//Man 
                     { ClothesComponent.Hat, 247 }, //+
                     { ClothesComponent.Torsos, 215 }, 
-                    { ClothesComponent.Legs, 230 },  //+
-                    { ClothesComponent.Shoes, 162 }, //+
-                    { ClothesComponent.Accessories, 203 }, //+
-                    { ClothesComponent.BodyArmors, 65 }, 
-                    { ClothesComponent.Tops, 612 }, // +
-                    { ClothesComponent.Undershirts, 222 }, 
-                    { ClothesComponent.Masks, 249 },//+
+                    { ClothesComponent.Legs, 222 },  //+
+                    { ClothesComponent.Shoes, 160 }, //+
+                    { ClothesComponent.Accessories, 201 }, //+
+                    { ClothesComponent.BodyArmors, 62 }, 
+                    { ClothesComponent.Tops, 589 }, // +
+                    { ClothesComponent.Undershirts, 216 }, 
+                    { ClothesComponent.Masks, 247 },//+
                     { ClothesComponent.Ears, 42 }, 
                     { ClothesComponent.Watches, 49}, //+
                     { ClothesComponent.Glasses, 59 }, 
@@ -917,20 +917,20 @@ namespace NeptuneEvo.Chars
 
                     { ClothesComponent.Bracelets, 16 }, 
      
-                    { ClothesComponent.Decals, 274 }, 
+                    { ClothesComponent.Decals, 258 }, 
                 } 
             }, 
             { false, new Dictionary<ClothesComponent, int>() 
                 { 
                     { ClothesComponent.Hat, 246 }, //+
                     { ClothesComponent.Torsos, 249 }, 
-                    { ClothesComponent.Legs, 243 },  //+
-                    { ClothesComponent.Shoes, 170 }, //+
-                    { ClothesComponent.Accessories, 173 }, //a
-                    { ClothesComponent.BodyArmors, 65 }, 
-                    { ClothesComponent.Tops, 655 }, //+
-                    { ClothesComponent.Undershirts, 267 }, 
-                    { ClothesComponent.Masks,  250}, //+
+                    { ClothesComponent.Legs, 235 },  //+
+                    { ClothesComponent.Shoes, 168 }, //+
+                    { ClothesComponent.Accessories, 171 }, //a
+                    { ClothesComponent.BodyArmors, 62 }, 
+                    { ClothesComponent.Tops, 632 }, //+
+                    { ClothesComponent.Undershirts, 262 }, 
+                    { ClothesComponent.Masks,  248}, //+
                     { ClothesComponent.Ears, 23 }, 
                     { ClothesComponent.Watches, 38 }, //+
                     { ClothesComponent.Glasses, 61 }, //+
@@ -939,7 +939,7 @@ namespace NeptuneEvo.Chars
 
                     { ClothesComponent.Bracelets, 23 }, 
      
-                    { ClothesComponent.Decals, 291 }, 
+                    { ClothesComponent.Decals, 275 }, 
                 }
             },
         }; 
@@ -1069,7 +1069,7 @@ namespace NeptuneEvo.Chars
         }
 
         /// <summary>
-        /// Установка верхней нижней одежды и рук
+        /// Setting upper clothing, lower clothing, and hands
         /// </summary>
         /// <param name="player"></param>
         public static void SetTop(ExtPlayer player, bool gender)
@@ -1094,16 +1094,16 @@ namespace NeptuneEvo.Chars
 
                 var isClearLegs = false;
 
-                //Сначала одеваем нижнюю одежду
+                //First, put on the lower clothing.
                 if (playerTopDown.ItemId != ItemId.Debug && topsData.ContainsKey(playerTopDownData["Variation"]) && IsTopDown(topsData[playerTopDownData["Variation"]]))
                 {
                     undershirtsVariation = topsData[playerTopDownData["Variation"]].Variation;
 
                     //if (!TopsData[PlayerTopDownData["Variation"]].Textures.Contains(PlayerTopDownData["Texture"])) PlayerTopDownData["Texture"] = 0;
-                    // Проверяем, если это нижняя одежда
+                    // We check if it is lower clothing.
                     if (playerTopUp.ItemId == ItemId.Debug)
                     {
-                        // Проверяем, если на человеке нет верхней одежды, то удаляем undershirt и ставим "нижнюю" как верхнюю.
+                        // Check if the person is not wearing any upper clothing; if so, remove the undershirt and set the 'lower' clothing as upper.
 
                         topVariation = topsData[playerTopDownData["Variation"]].Variation;
                         isClearLegs = topsData[playerTopDownData["Variation"]].IsClearLegs;
@@ -1111,12 +1111,12 @@ namespace NeptuneEvo.Chars
 
                         torsosId = playerTopDownData["Variation"];
 
-                        // Удаляем undershirt
+                        // Remove the undershirt
                         undershirtsVariation = -1;
                     }
                 }
 
-                //Одеваем верхнюю
+                //Put on the upper clothing
 
 
                 var typeUndershirt = 0;
@@ -1128,7 +1128,7 @@ namespace NeptuneEvo.Chars
                     //if (!TopsData[PlayerTopUsessionData["Variation"]].Textures.Contains(PlayerTopUsessionData["Texture"])) PlayerTopUsessionData["Texture"] = 0;
 
                     var typeClothes = topsData[playerTopUpData["Variation"]].Type;
-                    // Проверяем, если текущий верх отсутствует, то мы просто надеваем на человека верхнюю одежду
+                    // Check if the current upper clothing is missing; if so, we simply put upper clothing on the character
                     if (playerTopDown.ItemId == ItemId.Debug || typeClothes == 0) undershirtsVariation = -1;
                     else if (typeClothes == 1)
                     {

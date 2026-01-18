@@ -39,20 +39,20 @@ namespace NeptuneEvo.Jobs
 
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMustBeInVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMustBeInVeh), 3000);
                     return;
                 }
 
                 if (sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyStartedWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyStartedWorkDay), 3000);
                     return;
                 }
 
                 (byte, float) jobLevelInfo = characterData.JobSkills.ContainsKey((int)JobsId.Taxi) ? Main.GetPlayerJobLevelBonus((int)JobsId.Taxi, characterData.JobSkills[(int)JobsId.Taxi]) : (0, 1);
                 if (Main.ServerNumber != 0 && jobLevelInfo.Item1 < 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Function5lvl), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Function5lvl), 3000);
                     return;
                 }
 
@@ -67,7 +67,7 @@ namespace NeptuneEvo.Jobs
                     
                     Players.Phone.Taxi.Orders.Repository.StartWork(player);
                     
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.StartWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.StartWorkDay), 3000);
                 }
             }
             catch (Exception e)

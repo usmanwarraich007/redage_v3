@@ -503,7 +503,7 @@ namespace NeptuneEvo.Core
         {
             if (!player.IsCharacterData()) return;
             else if (!player.IsInVehicle) return;
-            Trigger.ClientEvent(player, "openDialog", "RepairMyVeh", LangFunc.GetText(LangType.Ru, DataName.RepairSelf));
+            Trigger.ClientEvent(player, "openDialog", "RepairMyVeh", LangFunc.GetText(LangType.En, DataName.RepairSelf));
             return;
         }*/
     }

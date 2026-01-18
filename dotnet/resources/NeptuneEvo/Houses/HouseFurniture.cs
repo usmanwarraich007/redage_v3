@@ -140,12 +140,12 @@ namespace NeptuneEvo.Houses
             if (!player.IsCharacterData()) return;
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             if (Main.IHaveDemorgan(player, true)) return;
@@ -454,18 +454,18 @@ namespace NeptuneEvo.Houses
                 var house = HouseManager.GetHouse(player, true);
                 if (house == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
                 Vector3 pos = new Vector3(X, Y, Z);
                 if (player.Position.DistanceTo(pos) >= 6f)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MebelDomTooFar), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MebelDomTooFar), 5000);
                     return;
                 }
                 if (!HouseFurnitures.ContainsKey(house.ID))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MebelError), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MebelError), 5000);
                     return;
                 }
 
@@ -474,7 +474,7 @@ namespace NeptuneEvo.Houses
                 {
                     if (p != null && p.IsSet && p.Position != null && p.Position.DistanceTo(pos) <= 0.5f)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MebelTooNear), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MebelTooNear), 3000);
                         return;
                     }
                 }

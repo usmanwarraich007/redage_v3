@@ -27,7 +27,7 @@ namespace NeptuneEvo.Jobs
         {
             for (int i = 0; i < GetProduct.Count; i++)
             {
-                Main.CreateBlip(new Main.BlipData(557, LangFunc.GetText(LangType.Ru, DataName.ZagruzkaTovara), GetProduct[i], 84, true));
+                Main.CreateBlip(new Main.BlipData(557, LangFunc.GetText(LangType.En, DataName.ZagruzkaTovara), GetProduct[i], 84, true));
                 CustomColShape.CreateCylinderColShape(GetProduct[i], 50F, 2F, 0, ColShapeEnums.GetProductTrucker);
             }
         }
@@ -97,7 +97,7 @@ namespace NeptuneEvo.Jobs
             
             sessionData.WorkData.OnWork = true;
             sessionData.OrderData.WayPoint = null;
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GoToZagruz), 10000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GoToZagruz), 10000);
             var pos = GetNearestGetProduct(player.Position);
             Trigger.ClientEvent(player, "createWaypoint", pos.X, pos.Y);
         }
@@ -110,7 +110,7 @@ namespace NeptuneEvo.Jobs
             
             if (sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                 sessionData.WorkData.OnWork = false;
                 sessionData.OrderData.WayPoint = null;
                 CancelOrder(player);
@@ -180,7 +180,7 @@ namespace NeptuneEvo.Jobs
                         CancelOrder(player);
                         return;
                     }
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DoveziteDo, BusinessManager.BusinessTypeNames[biz.Type]), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DoveziteDo, BusinessManager.BusinessTypeNames[biz.Type]), 3000);
                     sessionData.OrderData.GotProduct = true;
                     sessionData.OrderData.WayPoint = biz;
                     Trigger.ClientEvent(player, "createWaypoint", biz.UnloadPoint.X, biz.UnloadPoint.Y);
@@ -210,7 +210,7 @@ namespace NeptuneEvo.Jobs
                 if (rentData == null || characterData.WorkID != (int)JobsId.Trucker || characterData.WorkID == (int)JobsId.Trucker && !sessionData.WorkData.OnWork) return;
                 if (rentData.Vehicle != player.Vehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeInTruck), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeInTruck), 3000);
                     return;
                 }
                 var uid = sessionData.OrderData.Order;
@@ -238,7 +238,7 @@ namespace NeptuneEvo.Jobs
                 var ow = (ExtPlayer) NAPI.Player.GetPlayerFromName(biz.Owner);
                 sessionData.OrderData.WayPoint = null;
                 if (ow != null) 
-                    Notify.Send(ow, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouOrderDeliveried, bizOrder.Name), 3000);
+                    Notify.Send(ow, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouOrderDeliveried, bizOrder.Name), 3000);
                 
                 if (qMain.GetQuestsLine(player, Zdobich.QuestName) == (int)zdobich_quests.Stage11)
                 {
@@ -250,13 +250,13 @@ namespace NeptuneEvo.Jobs
                     {
                         qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                         qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                     }
                     else
                     {
                         qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                         //todo translate (было DataName.PointsQuestGot)
-                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                     }
                 }
 
@@ -272,10 +272,10 @@ namespace NeptuneEvo.Jobs
                 Trigger.ClientEvent(player, "deleteCheckpoint", 10);
                 sessionData.OrderData.GotProduct = false;
                 sessionData.OrderData.Order = -1;
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TrucSuccDelivery), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TrucSuccDelivery), 3000);
 
                 if (sessionData.LastPointTime > DateTime.Now)
-                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.AnticheatDostavka, player.Name, player.Value));
+                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.AnticheatDostavka, player.Name, player.Value));
                 
                 sessionData.LastPointTime = DateTime.Now.AddSeconds(59);
 

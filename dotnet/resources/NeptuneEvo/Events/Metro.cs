@@ -40,7 +40,7 @@ namespace NeptuneEvo.Events
         {
             if (!FunctionsAccess.IsWorking("metro"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             var characterData = player.GetCharacterData();

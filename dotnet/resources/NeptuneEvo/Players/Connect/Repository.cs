@@ -1,4 +1,4 @@
-﻿using Database;
+using Database;
 using GTANetworkAPI;
 using NeptuneEvo.Handles;
 using LinqToDB;
@@ -28,7 +28,7 @@ namespace NeptuneEvo.Players.Connect
                 var sessionData = player.GetSessionData();
                 if (sessionData == null) return;
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
                 
                 /*var session = await db.Sessions
                     .Where(s => s.Hash == Accounts.Repository.GetSha256($"{sessionData.RealSocialClub}_{sessionData.Address}"))
@@ -120,7 +120,7 @@ namespace NeptuneEvo.Players.Connect
             {
                 Trigger.ClientEvent(player, "client.auth", -1);
                 Trigger.ClientEvent(player, "client.closeAll");
-                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, $"В данный момент на сервере ведутся технические работы, следите за новостями в оф. дискорде.", 1000 * 60);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.ServerMaintance), 1000 * 60);
                 return;
             }*/
             
@@ -148,7 +148,7 @@ namespace NeptuneEvo.Players.Connect
                     if (player == null || !player.IsSessionData()) return;
                     sessionData.TimersData.AutoDCTimer = null;
                     if (player.IsAccountData()) return;
-                    player.setKick(LangFunc.GetText(LangType.Ru, DataName.AuthorizationTimeout));
+                    player.setKick(LangFunc.GetText(LangType.En, DataName.AuthorizationTimeout));
                 });
             }
         }

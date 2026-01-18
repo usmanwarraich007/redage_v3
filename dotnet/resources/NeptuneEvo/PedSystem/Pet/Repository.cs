@@ -1,4 +1,4 @@
-﻿using Database;
+using Database;
 using GTANetworkAPI;
 using NeptuneEvo.Handles;
 using LinqToDB;
@@ -16,6 +16,7 @@ using NeptuneEvo.Quests;
 using NeptuneEvo.Quests.Models;
 using Newtonsoft.Json;
 using Redage.SDK;
+using Localization;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace NeptuneEvo.PedSystem.Pet
             Timers.Start("PetHealth", 1000 * 60 * 8, () => PetHealth(), true);
             
             PedSystem.Repository.CreateQuest("a_m_y_soucent_03", new Vector3(268.109, -641.3529, 42.01984), 60.41674f, title: "~y~NPC~w~ Виталий\nПродавец питомцев", colShapeEnums: ColShapeEnums.PetShop);
-            Main.CreateBlip(new Main.BlipData(141, LangFunc.GetText(LangType.Ru, DataName.PetSeller), new Vector3(268.109, -641.3529, 42.01984), 9, true));
+            Main.CreateBlip(new Main.BlipData(141, LangFunc.GetText(LangType.En, DataName.PetSeller), new Vector3(268.109, -641.3529, 42.01984), 9, true));
 
             /*await using var db = new ServerBD("MainDB");//При старте сервера
 
@@ -92,12 +93,12 @@ namespace NeptuneEvo.PedSystem.Pet
 
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;
@@ -294,7 +295,7 @@ namespace NeptuneEvo.PedSystem.Pet
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     foreach (var petData in ListSavePet)
                     {
@@ -354,8 +355,8 @@ namespace NeptuneEvo.PedSystem.Pet
                 if (player == null)
                     return;
 
-                //Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PetDying), 10000);
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Ems,LangFunc.GetText(LangType.Ru, DataName.PetDying), DateTime.Now);
+                //Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PetDying), 10000);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Ems,LangFunc.GetText(LangType.En, DataName.PetDying), DateTime.Now);
             }
             else if (player != null)
                 Trigger.ClientEvent(player, "client.pet.health", petData.Health);
@@ -421,20 +422,20 @@ namespace NeptuneEvo.PedSystem.Pet
                 {
                     var pet = PetsShop[index];
 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var isPet = await db.Pet
                         .AnyAsync(p => p.OwnerUUID == characterData.UUID);
 
                     if (isPet)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHavePet), 5000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHavePet), 5000);
                         return;
                     }
                     else if (!pet.isDonate && UpdateData.CanIChange(player, pet.Price, true) != 255) return;
                     else if (pet.isDonate && accountData.RedBucks < pet.Price)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                         return;
                     }
 
@@ -460,7 +461,7 @@ namespace NeptuneEvo.PedSystem.Pet
                             }
                             else
                             {
-                                UpdateData.RedBucks(player, -pet.Price, msg: LangFunc.GetText(LangType.Ru, DataName.BoughtPet));
+                                UpdateData.RedBucks(player, -pet.Price, msg: LangFunc.GetText(LangType.En, DataName.BoughtPet));
                             }
 
                             var petData = new PetData
@@ -496,7 +497,7 @@ namespace NeptuneEvo.PedSystem.Pet
         {
             if (!FunctionsAccess.IsWorking("pet"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             var characterData = player.GetCharacterData();
@@ -508,7 +509,7 @@ namespace NeptuneEvo.PedSystem.Pet
 
             if (createPets > 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PetIsOk), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PetIsOk), 5000);
                 return;
             }
 
@@ -516,7 +517,7 @@ namespace NeptuneEvo.PedSystem.Pet
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var pet = await db.Pet
                         .Where(p => p.OwnerUUID == characterData.UUID && p.Health == 0)
@@ -524,7 +525,7 @@ namespace NeptuneEvo.PedSystem.Pet
 
                     if (pet == null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoPet), 5000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoPet), 5000);
                         return;
                     }
                     //int price = Convert.ToInt32(TimeSpan.FromTicks(DateTime.Now.Ticks - pet.Death.Ticks).TotalSeconds) * PriceToSecond;
@@ -534,8 +535,8 @@ namespace NeptuneEvo.PedSystem.Pet
                     NAPI.Task.Run(() =>
                     {
                         Wallet.Change(player, -price);
-                        //Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouPetIsOk, price), 10000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Ems, LangFunc.GetText(LangType.Ru, DataName.YouPetIsOk, price), DateTime.Now); 
+                        //Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouPetIsOk, price), 10000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Ems, LangFunc.GetText(LangType.En, DataName.YouPetIsOk, price), DateTime.Now); 
 
                         var position = new Vector3(300.2901, -578.11456, 43.26088);
                         //var rotation = JsonConvert.DeserializeObject<Vector3>(pet.Rotation);
@@ -625,14 +626,14 @@ namespace NeptuneEvo.PedSystem.Pet
                             var item = itemData.Value;
                             if (Fractions.Police.IllegalsItems.ContainsKey(item.ItemId))
                             {
-                                Commands.RPChat("do", player, LangFunc.GetText(LangType.Ru, DataName.PetSniffed));
+                                Commands.RPChat("do", player, LangFunc.GetText(LangType.En, DataName.PetSniffed));
                                 return;
                             }
                         }
                     }
                 }
             }
-            Commands.RPChat("do", player, LangFunc.GetText(LangType.Ru, DataName.PetSniffs, target.Name));
+            Commands.RPChat("do", player, LangFunc.GetText(LangType.En, DataName.PetSniffs, target.Name));
         }
         public static void OnUpdateDim(ExtPlayer player, uint dimension)
         {
@@ -694,11 +695,11 @@ namespace NeptuneEvo.PedSystem.Pet
                 }
 
                 menuItem = new Menu.Item("back", Menu.MenuItem.Button);
-                menuItem.Text = LangFunc.GetText(LangType.Ru, DataName.back);
+                menuItem.Text = LangFunc.GetText(LangType.En, DataName.back);
                 menu.Add(menuItem);
 
                 menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-                menuItem.Text = LangFunc.GetText(LangType.Ru, DataName.Close);
+                menuItem.Text = LangFunc.GetText(LangType.En, DataName.Close);
                 menu.Add(menuItem);
 
                 menu.Open(player);
@@ -743,7 +744,7 @@ namespace NeptuneEvo.PedSystem.Pet
 
                 sessionData.SelectPed = ped;
 
-                Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.Name), LangFunc.GetText(LangType.Ru, DataName.InputPetName), 36, "make_ped_name");
+                Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.Name), LangFunc.GetText(LangType.En, DataName.InputPetName), 36, "make_ped_name");
 
             }
             catch (Exception e)
@@ -774,7 +775,7 @@ namespace NeptuneEvo.PedSystem.Pet
 
                 ped.SetSharedData("petName", $"{name} ({player.Value})");
                 Trigger.ClientEvent(player, "client.pet.nameChange", name);
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PetNameChanged, name), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PetNameChanged, name), 5000);
             }
             catch (Exception e)
             {
@@ -814,9 +815,9 @@ namespace NeptuneEvo.PedSystem.Pet
                 sessionData.SelectPed = ped;
 
                 if (pet.isDonate)
-                    Trigger.ClientEvent(player, "openDialog", "sell_pet", LangFunc.GetText(LangType.Ru, DataName.PetSellRb, Wallet.Format(pet.Price / 2)));
+                    Trigger.ClientEvent(player, "openDialog", "sell_pet", LangFunc.GetText(LangType.En, DataName.PetSellRb, Wallet.Format(pet.Price / 2)));
                 else
-                    Trigger.ClientEvent(player, "openDialog", "sell_pet", LangFunc.GetText(LangType.Ru, DataName.PetSellMoney, Wallet.Format(pet.Price / 2)));
+                    Trigger.ClientEvent(player, "openDialog", "sell_pet", LangFunc.GetText(LangType.En, DataName.PetSellMoney, Wallet.Format(pet.Price / 2)));
 
             }
             catch (Exception e)
@@ -858,12 +859,12 @@ namespace NeptuneEvo.PedSystem.Pet
                 {
                     GameLog.Money($"player({characterData.UUID})", $"sellPet", Convert.ToInt32(pet.Price / 2), $"sellPet({pet.Ped.ToString()})");
                     Wallet.Change(player, Convert.ToInt32(pet.Price / 2));
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PetGivenRb, Convert.ToInt32(pet.Price / 2)), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PetGivenRb, Convert.ToInt32(pet.Price / 2)), 5000);
                 }
                 else
                 {
-                    UpdateData.RedBucks(player, Convert.ToInt32(pet.Price / 2), msg: LangFunc.GetText(LangType.Ru, DataName.PetSell));
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PetGivenMoney, Convert.ToInt32(pet.Price / 2)), 5000);
+                    UpdateData.RedBucks(player, Convert.ToInt32(pet.Price / 2), msg: LangFunc.GetText(LangType.En, DataName.PetSell));
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PetGivenMoney, Convert.ToInt32(pet.Price / 2)), 5000);
                 }
 
 
@@ -874,7 +875,7 @@ namespace NeptuneEvo.PedSystem.Pet
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         db.Pet
                             .Where(p => p.AutoId == petData.AutoId)
@@ -929,12 +930,12 @@ namespace NeptuneEvo.PedSystem.Pet
 
                 else if (ped.Position.DistanceTo(player.Position) > 3f)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PetTooFar), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PetTooFar), 5000);
                     return;
                 }
                 else if (petData.Health >= 100)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PetNoHungry), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PetNoHungry), 5000);
                     return;
                 }
 
@@ -950,12 +951,12 @@ namespace NeptuneEvo.PedSystem.Pet
 
                 if (ItemStruct == null || ItemStruct.Item == null || ItemStruct.Index == -1 || !PetFood.ContainsKey(ItemStruct.Item.ItemId))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoFood), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoFood), 5000);
                     return;
                 }
                 else if (DateTime.Now < sessionData.TimingsData.NextEat)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                     return;
                 }
                 var eatData = PetFood[ItemStruct.Item.ItemId];
@@ -989,7 +990,7 @@ namespace NeptuneEvo.PedSystem.Pet
                         Trigger.StopAnimation(player);
                         player.Position.Z += 1.12f;
                         Damage(ped, eatData);
-                        Commands.RPChat("sme", player, $"покормил" + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.Ru, DataName.Pets));
+                        Commands.RPChat("sme", player, $"покормил" + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.En, DataName.Pets));
                     }
                     catch (Exception e)
                     {

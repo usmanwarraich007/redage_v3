@@ -73,7 +73,7 @@ namespace NeptuneEvo.Database.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var updateList = DBListUpdate.ToList();
                     

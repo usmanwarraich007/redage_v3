@@ -1,4 +1,4 @@
-﻿using Database;
+using Database;
 using GTANetworkAPI;
 using NeptuneEvo.Handles;
 using LinqToDB;
@@ -94,13 +94,13 @@ namespace NeptuneEvo.Quests
                     {
                         Vector3 waypoint = BusinessManager.getNearestBiz(player, 0);
                         Trigger.ClientEvent(player, "createWaypoint", waypoint.X, waypoint.Y);
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, "На карте был отмечен ближайший 24/7.", 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Nearest247Marked), 3000);
                     }
                     break;
                 case data_quests.Tools:
                     qMain.UpdateQuestsLine(player, "npc_fd_dada", (int)data_quests.Tools, (int)data_quests.Boat);
                     Trigger.ClientEvent(player, "client.create.npc_dfday_mission", 1);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, "Почини лодку!", 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FixTheBoat), 3000);
                     break;
                 default:
                     // Not supposed to end up here. 
@@ -117,12 +117,12 @@ namespace NeptuneEvo.Quests
             if (!player.IsCharacterData()) return;
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;

@@ -365,7 +365,7 @@ namespace NeptuneEvo.Events
                 var targetCharacterData = target.GetCharacterData();
                 if (targetCharacterData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 3000);
                     return;
                 }
                 Chars.Repository.AddNewItem(target, $"char_{targetCharacterData.UUID}", "inventory", ItemId.Giftcoin, amount);
@@ -393,7 +393,7 @@ namespace NeptuneEvo.Events
                     {
                         if (Chars.Repository.AddNewItem(foreachPlayer, $"char_{foreachCharacterData.UUID}", "inventory", ItemId.Giftcoin, amount) == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 5000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 5000);
                             return;
                         }
                         //GameLog.Money($"player({characterData.UUID})", $"player({targetCharacterData.UUID})", amount, "admin");

@@ -1,24 +1,24 @@
-﻿namespace NeptuneEvo.VehicleModel.Models
+namespace NeptuneEvo.VehicleModel.Models
 {
     /// <summary>
-    /// Данные об авто
+    /// Vehicle data
     /// </summary>
     public class VehicleInfo
     {
         /// <summary>
-        /// Класс авто
+        /// Vehicle class
         /// </summary>
         public string Class;
         /// <summary>
-        /// Максиммальное колличество слотов инвентаря
+        /// Maximum number of inventory slots
         /// </summary>
         public int MaxSlots;
         /// <summary>
-        /// Цена
+        /// Price
         /// </summary>
         public int Price;
         /// <summary>
-        /// Название
+        /// Name
         /// </summary>
         public string Name;
 

@@ -311,14 +311,14 @@ namespace NeptuneEvo.Fractions
                         case 10:
                             if (!Main.DoorsControl.ContainsKey("lcn_0") || Main.DoorsControl["lcn_0"])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubDoorClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubDoorClosed), 3000);
                                 return;
                             }
                             break;
                         case 12:
                             if (!Main.DoorsControl.ContainsKey("yk_2") || Main.DoorsControl["yk_2"])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubDoorClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubDoorClosed), 3000);
                                 return;
                             }
                             break;
@@ -345,14 +345,14 @@ namespace NeptuneEvo.Fractions
                         case 10:
                             if (!Main.DoorsControl.ContainsKey("lcn_0") || Main.DoorsControl["lcn_0"])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubDoorClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubDoorClosed), 3000);
                                 return;
                             }
                             break;
                         case 12:
                             if (!Main.DoorsControl.ContainsKey("yk_2") || Main.DoorsControl["yk_2"])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubDoorClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubDoorClosed), 3000);
                                 return;
                             }
                             break;
@@ -378,31 +378,31 @@ namespace NeptuneEvo.Fractions
                 
                 if (memberFractionData.Id != index)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubNotInFraction, Manager.GetName(index)), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubNotInFraction, Manager.GetName(index)), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                     return;
                 }
                 int club = index;
                 int matCount = Chars.Repository.getCountItem(VehicleManager.GetVehicleToInventory(player.Vehicle.NumberPlate), ItemId.Material);
                 if (matCount == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarNoMats), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarNoMats), 3000);
                     return;
                 }
                 if (ClubsStocks[club].Materials >= MaxMats)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseFilled), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseFilled), 3000);
                     return;
                 }
                 Chars.Repository.Remove(null, VehicleManager.GetVehicleToInventory(player.Vehicle.NumberPlate), "vehicle", ItemId.Material, matCount);
                 ClubsStocks[club].Materials += matCount;
                 ClubsStocks[club].UpdateLabel();
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FromCarToClubWarehouse), 3000);
-                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.FtableLoadedFromCarToClubWarehouse, matCount));
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FromCarToClubWarehouse), 3000);
+                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.FtableLoadedFromCarToClubWarehouse, matCount));
             }
             catch (Exception e)
             {
@@ -534,7 +534,7 @@ namespace NeptuneEvo.Fractions
                             case 0:
                                 if (ClubsStocks[fractionId].Alco1 <= 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                                     return;
                                 }
                                 ClubsStocks[fractionId].Alco1--;
@@ -542,7 +542,7 @@ namespace NeptuneEvo.Fractions
                             case 1:
                                 if (ClubsStocks[fractionId].Alco2 <= 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                                     return;
                                 }
                                 ClubsStocks[fractionId].Alco2--;
@@ -550,7 +550,7 @@ namespace NeptuneEvo.Fractions
                             case 2:
                                 if (ClubsStocks[fractionId].Alco3 <= 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                                     return;
                                 }
                                 ClubsStocks[fractionId].Alco3--;
@@ -571,7 +571,7 @@ namespace NeptuneEvo.Fractions
                         }
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", invItem) == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
 
@@ -580,7 +580,7 @@ namespace NeptuneEvo.Fractions
                             case 0:
                                 if (ClubsStocks[fractionId].Alco1 <= 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                                     return;
                                 }
                                 ClubsStocks[fractionId].Alco1--;
@@ -588,7 +588,7 @@ namespace NeptuneEvo.Fractions
                             case 1:
                                 if (ClubsStocks[fractionId].Alco2 <= 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                                     return;
                                 }
                                 ClubsStocks[fractionId].Alco2--;
@@ -596,7 +596,7 @@ namespace NeptuneEvo.Fractions
                             case 2:
                                 if (ClubsStocks[fractionId].Alco3 <= 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                                     return;
                                 }
                                 ClubsStocks[fractionId].Alco3--;

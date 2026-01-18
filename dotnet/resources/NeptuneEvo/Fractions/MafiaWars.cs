@@ -82,7 +82,7 @@ namespace NeptuneEvo.Fractions
                 foreach (var position in warPoints)
                 {
                     CustomColShape.CreateSphereColShape(position, Range, NAPI.GlobalDimension, ColShapeEnums.WarPoint, i);
-                    warBlips.Add(i, (ExtBlip)NAPI.Blip.CreateBlip(543, position, 1, 40, Main.StringToU16(LangFunc.GetText(LangType.Ru, DataName.BizWar)), 255, 0, true, 0, 0));
+                    warBlips.Add(i, (ExtBlip)NAPI.Blip.CreateBlip(543, position, 1, 40, Main.StringToU16(LangFunc.GetText(LangType.En, DataName.BizWar)), 255, 0, true, 0, 0));
                     i++;
                 }
             }
@@ -104,20 +104,20 @@ namespace NeptuneEvo.Fractions
 
                 if (!FunctionsAccess.IsWorking("CMD_startBizwar"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 
                 if (characterData.IsBannedCrime == true)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizWarBan, characterData.BanCrimeReason), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizWarBan, characterData.BanCrimeReason), 5000);
                     return;
                 }
 
                 var bizId = CustomColShape.GetDataToEnum(player, ColShapeEnums.BusinessAction);
                 if (bizId == (int)ColShapeData.Error)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNotOnBiz), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNotOnBiz), 3000);
                     return;
                 }
                 
@@ -127,19 +127,19 @@ namespace NeptuneEvo.Fractions
                 var fracId = player.GetFractionId();
                 if (biz.Mafia == fracId)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantCaptYourBiz), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantCaptYourBiz), 3000);
                     return;
                 }
                 
                 if (biz.Mafia == -1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizNotBelongsToMaf), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizNotBelongsToMaf), 3000);
                     return;
                 }
                 
                 if (Main.ServerNumber != 0 && (DateTime.Now.Hour < 13 || DateTime.Now.Hour >= 23))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MafiaTimeWar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MafiaTimeWar), 3000);
                     return;
                 }
                 
@@ -151,9 +151,9 @@ namespace NeptuneEvo.Fractions
                     DateTime g = new DateTime(ticks);
                     
                     if (g.Minute >= 5)
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarTimeMafHours, g.Hour, g.Minute, g.Second), 6000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarTimeMafHours, g.Hour, g.Minute, g.Second), 6000);
                     else
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarTimeMaf, g.Minute, g.Second), 6000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarTimeMaf, g.Minute, g.Second), 6000);
                     
                     return;
                 }
@@ -166,22 +166,22 @@ namespace NeptuneEvo.Fractions
                     DateTime g = new DateTime(ticks);
                     
                     if (g.Minute >= 5)
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarTimeMafHours, g.Hour, g.Minute, g.Second), 6000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarTimeMafHours, g.Hour, g.Minute, g.Second), 6000);
                     else
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarTimeMaf, g.Minute, g.Second), 6000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarTimeMaf, g.Minute, g.Second), 6000);
                    
                     return;
                 }
                 
                 if (Main.ServerNumber != 0 && (Manager.FractionMembersCount(biz.Mafia) < 4))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoOnline), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoOnline), 3000);
                     return;
                 }
                 
                 if (World.War.Repository.Wars.Values.Any(w => w.Type == WarType.Mafia))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarBizGoing), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarBizGoing), 3000);
                     return;
                 }
                 
@@ -204,11 +204,11 @@ namespace NeptuneEvo.Fractions
 
                 warBlips[mapId].Color = 49;
 
-                Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.AdminBizWar, ChatColors.Red, player.Name, player.Value, Manager.GetName(fracId), Manager.GetName(biz.Mafia)));
+                Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.AdminBizWar, ChatColors.Red, player.Name, player.Value, Manager.GetName(fracId), Manager.GetName(biz.Mafia)));
                 GameLog.FracLog(fracId, characterData.UUID, -1, player.Name, "-1", $"bizwar({biz.ID}, {BusinessManager.BusinessTypeNames[biz.Type]}, {Manager.FractionNames[biz.Mafia]})");
 
-                Manager.sendFractionMessage(biz.Mafia, LangFunc.GetText(LangType.Ru, DataName.BizWarDefendStart, Manager.GetName(fracId)));
-                Manager.sendFractionMessage(fracId, LangFunc.GetText(LangType.Ru, DataName.YouStartBizWar));
+                Manager.sendFractionMessage(biz.Mafia, LangFunc.GetText(LangType.En, DataName.BizWarDefendStart, Manager.GetName(fracId)));
+                Manager.sendFractionMessage(fracId, LangFunc.GetText(LangType.En, DataName.YouStartBizWar));
 
                 foreach (ExtPlayer foreachPlayer in Character.Repository.GetPlayers())
                 {
@@ -295,18 +295,18 @@ namespace NeptuneEvo.Fractions
                 
                 if (characterData.IsBannedCrime == true)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.Ru, DataName.BizWarBan, characterData.BanCrimeReason), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.En, DataName.BizWarBan, characterData.BanCrimeReason), 5000);
                     return;
                 }
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -321,17 +321,17 @@ namespace NeptuneEvo.Fractions
                 {
                     if (sessionData.UsedTPOnCaptureOrBizwar == 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyGoToWarZone), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyGoToWarZone), 3000);
                         return;
                     }
                     if (sessionData.UsedTPOnCaptureOrBizwar == 2)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyInWarZone), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyInWarZone), 3000);
                         return;
                     }
                     if (sessionData.WarData.IsWarZone)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyInWarZone), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyInWarZone), 3000);
                         return;
                     }
 
@@ -340,14 +340,14 @@ namespace NeptuneEvo.Fractions
                         sessionData.PositionCaptureOrBizwar = player.GetPosition();
                         player.Position = warCenterPoints[war.MapId];
                         sessionData.UsedTPOnCaptureOrBizwar = 1;
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WastpCenterWar), 5000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WastpCenterWar), 5000);
                     }
                     else
                     {
                         sessionData.PositionCaptureOrBizwar = player.GetPosition();
                         player.Position = warNearCenterPoints[war.MapId];
                         sessionData.UsedTPOnCaptureOrBizwar = 1;
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WasTPNearWar), 7000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WasTPNearWar), 7000);
                     }
                 }
             }

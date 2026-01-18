@@ -51,7 +51,7 @@ namespace NeptuneEvo.Houses
                     blip.Color = 59;
                     blip.Name = "Hotel";*/
 
-                    Main.CreateBlip(new Main.BlipData(475, LangFunc.GetText(LangType.Ru, DataName.Hotel), pos, 16, true));
+                    Main.CreateBlip(new Main.BlipData(475, LangFunc.GetText(LangType.En, DataName.Hotel), pos, 16, true));
 
                     CustomColShape.CreateCylinderColShape(pos, 1.5f, 5f, 0, ColShapeEnums.EnterHotel, HotelID);
 
@@ -226,12 +226,12 @@ namespace NeptuneEvo.Houses
                 if (!player.IsCharacterData()) return;
                 
                 var frameList = new FrameListData();
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.Hotel);
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.Hotel);
                 frameList.Callback = callback_hotelbuy;
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.HotelPayday), "info"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.HotelPayday), "info"));
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.HotelRent, Main.HotelRent), "rent"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.HotelRent, Main.HotelRent), "rent"));
 
                 Players.Popup.List.Repository.Open(player, frameList); 
             }
@@ -285,12 +285,12 @@ namespace NeptuneEvo.Houses
                 if (characterData == null) return;
 
                 var frameList = new FrameListData();
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.Hotel);
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.Hotel);
                 frameList.Callback = callback_hotelmanage;
 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.HotelPayday), "info"));
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.ExpandRent), "extend"));
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.Viselitsya), "moveout"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.HotelPayday), "info"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.ExpandRent), "extend"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.Viselitsya), "moveout"));
                 Players.Popup.List.Repository.Open(player, frameList); 
             }
             catch (Exception e)

@@ -23,7 +23,7 @@ namespace NeptuneEvo.Events
                 CustomColShape.CreateSphereColShape(new Vector3(-488.47617, -401.0276, 34.79613), 7f, 0, ColShapeEnums.EventsMenu);
                 PedSystem.Repository.CreateQuest("a_m_m_afriamer_01", new Vector3(-486.10715, -399.39944, 34.546597), -47.65183f, title: "~y~NPC~w~ Саня\nПрофессиональный игроман");
                 //NAPI.Marker.CreateMarker(1, new Vector3(-478.86032, -395.27307, 34.027653 - 1.25), new Vector3(), new Vector3(), 1f, new Color(255, 255, 255, 220));
-                Main.CreateBlip(new Main.BlipData(491, LangFunc.GetText(LangType.Ru, DataName.Events), new Vector3(-483.149, -400.09946, 34.546608), 6, true));
+                Main.CreateBlip(new Main.BlipData(491, LangFunc.GetText(LangType.En, DataName.Events), new Vector3(-483.149, -400.09946, 34.546608), 6, true));
             }
             catch (Exception e)
             {
@@ -44,27 +44,27 @@ namespace NeptuneEvo.Events
                 
                 if (!FunctionsAccess.IsWorking("EventsMenuInteraction"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 /*else if (characterData.LVL < 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.lvl3forgame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.lvl3forgame), 3000);
                     return;
                 }*/
                 else if (sessionData.WorkData.OnDuty || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 else if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;

@@ -276,7 +276,7 @@ namespace NeptuneEvo.Events
         {
             if (!FunctionsAccess.IsWorking("everydayaward2"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
@@ -347,7 +347,7 @@ namespace NeptuneEvo.Events
         {
             if (!FunctionsAccess.IsWorking("everydayaward2"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
@@ -369,10 +369,10 @@ namespace NeptuneEvo.Events
                     Accounts.Save.Repository.SaveReceived(player);
                 }
                 else 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Everyday6h), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Everyday6h), 3000);
             }
             else 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyEveryDayGet), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyEveryDayGet), 3000);
         }
         
         //
@@ -382,7 +382,7 @@ namespace NeptuneEvo.Events
         {
             if (!FunctionsAccess.IsWorking("everydayaward2"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
@@ -441,7 +441,7 @@ namespace NeptuneEvo.Events
         {
             if (!FunctionsAccess.IsWorking("everydayaward2"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
@@ -458,13 +458,13 @@ namespace NeptuneEvo.Events
                     GiveBonus(player, slotId - 1);
                     OnDonateList(player);
                     Accounts.Save.Repository.SaveReceived(player);
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.YouGetPopBonus, MoneySystem.Wallet.Format(donateData)), DateTime.Now);
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.YouGetPopBonus, MoneySystem.Wallet.Format(donateData)), DateTime.Now);
                 }
                 else 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Everyday6h), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Everyday6h), 3000);
             }
             else 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyEveryDayGet), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyEveryDayGet), 3000);
         }
         
        
@@ -511,7 +511,7 @@ namespace NeptuneEvo.Events
                 if (!FunctionsAccess.IsWorking("everydayaward"))
                 {
                     if (isInit) Main.Compensation(player);
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var accountData = player.GetAccountData();
@@ -632,7 +632,7 @@ namespace NeptuneEvo.Events
                         GiveBonus(player, SlotId);
                         isUpdate = true;
                     }
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Everyday6h), 3000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Everyday6h), 3000);
                 }
                 if (!Convert.ToBoolean(accountData.ReceivedAward[WeekBonusSlotId]))
                 {
@@ -654,8 +654,8 @@ namespace NeptuneEvo.Events
                         accountData.ReceivedAward[day] = 1;
                         GiveBonus(player, day - 1);
                         isUpdate = true;
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetPopBonus, MoneySystem.Wallet.Format(donateData.Value)), 10000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.YouGetPopBonus, MoneySystem.Wallet.Format(donateData.Value)), DateTime.Now);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetPopBonus, MoneySystem.Wallet.Format(donateData.Value)), 10000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.YouGetPopBonus, MoneySystem.Wallet.Format(donateData.Value)), DateTime.Now);
                         break;
                     }                    
                 }
@@ -664,7 +664,7 @@ namespace NeptuneEvo.Events
                 if (isUpdate)
                     Accounts.Save.Repository.SaveReceived(player);
                 else
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyEveryDayGet), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyEveryDayGet), 3000);
             }
             catch (Exception e)
             {
@@ -697,7 +697,7 @@ namespace NeptuneEvo.Events
                         }
 
                         GameLog.Money($"system", $"player({characterData.UUID})", 1, $"GiveBonus({award.ItemId},{award.Data})");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItemSklad, Chars.Repository.ItemsInfo[(ItemId)award.ItemId].Name), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItemSklad, Chars.Repository.ItemsInfo[(ItemId)award.ItemId].Name), 3000);
                         break;
                     case 1:
                         Chars.Repository.UpdateVipStatus(player, award.ItemId, award.Count, true, true, "BonusVIP");
@@ -707,11 +707,11 @@ namespace NeptuneEvo.Events
                         MoneySystem.Wallet.Change(player, +award.Count);
                         GameLog.Money($"system", $"player({characterData.UUID})", award.Count, $"GiveBonus");
                         //PlayerStats(player);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(award.Count)), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(award.Count)), 3000);
                         break;
                     case 3:
-                        UpdateData.RedBucks(player, award.Count, msg: LangFunc.GetText(LangType.Ru, DataName.EverydayOnlineLog));
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWinRb, award.Count), 5000);
+                        UpdateData.RedBucks(player, award.Count, msg: LangFunc.GetText(LangType.En, DataName.EverydayOnlineLog));
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWinRb, award.Count), 5000);
                         break;
                     default:
                         // Not supposed to end up here. 

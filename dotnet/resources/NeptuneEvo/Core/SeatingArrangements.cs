@@ -34,7 +34,7 @@ namespace NeptuneEvo.Core
                 var position = new Vector3(posX, posY, posZ);
                 if (LandingData.Values.Any(p => p.DistanceTo2D(position) < 0.5))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantSitNear), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantSitNear), 3000);
                     return;
                 }
 

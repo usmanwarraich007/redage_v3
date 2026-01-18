@@ -32,27 +32,27 @@ namespace NeptuneEvo.Players.Phone.News
             
             if (string.IsNullOrEmpty(text))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                 return;
             }
             if (DateTime.Now < sessionData.TimingsData.NextAD)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantGoAdNow), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantGoAdNow), 3000);
                 return;
             }
             if (LsNewsSystem.IsAdvertToName(player.Name))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdAlreadyQueue), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdAlreadyQueue), 3000);
                 return;
             }
             if (characterData.Sim == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSimcard), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSimcard), 3000);
                 return;
             }
             if (text.Length < 15 || text.Length > 150)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdTooShort), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdTooShort), 3000);
                 return;
             }
             
@@ -63,7 +63,7 @@ namespace NeptuneEvo.Players.Phone.News
             
             if (!MoneySystem.Bank.Change(characterData.Bank, -price, false))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBankMoney), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBankMoney), 3000);
                 return;
             }
             

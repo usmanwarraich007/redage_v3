@@ -308,7 +308,7 @@ namespace NeptuneEvo.Fractions
                 var shapeData = CustomColShape.GetData(player, ColShapeEnums.GangZone);
                 if (shapeData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAreNotInRegion), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAreNotInRegion), 3000);
                     return;
                 }
                 
@@ -319,7 +319,7 @@ namespace NeptuneEvo.Fractions
                     case 36:
                     case 57:
                     case 89:
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontClaimTitulRegion), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontClaimTitulRegion), 3000);
                         return;
                 }
                 
@@ -328,13 +328,13 @@ namespace NeptuneEvo.Fractions
                 var region = GangPoints[shapeData.Index];
                 if (region.GangOwner == fracId)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantClaimYourRegion), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantClaimYourRegion), 3000);
                     return;
                 }
                 
                 if (Main.ServerNumber != 0 && (DateTime.Now.Hour < 13 || DateTime.Now.Hour >= 23))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TimeYouCanClaimRegion), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TimeYouCanClaimRegion), 3000);
                     return;
                 }
                 
@@ -346,9 +346,9 @@ namespace NeptuneEvo.Fractions
                     DateTime g = new DateTime(ticks);
                     
                     if (g.Minute >= 5)
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCanClaim1h, g.Hour, g.Minute, g.Second), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCanClaim1h, g.Hour, g.Minute, g.Second), 3000);
                     else
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCanClaim,  g.Minute, g.Second), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCanClaim,  g.Minute, g.Second), 3000);
                     
                     return;
                 }
@@ -361,22 +361,22 @@ namespace NeptuneEvo.Fractions
                     DateTime g = new DateTime(ticks);
                     
                     if (g.Minute >= 5)
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCanClaimGangRegion1h, g.Hour, g.Minute, g.Second), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCanClaimGangRegion1h, g.Hour, g.Minute, g.Second), 3000);
                     else
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCanClaimGangRegion,  g.Minute, g.Second), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCanClaimGangRegion,  g.Minute, g.Second), 3000);
                     
                     return;
                 }
                 
                 if (Main.ServerNumber != 0 && (Manager.FractionMembersCount(region.GangOwner) < 3))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontHaveOnlineEnemyGang), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontHaveOnlineEnemyGang), 3000);
                     return;
                 }
                 
                 if (World.War.Repository.Wars.Values.Any(w => w.Type == WarType.Gangs))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CaptIsGoingSomeGang), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CaptIsGoingSomeGang), 3000);
                     return;
                 }
 
@@ -400,10 +400,10 @@ namespace NeptuneEvo.Fractions
                 Trigger.SendToAdmins(1, $"{ChatColors.Red}[A] {player.Name} ({player.Value}) из {Manager.GetName(warData.AttackingId)} спровоцировал capture за территорию {Manager.GetName(warData.ProtectingId)}.");
                 GameLog.FracLog(fracId, characterData.UUID, -1, player.Name, "-1", $"capture({region.ID}, {Manager.FractionNames[region.GangOwner]})");
 
-                Manager.SendCoolFractionMsg(warData.ProtectingId, "Капт", "На вас напали!", LangFunc.GetText(LangType.Ru, DataName.CaptureAlertDefend, Manager.GetName(warData.AttackingId)), "", 10000);
-                Manager.SendCoolFractionMsg(warData.AttackingId, "Капт", "Нападение", LangFunc.GetText(LangType.Ru, DataName.CaptureAlertAttack), "", 10000);
-                //Manager.sendFractionMessage(warData.ProtectingId, LangFunc.GetText(LangType.Ru, DataName.CaptureAlertDefend, Manager.GetName(warData.AttackingId)));
-                //Manager.sendFractionMessage(warData.AttackingId, LangFunc.GetText(LangType.Ru, DataName.CaptureAlertAttack));
+                Manager.SendCoolFractionMsg(warData.ProtectingId, "Капт", "На вас напали!", LangFunc.GetText(LangType.En, DataName.CaptureAlertDefend, Manager.GetName(warData.AttackingId)), "", 10000);
+                Manager.SendCoolFractionMsg(warData.AttackingId, "Капт", "Нападение", LangFunc.GetText(LangType.En, DataName.CaptureAlertAttack), "", 10000);
+                //Manager.sendFractionMessage(warData.ProtectingId, LangFunc.GetText(LangType.En, DataName.CaptureAlertDefend, Manager.GetName(warData.AttackingId)));
+                //Manager.sendFractionMessage(warData.AttackingId, LangFunc.GetText(LangType.En, DataName.CaptureAlertAttack));
 
                 foreach (ExtPlayer foreachPlayer in Character.Repository.GetPlayers())
                 {
@@ -485,12 +485,12 @@ namespace NeptuneEvo.Fractions
                 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
@@ -505,17 +505,17 @@ namespace NeptuneEvo.Fractions
                 
                     if (sessionData.UsedTPOnCaptureOrBizwar == 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyTpToClaimRegion), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyTpToClaimRegion), 3000);
                         return;
                     }
                     if (sessionData.UsedTPOnCaptureOrBizwar == 2)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWasInClaimRegion), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWasInClaimRegion), 3000);
                         return;
                     }
                     if (sessionData.WarData.IsWarZone)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyInClaimRegion), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyInClaimRegion), 3000);
                         return;
                     }
 
@@ -524,8 +524,8 @@ namespace NeptuneEvo.Fractions
                         sessionData.PositionCaptureOrBizwar = player.GetPosition();
                         player.Position = war.Position;
                         sessionData.UsedTPOnCaptureOrBizwar = 1;
-                        EventSys.SendCoolMsg(player,"Капт", "Телепорт", LangFunc.GetText(LangType.Ru, DataName.YouWasTpCenterClaimRegion), "", 5000);   
-                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWasTpCenterClaimRegion), 3000);
+                        EventSys.SendCoolMsg(player,"Капт", "Телепорт", LangFunc.GetText(LangType.En, DataName.YouWasTpCenterClaimRegion), "", 5000);   
+                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWasTpCenterClaimRegion), 3000);
                     }
                     else
                     {
@@ -547,11 +547,11 @@ namespace NeptuneEvo.Fractions
                             sessionData.PositionCaptureOrBizwar = player.GetPosition();
                             player.Position = nearestCaptureCoord;
                             sessionData.UsedTPOnCaptureOrBizwar = 1;
-                            EventSys.SendCoolMsg(player,"Капт", "Телепорт", LangFunc.GetText(LangType.Ru, DataName.YouWasTpNearClaimRegion), "", 5000);   
-                            //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWasTpNearClaimRegion), 3000);
+                            EventSys.SendCoolMsg(player,"Капт", "Телепорт", LangFunc.GetText(LangType.En, DataName.YouWasTpNearClaimRegion), "", 5000);   
+                            //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWasTpNearClaimRegion), 3000);
                         }
                         else
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindNearClaimRegion), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindNearClaimRegion), 3000);
                         
                     }
                 
@@ -597,7 +597,7 @@ namespace NeptuneEvo.Fractions
                 {    
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
                         
                         await db.Gangspoints
                             .Where(g => g.Id == ID)

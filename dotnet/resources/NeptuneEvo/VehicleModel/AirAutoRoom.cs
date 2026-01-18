@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using GTANetworkAPI;
 using Localization;
@@ -61,10 +61,10 @@ namespace NeptuneEvo.VehicleModel
         {
  
             Main.CreateBlip(new Main.BlipData(359, "AirShop", NpcBuyPosition, 4, true));
-            PedSystem.Repository.CreateQuest("csb_reporter", NpcBuyPosition, NpcBuyRotation, title: "~y~NPC~w~ Продавец воздушного транспорта", colShapeEnums: ColShapeEnums.AirAutoRoom);
+                        PedSystem.Repository.CreateQuest("csb_reporter", NpcBuyPosition, NpcBuyRotation, title: "~y~NPC~w~ Air Vehicle Seller", colShapeEnums: ColShapeEnums.AirAutoRoom);
             //
             Main.CreateBlip(new Main.BlipData(602, "HeliPort", NpcSpawnPosition, 60, true));
-            PedSystem.Repository.CreateQuest("s_m_y_airworker", NpcSpawnPosition, NpcSpawnRotation, title: "~y~NPC~w~ Работник Аэропорта", colShapeEnums: ColShapeEnums.AirSpawn);
+                        PedSystem.Repository.CreateQuest("s_m_y_airworker", NpcSpawnPosition, NpcSpawnRotation, title: "~y~NPC~w~ Airport Worker", colShapeEnums: ColShapeEnums.AirSpawn);
         }
         
         public static bool isAirCar(string model)
@@ -91,12 +91,12 @@ namespace NeptuneEvo.VehicleModel
                 if (!player.IsCharacterData()) return;
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
@@ -124,7 +124,7 @@ namespace NeptuneEvo.VehicleModel
             {
                 if (!FunctionsAccess.IsWorking("OpenDonateAutoroom"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var sessionData = player.GetSessionData();
@@ -134,12 +134,12 @@ namespace NeptuneEvo.VehicleModel
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
@@ -196,7 +196,7 @@ namespace NeptuneEvo.VehicleModel
             
             if (!FunctionsAccess.IsWorking("airspawn"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             

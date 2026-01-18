@@ -84,8 +84,8 @@ namespace NeptuneEvo.Character.Friend
                 string secondName = target.Name;
                 if (characterData.Friends.ContainsKey(secondName) && characterData.Friends[secondName] && targetCharacterData.Friends.ContainsKey(firstName) && targetCharacterData.Friends[firstName])
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHi), 5000);
-                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHi), 5000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHi), 5000);
+                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHi), 5000);
                     return;
                 }
                 characterData.Handshaked++;
@@ -108,7 +108,7 @@ namespace NeptuneEvo.Character.Friend
                     {
                         try
                         {
-                            await using var db = new ServerBD("MainDB");//В отдельном потоке
+                            await using var db = new ServerBD("MainDB");//On Separate Thread
 
                             await db.InsertAsync(new Friends
                             {
@@ -126,8 +126,8 @@ namespace NeptuneEvo.Character.Friend
                     characterData.Friends[secondName] = false;
                     targetCharacterData.Friends[firstName] = false;
 
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HiSecond, secondName.Split('_')[0]), 5000);
-                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HiFirst, firstName.Split('_')[0]), 5000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HiSecond, secondName.Split('_')[0]), 5000);
+                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HiFirst, firstName.Split('_')[0]), 5000);
                     BattlePass.Repository.UpdateReward(target, 32);
                 }
                 else
@@ -137,7 +137,7 @@ namespace NeptuneEvo.Character.Friend
                         try
                         {
 	
-                            await using var db = new ServerBD("MainDB");//В отдельном потоке
+                            await using var db = new ServerBD("MainDB");//On Separate Thread
 
                             await db.Friends
                                 .Where(f => (f.First == firstName && f.Second == secondName) || (f.First == secondName && f.Second == firstName))
@@ -211,7 +211,7 @@ namespace NeptuneEvo.Character.Friend
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         if (newName == null)
                         {

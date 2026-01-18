@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using GTANetworkAPI;
 using Localization;
@@ -25,7 +25,7 @@ namespace NeptuneEvo.VehicleModel
         {
  
             Main.CreateBlip(new Main.BlipData(595, "Exotic DonateRoom", NpcBuyPosition, 1, true));
-            PedSystem.Repository.CreateQuest("a_f_m_fatbla_01", NpcBuyPosition, NpcBuyRotation, title: "~y~NPC~w~ Доната Редбаксовна", colShapeEnums: ColShapeEnums.DonateAutoroom);
+                        PedSystem.Repository.CreateQuest("a_f_m_fatbla_01", NpcBuyPosition, NpcBuyRotation, title: "~y~NPC~w~ Donation Specialist", colShapeEnums: ColShapeEnums.DonateAutoroom);
         }
         [Interaction(ColShapeEnums.DonateAutoroom)]
         public static void OpenDialog(ExtPlayer player, int index)
@@ -37,12 +37,12 @@ namespace NeptuneEvo.VehicleModel
                 if (!player.IsCharacterData()) return;
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
@@ -62,7 +62,7 @@ namespace NeptuneEvo.VehicleModel
 
                 if (!FunctionsAccess.IsWorking("OpenDonateAutoroom"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var sessionData = player.GetSessionData();
@@ -72,12 +72,12 @@ namespace NeptuneEvo.VehicleModel
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
@@ -90,7 +90,7 @@ namespace NeptuneEvo.VehicleModel
                 
                 if (donateVehiclesInfo.Count < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoVehAccessed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoVehAccessed), 3000);
                     return;
                 }
 

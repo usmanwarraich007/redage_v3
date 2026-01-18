@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Linq;
 using GTANetworkAPI;
+using Localization;
 using NeptuneEvo.Character;
 using NeptuneEvo.Handles;
 using Redage.SDK;
@@ -19,7 +20,7 @@ namespace NeptuneEvo.Players.Restart
             if (Main.stringGlobalBlock.Any(c => testmsg.Contains(c)) ||
                 Main.stringDefaultBlock.Any(c => testmsg.Contains(c)))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы ввели запрещенное слово", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ForbiddenWord), 3000);
                 return;
             }
             

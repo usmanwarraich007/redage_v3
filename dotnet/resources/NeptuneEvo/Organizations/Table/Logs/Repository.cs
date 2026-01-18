@@ -28,7 +28,7 @@ namespace NeptuneEvo.Organizations.Table.Logs
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.InsertAsync(new Orglogs
                         {
@@ -68,7 +68,7 @@ namespace NeptuneEvo.Organizations.Table.Logs
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         var test = db.Orglogs
                             .Select(v => new
@@ -160,7 +160,7 @@ namespace NeptuneEvo.Organizations.Table.Logs
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         var test = db.Orglogs
                             .Select(v => new

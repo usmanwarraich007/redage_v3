@@ -44,7 +44,7 @@ namespace NeptuneEvo.Database.Models
                     
                     if (houses.Count > 0 || garages.Count > 0 || houseFurnitures.Count > 0)
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке 
+                        await using var db = new ServerBD("MainDB");//On Separate Thread 
                         
                         foreach (var house in houses)
                             await house.Save(db);   

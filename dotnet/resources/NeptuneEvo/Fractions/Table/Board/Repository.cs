@@ -35,22 +35,22 @@ namespace NeptuneEvo.Fractions.Table.Board
                 
                 if (DateTime.Now < sessionData.TimingsData.NextGlobalChat)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Block10Min), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Block10Min), 4500);
                     return;
                 }
                 title = Main.BlockSymbols(Main.RainbowExploit(title));
                 text = Main.BlockSymbols(Main.RainbowExploit(text));
                 if (text.Length > 100)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxTableNewsText), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxTableNewsText), 4500);
                     return;
                 }
                 string testmsg = $"{title.ToLower()} {text.ToLower()}";
                 if (Main.stringGlobalBlock.Any(c => testmsg.Contains(c)))
                 {
                     sessionData.TimingsData.NextGlobalChat = DateTime.Now.AddMinutes(10);
-                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.Ru, DataName.AdminAlertFTableNews, player.Name, player.Value, text));
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RestrictedWordsTableNews), 15000);
+                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.En, DataName.AdminAlertFTableNews, player.Name, player.Value, text));
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RestrictedWordsTableNews), 15000);
                     return;
                 }
 
@@ -73,8 +73,8 @@ namespace NeptuneEvo.Fractions.Table.Board
                 };
                 
                 fractionData.BoardsList.Add(boardData);
-                Fractions.Manager.sendFractionMessage(memberFractionData.Id, "[F] " + LangFunc.GetText(LangType.Ru, DataName.TableNewNews), true);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAddedTableNews), 3000);
+                Fractions.Manager.sendFractionMessage(memberFractionData.Id, "[F] " + LangFunc.GetText(LangType.En, DataName.TableNewNews), true);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAddedTableNews), 3000);
 
                 Get(player, 1);
             }
@@ -94,7 +94,7 @@ namespace NeptuneEvo.Fractions.Table.Board
                 //else if (!Manager.canUseCommand(player, RankToAccess.TableWall)) return;
                 else if (DateTime.Now < sessionData.TimingsData.NextGlobalChat)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Block10Min), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Block10Min), 4500);
                     return;
                 }
                 title = Main.BlockSymbols(Main.RainbowExploit(title));
@@ -103,8 +103,8 @@ namespace NeptuneEvo.Fractions.Table.Board
                 if (Main.stringGlobalBlock.Any(c => testmsg.Contains(c)))
                 {
                     sessionData.TimingsData.NextGlobalChat = DateTime.Now.AddMinutes(10);
-                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.Ru, DataName.AdminAlertFTableNews, player.Name, player.Value, text));
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RestrictedWordsTableNews), 15000);
+                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.En, DataName.AdminAlertFTableNews, player.Name, player.Value, text));
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RestrictedWordsTableNews), 15000);
                     return;
                 }
 
@@ -127,7 +127,7 @@ namespace NeptuneEvo.Fractions.Table.Board
                 boards.Reverse();
                 fractionData.BoardsList = boards;
                 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouEditedTableNews), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouEditedTableNews), 3000);
                 Get(player, index + 1);
             }
             catch (Exception e)
@@ -145,7 +145,7 @@ namespace NeptuneEvo.Fractions.Table.Board
                 //else if (!Manager.canUseCommand(player, RankToAccess.TableWall)) return;
                 else if (DateTime.Now < sessionData.TimingsData.NextGlobalChat)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Block10Min), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Block10Min), 4500);
                     return;
                 }
 
@@ -164,7 +164,7 @@ namespace NeptuneEvo.Fractions.Table.Board
 
                 fractionData.BoardsList.Remove(boardData);
                 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouDeletedTableNews), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouDeletedTableNews), 3000);
                 Get(player, 1);
             }
             catch (Exception e)

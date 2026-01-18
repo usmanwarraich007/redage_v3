@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item1, new TableTaskData
                 {
-                    Desc = "Заправить рабочую машину",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_RefuelWorkCar),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -41,7 +41,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item2, new TableTaskData
                 {
-                    Desc = "Помыть рабочую машину.",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_WashWorkCar),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -54,7 +54,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item3, new TableTaskData
                 {
-                    Desc = "Успешно завершить патруль на автомобиле",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_CompleteCarPatrol),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -67,7 +67,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item4, new TableTaskData
                 {
-                    Desc = "Успешно завершить патруль на вертолёте",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_CompleteHeliPatrol),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -80,7 +80,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item5, new TableTaskData
                 {
-                    Desc = "Принять любой вызов",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_AcceptAnyCall),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -93,7 +93,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item6, new TableTaskData
                 {
-                    Desc = "Прибыть на вызов по CODE 0",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_ArriveCode0),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -106,7 +106,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item7, new TableTaskData
                 {
-                    Desc = "Прибыть на вызов о взломе сейфа",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_ArriveSafeCrack),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -119,7 +119,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item8, new TableTaskData
                 {
-                    Desc = "Прибыть на вызов о взломе транспорта",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_ArriveVehicleTheft),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -132,7 +132,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item9, new TableTaskData
                 {
-                    Desc = "Выписать штраф любому нарушителю",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_IssueFine),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -145,7 +145,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item10, new TableTaskData
                 {
-                    Desc = "Изъять наркотики у любого нарушителя",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_SeizeDrugs),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -158,7 +158,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item11, new TableTaskData
                 {
-                    Desc = "Изъять оружие у любого нарушителя",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_SeizeWeapons),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -171,7 +171,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item12, new TableTaskData
                 {
-                    Desc = "Проверить документы у любого человека",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_CheckDocuments),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -184,7 +184,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item13, new TableTaskData
                 {
-                    Desc = "Обыскать любого человека",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_SearchPerson),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -197,7 +197,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item14, new TableTaskData
                 {
-                    Desc = "Выдать лицензию на оружие любому человеку",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_IssueWeaponLicense),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -210,7 +210,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item15, new TableTaskData
                 {
-                    Desc = "Эвакуировать автомобиль нарушителя",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_EvacuateVehicle),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -223,7 +223,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item16, new TableTaskData
                 {
-                    Desc = "Доставить материалы на свою базу",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_DeliverMaterials),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -236,7 +236,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item17, new TableTaskData
                 {
-                    Desc = "Загрузить материалы в Порту",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_LoadMaterialsPort),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -249,7 +249,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item18, new TableTaskData
                 {
-                    Desc = "Вернуть бронежилет на склад", 
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_ReturnArmor),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -262,7 +262,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item19, new TableTaskData
                 {
-                    Desc = "Добыть на гос. шахте любую руду",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_MineOre),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -275,7 +275,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item20, new TableTaskData
                 {
-                    Desc = "Выдать таблетку находясь в больнице",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_GivePillInHospital),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -288,7 +288,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item21, new TableTaskData
                 {
-                    Desc = "Реанимировать игрока используя аптечку",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_ReviveWithMedkit),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -301,7 +301,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item22, new TableTaskData
                 {
-                    Desc = "Доставить аптечку на свой склад",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_DeliverMedkit),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -314,7 +314,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item23, new TableTaskData
                 {
-                    Desc = "Выдать QR код любому человеку",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_GiveQRCode),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -327,7 +327,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item24, new TableTaskData
                 {
-                    Desc = "Принять участие в бизваре",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_ParticipateBizwar),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -340,7 +340,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item25, new TableTaskData
                 {
-                    Desc = "Сделать убийство на бизваре",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_KillInBizwar),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -353,7 +353,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item26, new TableTaskData
                 {
-                    Desc = "Ограбить любого человека",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_RobPerson),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -366,7 +366,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item27, new TableTaskData
                 {
-                    Desc = "Выполнить любую миссию по доставке", 
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_CompleteDeliveryMission),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -379,7 +379,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item28, new TableTaskData
                 {
-                    Desc = "Взломать любую машину",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_HackAnyCar),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -392,7 +392,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item29, new TableTaskData
                 {
-                    Desc = "Ограбить любую мебель в любом доме",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_RobFurniture),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -405,7 +405,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item30, new TableTaskData
                 {
-                    Desc = "Принять участие в капте",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_ParticipateCapture),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -418,7 +418,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item31, new TableTaskData
                 {
-                    Desc = "Сделать убийство на капте",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_KillInCapture),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -431,7 +431,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item32, new TableTaskData
                 {
-                    Desc = "Ограбить магазин 24/7",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_Rob247Store),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -444,7 +444,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item33, new TableTaskData
                 {
-                    Desc = "Доставить наркотики на склад",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_DeliverDrugsToWarehouse),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -457,7 +457,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 TableTaskId.Item34, new TableTaskData
                 {
-                    Desc = "Отредактировать любое объявление",
+                    Desc = LangFunc.GetText(LangType.Ru, DataName.Task_EditAnyAd),
                     MaxCount = 1,
                     PersonExp = 1,
                     OrgExp = 1,
@@ -504,14 +504,14 @@ namespace NeptuneEvo.Table.Tasks
 
                         GameLog.Money($"system", $"player({player.GetUUID()})", 1, $"TSGiveBonus({award.ItemId},{award.Data})");
                         if (isMessage) 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItemSklad, Chars.Repository.ItemsInfo[(ItemId)award.ItemId].Name), 6000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItemSklad, Chars.Repository.ItemsInfo[(ItemId)award.ItemId].Name), 6000);
                         break;
                     case BattlePassRewardType.Money:
                         MoneySystem.Wallet.Change(player, +award.Count);
                         GameLog.Money($"system", $"player({player.GetUUID()})", award.Count, $"TSGiveBonus");
                         //PlayerStats(player);
                         if (isMessage) 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(award.Count)), 6000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(award.Count)), 6000);
                         break;
                 }
             }
@@ -634,7 +634,7 @@ namespace NeptuneEvo.Table.Tasks
             {
                 var newTasks = new TableTaskPlayerData[MaxTableTask];
 
-                for (var i = 0; i < MaxTableTask; i++)//Мы смотрим старый список
+                for (var i = 0; i < MaxTableTask; i++)//We look at the old list
                 {
                     if (!isUpdate && tasks != null && tasks.Length > 0)
                     {
@@ -650,7 +650,7 @@ namespace NeptuneEvo.Table.Tasks
                     }
                 }
                 
-                for (var i = 0; i < MaxTableTask; i++)//Мы смотрим старый список
+                for (var i = 0; i < MaxTableTask; i++)//We look at the old list
                 {
                     if (!isUpdate && newTasks.Length > 0 && newTasks[i] != null)
                     {
@@ -995,7 +995,7 @@ namespace NeptuneEvo.Table.Tasks
                             }
                             else
                             {
-                                Trigger.ClientEvent(player, "client.battlepass.missionComplite", $"Фракционное задание выполнено", $"{task.Name}");
+                                Trigger.ClientEvent(player, "client.battlepass.missionComplite", LangFunc.GetText(LangType.En, DataName.FactionTaskComplete), $"{task.Name}");
                                 foreach (var award in task.Awards)
                                     Table.Tasks.Repository.GiveBonus(player, award);
                             }
@@ -1013,7 +1013,7 @@ namespace NeptuneEvo.Table.Tasks
                     {            
                         //offline
 
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//In a separate thread
                         
                         foreach (var offlineTask in userOfflineBonus)
                         {

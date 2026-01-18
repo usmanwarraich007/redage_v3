@@ -63,27 +63,27 @@ namespace NeptuneEvo.MoneySystem
                 if (characterData == null) return;
                 if (characterData.AdminLVL != 0)
                 {
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LotteryAnnounce, LotteryBought.Count(), Wallet.Format(Price)), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LotteryAnnounce, LotteryBought.Count(), Wallet.Format(Price)), 3000);
                     return;
                 }
                 else
                 {
                     if (LotteryBought.Count == 0)
                     {
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ZeroTicketsLottery), 7000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZeroTicketsLottery), 7000);
                         return;
                     }
                     int mytotal = LotteryBought.Where(p => p.Value == characterData.UUID).Count();
                     if (mytotal == 0)
                     {
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ZeroTicketsLottery), 7000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZeroTicketsLottery), 7000);
                         return;
                     }
                     double shans = mytotal * 100.0 / LotteryBought.Count();
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LotteryMy, mytotal, shans.ToString("0.##"), Wallet.Format(Price)), 7000);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.JackPotLottery), 7000);
-                    if (shans >= 70.0) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Chance70Lottery), 7000);
-                    else if (shans >= 50.0) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Chance50Lottery), 7000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LotteryMy, mytotal, shans.ToString("0.##"), Wallet.Format(Price)), 7000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.JackPotLottery), 7000);
+                    if (shans >= 70.0) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Chance70Lottery), 7000);
+                    else if (shans >= 50.0) Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Chance50Lottery), 7000);
                 }
             }
             catch (Exception e)

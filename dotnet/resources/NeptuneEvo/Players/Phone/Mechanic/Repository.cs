@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Localization;
@@ -64,13 +64,13 @@ namespace NeptuneEvo.Players.Phone.Mechanic
             
             if (!FunctionsAccess.IsWorking("phonemechanic"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
             if (OrdersList.Any(ol => ol.Player == player || ol.Driver == player))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyCallMechanik), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyCallMechanik), 3000);
                 return;
             }
             
@@ -97,14 +97,14 @@ namespace NeptuneEvo.Players.Phone.Mechanic
                 
                 OrdersList.Add(mechanicData);
                 
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WaitMechanikCall, mechanicCount), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WaitMechanikCall, mechanicCount), 3000);
                 Trigger.ClientEvent(player, "client.phone.mech.successOrder");
                 
                 //Trigger.ClientEvent(player, "client.phone.mech.");
                 BattlePass.Repository.UpdateReward(player, 65);
                 
             }
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMechanikNear), 3000);
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMechanikNear), 3000);
 
         }
 
@@ -119,7 +119,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic
             if (mechanicData == null)
             {
                 if (!isDisconnect) 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не вызывали автомеханика", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DidNotCallMechanic), 3000);
                 
                 return;
             }
@@ -142,7 +142,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic
                     mechanicData.DriverTimer = null;
                     
                     if (!isDisconnect) 
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TripCanceled), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TripCanceled), 3000);
                 }
 
                 if (!isDisconnect)
@@ -164,7 +164,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic
 
 
                     if (!isDisconnect)
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCancelTripMech), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCancelTripMech), 3000);
                 }
 
                 if (!isDisconnect)
@@ -189,7 +189,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic
                             Trigger.ClientEvent(foreachPlayer, "client.phone.mechjob.add", targetCharacterData.UUID, target.Name, target.Position.X, target.Position.Y, target.Position.Z);
                         }
                         
-                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DriverCancelTrip), 3000);
+                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DriverCancelTrip), 3000);
                         
                         Trigger.ClientEvent(target, "client.phone.mech.successOrder");
                     } else
@@ -198,7 +198,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic
                 else
                 {
                     if (isNotRemove)
-                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PassengerCancel), 3000);
+                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PassengerCancel), 3000);
                     
                     Trigger.ClientEvent(target, "client.phone.mechjob.successCancel");
                 }

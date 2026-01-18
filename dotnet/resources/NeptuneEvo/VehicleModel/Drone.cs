@@ -61,14 +61,14 @@ namespace NeptuneEvo.VehicleModel
                 if (!FractionDroneData.ContainsKey(fracId)) return;
                 if (Configs.FractionDrones[fracId].Count >= FractionDroneData[fracId].Item2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Only2DronesAvaible, FractionDroneData[fracId].Item2), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Only2DronesAvaible, FractionDroneData[fracId].Item2), 5000);
                     return;
                 }
                 var vehicle = (ExtVehicle) player.Vehicle;
                 var vehicleLocalData = vehicle.GetVehicleLocalData();
                 if (vehicle == null || vehicleLocalData == null || vehicle.Model == (uint)VehicleHash.Rcbandito)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMustBeInVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMustBeInVeh), 3000);
                     return;
                 }
                 if (vehicleLocalData.Access == VehicleAccess.Fraction && vehicleLocalData.Fraction == fracId)
@@ -83,7 +83,7 @@ namespace NeptuneEvo.VehicleModel
 
                     Trigger.ClientEvent(player, "setIntoVehicle", drone, VehicleSeat.Driver - 1);
                     Trigger.ClientEvent(player, "client.dron.init", vehicle.Position.X, vehicle.Position.Y, vehicle.Position.Z);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DroneControls), 10000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DroneControls), 10000);
                 }
             }
             catch (Exception e)
@@ -131,7 +131,7 @@ namespace NeptuneEvo.VehicleModel
                 else if (vehicleLocalData.Access == VehicleAccess.Admin && vehicleDrone.Model == NAPI.Util.GetHashKey("rcbandito") && vehicleDrone.HasSharedData("isDrone"))
                 {
                     VehicleStreaming.DeleteVehicle(vehicleDrone);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DroneDeleted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DroneDeleted), 3000);
                 }
             }
             catch (Exception e)

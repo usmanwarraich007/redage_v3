@@ -1,4 +1,4 @@
-﻿using Database;
+using Database;
 using GTANetworkAPI;
 using NeptuneEvo.Handles;
 using NeptuneEvo.Chars;
@@ -217,7 +217,7 @@ namespace NeptuneEvo.Quests
                         {
                             try
                             {
-                                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                                 var sqlId = await db.InsertWithInt32IdentityAsync(new Questschars
                                 {
@@ -717,7 +717,7 @@ namespace NeptuneEvo.Quests
                 var targetCharacterData = target.GetCharacterData();
                 if (targetCharacterData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 3000);
                     return;
                 }
 
@@ -731,7 +731,7 @@ namespace NeptuneEvo.Quests
                 questData.Complete = true;
                 UpdateQuestsStage(player, questData.ActorName, questData.Line, 1, isUpdateHud: true);
                 UpdateQuestsComplete(player, questData.ActorName, questData.Line, true);
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы пропустили квест {questData.ActorName} игроку {target.Name}", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.QuestSkippedToPlayer, questData.ActorName, target.Name), 3000);
             }
             catch (Exception e)
             {

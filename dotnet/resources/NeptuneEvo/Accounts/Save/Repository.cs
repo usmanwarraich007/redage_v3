@@ -85,7 +85,7 @@ namespace NeptuneEvo.Accounts.Save
                     var accountData = player.GetAccountData();
                     if (accountData == null) return;
                 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
                 
                     await db.Accounts
                         .Where(v => v.Login == accountData.Login)

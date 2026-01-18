@@ -34,7 +34,7 @@ namespace NeptuneEvo.Database.Models
 
                     if (donateUpdateList.Count > 0 || moneyUpdateList.Count > 0)
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке 
+                        await using var db = new ServerBD("MainDB");//On Separate Thread 
 
                         await DonateUpdate(db, donateUpdateList);
                         

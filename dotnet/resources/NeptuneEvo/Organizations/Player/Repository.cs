@@ -69,7 +69,7 @@ namespace NeptuneEvo.Organizations.Player
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.InsertAsync(new Orgranks
                         {
@@ -153,7 +153,7 @@ namespace NeptuneEvo.Organizations.Player
                     {
                         try
                         {
-                            await using var db = new ServerBD("MainDB"); //В отдельном потоке
+                            await using var db = new ServerBD("MainDB"); //On Separate Thread
 
                             await db.Orgranks
                                 .Where(v => v.Uuid == memberOrganizationData.UUID && v.Id == memberOrganizationData.Id)
@@ -392,7 +392,7 @@ namespace NeptuneEvo.Organizations.Player
                     return true;
                 
                 if (notify) 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000);
             }
             catch (Exception e)
             {

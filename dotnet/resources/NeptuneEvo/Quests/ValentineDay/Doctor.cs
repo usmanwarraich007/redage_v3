@@ -1,4 +1,4 @@
-﻿using Database;
+using Database;
 using GTANetworkAPI;
 using NeptuneEvo.Handles;
 using LinqToDB;
@@ -55,7 +55,7 @@ namespace NeptuneEvo.Quests
             switch ((doctor_quests)Line)
             {
                 case doctor_quests.Start:
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "На карте отмечены примерные координаты Бабушки Granny.", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GrannyCoordsMarked), 3000);
                     Trigger.ClientEvent(player, "createWaypoint", -1661.0814f, -1002.26465f);
                     qMain.SetQuests(player, "npc_granny", true, 0, isReturn: false);
                     qMain.UpdateDisplayInHood(player, "npc_doctor", false);
@@ -75,12 +75,12 @@ namespace NeptuneEvo.Quests
             if (!player.IsCharacterData()) return;
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;

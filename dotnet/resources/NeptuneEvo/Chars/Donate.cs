@@ -91,7 +91,7 @@ namespace NeptuneEvo.Chars
                     price = Convert.ToInt32(price * 0.7);
                 }
 
-                UpdateData.RedBucks(player, price, LangFunc.GetText(LangType.Ru, DataName.DonShopBought));
+                UpdateData.RedBucks(player, price, LangFunc.GetText(LangType.En, DataName.DonShopBought));
             }
             catch (Exception e)
             {
@@ -162,7 +162,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SubAlreadyBuy), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SubAlreadyBuy), 3000);
 
                             return;
 
@@ -174,7 +174,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
@@ -184,11 +184,11 @@ namespace NeptuneEvo.Chars
 
                         accountData.SubscribeEndTime = DateTime.Now.AddDays(30);
 
-                        UpdateData.RedBucks(player, -price, LangFunc.GetText(LangType.Ru, DataName.SubBought));
+                        UpdateData.RedBucks(player, -price, LangFunc.GetText(LangType.En, DataName.SubBought));
 
                         RewardSubscribe(player);
 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBoughtSub), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBoughtSub), 3000);
 
                         break;
 
@@ -198,7 +198,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyBoughtVIP), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyBoughtVIP), 3000);
 
                             return;
 
@@ -208,13 +208,13 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
                         }
 
-                        UpdateData.RedBucks(player, -DonatesPremiumData[1].Price, msg: LangFunc.GetText(LangType.Ru, DataName.BoughtSilverVIP));
+                        UpdateData.RedBucks(player, -DonatesPremiumData[1].Price, msg: LangFunc.GetText(LangType.En, DataName.BoughtSilverVIP));
 
                         accountData.VipLvl = 1;
 
@@ -222,7 +222,7 @@ namespace NeptuneEvo.Chars
 
                         //Repository.PlayerStats(player);
 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuySilverVIP), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuySilverVIP), 3000);
 
                         break;
 
@@ -232,7 +232,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyBoughtVIP), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyBoughtVIP), 3000);
 
                             return;
 
@@ -242,13 +242,13 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
                         }
 
-                        UpdateData.RedBucks(player, -DonatesPremiumData[2].Price, msg: LangFunc.GetText(LangType.Ru, DataName.BoughtGoldVIP));
+                        UpdateData.RedBucks(player, -DonatesPremiumData[2].Price, msg: LangFunc.GetText(LangType.En, DataName.BoughtGoldVIP));
 
                         accountData.VipLvl = 2;
 
@@ -256,7 +256,7 @@ namespace NeptuneEvo.Chars
 
                         //Repository.PlayerStats(player);
 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuyGoldVIP), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuyGoldVIP), 3000);
 
                         break;
 
@@ -266,7 +266,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyBoughtVIP), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyBoughtVIP), 3000);
 
                             return;
 
@@ -276,13 +276,13 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
                         }
 
-                        UpdateData.RedBucks(player, -DonatesPremiumData[3].Price, msg: LangFunc.GetText(LangType.Ru, DataName.BoughtPlatinumVIP));
+                        UpdateData.RedBucks(player, -DonatesPremiumData[3].Price, msg: LangFunc.GetText(LangType.En, DataName.BoughtPlatinumVIP));
 
                         accountData.VipLvl = 3;
 
@@ -290,7 +290,7 @@ namespace NeptuneEvo.Chars
 
                         //Repository.PlayerStats(player);
 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuyPlatinumVIP), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuyPlatinumVIP), 3000);
 
                         break;
 
@@ -300,7 +300,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyBoughtVIP), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyBoughtVIP), 3000);
 
                             return;
 
@@ -310,13 +310,13 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
                         }
 
-                        UpdateData.RedBucks(player, -DonatesPremiumData[4].Price, LangFunc.GetText(LangType.Ru, DataName.BoughtDiamondVIP));
+                        UpdateData.RedBucks(player, -DonatesPremiumData[4].Price, LangFunc.GetText(LangType.En, DataName.BoughtDiamondVIP));
 
                         accountData.VipLvl = 4;
 
@@ -324,7 +324,7 @@ namespace NeptuneEvo.Chars
 
                         //Repository.PlayerStats(player);
 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuyDiamondVIP), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuyDiamondVIP), 3000);
 
                         break;
                 }
@@ -354,7 +354,7 @@ namespace NeptuneEvo.Chars
 
                 {
 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSubscription), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSubscription), 3000);
 
                     return;
 
@@ -364,7 +364,7 @@ namespace NeptuneEvo.Chars
 
                 {
 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Only24hPrize), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Only24hPrize), 3000);
 
                     return;
 
@@ -384,7 +384,7 @@ namespace NeptuneEvo.Chars
 
                 int donateCash = DonatesPremiumData[0].GiveRb;
 
-                UpdateData.RedBucks(player, donateCash, msg: LangFunc.GetText(LangType.Ru, DataName.SubBonus));
+                UpdateData.RedBucks(player, donateCash, msg: LangFunc.GetText(LangType.En, DataName.SubBonus));
 
                 accountData.SubscribeTime = DateTime.Now.AddDays(1);
 
@@ -444,7 +444,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -453,7 +453,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -463,7 +463,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -487,9 +487,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NaHodDonPack, Main.DonatePack.PriceRB[0]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NaHodDonPack, Main.DonatePack.PriceRB[0]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.NaHodDonPack, Main.DonatePack.PriceRB[0]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.NaHodDonPack, Main.DonatePack.PriceRB[0]));
 
                             break;
 
@@ -503,7 +503,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -512,7 +512,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceForAccessory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceForAccessory), 3000);
 
                                 return;
 
@@ -536,7 +536,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -546,7 +546,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -556,9 +556,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.StarterDonPack, Main.DonatePack.PriceRB[1]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.StarterDonPack, Main.DonatePack.PriceRB[1]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.StarterDonPack, Main.DonatePack.PriceRB[1]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.StarterDonPack, Main.DonatePack.PriceRB[1]));
 
                             break;
 
@@ -572,7 +572,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -582,7 +582,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -591,7 +591,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceForAccessory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceForAccessory), 3000);
 
                                 return;
 
@@ -601,7 +601,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -633,9 +633,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PromotedDonPack, Main.DonatePack.PriceRB[2]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PromotedDonPack, Main.DonatePack.PriceRB[2]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.PromotedDonPack, Main.DonatePack.PriceRB[2]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.PromotedDonPack, Main.DonatePack.PriceRB[2]));
 
                             break;
 
@@ -649,7 +649,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -659,7 +659,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -669,7 +669,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceForAccessory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceForAccessory), 3000);
 
                                 return;
 
@@ -678,7 +678,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -709,9 +709,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LoadedDonPack, Main.DonatePack.PriceRB[3]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LoadedDonPack, Main.DonatePack.PriceRB[3]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.LoadedDonPack, Main.DonatePack.PriceRB[3]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.LoadedDonPack, Main.DonatePack.PriceRB[3]));
 
                             break;
 
@@ -725,7 +725,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -737,7 +737,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxCarsDonPack), 6000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxCarsDonPack), 6000);
 
                                 return;
 
@@ -750,7 +750,7 @@ namespace NeptuneEvo.Chars
                                 var garage = house.GetGarageData();
                                 if (garage == null || vehiclesCount >= Houses.GarageManager.GarageTypes[garage.Type].MaxCars)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxCarsDonPack), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxCarsDonPack), 3000);
                                     return;
                                 }
                             }
@@ -771,9 +771,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GoodStartDonPack, Main.DonatePack.PriceRB[4]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GoodStartDonPack, Main.DonatePack.PriceRB[4]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.GoodStartDonPack, Main.DonatePack.PriceRB[4]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.GoodStartDonPack, Main.DonatePack.PriceRB[4]));
 
                             break;
 
@@ -787,7 +787,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -811,9 +811,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BigPlansDonPack, Main.DonatePack.PriceRB[5]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BigPlansDonPack, Main.DonatePack.PriceRB[5]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.BigPlansDonPack, Main.DonatePack.PriceRB[5]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.BigPlansDonPack, Main.DonatePack.PriceRB[5]));
 
                             break;
 
@@ -827,7 +827,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -837,7 +837,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -847,7 +847,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceForAccessory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceForAccessory), 3000);
 
                                 return;
 
@@ -857,7 +857,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -888,9 +888,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BigCheckDonPack, Main.DonatePack.PriceRB[6]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BigCheckDonPack, Main.DonatePack.PriceRB[6]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.BigCheckDonPack, Main.DonatePack.PriceRB[6]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.BigCheckDonPack, Main.DonatePack.PriceRB[6]));
 
                             break;
 
@@ -902,7 +902,7 @@ namespace NeptuneEvo.Chars
 
                             if (accountData.RedBucks < GetPrice(accountData.Unique, "packages", id, Main.DonatePack.PriceRB[7]))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                                 return;
                             }
 
@@ -910,7 +910,7 @@ namespace NeptuneEvo.Chars
 
                             if (vehiclesCount >= Houses.GarageManager.MaxGarageCars)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxCarsDonPack), 6000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxCarsDonPack), 6000);
                                 return;
                             }
 
@@ -922,7 +922,7 @@ namespace NeptuneEvo.Chars
 
                                 if (garage == null || vehiclesCount >= Houses.GarageManager.GarageTypes[garage.Type].MaxCars)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxCarsDonPack), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxCarsDonPack), 3000);
                                     return;
                                 }
                             }
@@ -943,9 +943,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GreatDonPack, Main.DonatePack.PriceRB[7]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GreatDonPack, Main.DonatePack.PriceRB[7]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.GreatDonPack, Main.DonatePack.PriceRB[7]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.GreatDonPack, Main.DonatePack.PriceRB[7]));
 
                             break;
 
@@ -959,7 +959,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -970,7 +970,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -980,7 +980,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceForAccessory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceForAccessory), 3000);
 
                                 return;
 
@@ -990,7 +990,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -1008,9 +1008,9 @@ namespace NeptuneEvo.Chars
                            
                            characterData.Licenses[4] = true; // helicopter
                     
-                            characterData.Licenses[5] = true; // самолет
-                            
-                            characterData.Licenses[6] = true; // gun lic
+                            characterData.Licenses[5] = true; // Airplane
+
+                            characterData.Licenses[6] = true; // gun license
 
                             characterData.Licenses[8] = true; // paramedic
 
@@ -1025,9 +1025,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LegendPackDon, Main.DonatePack.PriceRB[8]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LegendPackDon, Main.DonatePack.PriceRB[8]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.LegendPackDon, Main.DonatePack.PriceRB[8]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.LegendPackDon, Main.DonatePack.PriceRB[8]));
 
                             break;
 
@@ -1041,7 +1041,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -1053,7 +1053,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxCarsDonPack), 6000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxCarsDonPack), 6000);
 
                                 return;
 
@@ -1071,7 +1071,7 @@ namespace NeptuneEvo.Chars
 
                                 {
 
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxCarsDonPack), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxCarsDonPack), 3000);
 
                                     return;
 
@@ -1099,9 +1099,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuyDonateGreatStart, Main.DonatePack.PriceRB[9]), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuyDonateGreatStart, Main.DonatePack.PriceRB[9]), 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.Ru, DataName.BuyDonateGreatStart, Main.DonatePack.PriceRB[9]));
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, LangFunc.GetText(LangType.En, DataName.BuyDonateGreatStart, Main.DonatePack.PriceRB[9]));
 
                             break;
 
@@ -1115,7 +1115,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                                 return;
 
@@ -1125,7 +1125,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceForAccessory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceForAccessory), 3000);
 
                                 return;
 
@@ -1135,7 +1135,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -1169,7 +1169,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -1178,7 +1178,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
 
                                 return;
 
@@ -1186,9 +1186,9 @@ namespace NeptuneEvo.Chars
 
                             //Repository.PlayerStats(player);
 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно приобрели набор «Батя»!", 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You’ve successfully purchased the 'Boss' pack!", 3000);
 
-                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, $"Куплен набор «Батя» (-{Main.DonatePack.GiveMoney[10]} RedBucks)");
+                            GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, $"Batya bundle purchased (-{Main.DonatePack.GiveMoney[10]} RedBucks)");
 
                             break;
 
@@ -1245,12 +1245,12 @@ namespace NeptuneEvo.Chars
                         if (!player.IsCharacterData()) return;
                         if (sessionData.CuffedData.Cuffed)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                             return;
                         }
                         if (sessionData.DeathData.InDeath)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                             return;
                         }
 
@@ -1258,7 +1258,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
@@ -1268,13 +1268,13 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCreatorDemorgan), 5000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCreatorDemorgan), 5000);
 
                             return;
 
                         }
 
-                        UpdateData.RedBucks(player, -1000, msg:LangFunc.GetText(LangType.Ru, DataName.SendCreator));
+                        UpdateData.RedBucks(player, -1000, msg:LangFunc.GetText(LangType.En, DataName.SendCreator));
 
                         Character.Friend.Repository.ClearFriends(player, player.Name);
 
@@ -1288,7 +1288,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
@@ -1312,7 +1312,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoName), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoName), 3000);
 
                                 return;
 
@@ -1322,7 +1322,7 @@ namespace NeptuneEvo.Chars
 
                             {
 
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoFamily), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoFamily), 3000);
 
                                 return;
 
@@ -1346,7 +1346,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NameExists), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NameExists), 3000);
 
                             return;
 
@@ -1364,9 +1364,9 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Admin.AdminsLog(1, LangFunc.GetText(LangType.Ru, DataName.ChangeNameAdmins, player.Name, player.Value, name), 1);
+                            Admin.AdminsLog(1, LangFunc.GetText(LangType.En, DataName.ChangeNameAdmins, player.Name, player.Value, name), 1);
 
-                            UpdateData.RedBucks(player, -800, msg: LangFunc.GetText(LangType.Ru, DataName.ChangeName));
+                            UpdateData.RedBucks(player, -800, msg: LangFunc.GetText(LangType.En, DataName.ChangeName));
 
                             Character.Change.Repository.ChangeName(player, name);
 
@@ -1382,7 +1382,7 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Nowarn), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Nowarn), 3000);
 
                             return;
 
@@ -1392,19 +1392,19 @@ namespace NeptuneEvo.Chars
 
                         {
 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                             return;
 
                         }
 
-                        UpdateData.RedBucks(player, -1000, msg: LangFunc.GetText(LangType.Ru, DataName.SnyatieWarn));
+                        UpdateData.RedBucks(player, -1000, msg: LangFunc.GetText(LangType.En, DataName.SnyatieWarn));
 
                         characterData.Warns -= 1;
 
                         //Repository.PlayerStats(player);
 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucUnwarn), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucUnwarn), 3000);
 
                         break;
 
@@ -1442,7 +1442,7 @@ namespace NeptuneEvo.Chars
 
                 {
 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Amount1OrMore), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Amount1OrMore), 3000);
 
                     return;
 
@@ -1452,7 +1452,7 @@ namespace NeptuneEvo.Chars
 
                 {
 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                     return;
 
@@ -1460,10 +1460,10 @@ namespace NeptuneEvo.Chars
 
                 int totalamount = amount * Convert.ToInt32(10 * Main.DonateSettings.Convert);
                 
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.SucConvertRbToMoney, amount, totalamount), DateTime.Now);
-                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucConvertRbToMoney, amount, totalamount), 3000);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.SucConvertRbToMoney, amount, totalamount), DateTime.Now);
+                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucConvertRbToMoney, amount, totalamount), 3000);
 
-                UpdateData.RedBucks(player, -amount, msg: LangFunc.GetText(LangType.Ru, DataName.ConvertRbTo, totalamount));
+                UpdateData.RedBucks(player, -amount, msg: LangFunc.GetText(LangType.En, DataName.ConvertRbTo, totalamount));
 
                 Wallet.Change(player, +totalamount);
 
@@ -1486,19 +1486,19 @@ namespace NeptuneEvo.Chars
                 if (accountData == null) return;
                 if (accountData.Chars[slotId] != -2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Already3Slot), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Already3Slot), 3000);
                     return;
                 }
 
                 if (accountData.RedBucks < 1000)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                     return;
 
                 }
 
-                UpdateData.RedBucks(player, -1000, msg: LangFunc.GetText(LangType.Ru, DataName.Buy3Slot));
+                UpdateData.RedBucks(player, -1000, msg: LangFunc.GetText(LangType.En, DataName.Buy3Slot));
 
                 if (accountData.VipLvl <= 3)
 
@@ -1508,7 +1508,7 @@ namespace NeptuneEvo.Chars
 
                     accountData.VipLvl = 3;
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlatinumVIP30d), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlatinumVIP30d), 3000);
 
                 }
 
@@ -1518,7 +1518,7 @@ namespace NeptuneEvo.Chars
 
                     accountData.VipDate = accountData.VipDate.AddDays(7);
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlattoVip7d), 5000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlattoVip7d), 5000);
 
                 }
 
@@ -1613,7 +1613,7 @@ namespace NeptuneEvo.Chars
 
                 {
 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
 
                     return;
 
@@ -1627,9 +1627,9 @@ namespace NeptuneEvo.Chars
 
                 Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", cData.ItemId, 1, cData.Data);
 
-                UpdateData.RedBucks(player, -cData.PriceRB, msg: LangFunc.GetText(LangType.Ru, DataName.LKLogBuyClothes, id));
+                UpdateData.RedBucks(player, -cData.PriceRB, msg: LangFunc.GetText(LangType.En, DataName.LKLogBuyClothes, id));
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PremiumClothesBuy), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PremiumClothesBuy), 3000);
 
             }
 
@@ -1701,7 +1701,7 @@ namespace NeptuneEvo.Chars
             
             if (!FunctionsAccess.IsWorking("donatebuyVehNumber"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             number = number.ToUpper();
@@ -1709,7 +1709,7 @@ namespace NeptuneEvo.Chars
             var rg = new Regex(@"^[A-Z0-9]+$", RegexOptions.IgnoreCase);
             if (!rg.IsMatch(number))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IncorrectInputNewNumber), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IncorrectInputNewNumber), 3000);
                 return;
             }
             
@@ -1725,7 +1725,7 @@ namespace NeptuneEvo.Chars
             if (numberData[1].ToString() == "$" && UpdateData.CanIChange(player, money, true) != 255) return;
             if (numberData[1].ToString() == "RB" && accountData.RedBucks < money)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                 return;
             }
             if (Chars.Repository.isFreeSlots(player, ItemId.VehicleNumber, 1) != 0) 
@@ -1740,8 +1740,8 @@ namespace NeptuneEvo.Chars
             }
             else
             {
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.DonNumBuy, number, money), DateTime.Now);
-                UpdateData.RedBucks(player, -money, LangFunc.GetText(LangType.Ru, DataName.DonNumBuy, number, money));
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.DonNumBuy, number, money), DateTime.Now);
+                UpdateData.RedBucks(player, -money, LangFunc.GetText(LangType.En, DataName.DonNumBuy, number, money));
             }
             //client.donate.close
             Trigger.ClientEvent(player, "client.donate.close");
@@ -1772,7 +1772,7 @@ namespace NeptuneEvo.Chars
             
             if (!FunctionsAccess.IsWorking("donatebuySim"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
 
@@ -1794,7 +1794,7 @@ namespace NeptuneEvo.Chars
             
             if (accountData.RedBucks < money)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                 return;
             }
             if (Chars.Repository.isFreeSlots(player, ItemId.SimCard, 1) != 0) 
@@ -1802,8 +1802,8 @@ namespace NeptuneEvo.Chars
             
             Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.SimCard, 1, sim.ToString());
             
-            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.DonSimBuy, sim, money), DateTime.Now);
-            UpdateData.RedBucks(player, -money, LangFunc.GetText(LangType.Ru, DataName.DonSimBuy, sim, money));
+            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.DonSimBuy, sim, money), DateTime.Now);
+            UpdateData.RedBucks(player, -money, LangFunc.GetText(LangType.En, DataName.DonSimBuy, sim, money));
             //client.donate.close
             Trigger.ClientEvent(player, "client.donate.close");
         }

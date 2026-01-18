@@ -26,7 +26,7 @@ namespace NeptuneEvo.Database.Models
                         Players.Phone.Messages.Repository.IsCountUpdateMessages() ||
                         Players.Phone.Auction.Repository.IsSavingAuctions())
                     {
-                        await using var db = new ServerBD("MainDB"); //В отдельном потоке
+                        await using var db = new ServerBD("MainDB"); //On Separate Thread
 
                         await Players.Phone.Messages.Repository.InsertMessages(db);
 

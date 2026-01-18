@@ -61,14 +61,14 @@ namespace NeptuneEvo.Fractions
 
                 if (sessionData.Following != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsFollowing), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsFollowing), 5000);
                     return;
                 }
                 string data = (characterData.Gender) ? "128_0_true" : "98_0_false";
 
                 if (player.GetFractionId() != (int) Models.Fractions.MERRYWEATHER && Chars.Repository.isItem(player, "inventory", ItemId.Jewelry, data) == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsBadgeFIBorPD), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsBadgeFIBorPD), 5000);
                     return;
                 }
                 NAPI.Entity.SetEntityPosition(player, CoordsToLift[floor] + new Vector3(0, 0, 1.12));

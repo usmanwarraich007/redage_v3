@@ -37,7 +37,7 @@ namespace NeptuneEvo.Jobs
 
                 // blips
 
-                Main.CreateBlip(new Main.BlipData(354, LangFunc.GetText(LangType.Ru, DataName.Electrostanciya), new Vector3(724.9625, 133.9959, 79.83643), 70, true, 1.2f));
+                Main.CreateBlip(new Main.BlipData(354, LangFunc.GetText(LangType.En, DataName.Electrostanciya), new Vector3(724.9625, 133.9959, 79.83643), 70, true, 1.2f));
 
             }
             catch (Exception e)
@@ -47,14 +47,14 @@ namespace NeptuneEvo.Jobs
         }
         public static List<string> JobStats = new List<string>
         {
-            LangFunc.GetText(LangType.Ru, DataName.Electrician),
-            LangFunc.GetText(LangType.Ru, DataName.Postman),
-            LangFunc.GetText(LangType.Ru, DataName.Taximan),
-            LangFunc.GetText(LangType.Ru, DataName.Busdriver),
-            LangFunc.GetText(LangType.Ru, DataName.Gazonman),
-            LangFunc.GetText(LangType.Ru, DataName.Dalnoboy),
-            LangFunc.GetText(LangType.Ru, DataName.Inkassman),
-            LangFunc.GetText(LangType.Ru, DataName.Mechanicman),
+            LangFunc.GetText(LangType.En, DataName.Electrician),
+            LangFunc.GetText(LangType.En, DataName.Postman),
+            LangFunc.GetText(LangType.En, DataName.Taximan),
+            LangFunc.GetText(LangType.En, DataName.Busdriver),
+            LangFunc.GetText(LangType.En, DataName.Gazonman),
+            LangFunc.GetText(LangType.En, DataName.Dalnoboy),
+            LangFunc.GetText(LangType.En, DataName.Inkassman),
+            LangFunc.GetText(LangType.En, DataName.Mechanicman),
         };
         public static SortedList<int, Vector3> Points = new SortedList<int, Vector3>
         {
@@ -70,14 +70,14 @@ namespace NeptuneEvo.Jobs
         };
         private static SortedList<int, string> JobList = new SortedList<int, string>
         {
-            {1, LangFunc.GetText(LangType.Ru, DataName.Electriciany) },
-            {2, LangFunc.GetText(LangType.Ru, DataName.Postmany) },
-            {3, LangFunc.GetText(LangType.Ru, DataName.Taximany) },
-            {4, LangFunc.GetText(LangType.Ru, DataName.Busdrivery) },
-            {5, LangFunc.GetText(LangType.Ru, DataName.Gazonmany) },
-            {6, LangFunc.GetText(LangType.Ru, DataName.Dalnoboyy) },
-            {7, LangFunc.GetText(LangType.Ru, DataName.Inkassmany) },
-            {8, LangFunc.GetText(LangType.Ru, DataName.Mechanicmany) },
+            {1, LangFunc.GetText(LangType.En, DataName.Electriciany) },
+            {2, LangFunc.GetText(LangType.En, DataName.Postmany) },
+            {3, LangFunc.GetText(LangType.En, DataName.Taximany) },
+            {4, LangFunc.GetText(LangType.En, DataName.Busdrivery) },
+            {5, LangFunc.GetText(LangType.En, DataName.Gazonmany) },
+            {6, LangFunc.GetText(LangType.En, DataName.Dalnoboyy) },
+            {7, LangFunc.GetText(LangType.En, DataName.Inkassmany) },
+            {8, LangFunc.GetText(LangType.En, DataName.Mechanicmany) },
         };
         
         public static void Layoff(ExtPlayer player)
@@ -90,7 +90,7 @@ namespace NeptuneEvo.Jobs
                 if (characterData == null) return;
                 if (sessionData.WorkData.OnWork == true)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 if (characterData.WorkID != 0)
@@ -101,11 +101,11 @@ namespace NeptuneEvo.Jobs
                         Trigger.ClientEvent(player, "deleteWorkBlip");
                     }
 
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLeaveJob), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLeaveJob), 3000);
                     BattlePass.Repository.UpdateReward(player, 10);
                     UpdateData.Work(player, 0);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNotJober), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNotJober), 3000);
             }
             catch (Exception e)
             {
@@ -145,36 +145,36 @@ namespace NeptuneEvo.Jobs
                 // }
                 if (characterData.WorkID != 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BeforeLeaveLastJob), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BeforeLeaveLastJob), 3000);
                     return;
                 }
                 if (sessionData.WorkData.OnWork == true)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
 
-                if (characterData.WorkID == job) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyJob, JobList[job]), 3000);
+                if (characterData.WorkID == job) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyJob, JobList[job]), 3000);
                 else
                 {
                     if (characterData.LVL < JobsMinLvl[job])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NeedJobsLvl, JobsMinLvl[job]), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NeedJobsLvl, JobsMinLvl[job]), 3000);
                         return;
                     }
                     if ((job == (int)JobsId.Postman || job == (int)JobsId.Taxi || job == (int)JobsId.CarMechanic) && !characterData.Licenses[1])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.JobLicB), 10000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.JobLicB), 10000);
                         return;
                     }
                     if ((job == (int)JobsId.Bus || job == (int)JobsId.Trucker || job == (int)JobsId.CashCollector) && !characterData.Licenses[2])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.JobLicC), 10000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.JobLicC), 10000);
                         return;
                     }
                     UpdateData.Work(player, job);
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouStartedJob, JobList[job]), 8000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouStartedJob, JobList[job]), 8000);
                     BattlePass.Repository.UpdateReward(player, 9);
                     
                     Trigger.ClientEvent(player, "createWaypoint", Points[job].X, Points[job].Y);

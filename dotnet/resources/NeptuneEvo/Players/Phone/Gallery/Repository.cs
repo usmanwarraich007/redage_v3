@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Localization;
 using NeptuneEvo.Handles;
 using Newtonsoft.Json;
 using Redage.SDK;
@@ -19,7 +20,7 @@ namespace NeptuneEvo.Players.Phone.Gallery
             
             if (phoneData.Gallery.Count >= MaxGallery)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "На телефоне нет места", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceOnPhone), 3000);
                 return;
             }
             

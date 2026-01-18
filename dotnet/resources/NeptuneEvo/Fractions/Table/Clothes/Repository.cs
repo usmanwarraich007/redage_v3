@@ -79,7 +79,7 @@ namespace NeptuneEvo.Fractions.Table.Clothes
                 
                 if (!FractionClothingSets.FractionMainCloakrooms.ContainsKey(fractionData.Id) && !FractionClothingSets.FractionSecondCloakrooms.ContainsKey(fractionData.Id))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantEditForm), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantEditForm), 3000);
                     return;
                 }
 
@@ -101,7 +101,7 @@ namespace NeptuneEvo.Fractions.Table.Clothes
                             
                             if (fractionSets.Any(f => f.SetName.Equals(newName)))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, gender ? LangFunc.GetText(LangType.Ru, DataName.ThisNameMaleFormUsed) : LangFunc.GetText(LangType.Ru, DataName.ThisNameFemaleFormUsed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, gender ? LangFunc.GetText(LangType.En, DataName.ThisNameMaleFormUsed) : LangFunc.GetText(LangType.En, DataName.ThisNameFemaleFormUsed), 3000);
                                 return;
                             }
 
@@ -112,7 +112,7 @@ namespace NeptuneEvo.Fractions.Table.Clothes
                                 fractionSet.Rank = rank;
                             }
                             
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucEditFormName), 5000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucEditFormName), 5000);
 
                         }
                         
@@ -154,7 +154,7 @@ namespace NeptuneEvo.Fractions.Table.Clothes
                         return;
                     }
                 }
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 3000);
             }
             catch (Exception e)
             {
@@ -184,13 +184,13 @@ namespace NeptuneEvo.Fractions.Table.Clothes
                 
                 if (!FractionClothingSets.FractionMainCloakrooms.ContainsKey(fractionData.Id) && !FractionClothingSets.FractionSecondCloakrooms.ContainsKey(fractionData.Id))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantEditForm), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantEditForm), 3000);
                     return;
                 }
 
                 if (sessionData.TempClothingData.NewName == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FormEditError), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FormEditError), 3000);
                     return;
                 }
                 
@@ -226,11 +226,11 @@ namespace NeptuneEvo.Fractions.Table.Clothes
                                     fractionSets.Remove(item);             
                                     FractionClothingSets.SetPlayerFactionClothingSet(player, fractionData.Id, setName, gender, isDutySet: false); 
                                     //player.ClearAccessories();
-                                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucDeleteFormComponent), 3000);
+                                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucDeleteFormComponent), 3000);
                                     return;
                                 }
                             }
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FormError), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FormError), 3000);
                             return;
                         }
                         
@@ -261,18 +261,18 @@ namespace NeptuneEvo.Fractions.Table.Clothes
                             if (!isUpdate)
                                 fractionSets.Add(new FractionSetData(rank, setName, availableSet.i));
                             
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucEditForm), 8000);  
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucEditForm), 8000);  
                             FractionClothingSets.SetPlayerFactionClothingSet(player, fractionData.Id, setName, gender, isDutySet: false); 
                             //player.ClearAccessories();
                             
                             return;
                         }
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEditThisForm), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEditThisForm), 3000);
                         return;
                     }
 
                 }
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 3000);
             }
             catch (Exception e)
             {

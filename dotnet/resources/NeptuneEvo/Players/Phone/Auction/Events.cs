@@ -1,9 +1,10 @@
-﻿using GTANetworkAPI;
+using GTANetworkAPI;
 using NeptuneEvo.Character;
 using NeptuneEvo.Functions;
 using NeptuneEvo.Handles;
 using NeptuneEvo.Players.Phone.Auction.Models;
 using Redage.SDK;
+using Localization;
 
 namespace NeptuneEvo.Players.Phone.Auction
 {
@@ -34,7 +35,7 @@ namespace NeptuneEvo.Players.Phone.Auction
 
             Repository.EndToId(id);
             
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы завершили аукцион {id}", 5000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AuctionFinished, id), 5000);
 
         }
     }

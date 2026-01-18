@@ -20,11 +20,15 @@ namespace Localization
             
             switch (langType)
             {
+                case LangType.En:
+                    dataLang = LibraryEn.EnText;
+                    break;
+
                 case LangType.Ru:
                     dataLang = LibraryRu.RuText;
                     break;
             }
-            
+
             if (!dataLang.ContainsKey(dataName))
                 return "";
             

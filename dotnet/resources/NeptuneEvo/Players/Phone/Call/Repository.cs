@@ -20,7 +20,7 @@ namespace NeptuneEvo.Players.Phone.Call
             
             if (characterData.Sim == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSimcard), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSimcard), 3000);
                 Trigger.ClientEvent(player, "client.phone.callError");
                 return;
             }
@@ -34,7 +34,7 @@ namespace NeptuneEvo.Players.Phone.Call
             if (characterData.Unmute > 0)
             {
                 Recents.Repository.Add(player, number, true, time, 0);
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                 Trigger.ClientEvent(player, "client.phone.callError");
                 return;
             }
@@ -118,7 +118,7 @@ namespace NeptuneEvo.Players.Phone.Call
             
             if (characterData.Sim == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSimcard), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSimcard), 3000);
                 Trigger.ClientEvent(player, "client.phone.callError");
                 return;
             }

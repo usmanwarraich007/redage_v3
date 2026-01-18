@@ -45,13 +45,13 @@ namespace NeptuneEvo.Fractions
                 if (sessionData.DeathData.InDeath)
                 {
                     VehicleManager.WarpPlayerOutOfVehicle(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantSitVehCritical), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantSitVehCritical), 3000);
                     return;
                 }
                 if (sessionData.Follower != null)
                 {
                     VehicleManager.WarpPlayerOutOfVehicle(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ReleaseBeforeSitveh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ReleaseBeforeSitveh), 3000);
                     return;
                 }
             }
@@ -82,8 +82,8 @@ namespace NeptuneEvo.Fractions
                     long ticks = Main.NextCarRespawn[fractionData.Id].Ticks - DateTime.Now.Ticks;
                     if (ticks <= 0) return;
                     DateTime g = new DateTime(ticks);
-                    if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CanDoByTime1h, g.Hour, g.Minute, g.Second), 3000);
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CanDoByTime,  g.Minute, g.Second), 3000);
+                    if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CanDoByTime1h, g.Hour, g.Minute, g.Second), 3000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CanDoByTime,  g.Minute, g.Second), 3000);
                     return;
                 }
 
@@ -103,10 +103,10 @@ namespace NeptuneEvo.Fractions
                 }
                 GameLog.FracLog(fractionData.Id, characterData.UUID, -1, player.Name, "-1", "respawnCars");
                 Main.NextCarRespawn[fractionData.Id] = DateTime.Now.AddMinutes(30);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RespawnFractionVehs), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RespawnFractionVehs), 3000);
 
                 if (fractionData.IsLeader(memberFractionData.Rank))
-                    Manager.sendFractionMessage(fractionData.Id, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.Ru, DataName.WhoRespawnFractionVehs, player.Name, player.Value), true);
+                    Manager.sendFractionMessage(fractionData.Id, "!{#FF8C00}[F] " + LangFunc.GetText(LangType.En, DataName.WhoRespawnFractionVehs, player.Name, player.Value), true);
             }
             catch (Exception e)
             {
@@ -124,7 +124,7 @@ namespace NeptuneEvo.Fractions
                 var fracId = player.GetFractionId();
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 ExtPlayer target = Main.GetNearestPlayer(player, 2);
@@ -136,28 +136,28 @@ namespace NeptuneEvo.Fractions
                 if (player.IsInVehicle || target.IsInVehicle || sessionData.InAirsoftLobby >= 0) return;
                 if (NAPI.Player.IsPlayerInAnyVehicle(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouInCar), 3000);
                     return;
                 }
                 if (NAPI.Player.IsPlayerInAnyVehicle(target))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerInCar), 3000);
                     return;
                 }
                 if (targetSessionData.IsCasinoGame != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantCuffWhenCasino, targetSessionData.IsCasinoGame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantCuffWhenCasino, targetSessionData.IsCasinoGame), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath) return;
                 if (sessionData.Follower != null || sessionData.Following != null || targetCharacterData.ArrestTime >= 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUseOnThisPlayer), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUseOnThisPlayer), 3000);
                     return;
                 }
                 if (targetSessionData.Following != null || targetSessionData.Follower != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUseOnThisPlayerWhenCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUseOnThisPlayerWhenCuffed), 3000);
                     return;
                 }
                 string cuffmesp = ""; // message for Player after cuff
@@ -172,22 +172,22 @@ namespace NeptuneEvo.Fractions
                 {
                     if (!sessionData.WorkData.OnDuty && characterData.AdminLVL == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                         return;
                     }
                     if (cdata.CuffedByMafia)
                     {
-                        uncuffmesp = LangFunc.GetText(LangType.Ru, DataName.YouUncuffPlayer, target.Value);
-                        uncuffmest = LangFunc.GetText(LangType.Ru, DataName.SomeoneUncuffsYou, player.Value);
+                        uncuffmesp = LangFunc.GetText(LangType.En, DataName.YouUncuffPlayer, target.Value);
+                        uncuffmest = LangFunc.GetText(LangType.En, DataName.SomeoneUncuffsYou, player.Value);
                         uncuffme = "развязал" + (characterData.Gender ? "" : "а") + " игрока {name}";
                     }
                     else
                     {
-                        cuffmesp = LangFunc.GetText(LangType.Ru, DataName.NaruchnikiTiOdel, target.Value);
-                        cuffmest = LangFunc.GetText(LangType.Ru, DataName.NaruchnikiNaVasOdel, player.Value);
+                        cuffmesp = LangFunc.GetText(LangType.En, DataName.NaruchnikiTiOdel, target.Value);
+                        cuffmest = LangFunc.GetText(LangType.En, DataName.NaruchnikiNaVasOdel, player.Value);
                         cuffme = "надел" + (characterData.Gender ? "" : "а") + " наручники на игрока {name}"; //
-                        uncuffmesp = LangFunc.GetText(LangType.Ru, DataName.ViSnyaliNaruchniki, target.Value);
-                        uncuffmest = LangFunc.GetText(LangType.Ru, DataName.OnSnyalNaruchniki, player.Value);
+                        uncuffmesp = LangFunc.GetText(LangType.En, DataName.ViSnyaliNaruchniki, target.Value);
+                        uncuffmest = LangFunc.GetText(LangType.En, DataName.OnSnyalNaruchniki, player.Value);
                         uncuffme = "снял" + (characterData.Gender ? "" : "а") + " наручники с игрока {name}"; //
                         sound = "cuffs";
                     }
@@ -196,28 +196,28 @@ namespace NeptuneEvo.Fractions
                 {
                     if (cdata.CuffedByCop)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromCuffs), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromCuffs), 3000);
                         return;
                     }
                     else if (!targetSessionData.HandsUp && !cdata.Cuffed)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerMustHandsUp), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerMustHandsUp), 3000);
                         return;
                     }
                     ItemStruct cuffs = Chars.Repository.isItem(player, "inventory", ItemId.Cuffs);
                     int count = (cuffs == null) ? 0 : cuffs.Item.Count;
                     if (!cdata.Cuffed && count == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoCuffs), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoCuffs), 3000);
                         return;
                     }
                     else if (!cdata.Cuffed) Chars.Repository.RemoveIndex(player, cuffs.Location, cuffs.Index, 1);
                     sound = "zips";
-                    cuffmesp = LangFunc.GetText(LangType.Ru, DataName.YouCuffed, target.Value);
-                    cuffmest = LangFunc.GetText(LangType.Ru, DataName.PlayerCuffsYou, player.Value);
+                    cuffmesp = LangFunc.GetText(LangType.En, DataName.YouCuffed, target.Value);
+                    cuffmest = LangFunc.GetText(LangType.En, DataName.PlayerCuffsYou, player.Value);
                     cuffme = "связал" + (characterData.Gender ? "" : "а") + " игрока {name}"; //SomeoneCuffsPlayer
-                    uncuffmesp = LangFunc.GetText(LangType.Ru, DataName.YouUncuffPlayer, target.Value);
-                    uncuffmest = LangFunc.GetText(LangType.Ru, DataName.SomeoneUncuffsYou, player.Value);
+                    uncuffmesp = LangFunc.GetText(LangType.En, DataName.YouUncuffPlayer, target.Value);
+                    uncuffmest = LangFunc.GetText(LangType.En, DataName.SomeoneUncuffsYou, player.Value);
                     uncuffme = "развязал" + (characterData.Gender ? "" : "а") + " игрока {name}"; //SomeoneUncuffsPlayer
                 }
                 if (!cdata.Cuffed)
@@ -570,7 +570,7 @@ namespace NeptuneEvo.Fractions
                 
                 if (newRank >= memberFractionData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantUpToRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantUpToRank), 3000);
                     return;
                 }
                 if (targetMemberFractionData.Rank >= memberFractionData.Rank)
@@ -719,7 +719,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -743,7 +743,7 @@ namespace NeptuneEvo.Fractions
                 }
                 if (targetCharacterData.Money < sum && MoneySystem.Bank.GetBalance(targetCharacterData.Bank) < sum)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                     return;
                 }
                 TicketsData ticketsData = targetSessionData.TicketsData;
@@ -779,8 +779,8 @@ namespace NeptuneEvo.Fractions
                     if (UpdateData.CanIChange(target, sum, true) != 255) return;
                     if (!MoneySystem.Wallet.Change(target, -sum) && !MoneySystem.Bank.Change(targetCharacterData.Bank, -sum, false))
                     {
-                        Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                        Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                     }
 
                     var fractionData = Fractions.Manager.GetFractionData((int) Fractions.Models.Fractions.CITY);
@@ -823,7 +823,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -863,7 +863,7 @@ namespace NeptuneEvo.Fractions
                 }
                 if (!targetSessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCuffed), 3000);
                     return;
                 }
                 if (targetSessionData.Following != null) unFollow(targetSessionData.Following, target);
@@ -911,14 +911,14 @@ namespace NeptuneEvo.Fractions
                     return;    
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 var targetCharacterData = target.GetCharacterData();
                 if (targetCharacterData == null) return;
                 if (!sessionData.WorkData.OnDuty)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                     return;
                 }
                 if (player == target)
@@ -928,7 +928,7 @@ namespace NeptuneEvo.Fractions
                 }
                 if (player.Position.DistanceTo(target.Position) > 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (sessionData.InArrestArea == -1)
@@ -1127,7 +1127,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
 
@@ -1158,7 +1158,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
 
@@ -1188,12 +1188,12 @@ namespace NeptuneEvo.Fractions
                 }
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (!targetSessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCuffed), 3000);
                     return;
                 }
                 if (targetSessionData.Following != null)
@@ -1260,7 +1260,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 
@@ -1312,7 +1312,7 @@ namespace NeptuneEvo.Fractions
                 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 if (!Main.PlayerNames.ContainsKey(pasport))
@@ -1331,7 +1331,7 @@ namespace NeptuneEvo.Fractions
                 {
                     if (!sessionData.WorkData.OnDuty)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                         return;
                     }
                     if (memberFractionData.Id == (int) Models.Fractions.CITY && !SafeZones.IsSafeZone(sessionData.InsideSafeZone, SafeZones.ZoneName.Court))
@@ -1394,7 +1394,7 @@ namespace NeptuneEvo.Fractions
                 if (characterData == null) return;            
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -1415,7 +1415,7 @@ namespace NeptuneEvo.Fractions
                 }
                 if (player.Position.DistanceTo(target.Position) > 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (!targetSessionData.CuffedData.Cuffed)
@@ -1442,7 +1442,7 @@ namespace NeptuneEvo.Fractions
                 }
                 if (emptySlots.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInCar), 3000);
                     return;
                 }
                 //Trigger.ClientEvent(target, "setIntoVehicle", vehicle, emptySlots[0] - 1);
@@ -1468,7 +1468,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 
@@ -1596,7 +1596,7 @@ namespace NeptuneEvo.Fractions
                 if (!player.IsFractionAccess(RankToAccess.TakeGunLic)) return;
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
 
@@ -1651,7 +1651,7 @@ namespace NeptuneEvo.Fractions
                 if (targetCharacterData == null) return;
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (!targetCharacterData.Licenses[4])
@@ -1712,7 +1712,7 @@ namespace NeptuneEvo.Fractions
                 if (characterData == null) return;            
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -1722,12 +1722,12 @@ namespace NeptuneEvo.Fractions
                 if (player == target) return;
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (price < Main.MinGunLic || price > Main.MaxGunLic)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GunLicLimit, Main.MinGunLic, Main.MaxGunLic), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GunLicLimit, Main.MinGunLic, Main.MaxGunLic), 5000);
                     return;
                 }
                 if (targetCharacterData.Licenses[6])
@@ -1737,7 +1737,7 @@ namespace NeptuneEvo.Fractions
                 }
                 if (targetCharacterData.Money < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                     return;
                 }
                 if (targetSessionData.SellItemData.Seller != null)
@@ -1944,7 +1944,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
                 var targetCharacterData = target.GetCharacterData();
@@ -1954,7 +1954,7 @@ namespace NeptuneEvo.Fractions
                 if (target.IsInVehicle) return;
                 if (!targetCharacterData.IsAlive)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerDying), 3000);
                     return;
                 }
                 ItemStruct maskItem = Chars.Repository.isItem(target, "accessories", ItemId.Mask);
@@ -2016,7 +2016,7 @@ namespace NeptuneEvo.Fractions
                         EventSys.SendCoolMsg(target,"Предложение", "Поднять руки", $"Игрок ({player.Value}) заставляет вас поднять руки. Вы желаете подчиниться требованиям и поднять руки? Y/N - принять/отклонить", "", 10000);
                         //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы заставляете игрока ({target.Value}) поднять руки.", 3000);
                         EventSys.SendCoolMsg(player,"Предложение", "Поднять руки", $"Вы заставляете игрока ({target.Value}) поднять руки.", "", 7000);
-                        Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.HansOn, target.Name));
+                        Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.HansOn, target.Name));
                     }
                     else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете заставить игрока поднять руки в данный момент", 3000);
                 }
@@ -2124,7 +2124,7 @@ namespace NeptuneEvo.Fractions
                 if (!target.IsCharacterData() || target.IsInVehicle) return;
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (!force && !player.IsFractionAccess(RankToAccess.Pocket)) return;
@@ -2177,37 +2177,37 @@ namespace NeptuneEvo.Fractions
                 if (targetCharacterData == null) return;
                 if (target.Position.DistanceTo(player.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (targetCharacterData.LVL < 10)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MinorYearsToDoThis), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MinorYearsToDoThis), 3000);
                     return;
                 }
                 if (price < Main.MinPMLic || price > Main.MaxPMLic)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PriceCanBeFromTo, Main.MinPMLic, Main.MaxPMLic), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PriceCanBeFromTo, Main.MinPMLic, Main.MaxPMLic), 3000);
                     return;
                 }
                 if (targetCharacterData.Licenses[8])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerHavePMLic), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerHavePMLic), 3000);
                     return;
                 }
                 if (targetCharacterData.Money < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                     return;
                 }
                 if (targetSessionData.SellItemData.Seller != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerCantAcceptOffers), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerCantAcceptOffers), 3000);
                     return;
                 }
-                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouOfferedPMLicTo, target.Value, MoneySystem.Wallet.Format(price)), 3000);
-                EventSys.SendCoolMsg(player,"Предложение", "Покупка", $"{LangFunc.GetText(LangType.Ru, DataName.YouOfferedPMLicTo, target.Value, MoneySystem.Wallet.Format(price))}", "", 5000);
-                Trigger.ClientEvent(target, "openDialog", "PM_LIC", LangFunc.GetText(LangType.Ru, DataName.PlayerOfferedPMLic, player.Value, MoneySystem.Wallet.Format(price)));
+                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouOfferedPMLicTo, target.Value, MoneySystem.Wallet.Format(price)), 3000);
+                EventSys.SendCoolMsg(player,"Предложение", "Покупка", $"{LangFunc.GetText(LangType.En, DataName.YouOfferedPMLicTo, target.Value, MoneySystem.Wallet.Format(price))}", "", 5000);
+                Trigger.ClientEvent(target, "openDialog", "PM_LIC", LangFunc.GetText(LangType.En, DataName.PlayerOfferedPMLic, player.Value, MoneySystem.Wallet.Format(price)));
                 targetSessionData.SellItemData.Seller = player;
                 targetSessionData.SellItemData.Price = price;
             }
@@ -2239,7 +2239,7 @@ namespace NeptuneEvo.Fractions
                 {
                     sellerSessionData.SellItemData = new SellItemData();
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SellerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SellerTooFar), 3000);
                     return;
                 }
                 if (characterData.Licenses[8])
@@ -2264,11 +2264,11 @@ namespace NeptuneEvo.Fractions
                 GameLog.Money($"player({characterData.UUID})", $"frac(6)", price, $"buyPmlic({sellerCharacterData.UUID})");
                 GameLog.Money($"frac(6)", $"player({sellerCharacterData.UUID})", price / 20, $"sellPmlic({characterData.UUID})");
                 characterData.Licenses[8] = true;
-                Fractions.Table.Logs.Repository.AddLogs(seller, FractionLogsType.GiveGunLic, LangFunc.GetText(LangType.Ru, DataName.GivenPmLicTo, player.Value, characterData.UUID));
+                Fractions.Table.Logs.Repository.AddLogs(seller, FractionLogsType.GiveGunLic, LangFunc.GetText(LangType.En, DataName.GivenPmLicTo, player.Value, characterData.UUID));
                 //Chars.Repository.PlayerStats(player);
                 GameLog.FracLog(seller.GetFractionId(), sellerCharacterData.UUID, characterData.UUID, seller.Name, player.Name, "givePmLic");
-                Notify.Send(seller, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGivePmLic, player.Name), 3000);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBoughtPmLic, seller.Name), 3000);
+                Notify.Send(seller, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGivePmLic, player.Name), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBoughtPmLic, seller.Name), 3000);
                 sellerSessionData.SellItemData = new SellItemData();
                 sessionData.SellItemData = new SellItemData();
             }
@@ -2290,7 +2290,7 @@ namespace NeptuneEvo.Fractions
                 if (targetCharacterData == null) return;
                 if (target.Position.DistanceTo(player.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (targetCharacterData.Licenses[7])
@@ -2328,25 +2328,25 @@ namespace NeptuneEvo.Fractions
                 
                 if (target.Position.DistanceTo(player.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 
                 if (Chars.Repository.isItem(target, "inventory", ItemId.Qr) != null) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyHaveQR), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveQR), 3000); 
                     return; 
                 }
                 
                 if (player == target)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantQrSebe), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantQrSebe), 3000);
                     return;
                 }
                 
                 if (Chars.Repository.AddNewItem(target, $"char_{targetCharacterData.UUID}", "inventory", ItemId.Qr, 1) == -1)
                 {
-                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                     return;
                 } 
                 
@@ -2384,12 +2384,12 @@ namespace NeptuneEvo.Fractions
                 {
                     if ((sessionData.SellItemData.Buyer != null || sessionData.SellItemData.Seller != null) && Chars.Repository.TradeGet(player))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantTrade), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantTrade), 3000);
                         return;
                     }
                     if (!sessionData.WorkData.OnDuty)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                         return;
                     }
                     if (Chars.Repository.isItem(player, "inventory", ItemId.HealthKit) == null || Chars.Repository.TradeGet(target))
@@ -2404,7 +2404,7 @@ namespace NeptuneEvo.Fractions
                     }
                     if (player.Position.DistanceTo(target.Position) > 2)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                         return;
                     }
                     if (targetCharacterData.Money < price)
@@ -2414,7 +2414,7 @@ namespace NeptuneEvo.Fractions
                     }
                     if ((targetSessionData.SellItemData.Seller != null || targetSessionData.SellItemData.Buyer != null) && Chars.Repository.TradeGet(target))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerAlreadyTraded), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerAlreadyTraded), 3000);
                         return;
                     }
                     if (Main.IHaveDemorgan(player, true)) return;
@@ -2448,7 +2448,7 @@ namespace NeptuneEvo.Fractions
                 {
                     if (!sessionData.WorkData.OnDuty)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                         return;
                     }
                     if (player.Position.DistanceTo(target.Position) > 2)

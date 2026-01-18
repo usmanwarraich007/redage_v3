@@ -5,7 +5,7 @@
       "executablePath": "$(MSBuildProjectDirectory)/../../../ragemp-server.exe",
       "workingDirectory": "$(MSBuildProjectDirectory)../../../../",
       "environmentVariables": {
-        "Ключ": "Значение"
+        "Key": "Value"
       },
       "sqlDebugging": false,
       "nativeDebugging": false

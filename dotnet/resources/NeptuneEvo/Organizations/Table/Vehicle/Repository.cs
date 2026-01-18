@@ -77,23 +77,23 @@ namespace NeptuneEvo.Organizations.Table.Vehicle
                 var vData = organizationData.Vehicles[number];
                 if (vData.rank > memberOrganizationData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantUpToRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantUpToRank), 3000);
                     return;
                 }
                 if (rank > memberOrganizationData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantUpVehicleRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantUpVehicleRank), 3000);
                     return;
                 }
                 if (rank < 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantSetNullRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantSetNullRank), 3000);
                     return;
                 }
                 if (vehicleLocalData.Access == VehicleAccess.Organization && vehicleLocalData.Fraction == memberOrganizationData.Id)
                 {
                     vehicleLocalData.MinRank = rank;
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccessEditRankVehWithPrikol, vData.model, number), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccessEditRankVehWithPrikol, vData.model, number), 3000);
                 }
                 vData.rank = rank;
                 GetVehicles(player);
@@ -101,7 +101,7 @@ namespace NeptuneEvo.Organizations.Table.Vehicle
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Orgvehicles
                             .Where(v => v.Number == number)
@@ -141,17 +141,17 @@ namespace NeptuneEvo.Organizations.Table.Vehicle
                 {
                     if (characterData.Money < 20)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoneyNeed, 20 - characterData.Money), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoneyNeed, 20 - characterData.Money), 3000);
                         return;
                     }
                     if (vehicleLocalData.Occupants.Count >= 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarUsed), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarUsed), 3000);
                         return;
                     }
                     if (vehicleLocalData.Access == VehicleAccess.OrganizationGarage)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarNoNeedEvac), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarNoNeedEvac), 3000);
                         return;
                     }
                     if (Ticket.IsVehicleTickets(number, VehicleTicketType.Organization))
@@ -171,7 +171,7 @@ namespace NeptuneEvo.Organizations.Table.Vehicle
                     VehicleManager.OrgApplyCustomization(vehicle, organizationVehicle.customization);
                     MoneySystem.Wallet.Change(player, -20);
                     GameLog.Money($"player({characterData.UUID})", $"server", 20, $"orgCarEvac");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarOtognana), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarOtognana), 3000);
                     GetVehicles(player);
                 }
             }
@@ -195,14 +195,14 @@ namespace NeptuneEvo.Organizations.Table.Vehicle
                 
                 if (vehicleLocalData.Access == VehicleAccess.OrganizationGarage)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarNoNeedEvac), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarNoNeedEvac), 3000);
                     return;
                 }
                 
                 if (vehicleLocalData.Fraction == memberOrganizationData.Id && memberOrganizationData.Rank >= vehicleLocalData.MinRank)
                 {
                     Trigger.ClientEvent(player, "createWaypoint", vehicle.Position.X, vehicle.Position.Y);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GPSOtmechenoCarFraction), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GPSOtmechenoCarFraction), 3000);
                 }
             }
             catch (Exception e)
@@ -228,7 +228,7 @@ namespace NeptuneEvo.Organizations.Table.Vehicle
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Orgvehicles
                             .Where(v => v.Organization == organizationData.Id)
@@ -260,7 +260,7 @@ namespace NeptuneEvo.Organizations.Table.Vehicle
                     organizationVehicles[vehicleNumber].rank = 0;
                 }
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucResetDefaultVehRanks), 4500);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucResetDefaultVehRanks), 4500);
             }
             catch (Exception e)
             {

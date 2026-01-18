@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +38,7 @@ namespace NeptuneEvo.World.War
         public static void OnResource()
         {
             
-            using var db = new ServerBD("MainDB");//В отдельном потоке
+                        using var db = new ServerBD("MainDB");//In a separate thread
             
             var wars = db.Wars.ToList();
 
@@ -137,13 +137,13 @@ namespace NeptuneEvo.World.War
                 var title = "";
                 
                 if (type == WarType.Gangs)
-                    title = $"Нападание на зону {mapName}";
+                    title = LangFunc.GetText(LangType.En, DataName.AttackOnZone, mapName);
                 if (type == WarType.Mafia)
-                    title = $"Нападание на бизес {mapName}";
+                    title = LangFunc.GetText(LangType.En, DataName.AttackOnBusiness, mapName);
                 if (type == WarType.OrgHouse)
-                    title = $"Нападание на дом {mapName}";
+                    title = LangFunc.GetText(LangType.En, DataName.AttackOnHouse, mapName);
                 if (type == WarType.OrgWarZone)
-                    title = $"Нападание на зону {mapName}";
+                    title = LangFunc.GetText(LangType.En, DataName.AttackOnZone, mapName);
                 
                 var owner = "";
                 if (type == WarType.Gangs || type == WarType.Mafia)
@@ -191,21 +191,21 @@ namespace NeptuneEvo.World.War
 
                     if (DateTime.Now > time)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Неверное время.", 6000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InvalidTime), 6000);
                         //if (isWarInterface) Trigger.ClientEvent(player, "client.closeWar");
                         return 0;
                     }
 
                     if (Main.ServerNumber != 0 && DateTime.Now.AddHours(2) > time)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Стрелку можно забить минимум за два часа", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarMinTwoHours), 3000);
                         //if (isWarInterface) Trigger.ClientEvent(player, "client.closeWar");
                         return 0;
                     }
                     
                     if (Main.ServerNumber == 0 && DateTime.Now.AddMinutes(5) > time)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Стрелку можно забить минимум за 5 минут", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarMinFiveMinutes), 3000);
                         //if (isWarInterface) Trigger.ClientEvent(player, "client.closeWar");
                         return 0;
                     }
@@ -213,7 +213,7 @@ namespace NeptuneEvo.World.War
 
                 if (Wars.Values.Any(w => w.Type == warData.Type && w.ObjectId == warData.ObjectId))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Эта зона уже находится в процессе захвата.", 8000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZoneIsBeingCaptured), 8000);
                     if (isWarInterface) Trigger.ClientEvent(player, "client.closeWar");
                     return 0;
                 }
@@ -254,7 +254,7 @@ namespace NeptuneEvo.World.War
                 
                 Wars.TryAdd(id, war);
                 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы забили стрелку.", 15000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveScheduledAMeeting), 15000);
                 Trigger.ClientEvent(player, "client.closeWar");
                 
                 if (warData.Type == WarType.OrgWarZone) Organizations.FamilyZones.Repository.Open(player);
@@ -338,7 +338,7 @@ namespace NeptuneEvo.World.War
                 {
                     var frameList = new FrameListData();
 
-                    frameList.Header = "Выбор Зоны войны";
+                    frameList.Header = LangFunc.GetText(LangType.En, DataName.SelectWarZone);
                     frameList.Callback = CallbackEntryZone;
                 
                     foreach (var war in wars)
@@ -346,13 +346,13 @@ namespace NeptuneEvo.World.War
                         var title = "";
                         
                         if (war.Type == WarType.Gangs)
-                            title = "Война за зону";
+                            title = LangFunc.GetText(LangType.En, DataName.WarForZone);
                         else if (war.Type == WarType.Mafia)
-                            title = "Война за бизнес";
+                            title = LangFunc.GetText(LangType.En, DataName.WarForBusiness);
                         else if (war.Type == WarType.OrgWarZone)
-                            title = "Война за зону";
+                            title = LangFunc.GetText(LangType.En, DataName.WarForZone);
                         else if (war.Type == WarType.OrgHouse)
-                            title = "Война за дом";
+                            title = LangFunc.GetText(LangType.En, DataName.WarForHouse);
                         
                         frameList.List.Add(new ListData($"{title} - {war.ObjectId}", war.Id));
                     }
@@ -968,17 +968,17 @@ namespace NeptuneEvo.World.War
                 if (sessionData == null) 
                     return;
                 
-                //Уведомление о войне
+                //War Notification
                 if (text == null)
                 {
                     var time = war.Time.ToString("dd.MM HH:mm");
                         
                     if (minute == 60)
-                        time = "Минута";
+                        time = LangFunc.GetText(LangType.En, DataName.Minute);
                     if (minute == 30)
-                        time = "30 секунд";
+                        time = LangFunc.GetText(LangType.En, DataName.ThirtySeconds);
                     if (minute == 15)
-                        time = "15 секунд";
+                        time = LangFunc.GetText(LangType.En, DataName.FifteenSeconds);
                         
                     if (wayPoint != null) 
                         Trigger.ClientEvent(player, "infoWarZone", -1, isAttack, war.MapName, war.GripType, time, war.Composition, war.WeaponsCategory, wayPoint.X, wayPoint.Y);
@@ -1032,13 +1032,13 @@ namespace NeptuneEvo.World.War
                             {
                                 war.Status = WarStatus.War;
                                 war.Counting = WarCounting;
-                                Notification(war.Id, "Команда противника может зайти в купол.");
+                                Notification(war.Id, LangFunc.GetText(LangType.En, DataName.EnemyTeamCanEnterDome));
                             }
                             else
                             {
                                 war.Status = WarStatus.Protection;
                                 war.Counting = ProtectionCounting;
-                                Notification(war.Id, "Команда противника может зайти в купол.");
+                                Notification(war.Id, LangFunc.GetText(LangType.En, DataName.EnemyTeamCanEnterDome));
                             }
                             //
                             var isFraction = war.Type == WarType.Gangs || war.Type == WarType.Mafia;
@@ -1102,7 +1102,7 @@ namespace NeptuneEvo.World.War
 
                         war.Status = WarStatus.War;
                         war.Counting = WarCounting;
-                        Notification(war.Id, "Команда атаки может зайти в купол.");
+                        Notification(war.Id, LangFunc.GetText(LangType.En, DataName.AttackingTeamCanEnterDome));
 
                 }
                 else if (war.Status == WarStatus.War)
@@ -1235,41 +1235,41 @@ namespace NeptuneEvo.World.War
                     case WarType.OrgWarZone:
                         if (draw)
                         {
-                            Fractions.Manager.SendCoolOrganizationMsg(war.ProtectingId,"Война", "Ничья", "Вы сыграли в ничью.", "", 10000);   
-                            Fractions.Manager.SendCoolOrganizationMsg(war.AttackingId,"Война", "Ничья", "Вы сыграли в ничью.", "", 10000); 
-                            //Fractions.Manager.sendOrganizationMessage(war.AttackingId, "Вы сыграли в ничью.");
-                            //Fractions.Manager.sendOrganizationMessage(war.ProtectingId, "Вы сыграли в ничью.");
+                            Fractions.Manager.SendCoolOrganizationMsg(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.War), LangFunc.GetText(LangType.En, DataName.Draw), LangFunc.GetText(LangType.En, DataName.YouPlayedDraw), "", 10000);   
+                            Fractions.Manager.SendCoolOrganizationMsg(war.AttackingId, LangFunc.GetText(LangType.En, DataName.War), LangFunc.GetText(LangType.En, DataName.Draw), LangFunc.GetText(LangType.En, DataName.YouPlayedDraw), "", 10000); 
+                            //Fractions.Manager.sendOrganizationMessage(war.AttackingId, LangFunc.GetText(LangType.En, DataName.YouPlayedDraw));
+                            //Fractions.Manager.sendOrganizationMessage(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.YouPlayedDraw));
                         }
                         else if (victoryAttackers)
                         {
-                            Fractions.Manager.SendCoolOrganizationMsg(war.ProtectingId,"Война", "Поражение", "Вы проиграли войну и потеряли территорию :(", "", 10000);   
-                            Fractions.Manager.SendCoolOrganizationMsg(war.AttackingId,"Война", "Победа", "Вы победили! Территория переходит под ваш контроль, поздравляем!", "", 10000); 
-                            //Fractions.Manager.sendOrganizationMessage(war.AttackingId, "Вы победили! Территория переходит под ваш контроль, поздравляем!");
-                           // Fractions.Manager.sendOrganizationMessage(war.ProtectingId, "Вы проиграли войну и потеряли территорию :(");
+                            Fractions.Manager.SendCoolOrganizationMsg(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.War), LangFunc.GetText(LangType.En, DataName.Defeat), LangFunc.GetText(LangType.En, DataName.YouLostWarAndTerritory), "", 10000);   
+                            Fractions.Manager.SendCoolOrganizationMsg(war.AttackingId, LangFunc.GetText(LangType.En, DataName.War), LangFunc.GetText(LangType.En, DataName.Victory), LangFunc.GetText(LangType.En, DataName.YouWonAndTookTerritory), "", 10000); 
+                            //Fractions.Manager.sendOrganizationMessage(war.AttackingId, LangFunc.GetText(LangType.En, DataName.YouWonAndTookTerritory));
+                           // Fractions.Manager.sendOrganizationMessage(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.YouLostWarAndTerritory));
                         }
                         else
                         {
-                            Fractions.Manager.SendCoolOrganizationMsg(war.ProtectingId,"Война", "Победа", "Вы удержали территорию! Поздравляем!", "", 10000);   
-                            Fractions.Manager.SendCoolOrganizationMsg(war.AttackingId,"Война", "Поражение", "Вы проиграли! Территория остаётся у стороны защиты.", "", 10000); 
-                            //Fractions.Manager.sendOrganizationMessage(war.AttackingId, "Вы проиграли! Территория остаётся у стороны защиты.");
-                            //Fractions.Manager.sendOrganizationMessage(war.ProtectingId, "Вы удержали территорию! Поздравляем!");
+                            Fractions.Manager.SendCoolOrganizationMsg(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.War), LangFunc.GetText(LangType.En, DataName.Victory), LangFunc.GetText(LangType.En, DataName.YouHeldTerritory), "", 10000);   
+                            Fractions.Manager.SendCoolOrganizationMsg(war.AttackingId, LangFunc.GetText(LangType.En, DataName.War), LangFunc.GetText(LangType.En, DataName.Defeat), LangFunc.GetText(LangType.En, DataName.YouLostTerritoryRemains), "", 10000); 
+                            //Fractions.Manager.sendOrganizationMessage(war.AttackingId, LangFunc.GetText(LangType.En, DataName.YouLostTerritoryRemains));
+                            //Fractions.Manager.sendOrganizationMessage(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.YouHeldTerritory));
                         }
                         break;
                     
                     case WarType.Gangs:
                         if (victoryAttackers)
                         {
-                            Fractions.Manager.SendCoolFractionMsg(war.ProtectingId,"Капт", "Поражение", LangFunc.GetText(LangType.Ru, DataName.CaptureLoseByDef), "", 10000);   
-                            Fractions.Manager.SendCoolFractionMsg(war.AttackingId,"Капт", "Победа", LangFunc.GetText(LangType.Ru, DataName.CaptureWinByAttack), "", 10000); 
-                            //Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.Ru, DataName.CaptureLoseByDef));
-                            //Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.Ru, DataName.CaptureWinByAttack));
+                            Fractions.Manager.SendCoolFractionMsg(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.Capture), LangFunc.GetText(LangType.En, DataName.Defeat), LangFunc.GetText(LangType.En, DataName.CaptureLoseByDef), "", 10000);   
+                            Fractions.Manager.SendCoolFractionMsg(war.AttackingId, LangFunc.GetText(LangType.En, DataName.Capture), LangFunc.GetText(LangType.En, DataName.Victory), LangFunc.GetText(LangType.En, DataName.CaptureWinByAttack), "", 10000); 
+                            //Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.CaptureLoseByDef));
+                            //Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.En, DataName.CaptureWinByAttack));
                         }
                         else
                         {
-                            Fractions.Manager.SendCoolFractionMsg(war.ProtectingId,"Капт", "Победа", LangFunc.GetText(LangType.Ru, DataName.CaptureWinByDef), "", 10000);   
-                            Fractions.Manager.SendCoolFractionMsg(war.AttackingId,"Капт", "Поражение", LangFunc.GetText(LangType.Ru, DataName.CaptureLoseByAttack), "", 10000);   
-                            //Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.Ru, DataName.CaptureWinByDef));
-                           // Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.Ru, DataName.CaptureLoseByAttack));
+                            Fractions.Manager.SendCoolFractionMsg(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.Capture), LangFunc.GetText(LangType.En, DataName.Victory), LangFunc.GetText(LangType.En, DataName.CaptureWinByDef), "", 10000);   
+                            Fractions.Manager.SendCoolFractionMsg(war.AttackingId, LangFunc.GetText(LangType.En, DataName.Capture), LangFunc.GetText(LangType.En, DataName.Defeat), LangFunc.GetText(LangType.En, DataName.CaptureLoseByAttack), "", 10000);   
+                            //Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.CaptureWinByDef));
+                           // Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.En, DataName.CaptureLoseByAttack));
                         }
                         
                         foreach (ExtPlayer foreachPlayer in Character.Repository.GetPlayers())
@@ -1293,14 +1293,14 @@ namespace NeptuneEvo.World.War
                     case WarType.Mafia:
                         if (victoryAttackers)
                         {
-                            Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.Ru, DataName.DefLoseBizWar));
-                            Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.Ru, DataName.AttackWinBizWar));
+                            Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.DefLoseBizWar));
+                            Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.En, DataName.AttackWinBizWar));
 
                         }
                         else
                         {
-                            Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.Ru, DataName.DefWinBizWar));
-                            Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.Ru, DataName.AttackLoseBizWar));
+                            Fractions.Manager.sendFractionMessage(war.ProtectingId, LangFunc.GetText(LangType.En, DataName.DefWinBizWar));
+                            Fractions.Manager.sendFractionMessage(war.AttackingId, LangFunc.GetText(LangType.En, DataName.AttackLoseBizWar));
                         }
                         
                         foreach (ExtPlayer foreachPlayer in Character.Repository.GetPlayers())

@@ -141,20 +141,20 @@ namespace NeptuneEvo.Inventory.Drop
                 }
                 if (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 4)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdminCantPickupItems), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdminCantPickupItems), 3000);
                     return;
                 }
                 if (dropData.Player != null && dropData.Player != player) return;
 
                 if (player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantPickupInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantPickupInCar), 3000);
                     return;
                 }
                 
                 if (!obj.Exists || obj.Position.DistanceTo(player.Position) >= 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 1500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 1500);
                     return;
                 }
                 var dropItem = dropData.Item;
@@ -266,7 +266,7 @@ namespace NeptuneEvo.Inventory.Drop
                 
                 if (!obj.Exists || obj.Position.DistanceTo(player.Position) >= 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 1500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 1500);
                     return;
                 }
                 
@@ -279,7 +279,7 @@ namespace NeptuneEvo.Inventory.Drop
 
                 if (!int.TryParse(dropItem.Data, out value) || value <= 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HookahCantUse), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HookahCantUse), 3000);
                     DeleteObject(obj);
                     return;
                 }

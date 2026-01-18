@@ -25,7 +25,7 @@ namespace NeptuneEvo.Businesses.History
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
             

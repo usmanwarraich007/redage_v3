@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GTANetworkAPI;
@@ -120,7 +120,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
 
             if (player.Position.DistanceTo2D(target.Position) < 10f)
             {
-                //Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, "Такси подъехало.", 8000);
+                //Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(target.Lang, DataName.TaxiArrived), 8000);
                 Trigger.ClientEvent(player, "phone.notify", (int) DefaultNumber.Taxi, $"Ваше такси подъехало!", 8); 
                 Phone.Taxi.Repository.OnCancel(target, isNotRemove: false);
                 return;
@@ -160,7 +160,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                     selectedOrders.Add(taxiData.Player.Position.Z);
                 }
             }                                                                                                                                    
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotWorkTaxi), 3000);  
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotWorkTaxi), 3000);  
             
             Trigger.ClientEvent(player, "client.phone.taxijob.initSelect", JsonConvert.SerializeObject(selectedOrders), isTake);
         }
@@ -184,7 +184,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
 
             if (vehicleLocalData.WorkDriver != -1)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GiveTochkaZ), 5000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GiveTochkaZ), 5000);
 
                 var driverPlayer = Main.GetPlayerByUUID(vehicleLocalData.WorkDriver);
                 
@@ -198,7 +198,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                         if (taxiData.Player != player)
                         {
                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                                LangFunc.GetText(LangType.Ru, DataName.TaxiNoDriver), 3000);
+                                LangFunc.GetText(LangType.En, DataName.TaxiNoDriver), 3000);
                             VehicleManager.WarpPlayerOutOfVehicle(player);
                             return;
                         }
@@ -217,7 +217,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                 }
             }
             
-            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TaxiNoDriver), 3000);
+            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TaxiNoDriver), 3000);
             VehicleManager.WarpPlayerOutOfVehicle(player);
         }
         
@@ -235,7 +235,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                 {
                     driverSessionData.TaxiData.Passager = null;
                     Trigger.ClientEvent(driver, "client.phone.taxi.closeCounter");
-                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PassengerCancel), 5000);
+                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PassengerCancel), 5000);
                 }
             }
             
@@ -249,7 +249,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                     {
                         targetSessionData.TaxiData.Driver = null;
                         Trigger.ClientEvent(target, "client.phone.taxi.closeCounter");
-                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DriverCancel), 10000);
+                        Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DriverCancel), 10000);
                     }
                 }
             }
@@ -273,7 +273,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                 {
                     driverSessionData.TaxiData.Passager = null;
                     Trigger.ClientEvent(driver, "client.phone.taxi.closeCounter");
-                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PassengerCancel), 5000);
+                    Notify.Send(driver, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PassengerCancel), 5000);
                 }
                 sessionData.TaxiData.Driver = null;
                 Trigger.ClientEvent(player, "client.phone.taxi.closeCounter");
@@ -292,7 +292,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
 
             if (sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                 sessionData.WorkData.OnWork = false;
                 
                 Trigger.ClientEvent(player, "client.phone.taxijob.jobEnd");
@@ -308,7 +308,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                     targetSessionData.TaxiData.Driver = null;
                     Trigger.ClientEvent(target, "client.phone.taxi.closeCounter");
                 
-                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TaxiDriverLost), 3000);
+                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TaxiDriverLost), 3000);
                 }
             }
         }
@@ -352,7 +352,7 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
 
             if (Chars.UpdateData.CanIChange(target, price, true) != 255)
             {
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "У игрока не хватает денег для оплаты.", 6000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotEnoughMoneyForPayment), 6000);
                 return;
             }
             
@@ -378,13 +378,13 @@ namespace NeptuneEvo.Players.Phone.Taxi.Orders
                 {
                     qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                     qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                    Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                    Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                 }
                 else
                 {
                     qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                     //todo translate (было DataName.PointsQuestGot)
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                 }
             }
         }

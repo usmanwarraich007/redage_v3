@@ -80,7 +80,7 @@ namespace NeptuneEvo.Players.Phone.Auction.Businesses
                     {
                         try
                         {
-                            await using var db = new ServerBD("MainDB");//В отдельном потоке
+                            await using var db = new ServerBD("MainDB");//On Separate Thread
                         
                             var character = await db.Characters
                                 .Select(v => new { v.Uuid, v.Biz })

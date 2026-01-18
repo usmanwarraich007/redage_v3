@@ -30,7 +30,7 @@ namespace NeptuneEvo.Database.Models
                 
                     if (Businesses.History.Repository.IsCountInsertHistory() || businessId.Count > 0)
                     {
-                        await using var db = new ServerBD("MainDB"); //В отдельном потоке
+                        await using var db = new ServerBD("MainDB"); //On Separate Thread
 
                         await Businesses.History.Repository.InsertHistory(db);
 

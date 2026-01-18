@@ -33,7 +33,7 @@ namespace NeptuneEvo.Accounts.LoadCharacter
                 
                 if (accountData.Chars == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.Center, LangFunc.GetText(LangType.Ru, DataName.CharDataGetError), 5000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.CharDataGetError), 5000);
                     return;
                 }
                 
@@ -53,7 +53,7 @@ namespace NeptuneEvo.Accounts.LoadCharacter
 
                 var charsData = new Dictionary<int, object>();
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
                 var characters = await db.Characters
                     .Select(v => new {
                         v.Uuid,
@@ -79,7 +79,7 @@ namespace NeptuneEvo.Accounts.LoadCharacter
                 {
                     if (charData > 0 && characters.FirstOrDefault(c => c.Uuid == charData) == null)
                     {
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CharDelete, charData), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CharDelete, charData), 3000);
                         accountData.Chars[i] = -1;
                     }
                     i++;
@@ -195,7 +195,7 @@ namespace NeptuneEvo.Accounts.LoadCharacter
             }
             catch (Exception e)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, LangFunc.GetText(LangType.Ru, DataName.CharDataGetError), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.CharDataGetError), 5000);
                 Log.Write($"LoadSlots Exception: {e.ToString()}");
             }
         }

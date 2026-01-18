@@ -44,7 +44,7 @@ namespace NeptuneEvo.Events
 
                 if (!FunctionsAccess.IsWorking("UseBoombox"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -81,7 +81,7 @@ namespace NeptuneEvo.Events
 
                 if (!FunctionsAccess.IsWorking("SetFirstBoomboxURL"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -169,7 +169,7 @@ namespace NeptuneEvo.Events
                     menu.Add(menuItem);
 
                     menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-                    menuItem.Text = LangFunc.GetText(LangType.Ru, DataName.Close);
+                    menuItem.Text = LangFunc.GetText(LangType.En, DataName.Close);
                     menu.Add(menuItem);
 
                     menu.Open(player);

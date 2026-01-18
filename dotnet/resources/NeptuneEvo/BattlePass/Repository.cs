@@ -614,7 +614,7 @@ namespace NeptuneEvo.BattlePass
                     battlePass.IsDone = true;
                     AddExp(player, battlePassTask.Exp);
                     
-                    Trigger.ClientEvent(player, "client.battlepass.missionComplite", battlePassTask.Text, LangFunc.GetText(LangType.Ru, DataName.BPEverydayComplete));
+                    Trigger.ClientEvent(player, "client.battlepass.missionComplite", battlePassTask.Text, LangFunc.GetText(LangType.En, DataName.BPEverydayComplete));
                 }
             }
 
@@ -630,7 +630,7 @@ namespace NeptuneEvo.BattlePass
                     battlePass.IsDone = true;
                     AddExp(player, battlePassTask.Exp);
                     
-                    Trigger.ClientEvent(player, "client.battlepass.missionComplite", battlePassTask.Text, LangFunc.GetText(LangType.Ru, DataName.BPEverydayComplete));
+                    Trigger.ClientEvent(player, "client.battlepass.missionComplite", battlePassTask.Text, LangFunc.GetText(LangType.En, DataName.BPEverydayComplete));
                 }
             }
             
@@ -654,7 +654,7 @@ namespace NeptuneEvo.BattlePass
                     {
                         mission.IsDone = true;
                         
-                        Trigger.ClientEvent(player, "client.battlepass.missionComplite", battlePassTask.Text, LangFunc.GetText(LangType.Ru, DataName.MissionComplete));
+                        Trigger.ClientEvent(player, "client.battlepass.missionComplite", battlePassTask.Text, LangFunc.GetText(LangType.En, DataName.MissionComplete));
                     }
                 }
             }
@@ -710,25 +710,25 @@ namespace NeptuneEvo.BattlePass
 
                         GameLog.Money($"system", $"player({characterData.UUID})", 1, $"BPGiveBonus({award.ItemId},{award.Data})");
                         if (isMessage) 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItemSklad, Chars.Repository.ItemsInfo[(ItemId)award.ItemId].Name), 6000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItemSklad, Chars.Repository.ItemsInfo[(ItemId)award.ItemId].Name), 6000);
                         break;
                     case BattlePassRewardType.Vip:
                         Chars.Repository.UpdateVipStatus(player, award.ItemId, award.Count, true, true, "BonusVIP");
                         GameLog.Money($"system", $"player({characterData.UUID})", 1, $"BPGiveBonus(VIP,{award.ItemId},{award.Data})");
                         if (isMessage)
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetVipDays, Group.GroupNames[award.ItemId], award.Count), 6000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetVipDays, Group.GroupNames[award.ItemId], award.Count), 6000);
                         break;
                     case BattlePassRewardType.Money:
                         MoneySystem.Wallet.Change(player, +award.Count);
                         GameLog.Money($"system", $"player({characterData.UUID})", award.Count, $"BPGiveBonus");
                         //PlayerStats(player);
                         if (isMessage) 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(award.Count)), 6000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(award.Count)), 6000);
                         break;
                     case BattlePassRewardType.Donate:
                         UpdateData.RedBucks(player, award.Count, msg: "BPGiveBonus");
                         if (isMessage) 
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWinRb, award.Count), 5000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWinRb, award.Count), 5000);
                         break;
                 }
             }
@@ -753,19 +753,19 @@ namespace NeptuneEvo.BattlePass
             {
                 if (award.Id >= battlePassData.Lvl)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BpNoLevel), 6000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BpNoLevel), 6000);
                     return;
                 }
                 
                 if (award.Type == BattlePassRewardType.None)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantTakeThisItem), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantTakeThisItem), 3000);
                     return;
                 }
                 
                 if ((!isPrem && battlePassData.TookReward.Contains(award.Id)) || (isPrem && battlePassData.TookRewardPremium.Contains(award.Id)))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyTakeAward), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyTakeAward), 3000);
                     Trigger.ClientEvent(player, $"client.battlepass.takeSuccess", JsonConvert.SerializeObject(battlePassData.TookReward), JsonConvert.SerializeObject(battlePassData.TookRewardPremium));
                     return;
                 }
@@ -780,7 +780,7 @@ namespace NeptuneEvo.BattlePass
                 Trigger.ClientEvent(player, $"client.battlepass.takeSuccess", JsonConvert.SerializeObject(battlePassData.TookReward), JsonConvert.SerializeObject(battlePassData.TookRewardPremium));
                 return;
             }
-            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoActiveAwards), 6000);
+            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoActiveAwards), 6000);
         }
         
         
@@ -825,12 +825,12 @@ namespace NeptuneEvo.BattlePass
 
             if (isAdd)
             {
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouTakeAllAwards), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouTakeAllAwards), 3000);
                 Trigger.ClientEvent(player, $"client.battlepass.takeSuccess", JsonConvert.SerializeObject(battlePassData.TookReward), JsonConvert.SerializeObject(battlePassData.TookRewardPremium));
             }
             else
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoActiveAwards), 7000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoActiveAwards), 7000);
             }
         }
 
@@ -845,25 +845,25 @@ namespace NeptuneEvo.BattlePass
             var battlePassData = player.BattlePassData;
             if (battlePassData.IsPremium)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveBp), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveBp), 3000);
                 return;
             }
             if (DonatePack.IsDonate(player))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PaymetnLoad), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PaymetnLoad), 5000);
                 return;
             }
             
             if (!isBuyDonate && accountData.RedBucks < PricePremium)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                 return;
             }
             
             battlePassData.IsPremium = true;
             
-            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBuyBp), 3000);
-            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.YouBuyBp), DateTime.Now);
+            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBuyBp), 3000);
+            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.YouBuyBp), DateTime.Now);
             
             if (!isBuyDonate)
                 UpdateData.RedBucks(player, -PricePremium, msg:"BPBuyPremium");
@@ -920,11 +920,11 @@ namespace NeptuneEvo.BattlePass
                 battlePassData.TasksWeek.Clear();
             }
         }
-        
+
         //
-        
-        private static int MaxTime = 60 * 3; //Бонус каждые 3 часы
-        private static int TimeExp = 2; //Дает при кажом 3 - м часе
+
+        private static int MaxTime = 60 * 3; // Bonus every 3 hours
+        private static int TimeExp = 2; // Gives (exp) every 3rd hour
 
         public static void UpdateTime(ExtPlayer player)
         {
@@ -967,20 +967,20 @@ namespace NeptuneEvo.BattlePass
             
             if (accountData.RedBucks < buyLvl.PriceRB)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                 return;
             }
             var battlePassData = player.BattlePassData;
             if (IsMaxLvl (battlePassData.Lvl))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyMaxLvl), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyMaxLvl), 3000);
                 return;
             }
 
             AddLvl(player, buyLvl.Lvl);
             
-            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BpBuyLvl), 7000);
-            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.BpBuyLvl, buyLvl.Lvl, buyLvl.PriceRB), DateTime.Now);
+            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BpBuyLvl), 7000);
+            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.BpBuyLvl, buyLvl.Lvl, buyLvl.PriceRB), DateTime.Now);
             UpdateData.RedBucks(player, -buyLvl.PriceRB, msg:$"BPBuyLvl({buyLvl.Lvl})");
             battlePassData = player.BattlePassData;
             
@@ -1084,13 +1084,13 @@ namespace NeptuneEvo.BattlePass
 
             if (!isActiveBox (player, id))
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontCompletePrevios), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontCompletePrevios), 3000);
                 return;
             }
 
             if (missionData.Tasks.Any(t => t.Index == id && t.IsReward))
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.QuestCompletedAward), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.QuestCompletedAward), 3000);
                 return;
             }
 
@@ -1102,7 +1102,7 @@ namespace NeptuneEvo.BattlePass
             {
                 missionData.Select = id;
                 Trigger.ClientEvent(player, "client.battlepass.updateMissions", missionData.Select, JsonConvert.SerializeObject(missionData.Tasks));
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouTakeMissonBp, battlePassTask.Text), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouTakeMissonBp, battlePassTask.Text), 3000);
             }
             else
             {
@@ -1121,7 +1121,7 @@ namespace NeptuneEvo.BattlePass
                         AddExp(player, AllMissionExp);
                         Wallet.Change(player, AllMissionMoney);
                         GameLog.Money($"player({characterData.UUID})", $"system", AllMissionMoney, $"BPsetMissionsAll"); 
-                        Trigger.SendChatMessage(player,LangFunc.GetText(LangType.Ru, DataName.YouGetBonusBp));
+                        Trigger.SendChatMessage(player,LangFunc.GetText(LangType.En, DataName.YouGetBonusBp));
                     }
                     
                     Trigger.ClientEvent(player, "client.battlepass.updateMissions", missionData.Select, JsonConvert.SerializeObject(missionData.Tasks));
@@ -1129,10 +1129,10 @@ namespace NeptuneEvo.BattlePass
                     AddExp(player, OneMissionExp);
                     MoneySystem.Wallet.Change(player, battlePassTask.MissionMoney);
                     GameLog.Money($"player({characterData.UUID})", $"system", battlePassTask.MissionMoney, $"BPsetMissions");         
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BpTake), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BpTake), 3000);
                     return;
                 }
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouDontCompleteQuest), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouDontCompleteQuest), 3000);
             }
 
         }
@@ -1158,12 +1158,12 @@ namespace NeptuneEvo.BattlePass
                 {
                     if (accountData.RedBucks < 150)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                         return;
                     }
             
                     UpdateData.RedBucks(player, -150, msg:"BPOnSkip");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCompleteQuest), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCompleteQuest), 3000);
                     
                     UpdateReward(player, missionData.Select, isEnd: true);
                     SetMissions(player, missionData.Select);
@@ -1174,17 +1174,17 @@ namespace NeptuneEvo.BattlePass
                     
                     if (count < 20)
                     {
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantRefreshMissons), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantRefreshMissons), 3000);
                         return;
                     }
                     if (accountData.RedBucks < 500)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                         return;
                     }
             
                     UpdateData.RedBucks(player, -500, msg:"BPOnSkip");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RefreshMissions), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RefreshMissions), 3000);
                     
                     UpdateMission(player);         
                     

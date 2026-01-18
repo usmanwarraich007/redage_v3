@@ -37,7 +37,7 @@ namespace NeptuneEvo.Quests
         {
             if (!FunctionsAccess.IsWorking("wedding"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             var sessionData = player.GetSessionData();
@@ -46,12 +46,12 @@ namespace NeptuneEvo.Quests
             if (characterData == null) return;
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;
@@ -70,12 +70,12 @@ namespace NeptuneEvo.Quests
             if (characterData == null) return;
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;
@@ -135,12 +135,12 @@ namespace NeptuneEvo.Quests
                 if (target != null && player == target) return;
                 else if (targetCharacterData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 3000);
                     return;
                 }
                 else if (typeSurname != 0 && typeSurname != 2 && Main.PlayerNames.Values.Contains($"{characterData.FirstName}_{targetCharacterData.LastName}"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NameExists), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NameExists), 3000);
                     return;
                 }
                 
@@ -180,15 +180,15 @@ namespace NeptuneEvo.Quests
             {
                 case 0:
                     if (typeSurname == 0 || typeSurname == 2) 
-                        Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.Ru, DataName.YouWantWedding, target.Name, MoneySystem.Wallet.Format(price)));
+                        Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.En, DataName.YouWantWedding, target.Name, MoneySystem.Wallet.Format(price)));
                     else 
-                        Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.Ru, DataName.YouWantWeddingFamily, target.Name, MoneySystem.Wallet.Format(price), target.Name.Split("_")[1]));
+                        Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.En, DataName.YouWantWeddingFamily, target.Name, MoneySystem.Wallet.Format(price), target.Name.Split("_")[1]));
                     break;
                 case 1:
-                    Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.Ru, DataName.YouDivorce, target.Name, MoneySystem.Wallet.Format(price)));
+                    Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.En, DataName.YouDivorce, target.Name, MoneySystem.Wallet.Format(price)));
                     break;
                 case 2:
-                    Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.Ru, DataName.YouDivorceSolo, MoneySystem.Wallet.Format(price)));
+                    Trigger.ClientEvent(player, "openDialog", "Wedding", LangFunc.GetText(LangType.En, DataName.YouDivorceSolo, MoneySystem.Wallet.Format(price)));
                     break;
             }
 
@@ -217,18 +217,18 @@ namespace NeptuneEvo.Quests
 
             if (player.Position.DistanceTo(target.Position) > 5f)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouTooFar), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouTooFar), 3000);
                 return;
             }
             
             if (typeSurname == 0 && Main.PlayerNames.Values.Contains($"{targetCharacterData.FirstName}_{characterData.LastName}"))
             {
-                Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NameExists), 3000);
+                Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NameExists), 3000);
                 return;
             }
             else if (typeSurname == 1 && Main.PlayerNames.Values.Contains($"{characterData.FirstName}_{targetCharacterData.LastName}"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NameExists), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NameExists), 3000);
                 return;
             }
 
@@ -259,9 +259,9 @@ namespace NeptuneEvo.Quests
             targetCharacterData.WeddingName = $"{characterData.FirstName}_{characterData.LastName}";
             characterData.WeddingName = $"{targetCharacterData.FirstName}_{targetCharacterData.LastName}";
 
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WeddingSuc, target.Name), 10000);
-            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WeddingSuc, player.Name), 10000);
-            NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.SucWedding,Chars.Models.ChatColors.AMP, target.Name, player.Name));
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WeddingSuc, target.Name), 10000);
+            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WeddingSuc, player.Name), 10000);
+            NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.SucWedding,Chars.Models.ChatColors.AMP, target.Name, player.Name));
 
         }
         public static void OnDivorcio(ExtPlayer player, bool isOne = false)
@@ -289,7 +289,7 @@ namespace NeptuneEvo.Quests
             {
                 targetCharacterData.WeddingUUID = 0;
                 targetCharacterData.WeddingName = "";
-                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YourDivorced, player.Name), 10000);
+                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YourDivorced, player.Name), 10000);
             }
             else
             {
@@ -297,7 +297,7 @@ namespace NeptuneEvo.Quests
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
                     
                         await db.Characters
                             .Where(c => c.Uuid == uuid)
@@ -315,7 +315,7 @@ namespace NeptuneEvo.Quests
             characterData.WeddingUUID = 0;
             characterData.WeddingName = "";
 
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouDivorced, target.Name), 10000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouDivorced, target.Name), 10000);
         }
     }
 }

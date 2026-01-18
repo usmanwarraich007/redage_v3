@@ -118,7 +118,7 @@ namespace NeptuneEvo.Character.Save
                     if (characterData == null) 
                         return;
                 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Characters
                         .Where(v => v.Uuid == characterData.UUID)
@@ -141,7 +141,7 @@ namespace NeptuneEvo.Character.Save
                     if (characterData == null) 
                         return;
                 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Characters
                         .Where(v => v.Uuid == characterData.UUID)
@@ -161,7 +161,7 @@ namespace NeptuneEvo.Character.Save
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Characters
                         .Where(v => v.Uuid == uuid)
@@ -181,7 +181,7 @@ namespace NeptuneEvo.Character.Save
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Characters
                         .Where(v => v.Uuid == uuid)
@@ -200,7 +200,7 @@ namespace NeptuneEvo.Character.Save
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Characters
                         .Where(v => v.Uuid == uuid)
@@ -219,7 +219,7 @@ namespace NeptuneEvo.Character.Save
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var character = await db.Characters 
                         .Select(c => new {c.Uuid, c.Money}) 

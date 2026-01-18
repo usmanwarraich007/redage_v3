@@ -91,21 +91,21 @@ namespace NeptuneEvo.Jobs
                     TreesData[i].TreeObject = NAPI.Object.CreateObject(NAPI.Util.GetHashKey(TreesPositions[i].Item1), new Vector3(TreesPositions[i].Item2.X, TreesPositions[i].Item2.Y, TreesPositions[i].Item2.Z - 0.45), new Vector3(0, 0, 0), 255, 0);
                 }
 
-                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.Ru, DataName.LesniyeResi), new Vector3(-490.60272, -1124.4965, 25.138412), 2, true));
-               /*  Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.Ru, DataName.LesniyeResi), new Vector3(3370.0408, 4945.8154, 33.202995), 2, true));
-                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.Ru, DataName.LesniyeResi), new Vector3(-1319.7822, 4444.8164, 23.27308), 2, true));
-                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.Ru, DataName.LesniyeResi), new Vector3(-1988.7891, 2584.667, 3.311179), 2, true));
-                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.Ru, DataName.LesniyeResi), new Vector3(160.4275, 6895.9033, 20.979313), 2, true)); */
+                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.En, DataName.LesniyeResi), new Vector3(-490.60272, -1124.4965, 25.138412), 2, true));
+               /*  Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.En, DataName.LesniyeResi), new Vector3(3370.0408, 4945.8154, 33.202995), 2, true));
+                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.En, DataName.LesniyeResi), new Vector3(-1319.7822, 4444.8164, 23.27308), 2, true));
+                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.En, DataName.LesniyeResi), new Vector3(-1988.7891, 2584.667, 3.311179), 2, true));
+                Main.CreateBlip(new Main.BlipData(468, LangFunc.GetText(LangType.En, DataName.LesniyeResi), new Vector3(160.4275, 6895.9033, 20.979313), 2, true)); */
 
-                //Main.CreateBlip(new Main.BlipData(569, LangFunc.GetText(LangType.Ru, DataName.SkladLesa), new Vector3(-540.13434, 5380.038, 70.48429), 4, true));
-/*                 Main.CreateBlip(new Main.BlipData(480, LangFunc.GetText(LangType.Ru, DataName.SkladDereva), new Vector3(-575.54004, 5350.516, 70.214424), 70, true));
+                //Main.CreateBlip(new Main.BlipData(569, LangFunc.GetText(LangType.En, DataName.SkladLesa), new Vector3(-540.13434, 5380.038, 70.48429), 4, true));
+/*                 Main.CreateBlip(new Main.BlipData(480, LangFunc.GetText(LangType.En, DataName.SkladDereva), new Vector3(-575.54004, 5350.516, 70.214424), 70, true));
  */
-                Main.CreateBlip(new Main.BlipData(119, LangFunc.GetText(LangType.Ru, DataName.OhotnMagaz), new Vector3(-758.8592, -618.1002, 30.2762), 21, true));
+                Main.CreateBlip(new Main.BlipData(119, LangFunc.GetText(LangType.En, DataName.OhotnMagaz), new Vector3(-758.8592, -618.1002, 30.2762), 21, true));
 
-                TreeStockLabel = (ExtTextLabel) NAPI.TextLabel.CreateTextLabel(Main.StringToU16(LangFunc.GetText(LangType.Ru, DataName.Hranilishe, TreeStock[0], TreeStock[1], TreeStock[2])), new Vector3(-540.13434, 5380.038, 70.48429), 5F, 0.5F, 0, new Color(255, 255, 255), true, 0);
+                TreeStockLabel = (ExtTextLabel) NAPI.TextLabel.CreateTextLabel(Main.StringToU16(LangFunc.GetText(LangType.En, DataName.Hranilishe, TreeStock[0], TreeStock[1], TreeStock[2])), new Vector3(-540.13434, 5380.038, 70.48429), 5F, 0.5F, 0, new Color(255, 255, 255), true, 0);
 
-                PedSystem.Repository.CreateQuest("s_m_y_construct_01", new Vector3(-758.8592, -618.1002, 30.2762), -90.1f, title: LangFunc.GetText(LangType.Ru, DataName.BearGrylls), colShapeEnums: ColShapeEnums.HuntingShop);
-                PedSystem.Repository.CreateQuest("s_m_y_construct_01", new Vector3(-1640.2056, -802.55475, 10.231294), 58.71f, title: LangFunc.GetText(LangType.Ru, DataName.DmitrySkupshik), colShapeEnums: ColShapeEnums.TreesSell);
+                PedSystem.Repository.CreateQuest("s_m_y_construct_01", new Vector3(-758.8592, -618.1002, 30.2762), -90.1f, title: LangFunc.GetText(LangType.En, DataName.BearGrylls), colShapeEnums: ColShapeEnums.HuntingShop);
+                PedSystem.Repository.CreateQuest("s_m_y_construct_01", new Vector3(-1640.2056, -802.55475, 10.231294), 58.71f, title: LangFunc.GetText(LangType.En, DataName.DmitrySkupshik), colShapeEnums: ColShapeEnums.TreesSell);
             }
             catch (Exception e)
             {
@@ -127,12 +127,12 @@ namespace NeptuneEvo.Jobs
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -156,12 +156,12 @@ namespace NeptuneEvo.Jobs
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -217,48 +217,48 @@ namespace NeptuneEvo.Jobs
                         if (UpdateData.CanIChange(player, Main.PricesSettings.InstrumentPrices[0], true) != 255) return;
                         else if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.WorkAxe, 1, "1250") == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         Wallet.Change(player, -Main.PricesSettings.InstrumentPrices[0]);
                         GameLog.Money($"player({characterData.UUID})", $"server", Main.PricesSettings.InstrumentPrices[0], $"buyHuntingShop(74)");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BoughtAxe), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BoughtAxe), 3000);
                         BattlePass.Repository.UpdateReward(player, 57);
                         return;
                     case 75:
                         if (UpdateData.CanIChange(player, Main.PricesSettings.InstrumentPrices[1], true) != 255) return;
                         else if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Pickaxe1, 1, "300") == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         Wallet.Change(player, -Main.PricesSettings.InstrumentPrices[1]);
                         GameLog.Money($"player({characterData.UUID})", $"server", Main.PricesSettings.InstrumentPrices[1], $"buyHuntingShop(75)");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BoughtPickaxe1), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BoughtPickaxe1), 3000);
                         BattlePass.Repository.UpdateReward(player, 57);
                         return;
                     case 76:
                         if (UpdateData.CanIChange(player, Main.PricesSettings.InstrumentPrices[2], true) != 255) return;
                         else if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Pickaxe2, 1, "1248") == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         Wallet.Change(player, -Main.PricesSettings.InstrumentPrices[2]);
                         GameLog.Money($"player({characterData.UUID})", $"server", Main.PricesSettings.InstrumentPrices[2], $"buyHuntingShop(76)");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BoughtPickaxe2), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BoughtPickaxe2), 3000);
                         BattlePass.Repository.UpdateReward(player, 57);
                         return;
                     case 77:
                         if (UpdateData.CanIChange(player, Main.PricesSettings.InstrumentPrices[3], true) != 255) return;
                         else if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Pickaxe3, 1, "2250") == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         Wallet.Change(player, -Main.PricesSettings.InstrumentPrices[3]);
                         GameLog.Money($"player({characterData.UUID})", $"server", Main.PricesSettings.InstrumentPrices[3], $"buyHuntingShop(77)");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BoughtPickaxe3), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BoughtPickaxe3), 3000);
                         BattlePass.Repository.UpdateReward(player, 57);
                         return;
                 }
@@ -315,25 +315,25 @@ namespace NeptuneEvo.Jobs
 
                 if (!FunctionsAccess.IsWorking("Lumberjack_HitTree"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (sessionData.AnimationUse != null || Main.IHaveDemorgan(player, true)) return;
                 
                 /*if (DateTime.Now.Hour > 9 && DateTime.Now.Hour != 22 && DateTime.Now.Hour != 23)
                 { // todo translate
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OgranVremyaMiner), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OgranVremyaMiner), 3000);
                     return;
                 }*/
 
@@ -345,7 +345,7 @@ namespace NeptuneEvo.Jobs
                     ItemStruct WorkAxe = Chars.Repository.isItem(player, "inventory", ItemId.WorkAxe);
                     if (WorkAxe == null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoAxe), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoAxe), 3000);
                         return;
                     }
 
@@ -356,7 +356,7 @@ namespace NeptuneEvo.Jobs
                         else if (treesData.StartedTreeHitPlayerInfo == player) return;
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyCutting), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyCutting), 3000);
                             return;
                         }
                     }
@@ -367,7 +367,7 @@ namespace NeptuneEvo.Jobs
                         else if (treesData.LastTreeHitPlayer.Position.DistanceTo(treesData.TreePosition) >= 3) treesData.LastTreeHitPlayer = null;
                         else if (treesData.LastTreeHitTime > DateTime.Now)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyCutting), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyCutting), 3000);
                             return;
                         }
                     }
@@ -379,12 +379,12 @@ namespace NeptuneEvo.Jobs
 
                     if (WorkAxe.Item.Data == "" || WorkAxe.Item.Data.Length < 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AxeBroken), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AxeBroken), 3000);
                         Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", WorkAxe.Item.ItemId, 1);
                     }
                     else if ((Convert.ToInt32(WorkAxe.Item.Data) - 6) <= 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AxeBroken), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AxeBroken), 3000);
                         Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", WorkAxe.Item.ItemId, 1);
                     }
                     else
@@ -419,18 +419,18 @@ namespace NeptuneEvo.Jobs
 
                 if (!FunctionsAccess.IsWorking("Lumberjack_CutTree"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -465,7 +465,7 @@ namespace NeptuneEvo.Jobs
 
                     if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", item_type, 1) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoreLogs), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoreLogs), 3000);
                     }
                     else
                     {
@@ -499,7 +499,7 @@ namespace NeptuneEvo.Jobs
                 
                 /*if (DateTime.Now.Hour > 9 && DateTime.Now.Hour != 22 && DateTime.Now.Hour != 23)
                 { // todo translate
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OgranVremyaMiner), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OgranVremyaMiner), 3000);
                     Trigger.ClientEvent(player, "lumberjackJob_stopProcess");
                     return;
                 }*/
@@ -559,12 +559,12 @@ namespace NeptuneEvo.Jobs
 
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (sessionData.AnimationUse != null || Main.IHaveDemorgan(player, true)) return;
@@ -583,7 +583,7 @@ namespace NeptuneEvo.Jobs
 
                     if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", item_type, 1) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoreLogs), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoreLogs), 3000);
                         return;
                     }
 
@@ -640,7 +640,7 @@ namespace NeptuneEvo.Jobs
 
                 if (!FunctionsAccess.IsWorking("PlayerSellTrees"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 else if (TreeStock.Count < stock_item_index) return;
@@ -684,11 +684,11 @@ namespace NeptuneEvo.Jobs
                     Wallet.Change(player, totalmoney);
                     GameLog.Money($"server", $"player({characterData.UUID})", totalmoney, $"sellTrees({stock_item_index},{amount})");
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SellResources, Wallet.Format(totalmoney)), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SellResources, Wallet.Format(totalmoney)), 3000);
                     //BattlePass.Repository.UpdateReward(player, 59);
 
                     TreeStock[stock_item_index] += amount;
-                    TreeStockLabel.Text = Main.StringToU16(LangFunc.GetText(LangType.Ru, DataName.Hranilishe,  TreeStock[0], TreeStock[1], TreeStock[2]));
+                    TreeStockLabel.Text = Main.StringToU16(LangFunc.GetText(LangType.En, DataName.Hranilishe,  TreeStock[0], TreeStock[1], TreeStock[2]));
 
                     Perform(player, 1);
                     
@@ -702,17 +702,17 @@ namespace NeptuneEvo.Jobs
                         {
                             qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                             qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                            Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                            Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                         }
                         else
                         {
                             qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                             //todo translate (было DataName.PointsQuestGot)
-                            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                         }
                     }
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotEnoughRes), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotEnoughRes), 3000);
             }
             catch (Exception e)
             {

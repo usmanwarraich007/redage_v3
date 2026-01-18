@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GTANetworkAPI;
@@ -13,6 +13,7 @@ using NeptuneEvo.Table.Tasks.Player;
 using NeptuneEvo.VehicleData.LocalData;
 using NeptuneEvo.VehicleData.LocalData.Models;
 using Redage.SDK;
+using Localization;
 
 namespace NeptuneEvo.Table.Tasks.Patrolling
 {
@@ -661,7 +662,7 @@ namespace NeptuneEvo.Table.Tasks.Patrolling
                     
                     MoneySystem.Wallet.Change(player, Payment);
                     GameLog.Money("server", $"player({player.GetUUID()})", Payment, "Patrolling");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы закончили патруль.", 7000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PatrolFinished), 7000);
                 }
                 else
                 {
@@ -736,7 +737,7 @@ namespace NeptuneEvo.Table.Tasks.Patrolling
                 Trigger.ClientEvent(player, "createWaypoint", patrollingData.Position.X, patrollingData.Position.Y);
                 Trigger.ClientEvent(player, "createWorkBlip", patrollingData.Position);
                 
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы взяли задание, метка уже стоит на карте.", 7000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TaskTakenMarked), 7000);
                 return true;
 
             }

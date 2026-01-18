@@ -36,7 +36,7 @@ namespace NeptuneEvo.Accounts.Email.Confirmation
 
                 email = email.ToLower();
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var account = await db.Accounts
                     .Where(v => v.Login != accountData.Login && v.Email.ToLower() == email)

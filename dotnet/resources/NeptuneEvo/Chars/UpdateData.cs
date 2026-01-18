@@ -19,7 +19,7 @@ namespace NeptuneEvo.Chars
     class UpdateData : Script
     {
         /// <summary>
-        /// Логгер
+        /// Logger
         /// </summary>
         private static readonly nLog Log = new nLog("Chars.UpdateData");
         public static void RedBucks(ExtPlayer player, int value, string msg)
@@ -56,7 +56,7 @@ namespace NeptuneEvo.Chars
                 //}
                 if (Core.Admin.IsServerStoping)
                 {
-                    if (errortext) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ServRestarting), 3000);
+                    if (errortext) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ServRestarting), 3000);
                     return 2;
                 }
                 if (0 > value)
@@ -64,7 +64,7 @@ namespace NeptuneEvo.Chars
                 
                 if (characterData.Money < value)
                 {
-                    if (errortext) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoneyForIt, MoneySystem.Wallet.Format(value - characterData.Money)), 5000);
+                    if (errortext) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoneyForIt, MoneySystem.Wallet.Format(value - characterData.Money)), 5000);
                     return 3;
                 }
 
@@ -139,7 +139,7 @@ namespace NeptuneEvo.Chars
                     
                     characterData.EXP = characterData.EXP - (3 + characterData.LVL * 3);
                     Level(player, 1);
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NewLvl, characterData.LVL), 15000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NewLvl, characterData.LVL), 15000);
                     Utils.Analytics.HelperThread.AddEvent("levelup", accountData.Email, accountData.Ga, characterData.LVL);
                     //Trigger.ClientEvent(player, "ExpUP", 999999, characterData.EXP, characterData.LVL, (3 + characterData.LVL * 3));
                 } 
@@ -169,7 +169,7 @@ namespace NeptuneEvo.Chars
             }
             return 0;
         }
-        // НЕТ БЕЗОПАСНОСТИ ПОТОКОВ, При неправильном использовании сервер может падать
+        // WARNING: NO THREAD SAFETY. Improper use may cause the server to crash.
         public static uint GetVehicleDimension(ExtVehicle vehicle)
         {
             try

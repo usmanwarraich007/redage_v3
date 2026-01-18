@@ -76,7 +76,7 @@ namespace NeptuneEvo.Organizations.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Organizations
                         .Where(v => v.Organization == this.Id)
@@ -96,7 +96,7 @@ namespace NeptuneEvo.Organizations.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Organizations
                         .Where(v => v.Organization == this.Id)
@@ -119,7 +119,7 @@ namespace NeptuneEvo.Organizations.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Organizations
                         .Where(v => v.Organization == this.Id)
@@ -139,7 +139,7 @@ namespace NeptuneEvo.Organizations.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Organizations
                         .Where(v => v.Organization == this.Id)
@@ -162,7 +162,7 @@ namespace NeptuneEvo.Organizations.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Organizations
                         .Where(o => o.Organization == this.Id)

@@ -73,16 +73,16 @@ namespace NeptuneEvo.Fractions
 
                 if (characterData.LVL < Main.ServerSettings.MinVoteLvl)
                 {
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MinLvlVote, Main.ServerSettings.MinVoteLvl));
-                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MinLvlVote, Main.ServerSettings.MinVoteLvl), 3000);
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MinLvlVote, Main.ServerSettings.MinVoteLvl));
+                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MinLvlVote, Main.ServerSettings.MinVoteLvl), 3000);
                     return;
                 }
                 if (CandidateList.Count >= 2)
                 {
                     if (!CheckPlayerVoted(accountData.Login, ElectionPoint.Election)) OpenElectionMenu(player);
-                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.AlreadyVoted));
+                    else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.AlreadyVoted));
                 }
-                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.NoCandidates));
+                else Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.NoCandidates));
             }
             catch (Exception e)
             {
@@ -97,7 +97,7 @@ namespace NeptuneEvo.Fractions
                 if (!player.IsCharacterData()) return;
                 
                 var frameList = new FrameListData(); 
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.Elections); 
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.Elections); 
                 frameList.Callback = callback_electionsmenu; 
 
                 for (byte e = 0; e != CandidateList.Count; e++)
@@ -145,7 +145,7 @@ namespace NeptuneEvo.Fractions
                                 {
                                     try
                                     {
-                                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                                         await db.ECandidates
                                             .Where(v => v.Name == name)
@@ -166,13 +166,13 @@ namespace NeptuneEvo.Fractions
                                     }
                                 });
                                 
-                                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.MadeVote, ElectionPoint.Election, name));
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MadeVote, ElectionPoint.Election, name), 3000);
+                                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.MadeVote, ElectionPoint.Election, name));
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MadeVote, ElectionPoint.Election, name), 3000);
                             }
                         }
                     }
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 3000);
             }
             catch (Exception e)
             {
@@ -187,7 +187,7 @@ namespace NeptuneEvo.Fractions
             {
                 if (!player.IsCharacterData()) return;
                 if (!CommandsAccess.CanUseCmd(player, AdminCommands.Elections)) return;
-                Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Reloading), 3000);
+                Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Reloading), 3000);
                 if (ElectionPoint.Opened)
                 {
                     CustomColShape.DeleteColShape(ElectionPoint.Point);

@@ -119,7 +119,7 @@ namespace NeptuneEvo.Fractions
                 
                 if (vehicle.Model != NAPI.Util.GetHashKey("flatbed"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEvac), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEvac), 3000);
                     return;
                 }
                 if (!vehicleLocalData.IsFbAttach)
@@ -137,7 +137,7 @@ namespace NeptuneEvo.Fractions
                 MoneySystem.Wallet.Change(player, payment);
                 GameLog.Money($"player({characterData.UUID})", $"server", payment, $"ImpoundLot");
                 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucEvac,payment), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucEvac,payment), 3000);
             }
             catch (Exception e)
             {
@@ -152,12 +152,12 @@ namespace NeptuneEvo.Fractions
             if (!player.IsCharacterData()) return;
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             if (Main.IHaveDemorgan(player, true)) return;
@@ -333,32 +333,32 @@ namespace NeptuneEvo.Fractions
             
             if (vehicle.Model == NAPI.Util.GetHashKey("flatbed"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvacEvac), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvacEvac), 5000);
                 return;
             }
             if (CarException(vehicle.Model))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 5000);
                 return;
             }
 
             var flatbed = VehicleManager.getNearestVehicle(player, 10, NAPI.Util.GetHashKey("flatbed"));
             if (flatbed == null || flatbed == vehicle)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvac), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvac), 3000);
                 return;
             }
 
             var flatbedLocalData = flatbed.GetVehicleLocalData();
             if (flatbedLocalData == null)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvac), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvac), 3000);
                 return;
             }
             
             if (flatbedLocalData.IsFbAttach)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvacPlace), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvacPlace), 3000);
                 return;
             }
             
@@ -396,7 +396,7 @@ namespace NeptuneEvo.Fractions
                         case SafeZones.ZoneName.EMSpark:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.EMS)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
@@ -404,28 +404,28 @@ namespace NeptuneEvo.Fractions
                         case SafeZones.ZoneName.Cityhall:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.CITY)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.lspd:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.POLICE)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.govfib:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.FIB || (Models.Fractions)fractionData.Id == Models.Fractions.CITY)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.lsnews:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.LSNEWS)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
@@ -433,70 +433,70 @@ namespace NeptuneEvo.Fractions
                         case SafeZones.ZoneName.Sheriffs2:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.SHERIFF)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.RM:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.RUSSIAN)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.AM:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.ARMENIAN)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.YAK:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.YAKUZA)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.LCN:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.LCN)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.Ballas:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.BALLAS)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.MG13:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.MARABUNTA)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.Families:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.FAMILY)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.Bloods:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.BLOOD)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
                         case SafeZones.ZoneName.vagos:
                             if ((Models.Fractions)fractionData.Id == Models.Fractions.VAGOS)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantEvac), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantEvac), 3000);
                                 return;
                             }
                             break;
@@ -518,7 +518,7 @@ namespace NeptuneEvo.Fractions
                     //    return;
 
                     //data["model"] = orgVehicles[vehicle.NumberPlate].model;
-                    data["holder"] = LangFunc.GetText(LangType.Ru, DataName.OrgWithName, organizationData.Name);
+                    data["holder"] = LangFunc.GetText(LangType.En, DataName.OrgWithName, organizationData.Name);
                     break;
                 default:
                     data["holder"] = vehicleLocalData.Access.ToString();
@@ -547,11 +547,11 @@ namespace NeptuneEvo.Fractions
                 return;
             
             if (ticketPrice < 100 || ticketPrice > 500) {
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.Ru, DataName.EvacSum), 5000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.En, DataName.EvacSum), 5000);
                 return;
             }
             if (cameraLink.Length < 1 || ticketText.Length >= 45) {
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.Ru, DataName.EvacSymbols), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.En, DataName.EvacSymbols), 3000);
                 return;
             }
             ticketText = Main.BlockSymbols(ticketText);
@@ -571,13 +571,13 @@ namespace NeptuneEvo.Fractions
                     long ticks = vehicleLocalData.ExitTime.Ticks - DateTime.Now.Ticks;
                     if (ticks <= 0) return;
                     DateTime g = new DateTime(ticks);
-                    if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvac1Hours, g.Hour, g.Minute, g.Second), 10000);
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvac0Hours, g.Minute, g.Second), 10000);
+                    if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvac1Hours, g.Hour, g.Minute, g.Second), 10000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvac0Hours, g.Minute, g.Second), 10000);
                     return;
                 }
                 if (vehicleLocalData.Occupants.Count > 0 || player.Position.DistanceTo(vehicleTicket.Position) > 10)
                 {                    
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvacSidit), 7000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvacSidit), 7000);
                     return;
                 }
                 
@@ -585,20 +585,20 @@ namespace NeptuneEvo.Fractions
                 
                 if (flatbed == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvac), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvac), 3000);
                     return;
                 }
 
                 flatbedLocalData = flatbed.GetVehicleLocalData();
                 if (flatbedLocalData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvac), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvac), 3000);
                     return;
                 }
 
                 if (flatbedLocalData.IsFbAttach)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoEvacPlace), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoEvacPlace), 3000);
                     return;
                 }
             }
@@ -677,10 +677,10 @@ namespace NeptuneEvo.Fractions
                         fbAttach = fractionData.Vehicles[vehicleTicket.NumberPlate].customization;
                         fbAttach.Hash = vehicleTicket.Model;
                         Admin.RespawnFractionCar(vehicleTicket);
-                        Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.EvacShtrafS, player.Name.Replace("_"," "), vehicleTicket.NumberPlate));
+                        Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.EvacShtrafS, player.Name.Replace("_"," "), vehicleTicket.NumberPlate));
                     }
                     else 
-                        Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.EvacShtraf, ticketPrice));
+                        Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.EvacShtraf, ticketPrice));
                     player.AddTableScore(TableTaskId.Item9);
                     player.AddTableScore(TableTaskId.Item15);
                     break;
@@ -703,10 +703,10 @@ namespace NeptuneEvo.Fractions
                         fbAttach = organizationData.Vehicles[vehicleLocalData.NumberPlate].customization;
                         fbAttach.Hash = vehicleTicket.Model;
                         VehicleStreaming.DeleteVehicle(vehicleTicket);
-                        Manager.sendOrganizationMessage(orgId, LangFunc.GetText(LangType.Ru, DataName.EvacShtrafS, player.Name.Replace("_"," "), vehicleTicket.NumberPlate));
+                        Manager.sendOrganizationMessage(orgId, LangFunc.GetText(LangType.En, DataName.EvacShtrafS, player.Name.Replace("_"," "), vehicleTicket.NumberPlate));
                     }
                     else
-                        Manager.sendOrganizationMessage(orgId, LangFunc.GetText(LangType.Ru, DataName.EvacShtraf, ticketPrice));
+                        Manager.sendOrganizationMessage(orgId, LangFunc.GetText(LangType.En, DataName.EvacShtraf, ticketPrice));
                     player.AddTableScore(TableTaskId.Item9);
                     player.AddTableScore(TableTaskId.Item15);
 
@@ -723,14 +723,14 @@ namespace NeptuneEvo.Fractions
             }
             
             if (target.IsCharacterData()) 
-                Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EvacShtraf, ticketPrice), 6000);
+                Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EvacShtraf, ticketPrice), 6000);
             player.AddTableScore(TableTaskId.Item9);
             player.AddTableScore(TableTaskId.Item15);
             
             if (isEvac)
             {
                 if (target.IsCharacterData()) 
-                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EvacShtrafS, player.Name.Replace("_"," "), vehicleTicket.NumberPlate), 10000);
+                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EvacShtrafS, player.Name.Replace("_"," "), vehicleTicket.NumberPlate), 10000);
                 
                 sessionData.TicketCost = Convert.ToInt32(player.Position.DistanceTo2D(PedPos) / 100);
                 Army.onVehicleDeath(vehicleTicket);
@@ -755,7 +755,7 @@ namespace NeptuneEvo.Fractions
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var time = DateTime.Now;
                     model = model.ToUpper();
@@ -817,7 +817,7 @@ namespace NeptuneEvo.Fractions
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Vehicleticket
                         .Where(vt => vt.AutoId == autoId)
@@ -1024,7 +1024,7 @@ namespace NeptuneEvo.Fractions
                     }
                 }
             }
-            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomethingWrong), 5000);
+            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomethingWrong), 5000);
         }
         
         

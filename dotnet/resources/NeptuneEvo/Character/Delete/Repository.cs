@@ -31,7 +31,7 @@ namespace NeptuneEvo.Character.Delete
                 int uuid = accountData.Chars[slot];
                 if (uuid == -1 || uuid == -2) return;
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
                 
                 var character = await db.Characters
                     .Select(v => new
@@ -47,7 +47,7 @@ namespace NeptuneEvo.Character.Delete
                 
                 if (character == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RecoveryCantFind), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RecoveryCantFind), 3000);
                     return;
                 }
 
@@ -58,7 +58,7 @@ namespace NeptuneEvo.Character.Delete
                 
                     if (character.Demorgan != 0 || character.Warns != 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DeleteError), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DeleteError), 3000);
                         return;
                     }
                     
@@ -80,10 +80,10 @@ namespace NeptuneEvo.Character.Delete
                 
                 int uuid = accountData.Chars[slot];
                 if (uuid == -1 || uuid == -2) return;
-                
+
                 //if (character.Lvl <= 2)
                 //{
-               //     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно удалить персонажа до 3 уровня.", 3000);
+                //     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "It is not possible to delete a character before level 3.", 3000);
                 //    return;
                 //}
 
@@ -92,7 +92,7 @@ namespace NeptuneEvo.Character.Delete
                 
                 if (ban)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DeleteError), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DeleteError), 3000);
                     return;
                 }
 
@@ -129,7 +129,7 @@ namespace NeptuneEvo.Character.Delete
                     .UpdateAsync();
                 
                 Trigger.ClientEvent(player, "client.character.canceldelete", slot);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DeleteCancel), 10000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DeleteCancel), 10000);
             }
             catch (Exception e)
             {
@@ -250,8 +250,8 @@ namespace NeptuneEvo.Character.Delete
                                         Trigger.ClientEvent(target, "client.character.deleteSuccess", index);
                                     }
 
-                                    GameLog.AccountLog(targetAccountData.Login, targetAccountData.HWID, targetAccountData.IP, targetAccountData.SocialClub, $"Удаление персонажа {charData.Firstname}_{charData.Lastname}");
-                                    Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CharDeleted, charData.Firstname, charData.Lastname), 3000);
+                                    GameLog.AccountLog(targetAccountData.Login, targetAccountData.HWID, targetAccountData.IP, targetAccountData.SocialClub, $"Character Deletion {charData.Firstname}_{charData.Lastname}");
+                                    Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CharDeleted, charData.Firstname, charData.Lastname), 3000);
                                 }
                             }
 

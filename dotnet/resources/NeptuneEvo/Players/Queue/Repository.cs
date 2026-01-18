@@ -99,7 +99,7 @@ namespace NeptuneEvo.Players.Queue
             foreach (var target in players)
             {
                 if (target == null) continue;
-                Trigger.ClientEvent(target, "queue.text", false, LangFunc.GetText(LangType.Ru, DataName.YouQueued, players.IndexOf(target) + 1, playersCount));
+                Trigger.ClientEvent(target, "queue.text", false, LangFunc.GetText(LangType.En, DataName.YouQueued, players.IndexOf(target) + 1, playersCount));
             }
         }
     }

@@ -355,7 +355,7 @@ namespace NeptuneEvo.NewCasino
                 { // В случае, если все гуд (и игроки сидят, и ставки стоят)
                     table.Process = true;
 
-                    SendRouletteNotify(index, LangFunc.GetText(LangType.Ru, DataName.CantDoStavka));
+                    SendRouletteNotify(index, LangFunc.GetText(LangType.En, DataName.CantDoStavka));
                     if (table.Win == 0) table.Win = new Random().Next(1, 39);
                     while (!Roulette.ContainsKey(table.Win))
                     {
@@ -456,7 +456,7 @@ namespace NeptuneEvo.NewCasino
                 if (!player.IsCharacterData() || PlayerData.ContainsKey(player)) return;
                 if (!FunctionsAccess.IsWorking("roullete"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 if (RouletteTables.Count <= tableIndex) return;
@@ -464,7 +464,7 @@ namespace NeptuneEvo.NewCasino
 
                 if (table.Seats[placeID] != null)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlaceOwned), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlaceOwned), 3000);
                     return;
                 }
                 PlayerData.Add(player, new RoulettePlayerData(tableIndex));
@@ -512,13 +512,13 @@ namespace NeptuneEvo.NewCasino
 
                 if (table.Process && rData.AllBets.Count > 0)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantBetByGame), 5000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantBetByGame), 5000);
                     return;
                 }
 
                 if (rData.AllBets.Count > 0)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NowDeleteStavkas), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NowDeleteStavkas), 3000);
                     return;
                 }
                 PlayerData.Remove(player);
@@ -561,14 +561,14 @@ namespace NeptuneEvo.NewCasino
                 else if (UpdateData.CanIChange(player, bet, true) != 255) return;
                 if (!RouletteWorking)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 RoulettePlayerData rData = PlayerData[player];
 
                 if (rData.AllBets.Count >= MaxBetsLimit)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OneGameMaxBets, MaxBetsLimit), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OneGameMaxBets, MaxBetsLimit), 3000);
                     return;
                 }
                 if (RouletteTables.Count <= rData.SelectedTable) return;
@@ -576,7 +576,7 @@ namespace NeptuneEvo.NewCasino
 
                 if (table.Process)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WaitUntilGameEnds), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WaitUntilGameEnds), 3000);
                     return;
                 }
 
@@ -613,7 +613,7 @@ namespace NeptuneEvo.NewCasino
                     qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage23, 1, isUpdateHud: true);
                 }
                 rData.AllBets.Add(new BetData(bet, spot));
-                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBet, bet), 3000);
+                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBet, bet), 3000);
                 StartGame(rData.SelectedTable);
             }
             catch (Exception e)

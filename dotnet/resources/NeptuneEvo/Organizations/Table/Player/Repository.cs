@@ -193,7 +193,7 @@ namespace NeptuneEvo.Organizations.Table.Player
                     ExtPlayer target = Main.GetPlayerByID(id);
                     if (!target.IsCharacterData())
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 3000);
                         return;
                     }
                     Manager.InviteToOrganization(player, target);
@@ -203,7 +203,7 @@ namespace NeptuneEvo.Organizations.Table.Player
                     ExtPlayer target = (ExtPlayer) NAPI.Player.GetPlayerFromName(name);
                     if (!target.IsCharacterData())
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindMan), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindMan), 3000);
                         return;
                     }
                     Manager.InviteToOrganization(player, target);
@@ -248,7 +248,7 @@ namespace NeptuneEvo.Organizations.Table.Player
                 if (!player.IsOrganizationAccess(RankToAccess.Reprimand)) return;
                 if (text.Length > 100)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxVigovorLength), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxVigovorLength), 4500);
                     return;
                 }
 
@@ -259,15 +259,15 @@ namespace NeptuneEvo.Organizations.Table.Player
                 var targetMemberOrganizationData = Manager.GetOrganizationMemberData(uuid, memberOrganizationData.Id);
                 if (targetMemberOrganizationData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerFraction, name), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerFraction, name), 3000);
                     return;
                 }
                 if (targetMemberOrganizationData.Rank >= memberOrganizationData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantVigovor, name), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantVigovor, name), 3000);
                     return;
                 };
-                Logs.Repository.AddLogs(player, OrganizationLogsType.Reprimand, LangFunc.GetText(LangType.Ru, DataName.GivenVigovor, name, uuid, text));
+                Logs.Repository.AddLogs(player, OrganizationLogsType.Reprimand, LangFunc.GetText(LangType.En, DataName.GivenVigovor, name, uuid, text));
             }
             catch (Exception e)
             {
@@ -302,13 +302,13 @@ namespace NeptuneEvo.Organizations.Table.Player
                     
                 if (organizationData.IsLeader(player.GetUUID()))
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OwnerCantLeave), 5000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OwnerCantLeave), 5000);
                     return;
                 }
 
                 player.RemoveOrganizationMemberData();
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLeftFamily), 6000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLeftFamily), 6000);
             }
             catch (Exception e)
             {
@@ -350,7 +350,7 @@ namespace NeptuneEvo.Organizations.Table.Player
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Organizations
                             .Where(o => o.Organization == orgId)

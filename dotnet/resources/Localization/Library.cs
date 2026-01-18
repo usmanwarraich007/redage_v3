@@ -13,17 +13,17 @@ namespace Localization
             LibraryRu.Init();
             LibraryEn.Init();
             //
-            DefaultText = LibraryRu.Data();
+            DefaultText = LibraryEn.Data();
             
-            foreach (DataName fruit in Enum.GetValues(typeof(DataName)))
+            foreach (DataName dataName in Enum.GetValues(typeof(DataName)))
             {
                 try
                 {
-                    LangFunc.GetText(LangType.Ru, fruit, 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+                    LangFunc.GetText(LangType.En, dataName, 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(fruit);
+                    Console.WriteLine(dataName);
                 }
             }
         }

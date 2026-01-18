@@ -1,11 +1,11 @@
-﻿namespace NeptuneEvo.World.War.Models
+namespace NeptuneEvo.World.War.Models
 {
     public enum WarGripType
     {
-        Murders,//Больше убийств
-        WeaponPoints,//Больше очков
-        RetentionTerritory,//Удержание территории
-        LastSurvivor,//До последнего выжившего
+        Murders, //More kills
+        WeaponPoints, //More points
+        RetentionTerritory, //Territory retention
+        LastSurvivor, //Last survivor
         
         Destroy
     }

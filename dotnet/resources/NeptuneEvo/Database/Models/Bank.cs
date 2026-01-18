@@ -35,7 +35,7 @@ namespace NeptuneEvo.Database.Models
 
                     if (banks.Count > 0 || dellList.Count > 0)
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке 
+                        await using var db = new ServerBD("MainDB");//On Separate Thread 
 
                         foreach (var bankId in banks)
                             await MoneySystem.Bank.Save(db, bankId);

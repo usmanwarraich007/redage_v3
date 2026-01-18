@@ -48,11 +48,11 @@ namespace NeptuneEvo.Fractions
                
                 Main.CreateBlip(new Main.BlipData(459, "News", LsNewsSystem.LSNewsCoords[0], 4, true, 1.3f));
 
-                Main.CreateBlip(new Main.BlipData(621, LangFunc.GetText(LangType.Ru, DataName.Bolnica), Ems.emsCheckpoints[0], 1, true));
+                Main.CreateBlip(new Main.BlipData(621, LangFunc.GetText(LangType.En, DataName.Bolnica), Ems.emsCheckpoints[0], 1, true));
                 
                 Main.CreateBlip(new Main.BlipData(60, "FIB", Fbi.GpsPosition, 4, true));
                 
-                Main.CreateBlip(new Main.BlipData(478, LangFunc.GetText(LangType.Ru, DataName.WarPort), Army.ArmyCheckpoints[2], 52, true));
+                Main.CreateBlip(new Main.BlipData(478, LangFunc.GetText(LangType.En, DataName.WarPort), Army.ArmyCheckpoints[2], 52, true));
 
                 Main.CreateBlip(new Main.BlipData(437, "The Families", FractionSpawns[1], 25, true));
                 Main.CreateBlip(new Main.BlipData(437, "The Ballas Gang", FractionSpawns[2], 7, true));
@@ -650,12 +650,12 @@ namespace NeptuneEvo.Fractions
                 
                 if (fracId != garageData.FractionId && characterData.AdminLVL == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNotInFraction), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNotInFraction), 3000);
                     return;
                 }
                 if (sessionData.Following != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsFollowing), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsFollowing), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
@@ -669,7 +669,7 @@ namespace NeptuneEvo.Fractions
                     if (player.Vehicle == null) return;
                     if (player.VehicleSeat != (int)VehicleSeat.Driver)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeDriver), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeDriver), 3000);
                         return;
                     }
                     var veh = player.Vehicle;
@@ -700,12 +700,12 @@ namespace NeptuneEvo.Fractions
                 
                 if (fracId != garageData.FractionId && characterData.AdminLVL == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNotInFraction), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNotInFraction), 3000);
                     return;
                 }
                 if (sessionData.Following != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsFollowing), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsFollowing), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
@@ -719,7 +719,7 @@ namespace NeptuneEvo.Fractions
                     if (player.Vehicle == null) return;
                     if (player.VehicleSeat != (int)VehicleSeat.Driver)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeDriver), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeDriver), 3000);
                         return;
                     }
                     var veh = player.Vehicle;
@@ -750,7 +750,7 @@ namespace NeptuneEvo.Fractions
                 var fracId = memberFractionData.Id;
                 if (characterData.Unmute > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                     return;
                 }
                 if (characterData.DemorganTime >= 1) return;
@@ -790,7 +790,7 @@ namespace NeptuneEvo.Fractions
                 if (fracId == (int) Models.Fractions.None) return;
                 if (characterData.Unmute > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                     return;
                 }
                 if (characterData.DemorganTime >= 1) return;
@@ -845,7 +845,7 @@ namespace NeptuneEvo.Fractions
                 
                 if (characterData.Unmute > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                     return;
                 }
                 if (characterData.DemorganTime >= 1) return;
@@ -920,27 +920,27 @@ namespace NeptuneEvo.Fractions
  
                 if (sessionData.CuffedData.Cuffed) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000); 
                     return; 
                 } 
                 else if (sessionData.DeathData.InDeath) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000); 
                     return; 
                 } 
                 else if (sessionData.IsCalledGovMember == 2) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CallGov15sec), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CallGov15sec), 3000); 
                     return; 
                 } 
                 else if (Main.IHaveDemorgan(player, true)) return; 
  
                 string numberInfo = characterData.Sim == -1 ? "" : characterData.Sim.ToString();
 
-                Manager.sendFractionMessage(fracId, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PlayerCallGov, player.Name, player.Value) + " " + numberInfo, true); 
-                EventSys.SendCoolMsg(player, "Успешно", "Вызов сотрудника", $"{LangFunc.GetText(LangType.Ru, DataName.PlayerSucCallGov)}",  "", 10000);
-                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerSucCallGov), 3000); 
-                //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Ems, LangFunc.GetText(LangType.Ru, DataName.PlayerSucCallGov), DateTime.Now); 
+                Manager.sendFractionMessage(fracId, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.PlayerCallGov, player.Name, player.Value) + " " + numberInfo, true); 
+                EventSys.SendCoolMsg(player, "Успешно", "Вызов сотрудника", $"{LangFunc.GetText(LangType.En, DataName.PlayerSucCallGov)}",  "", 10000);
+                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerSucCallGov), 3000); 
+                //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Ems, LangFunc.GetText(LangType.En, DataName.PlayerSucCallGov), DateTime.Now); 
                 BattlePass.Repository.UpdateReward(player, 51);
                 sessionData.IsCalledGovMember = 2; 
  
@@ -1159,7 +1159,7 @@ namespace NeptuneEvo.Fractions
                 if (Configs.FractionWeapons.ContainsKey(fracId) && Configs.FractionWeapons[fracId].ContainsKey(weapon)) minRank = Configs.FractionWeapons[fracId][weapon];
                 if (memberFractionData.Rank < minRank)
                 {
-                    if (notify) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000);
+                    if (notify) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000);
                     return false;
                 }
                 else return true;
@@ -1422,7 +1422,7 @@ namespace NeptuneEvo.Fractions
                 }
                 if (ListItems.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomethingWrong), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomethingWrong), 3000);
                     return;
                 }
                 List<FracMatsData> _JsonData = new List<FracMatsData>();
@@ -1459,7 +1459,7 @@ namespace NeptuneEvo.Fractions
                     player.Position.DistanceTo(Sheriff.SecondGunsPosition) >= 5 &&
                     (index < 27 || index > 31))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFarFromVidacha), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFarFromVidacha), 3000);
                     return;
                 }
                 var fractionData = player.GetFractionData();
@@ -1480,7 +1480,7 @@ namespace NeptuneEvo.Fractions
                         case 20:
                             break;
                         default:
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OnlyForceGov), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OnlyForceGov), 3000);
                             return;
                     }
                 }*/
@@ -1493,39 +1493,39 @@ namespace NeptuneEvo.Fractions
                         if (!canGetWeapon(player, "Armor")) return;
                         if (fractionData.Materials < matsForArmor)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseNoMats), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseNoMats), 3000);
                             return;
                         }
                         if (Chars.Repository.itemCount(player, "inventory", ItemId.BodyArmor) >= Chars.Repository.maxItemCount) 
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveBronik), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveBronik), 3000);
                             return;
                         }
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.BodyArmor, 1, 100.ToString()) == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         fractionData.Materials -= matsForArmor;
                         fractionData.UpdateLabel();
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GetBronik), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GetBronik), 3000);
                         GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "armor", 1, "out");
-                        Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.Ru, DataName.VzyalBron));
+                        Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.En, DataName.VzyalBron));
 
                         if (fractionData.Id == (int) Models.Fractions.POLICE || fractionData.Id == (int) Models.Fractions.SHERIFF || fractionData.Id == (int) Models.Fractions.CITY || fractionData.Id == (int) Models.Fractions.ARMY || fractionData.Id == (int) Models.Fractions.FIB)
-                            sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakenBronik, player.Name, player.Value), true);
+                            sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakenBronik, player.Name, player.Value), true);
                         return;
                     case 26:
                         if (!FunctionsAccess.IsWorking("armorremove"))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                             return;
                         }
                         if (!canGetWeapon(player, "Armor")) return;
                         ItemStruct ItemStruct = Chars.Repository.isItem(player, "inventory", ItemId.BodyArmor);
                         if (ItemStruct == null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBronik), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBronik), 3000);
                             return;
                         }
                         int armorp;
@@ -1533,7 +1533,7 @@ namespace NeptuneEvo.Fractions
                         {
                             if (sessionData.ArmorHealth != -1 && player.Armor > sessionData.ArmorHealth)
                             {
-                                Trigger.SendToAdmins(3, LangFunc.GetText(LangType.Ru, DataName.AdminACBronik, player.Name));
+                                Trigger.SendToAdmins(3, LangFunc.GetText(LangType.En, DataName.AdminACBronik, player.Name));
                                 armorp = 0;
                             }
                             else armorp = player.Armor;
@@ -1552,19 +1552,19 @@ namespace NeptuneEvo.Fractions
                         sessionData.ArmorHealth = -1;
                         ClothesComponents.SetSpecialClothes(player, 9, 0, 0);
                         ClothesComponents.UpdateClothes(player);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BronikReturn, armorp, matstoadd), 5000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BronikReturn, armorp, matstoadd), 5000);
                         
                         if (fractionData.Id == (int) Models.Fractions.ARMY)
                             player.AddTableScore(TableTaskId.Item18);
 
                         if (fractionData.Id == (int) Models.Fractions.POLICE || fractionData.Id == (int) Models.Fractions.SHERIFF || fractionData.Id == (int) Models.Fractions.CITY || fractionData.Id == (int) Models.Fractions.ARMY || fractionData.Id == (int) Models.Fractions.FIB)
-                            sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.SdalBronik, player.Name, player.Value, armorp, matstoadd), true);
+                            sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.SdalBronik, player.Name, player.Value, armorp, matstoadd), true);
                         return;
                     case 32: // medkit
                         if (!canGetWeapon(player, "Medkits")) return;
                         if (fractionData.MedKits == 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseNoAptekas), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseNoAptekas), 3000);
                             return;
                         }
                         if (Chars.Repository.isFreeSlots(player, ItemId.HealthKit) != 0) return;
@@ -1572,11 +1572,11 @@ namespace NeptuneEvo.Fractions
                         fractionData.MedKits--;
                         fractionData.UpdateLabel();
                         GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "medkit", 1, "out");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GotApteka), 3000);
-                        Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.GetApteka));
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GotApteka), 3000);
+                        Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.GetApteka));
 
                         if (fractionData.Id == (int) Models.Fractions.POLICE || fractionData.Id == (int) Models.Fractions.SHERIFF || fractionData.Id == (int) Models.Fractions.CITY || fractionData.Id == (int) Models.Fractions.ARMY || fractionData.Id == (int) Models.Fractions.FIB)
-                            sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakeApteka, player.Name, player.Value), true);
+                            sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakeApteka, player.Name, player.Value), true);
                         return;
 
                     case 25:
@@ -1584,17 +1584,17 @@ namespace NeptuneEvo.Fractions
                         string data = (characterData.Gender) ? "128_0_true" : "98_0_false";
                         if (Chars.Repository.isItem(player, "inventory", ItemId.Jewelry, data) != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyHaveBadge), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveBadge), 3000);
                             return;
                         }
 
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Jewelry, 1, data) == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
-                        Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeSpecial, LangFunc.GetText(LangType.Ru, DataName.GetNewBadge));
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotFibBadge), 3000);
+                        Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeSpecial, LangFunc.GetText(LangType.En, DataName.GetNewBadge));
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotFibBadge), 3000);
                         return;
 
                     case 27:
@@ -1610,23 +1610,23 @@ namespace NeptuneEvo.Fractions
                         return;
                     case 19:
                         if (!canGetWeapon(player, "PistolAmmo")) return;
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.Ammo), LangFunc.GetText(LangType.Ru, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.Ammo), LangFunc.GetText(LangType.En, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
                         return;
                     case 20:
                         if (!canGetWeapon(player, "ShotgunsAmmo")) return;
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.Ammo), LangFunc.GetText(LangType.Ru, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.Ammo), LangFunc.GetText(LangType.En, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
                         return;
                     case 21:
                         if (!canGetWeapon(player, "SMGAmmo")) return;
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.Ammo), LangFunc.GetText(LangType.Ru, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.Ammo), LangFunc.GetText(LangType.En, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
                         return;
                     case 23:
                         if (!canGetWeapon(player, "RiflesAmmo")) return;
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.Ammo), LangFunc.GetText(LangType.Ru, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.Ammo), LangFunc.GetText(LangType.En, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
                         return;
                     case 24:
                         if (!canGetWeapon(player, "SniperAmmo")) return;
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.Ammo), LangFunc.GetText(LangType.Ru, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.Ammo), LangFunc.GetText(LangType.En, DataName.EnterAmmoHoches), 4, "take_frac_ammo");
                         return;
                     case 18:
                         giveGun(player, WeaponRepository.Hash.CombatMG, "CombatMG");
@@ -1722,119 +1722,119 @@ namespace NeptuneEvo.Fractions
                     case 82:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Konus, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                      
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Konus].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Konus].Name), 3000);
                         return;
                     case 83:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Konuss, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Konuss].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Konuss].Name), 3000);
                         return;
                     case 84:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Otboynik1, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                        
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Otboynik1].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Otboynik1].Name), 3000);
                         return;
                     case 85:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Otboynik2, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                      
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Otboynik2].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Otboynik2].Name), 3000);
                         return;
                     case 86:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Dontcross, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                       
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Dontcross].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Dontcross].Name), 3000);
                         return;
                     case 87:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Stop, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                       
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Stop].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Stop].Name), 3000);
                         return;
                     case 88:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.NetProezda, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.NetProezda].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.NetProezda].Name), 3000);
                         return;
                     case 89:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Kpp, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                        
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Kpp].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Kpp].Name), 3000);
                         return;
                     case 90:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Zabor1, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Zabor1].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Zabor1].Name), 3000);
                         return;
                     case 91:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Zabor2, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Zabor2].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Zabor2].Name), 3000);
                         return;
                     case 92:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Airlight, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                        
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Airlight].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Airlight].Name), 3000);
                         return;
                     case 93:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Camera1, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                       
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Camera1].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Camera1].Name), 3000);
                         return;
                     case 94:
                         if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Camera2, 1, "0") == -1)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                        
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Camera1].Name), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ItemId.Camera1].Name), 3000);
                         return;
                 }
             }
@@ -1862,24 +1862,24 @@ namespace NeptuneEvo.Fractions
                     long ticks = date.Ticks - DateTime.Now.Ticks;
                     if (ticks <= 0) return;
                     DateTime g = new DateTime(ticks);
-                    if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCanTakeGun1h, gun.ToString(), g.Hour, g.Minute, g.Second), 5000);
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCanTakeGun, gun.ToString(), g.Minute, g.Second), 5000);
+                    if (g.Hour >= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCanTakeGun1h, gun.ToString(), g.Hour, g.Minute, g.Second), 5000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCanTakeGun, gun.ToString(), g.Minute, g.Second), 5000);
                     return;
                 }
                 int frac = memberFractionData.Id;
                 if (!Configs.FractionWeapons[frac].ContainsKey(weaponstr))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorDostupWeapon), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorDostupWeapon), 3000);
                     return;
                 }
                 if (memberFractionData.Rank < Configs.FractionWeapons[frac][weaponstr])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostupWeapon), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostupWeapon), 3000);
                     return;
                 }
                 if (fractionData.Materials < matsForGun[gun])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseNoMats), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseNoMats), 3000);
                     return;
                 }
 
@@ -1889,16 +1889,16 @@ namespace NeptuneEvo.Fractions
 
                 fractionData.Materials -= matsForGun[gun];
                 fractionData.UpdateLabel();
-                Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.Ru, DataName.YouVzyalItem, gun.ToString(), serial));
+                Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.En, DataName.YouVzyalItem, gun.ToString(), serial));
                 int minutes = 5;
                 if (memberFractionData.Id == (int) Models.Fractions.POLICE || memberFractionData.Id == (int) Models.Fractions.SHERIFF) minutes = 10;
                 player.SetData($"GET_{gun.ToString()}", DateTime.Now.AddMinutes(minutes));
 
                 GameLog.Stock(memberFractionData.Id, player.GetUUID(), player.Name, $"{gun.ToString()}({serial})", 1, "out");
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, wType.ToString()), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, wType.ToString()), 3000);
 
                 if (memberFractionData.Id == (int) Models.Fractions.POLICE || memberFractionData.Id == (int) Models.Fractions.SHERIFF || memberFractionData.Id == (int) Models.Fractions.CITY || memberFractionData.Id == (int) Models.Fractions.ARMY || memberFractionData.Id == (int) Models.Fractions.FIB)
-                    sendFractionMessage(memberFractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakeGun, player.Name, player.Value, gun.ToString(), serial), true);
+                    sendFractionMessage(memberFractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakeGun, player.Name, player.Value, gun.ToString(), serial), true);
             }
             catch (Exception e)
             {
@@ -1920,19 +1920,19 @@ namespace NeptuneEvo.Fractions
                 
                 if (fractionData.Materials < MatsForAmmoType[ammoType] * ammo)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseNoMats), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseNoMats), 3000);
                     return;
                 }
                 if (Chars.Repository.isFreeSlots(player, ammoType, ammo) != 0) return;
                 Chars.Repository.AddNewItem(player, $"char_{player.GetUUID()}", "inventory", ammoType, ammo);
                 fractionData.Materials -= MatsForAmmoType[ammoType] * ammo;
                 fractionData.UpdateLabel();
-                Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.Ru, DataName.YouVzyalItem, Chars.Repository.ItemsInfo[ammoType].Name, ammo));
+                Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.En, DataName.YouVzyalItem, Chars.Repository.ItemsInfo[ammoType].Name, ammo));
                 GameLog.Stock(memberFractionData.Id, player.GetUUID(), player.Name, ammoType.ToString(), 1, "out");
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGotItem, Chars.Repository.ItemsInfo[ammoType].Name, ammo), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGotItem, Chars.Repository.ItemsInfo[ammoType].Name, ammo), 3000);
 
                 if (memberFractionData.Id == (int) Models.Fractions.POLICE || memberFractionData.Id == (int) Models.Fractions.SHERIFF || memberFractionData.Id == (int) Models.Fractions.CITY || memberFractionData.Id == (int) Models.Fractions.ARMY || memberFractionData.Id == (int) Models.Fractions.FIB)
-                    sendFractionMessage(memberFractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakeAmmo, player.Name, player.Value, Chars.Repository.ItemsInfo[ammoType].Name, ammo), true);
+                    sendFractionMessage(memberFractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakeAmmo, player.Name, player.Value, Chars.Repository.ItemsInfo[ammoType].Name, ammo), true);
             }
             catch (Exception e)
             {
@@ -1976,7 +1976,7 @@ namespace NeptuneEvo.Fractions
                             break;
                     }
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IncrorectInput), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IncrorectInput), 3000);
             }
             catch (Exception e)
             {
@@ -2032,13 +2032,13 @@ namespace NeptuneEvo.Fractions
                         if (player.IsOrganizationMemberData()) list = organizationsGuns.ToList();
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantCraftWeapon), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantCraftWeapon), 3000);
                             return;
                         }
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantCraftWeapon), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantCraftWeapon), 3000);
                         return;
                     }
                 }
@@ -2094,19 +2094,19 @@ namespace NeptuneEvo.Fractions
                             string familySelected = list[cat][index];
                             if (!organizationData.Schemes.ContainsKey(familySelected) || !organizationData.Schemes[familySelected])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FamilyDoesntSel, familySelected), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FamilyDoesntSel, familySelected), 3000);
                                 return;
                             }
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantCraftWeapon), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantCraftWeapon), 3000);
                             return;
                         }
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantCraftWeapon), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantCraftWeapon), 3000);
                         return;
                     }
                 }
@@ -2179,13 +2179,13 @@ namespace NeptuneEvo.Fractions
                             }
                             break;
                         default:
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CraftError), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CraftError), 3000);
                             return;
                     }
                 }
                 if (count < matsForGun[ WeaponRepository.GetHash(selected)])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMats), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMats), 3000);
                     return;
                 }
                 ItemId wType = (ItemId)Enum.Parse(typeof(ItemId), selected);
@@ -2215,7 +2215,7 @@ namespace NeptuneEvo.Fractions
 
                 if (FractionTypes[frac] == FractionsType.Nongov && memberFractionData.Rank <= 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CraftMW2lvl), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CraftMW2lvl), 3000);
                     return;
                 }
 
@@ -2223,7 +2223,7 @@ namespace NeptuneEvo.Fractions
 
                 if (ammo == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoInputAmmos), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoInputAmmos), 3000);
                     return;
                 }
 
@@ -2231,7 +2231,7 @@ namespace NeptuneEvo.Fractions
                 int matsCount = (mItem == null) ? 0 : mItem.Item.Count;
                 if (matsCount < MatsForAmmo[category] * ammo)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMats), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMats), 3000);
                     return;
                 }
                 if (Chars.Repository.isFreeSlots(player, AmmoTypes[category], ammo) != 0) return;
@@ -2396,7 +2396,7 @@ namespace NeptuneEvo.Fractions
                                 int maxstock = GetMaxStock(fractionData.Id);
                                 if (stockContains + amount > maxstock)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseTooMuch), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseTooMuch), 3000);
                                     return;
                                 }
                                 //ItemStruct mItem = Chars.Repository.isItem(player, "inventory", ItemId.Material);
@@ -2408,7 +2408,7 @@ namespace NeptuneEvo.Fractions
                                 stockContains = fractionData.Drugs;
                                 if (stockContains + amount > 10000)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NarkoWarehouseTooMuch), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NarkoWarehouseTooMuch), 3000);
                                     return;
                                 }
                                 //ItemStruct dItem = Chars.Repository.isItem(player, "inventory", ItemId.BodyArmor);
@@ -2431,7 +2431,7 @@ namespace NeptuneEvo.Fractions
 
                             if (playerHave < amount)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCoins), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCoins), 3000);
                                 return;
                             }
 
@@ -2439,33 +2439,33 @@ namespace NeptuneEvo.Fractions
                             {
                                 fractionData.Materials += amount;
                                 Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", ItemId.Material, amount);
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.Ru, DataName.TakenMats, amount));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FGetMats, player.Name, player.Value, amount), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.En, DataName.TakenMats, amount));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FGetMats, player.Name, player.Value, amount), true);
                             }
                             else if (item == "drugs")
                             {
                                 fractionData.Drugs += amount;
                                 Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", ItemId.Drugs, amount);
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.Ru, DataName.TakenDrugs, amount));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FGetDurgs, player.Name, player.Value, amount), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.En, DataName.TakenDrugs, amount));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FGetDurgs, player.Name, player.Value, amount), true);
                             }
                             else if (item == "money")
                             {
                                 fractionData.Money += amount;
                                 MoneySystem.Wallet.Change(player, -amount);
                                 GameLog.Money($"player({characterData.UUID})", $"frac({fractionData.Id})", amount, $"putStock");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMoney, LangFunc.GetText(LangType.Ru, DataName.TakenMoney, MoneySystem.Wallet.Format(amount)));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FGetMoney, player.Name, player.Value, MoneySystem.Wallet.Format(amount)), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMoney, LangFunc.GetText(LangType.En, DataName.TakenMoney, MoneySystem.Wallet.Format(amount)));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FGetMoney, player.Name, player.Value, MoneySystem.Wallet.Format(amount)), true);
                             }
                             else if (item == "medkits")
                             {
                                 fractionData.MedKits += amount;
                                 Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", ItemId.HealthKit, amount);
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.TakenHealthkits, amount));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FGetHealthKits, player.Name, player.Value, amount), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.TakenHealthkits, amount));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FGetHealthKits, player.Name, player.Value, amount), true);
                             }
                             GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, item, amount, "in");
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseLeft, stockContains + amount, playerHave - amount), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseLeft, stockContains + amount, playerHave - amount), 3000);
                             fractionData.UpdateLabel();
                             break;
                         case "take_stock":
@@ -2479,7 +2479,7 @@ namespace NeptuneEvo.Fractions
                                 playerHave = Chars.Repository.getCountToLacationItem($"char_{characterData.UUID}", "inventory", ItemId.Material);
                                 if (playerHave + amount > Chars.Repository.ItemsInfo[ItemId.Material].Stack)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.InventoryFilled), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InventoryFilled), 3000);
                                     return;
                                 }
                             }
@@ -2490,7 +2490,7 @@ namespace NeptuneEvo.Fractions
                                 playerHave = Chars.Repository.getCountToLacationItem($"char_{characterData.UUID}", "inventory", ItemId.Drugs);
                                 if (playerHave + amount > 50)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.InventoryFilled), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InventoryFilled), 3000);
                                     return;
                                 }
                             }
@@ -2509,7 +2509,7 @@ namespace NeptuneEvo.Fractions
 
                             if (stockContains < amount)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseEmptyNet), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseEmptyNet), 3000);
                                 return;
                             }
 
@@ -2518,35 +2518,35 @@ namespace NeptuneEvo.Fractions
                                 if (Chars.Repository.isFreeSlots(player, ItemId.Material, amount) != 0) return;
                                 fractionData.Materials -= amount;
                                 Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Material, amount);
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.Ru, DataName.TakeMats, amount));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakenMats, player.Name, player.Value, amount), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.En, DataName.TakeMats, amount));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakenMats, player.Name, player.Value, amount), true);
                             }
                             else if (item == "drugs")
                             {
                                 if (Chars.Repository.isFreeSlots(player, ItemId.Drugs, amount) != 0) return;
                                 fractionData.Drugs -= amount;
                                 Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Drugs, amount);
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.Ru, DataName.TakeNarko, amount));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakenDrugs, player.Name, player.Value, amount), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.En, DataName.TakeNarko, amount));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakenDrugs, player.Name, player.Value, amount), true);
                             }
                             else if (item == "money")
                             {
                                 fractionData.Money -= amount;
                                 MoneySystem.Wallet.Change(player, amount);
                                 GameLog.Money($"frac({fractionData.Id})", $"player({characterData.UUID})", amount, $"takeStock");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMoney, LangFunc.GetText(LangType.Ru, DataName.TakeMoney, MoneySystem.Wallet.Format(amount)));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakenMoney, player.Name, player.Value, MoneySystem.Wallet.Format(amount)), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMoney, LangFunc.GetText(LangType.En, DataName.TakeMoney, MoneySystem.Wallet.Format(amount)));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakenMoney, player.Name, player.Value, MoneySystem.Wallet.Format(amount)), true);
                             }
                             else if (item == "medkits")
                             {
                                 if (Chars.Repository.isFreeSlots(player, ItemId.HealthKit, amount) != 0) return;
                                 fractionData.MedKits -= amount;
                                 Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.HealthKit, amount);
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.TakeHealthkits, amount));
-                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.Ru, DataName.FTakenHealthKits, player.Name, player.Value, amount), true);
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.TakeHealthkits, amount));
+                                Manager.sendFractionMessage(fractionData.Id, LangFunc.GetText(LangType.En, DataName.FTakenHealthKits, player.Name, player.Value, amount), true);
                             }
                             GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, item, amount, "out");
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseLeft, stockContains - amount, playerHave + amount), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseLeft, stockContains - amount, playerHave + amount), 3000);
                             fractionData.UpdateLabel();
                             break;
                     }
@@ -2555,7 +2555,7 @@ namespace NeptuneEvo.Fractions
                 {
                     if (!player.IsInVehicle)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                         return;
                     }
                     var vehicle = (ExtVehicle) player.Vehicle;
@@ -2564,7 +2564,7 @@ namespace NeptuneEvo.Fractions
                     {
                         if (!vehicleLocalData.CanMats && !vehicleLocalData.CanDrugs && !vehicleLocalData.CanMedKits)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarCantMoving), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarCantMoving), 3000);
                             return;
                         }
                         var fractionId = sessionData.OnFracStock;
@@ -2578,161 +2578,161 @@ namespace NeptuneEvo.Fractions
                                 if (!vehicleLocalData.CanMats) return;
                                 if (fractionId != (int) Models.Fractions.ARMY && fractionData.Id != fractionId)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
                                     return;
                                 }
                                 if (fractionId != (int) Models.Fractions.ARMY && !player.IsFractionAccess(RankToAccess.TakeStock)) return;
                                 if (vehicle.Model == (uint)VehicleHash.Cargobob)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ThisVehNoMatsHere), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ThisVehNoMatsHere), 3000);
                                     return;
                                 }
                                 if (stockFractionData.Materials < amount)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SkaldNoMats), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SkaldNoMats), 3000);
                                     return;
                                 }
                                 int maxMats = (Stocks.maxMats.ContainsKey(vehicle.Model)) ? Stocks.maxMats[vehicle.Model] : 600;
                                 int curmats = Chars.Repository.getCountItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), ItemId.Material);
                                 if (curmats + amount > maxMats)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LimitOnlyMats, maxMats - curmats), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LimitOnlyMats, maxMats - curmats), 3000);
                                     return;
                                 }
                                 Chars.Repository.AddNewItem(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.Material, amount, MaxSlots: vMain.GetMaxSlots(vehicle.Model));
                                 stockFractionData.Materials -= amount;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLoadedMat), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLoadedMat), 3000);
                                 stockFractionData.UpdateLabel();
                                 GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "mats", amount, "out");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.ZagruzilMatsSoSklad, Manager.GetName(fractionId), amount));
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.ZagruzilMatsSoSklad, Manager.GetName(fractionId), amount));
                                 return;
                             case "unload_mats":
                                 int count = Chars.Repository.getCountToLacationItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.Material);
                                 if (count < amount)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.InCarMats, count), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InCarMats, count), 3000);
                                     return;
                                 }
                                 int maxstock = GetMaxStock(fractionData.Id);
                                 if (stockFractionData.Materials + amount > maxstock)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseTooMuch), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseTooMuch), 3000);
                                     return;
                                 }
                                 if (vehicle.Model == (uint)VehicleHash.Cargobob && fractionId != (int) Models.Fractions.ARMY)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OnlyZankudo), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OnlyZankudo), 3000);
                                     return;
                                 }
                                 Chars.Repository.Remove(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.Material, amount);
                                 stockFractionData.Materials += amount;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLoadedMats), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLoadedMats), 3000);
                                 stockFractionData.UpdateLabel();
                                 GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "mats", amount, "in");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.LoadedMats, Manager.GetName(fractionId), amount));
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.LoadedMats, Manager.GetName(fractionId), amount));
                                 player.AddTableScore(TableTaskId.Item16);
                                 return;
                             case "load_drugs":
                                 if (!vehicleLocalData.CanDrugs) return;
                                 if (fractionData.Id != fractionId)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
                                     return;
                                 }
                                 if (!player.IsFractionAccess(RankToAccess.TakeStock)) return;
                                 if (stockFractionData.Drugs < amount)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorNarkoSklad), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorNarkoSklad), 3000);
                                     return;
                                 }
                                 count = Chars.Repository.getCountItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), ItemId.Drugs);
                                 if (count >= (vMain.GetMaxSlots(vehicle.Model) * Chars.Repository.ItemsInfo[ItemId.Drugs].Stack))
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarMaxDrugs), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarMaxDrugs), 3000);
                                     return;
                                 }
                                 else if ((count + amount) > (vMain.GetMaxSlots(vehicle.Model) * Chars.Repository.ItemsInfo[ItemId.Drugs].Stack))
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.InCarSpace, (vMain.GetMaxSlots(vehicle.Model) * Chars.Repository.ItemsInfo[ItemId.Drugs].Stack) - count), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InCarSpace, (vMain.GetMaxSlots(vehicle.Model) * Chars.Repository.ItemsInfo[ItemId.Drugs].Stack) - count), 3000);
                                     return;
                                 }
                                 Chars.Repository.AddNewItem(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.Drugs, amount, MaxSlots: vMain.GetMaxSlots(vehicle.Model));
                                 stockFractionData.Drugs -= amount;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LoadDrugs), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LoadDrugs), 3000);
                                 stockFractionData.UpdateLabel();
                                 GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "drugs", amount, "out");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.Ru, DataName.LloadedDrugs, Manager.GetName(fractionId), amount));
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.En, DataName.LloadedDrugs, Manager.GetName(fractionId), amount));
                                 return;
                             case "unload_drugs":
                                 count = Chars.Repository.getCountToLacationItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.Drugs);
                                 if (count < amount)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehNoDrugs), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehNoDrugs), 3000);
                                     return;
                                 }
                                 if (stockFractionData.Drugs + amount > 10000)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NarkoWarehouseTooMuch), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NarkoWarehouseTooMuch), 3000);
                                     return;
                                 }
                                 Chars.Repository.Remove(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.Drugs, amount);
                                 stockFractionData.Drugs += amount;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.UnloadedDrugs), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.UnloadedDrugs), 3000);
                                 stockFractionData.UpdateLabel();
                                 GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "drugs", amount, "in");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.Ru, DataName.LoadedDrugs, Manager.GetName(fractionId), amount));
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeDrugs, LangFunc.GetText(LangType.En, DataName.LoadedDrugs, Manager.GetName(fractionId), amount));
                                 player.AddTableScore(TableTaskId.Item33);
                                 return;
                             case "load_medkits":
                                 if (!vehicleLocalData.CanMedKits) return;
                                 if (fractionData.Id != fractionId)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
                                     return;
                                 }
                                 if (!sessionData.WorkData.OnDuty)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                                     return;
                                 }
                                 if (stockFractionData.MedKits < amount)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorAptekasSklad), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorAptekasSklad), 3000);
                                     return;
                                 }
                                 if ((Chars.Repository.getCountItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), ItemId.HealthKit) + amount) > vMain.GetMaxSlots(vehicle.Model))
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorMedAmount), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorMedAmount), 3000);
                                     return;
                                 }
                                 /*if (Chars.Repository.isFreeSlots(player, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.HealthKit, amount) != 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorMedAmount), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorMedAmount), 3000);
                                     return;
                                 }*/
                                 Chars.Repository.AddNewItem(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.HealthKit, amount, MaxSlots: vMain.GetMaxSlots(vehicle.Model));
                                 fractionData.MedKits -= amount;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LoadAptekas), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LoadAptekas), 3000);
                                 fractionData.UpdateLabel();
                                 GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "medkits", amount, "out");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.LoadedAptekasFromSklad, Manager.GetName(fractionId), amount));
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.LoadedAptekasFromSklad, Manager.GetName(fractionId), amount));
                                 return;
                             case "unload_medkits":
                                 if (!sessionData.WorkData.OnDuty)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                                     return;
                                 }
                                 if (Chars.Repository.getCountToLacationItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.HealthKit) < amount)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehNoMedkits), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehNoMedkits), 3000);
                                     return;
                                 }
                                 if (fractionId == 8)
                                 {
                                     if (stockFractionData.MedKits + amount > 1500)
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SkladNoApteka), 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SkladNoApteka), 3000);
                                         return;
                                     }
                                 }
@@ -2740,17 +2740,17 @@ namespace NeptuneEvo.Fractions
                                 {
                                     if (stockFractionData.MedKits + amount > 1000)
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SkladNoApteka), 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SkladNoApteka), 3000);
                                         return;
                                     }
                                 }
                                 Chars.Repository.Remove(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", ItemId.HealthKit, amount);
                                 stockFractionData.MedKits += amount;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.UnloadedAptekas), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.UnloadedAptekas), 3000);
                                 player.AddTableScore(TableTaskId.Item22);
                                 stockFractionData.UpdateLabel();
                                 GameLog.Stock(fractionData.Id, characterData.UUID, player.Name, "medkits", amount, "in");
-                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.LoadedAptekas, Manager.GetName(fractionId), amount));
+                                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.LoadedAptekas, Manager.GetName(fractionId), amount));
                                 return;
                             default:
                                 // Not supposed to end up here. 
@@ -2780,7 +2780,7 @@ namespace NeptuneEvo.Fractions
                     case 1:
                         if (!player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                             return;
                         }
                         var vehicle = (ExtVehicle) player.Vehicle;
@@ -2789,7 +2789,7 @@ namespace NeptuneEvo.Fractions
                         {
                             if (!vehicleLocalData.CanMats && !vehicleLocalData.CanDrugs && !vehicleLocalData.CanMedKits)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarCantMoving), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarCantMoving), 3000);
                                 return;
                             }
                             fractionData = Manager.GetFractionData(fractionId);
@@ -2797,12 +2797,12 @@ namespace NeptuneEvo.Fractions
                                 return;
                             if (fractionData.Id == (int) Models.Fractions.ARMY && (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 10) && characterData.AdminLVL <= 6)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SkladFullyClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SkladFullyClosed), 3000);
                                 return;
                             }
                             if (!fractionData.IsOpenStock && fractionData.Id != (int) Models.Fractions.ARMY)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseClosed), 3000);
                                 return;
                             }
 
@@ -2812,7 +2812,7 @@ namespace NeptuneEvo.Fractions
                     case 2:
                         if (sessionData.OnFracStock == 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotOnSkladPoint), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotOnSkladPoint), 3000);
                             return;
                         }
                         
@@ -2822,12 +2822,12 @@ namespace NeptuneEvo.Fractions
                         
                         if (fractionData.Id != sessionData.OnFracStock)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubNotInFraction, Manager.GetName(sessionData.OnFracStock)), 3000);
                             return;
                         }
                         if (!fractionData.IsOpenStock)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseClosed), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseClosed), 3000);
                             return;
                         }
                         OpenFracStockMenu(player);
@@ -3017,17 +3017,17 @@ namespace NeptuneEvo.Fractions
                 int amount = 0;
                 if (!int.TryParse(data, out amount))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                     return;
                 }
                 if (amount < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                     return;
                 }
                 var vehicle = (ExtVehicle) player.Vehicle;
@@ -3036,7 +3036,7 @@ namespace NeptuneEvo.Fractions
                 {
                     if (!vehicleLocalData.CanMats && !vehicleLocalData.CanDrugs && !vehicleLocalData.CanMedKits)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarCantMoving), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarCantMoving), 3000);
                         return;
                     }
                     switch (eventName)
@@ -3178,16 +3178,16 @@ namespace NeptuneEvo.Fractions
                 matsLeft = 36000;
                 warMarker = (ExtMarker) NAPI.Marker.CreateMarker(1, warPosition - new Vector3(0, 0, 5), new Vector3(), new Vector3(), 6f, new Color(155, 0, 0, 255));
                 isWar = true;
-                Manager.sendFractionMessage((int) Models.Fractions.FAMILY, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.BALLAS, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.VAGOS, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.MARABUNTA, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.BLOOD, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.LCN, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.RUSSIAN, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.YAKUZA, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.THELOST, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
-                Manager.sendFractionMessage((int) Models.Fractions.MERRYWEATHER, LangFunc.GetText(LangType.Ru, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.FAMILY, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.BALLAS, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.VAGOS, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.MARABUNTA, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.BLOOD, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.LCN, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.RUSSIAN, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.YAKUZA, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.THELOST, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
+                Manager.sendFractionMessage((int) Models.Fractions.MERRYWEATHER, LangFunc.GetText(LangType.En, DataName.WzmShipGoing));
                 
                 //
                 
@@ -3256,16 +3256,16 @@ namespace NeptuneEvo.Fractions
                 
                 isWar = false;
                 
-                Manager.sendFractionMessage((int) Models.Fractions.FAMILY, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.BALLAS, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.VAGOS, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.MARABUNTA, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.BLOOD, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.LCN, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.RUSSIAN, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.YAKUZA, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.THELOST, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
-                Manager.sendFractionMessage((int) Models.Fractions.MERRYWEATHER, LangFunc.GetText(LangType.Ru, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.FAMILY, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.BALLAS, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.VAGOS, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.MARABUNTA, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.BLOOD, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.LCN, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.RUSSIAN, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.YAKUZA, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.THELOST, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
+                Manager.sendFractionMessage((int) Models.Fractions.MERRYWEATHER, LangFunc.GetText(LangType.En, DataName.WzmShipGone));
 
                 if (MatWarDropTimer != null) Timers.Stop(MatWarDropTimer);
 
@@ -3320,7 +3320,7 @@ namespace NeptuneEvo.Fractions
 
                 if (MatWarDropHealth > 0)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PressEtoLockPick), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PressEtoLockPick), 3000);
                     Trigger.ClientEvent(player, "client.updateMatWarHackStatus", true, MatWarDropHealth);
                 }
                 else Trigger.ClientEvent(player, "client.updateMatWarHackStatus", false, 0);
@@ -3344,13 +3344,13 @@ namespace NeptuneEvo.Fractions
 
                 if (!FunctionsAccess.IsWorking("StartedMatWarHack"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
                 if (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RestrictedForAdmin), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RestrictedForAdmin), 3000);
                     return;
                 }
 
@@ -3359,7 +3359,7 @@ namespace NeptuneEvo.Fractions
 
                 if (count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoArmyLockpick), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoArmyLockpick), 3000);
                     return;
                 }
 
@@ -3374,7 +3374,7 @@ namespace NeptuneEvo.Fractions
                             else if (MatWarDropsPositions[MatWarDropPositionIndex].DistanceTo(MatWarDropHackPlayerInfo.Position) > 3) MatWarDropHackPlayerInfo = null;
                             else
                             {
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyHacking), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyHacking), 3000);
                                 return;
                             }
                         }
@@ -3425,7 +3425,7 @@ namespace NeptuneEvo.Fractions
 
                         if (hack_chance <= 50)
                         {
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucZamok), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucZamok), 3000);
                             var position = MatWarDropsPositions[MatWarDropPositionIndex];
                             ParticleFx.PlayFXonPos(position, 500f, position.X, position.Y, position.Z, "scr_indep_fireworks", "scr_indep_firework_shotburst", 5000);
                             Trigger.ClientEventInRange(position, 2.5f, "client.updateMatWarHackStatus", false, 0);
@@ -3434,7 +3434,7 @@ namespace NeptuneEvo.Fractions
                         {
                             MatWarDropHealth = 20;
                             Trigger.ClientEvent(player, "client.updateMatWarHackStatus", true, MatWarDropHealth);
-                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FailZamok), 3000);
+                            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FailZamok), 3000);
                         }
 
                         ItemStruct armylockpick = Chars.Repository.isItem(player, "inventory", ItemId.ArmyLockpick);
@@ -3467,7 +3467,7 @@ namespace NeptuneEvo.Fractions
                             else if (MatWarDropsPositions[MatWarDropPositionIndex].DistanceTo(MatWarDropHackPlayerInfo.Position) > 3) MatWarDropHackPlayerInfo = null;
                             else
                             {
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyHacking), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyHacking), 3000);
                                 return;
                             }
                         }
@@ -3498,12 +3498,12 @@ namespace NeptuneEvo.Fractions
                 var fracId = player.GetFractionId();
                 if (!((fracId >= (int) Models.Fractions.FAMILY && fracId <= (int) Models.Fractions.BLOOD) || (fracId >= (int) Models.Fractions.LCN && fracId <= (int) Models.Fractions.ARMENIAN) || (fracId >= (int) Models.Fractions.THELOST && fracId <= (int) Models.Fractions.MERRYWEATHER)))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantMatsWar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantMatsWar), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                     return;
                 }
                 var vehicle = (ExtVehicle) player.Vehicle;
@@ -3512,23 +3512,23 @@ namespace NeptuneEvo.Fractions
                 {
                     if (!vehicleLocalData.CanMats)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantMoveMatsVeh), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantMoveMatsVeh), 3000);
                         return;
                     }
                     if (sessionData.TimersData.LoadMatsTimer != null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LoadingMatsvehUzhe), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LoadingMatsvehUzhe), 3000);
                         return;
                     }
                     if (Chars.Repository.getCountItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), ItemId.Material) >= Stocks.maxMats[player.Vehicle.Model])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarMaxMats), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarMaxMats), 3000);
                         return;
                     }
                     sessionData.TimersData.LoadMatsTimer = Timers.StartOnce(20000, () => Army.loadMaterialsTimer(player), true);
                     vehicleLocalData.LoaderMats = player;
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LoadingMatsStarted), 3000);
-                    Trigger.ClientEvent(player, "showLoader", LangFunc.GetText(LangType.Ru, DataName.LoadingMats), 1);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LoadingMatsStarted), 3000);
+                    Trigger.ClientEvent(player, "showLoader", LangFunc.GetText(LangType.En, DataName.LoadingMats), 1);
                     sessionData.VehicleMats = vehicle;
                     sessionData.WhereLoad = "WAR";
                 }
@@ -3555,7 +3555,7 @@ namespace NeptuneEvo.Fractions
                     if (targetSessionData.TimersData.LoadMatsTimer != null) Timers.Stop(targetSessionData.TimersData.LoadMatsTimer);
                     targetSessionData.TimersData.LoadMatsTimer = null;
                     vehicleLocalData.LoaderMats = null;
-                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MatLoadingCancelByCheckpoint), 3000);
+                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MatLoadingCancelByCheckpoint), 3000);
                 }
             }
             catch (Exception e)

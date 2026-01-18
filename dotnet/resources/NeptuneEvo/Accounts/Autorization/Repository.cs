@@ -34,11 +34,11 @@ namespace NeptuneEvo.Accounts.Autorization
             var testSpeedLoad = DateTime.Now;
             AutorizationEnum result = await InitAccount(player, loginOrEmail, password);
             if (result == AutorizationEnum.Authorized) LoadCharacter.Repository.Load(player, testSpeedLoad);
-            else if (result == AutorizationEnum.LoadingError) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AuthorizWait), 3000);
-            else if (result == AutorizationEnum.Already) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAuthorized), 3000);
-            else if (result == AutorizationEnum.Refused) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IncorrectInput), 3000);
-            else if (result == AutorizationEnum.SclubError) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SocialClubDoesntCorrect), 3000);
-            else if (result == AutorizationEnum.Error) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ConnectError), 3000);
+            else if (result == AutorizationEnum.LoadingError) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AuthorizWait), 3000);
+            else if (result == AutorizationEnum.Already) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAuthorized), 3000);
+            else if (result == AutorizationEnum.Refused) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IncorrectInput), 3000);
+            else if (result == AutorizationEnum.SclubError) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SocialClubDoesntCorrect), 3000);
+            else if (result == AutorizationEnum.Error) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ConnectError), 3000);
             //else if (result == AutorizationEnum.MaxSlots) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "", 3000);
             //Log.Write($"{sessionData.Name} ({sessionData.SocialClubName} | {sessionData.RealSocialClub}) tryed to signin.");
         }
@@ -70,14 +70,14 @@ namespace NeptuneEvo.Accounts.Autorization
                         return AutorizationEnum.Refused;
                 }
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
-                
-                // Получаем модель пользователя по логину
+                await using var db = new ServerBD("MainDB");//In a separate thread
+
+                // Get the user model by login
                 var account = await db.Accounts
                     .Where(v => (v.Login.ToLower() == loginOrEmail || v.Email.ToLower() == loginOrEmail) && v.Password == password)
                     .FirstOrDefaultAsync();
 
-                // Если база не вернула значение, то отправляем сброс
+                //  If the database did not return a value, then we send a reset
                 if (account == null)
                     return AutorizationEnum.Refused;
                 

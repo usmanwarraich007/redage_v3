@@ -54,7 +54,7 @@ namespace NeptuneEvo.Businesses.History
             
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var historyList = await db.Businesshistory
                     .Where(bh => bh.Bizid == bizId && bh.Date >= DateTime.Now.Subtract(new TimeSpan(MaxHistoryTime, 0, 0, 0)))

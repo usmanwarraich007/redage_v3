@@ -50,9 +50,9 @@ namespace NeptuneEvo.Core
                 var characterData = player.GetCharacterData();
                 if (characterData == null) return;
                 if (sessionData.TempBizID == -1 || !BusinessManager.BizList.ContainsKey(sessionData.TempBizID)) return;
-                
+
                 var biz = BusinessManager.BizList[sessionData.TempBizID];
-                
+
                 characterData.ExteriorPos = new Vector3(biz.EnterPoint.X, biz.EnterPoint.Y, biz.EnterPoint.Z + 1.5);
                 //NAPI.Entity.SetEntityPosition(player, new Vector3(CamPosition.X, CamPosition.Y - 2, CamPosition.Z));
                 Trigger.UniqueDimension(player);
@@ -67,15 +67,15 @@ namespace NeptuneEvo.Core
         #region Menu
         private static IReadOnlyDictionary<string, Color> carColors = new Dictionary<string, Color>
         {
-            { "Черный", new Color(0, 0, 0) },
-            { "Белый", new Color(225, 225, 225) },
-            { "Красный", new Color(230, 0, 0) },
-            { "Оранжевый", new Color(255, 115, 0) },
-            { "Желтый", new Color(240, 240, 0) },
-            { "Зеленый", new Color(0, 230, 0) },
-            { "Голубой", new Color(0, 205, 255) },
-            { "Синий", new Color(0, 0, 230) },
-            { "Фиолетовый", new Color(190, 60, 165) },
+            { "Black", new Color(0, 0, 0) },
+            { "White", new Color(225, 225, 225) },
+            { "Red", new Color(230, 0, 0) },
+            { "Orange", new Color(255, 115, 0) },
+            { "Yellow", new Color(240, 240, 0) },
+            { "Green", new Color(0, 230, 0) },
+            { "Light Blue", new Color(0, 205, 255) },
+            { "Blue", new Color(0, 0, 230) },
+            { "Purple", new Color(190, 60, 165) },
         };
 
         public static void OpenCarromMenu(ExtPlayer player, Business biz)
@@ -90,12 +90,12 @@ namespace NeptuneEvo.Core
                 var biztype = biz.Type;
                 if (biztype == 15) biztype = 4;
                 else biztype -= 2;
-                
+
                 var prices = new List<int>();
                 var gosPrices = new List<int>();
                 var names = new List<string>();
                 var bagageSlots = new List<int>();
-                
+
                 foreach (Product p in biz.Products)
                 {
                     if (!BusinessManager.CarsNames[biztype].Contains(p.Name)) continue;
@@ -131,22 +131,22 @@ namespace NeptuneEvo.Core
                 foreach (var name in Cars)
                 {
                     var busProductData = BusinessManager.GetBusProductData(name);
-                    if (busProductData == null) 
+                    if (busProductData == null)
                         continue;
                     var price = !isDonate ? busProductData.Price : busProductData.OtherPrice;
 
                     if (!isDonate)
                         price = price + (price * busProductData.Percent / 100);
-                    
-                    if (price == 0) 
+
+                    if (price == 0)
                         continue;
-                    
+
                     prices.Add(price);
                     gosPrices.Add(busProductData.Price);
                     names.Add(name);
                     bagageSlots.Add(VehicleModel.vMain.GetMaxSlots(NAPI.Util.GetHashKey(name)));
                 }
-                
+
                 Trigger.ClientEvent(player, "openAuto", JsonConvert.SerializeObject(names), JsonConvert.SerializeObject(prices), JsonConvert.SerializeObject(gosPrices), JsonConvert.SerializeObject(bagageSlots), isDonate ? "AutoroomGosDonateBuy" : "AutoroomGosBuy", isDonate);
             }
             catch (Exception e)
@@ -166,19 +166,19 @@ namespace NeptuneEvo.Core
                 if (characterData == null) return;
                 if (sessionData.TempBizID == -1 || !BusinessManager.BizList.ContainsKey(sessionData.TempBizID)) return;
                 Business biz = BusinessManager.BizList[sessionData.TempBizID];
-                if (id == 1) // Для себя
+                if (id == 1) // For myself
                 {
                     var vehiclesCount = VehicleManager.GetVehiclesCarCountToPlayer(player.Name);
                     if (vehiclesCount >= Houses.GarageManager.MaxGarageCars)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас максимальное кол-во машин", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You have the maximum number of cars", 3000);
                         RemoteEvent_carroomCancel(player);
                         return;
                     }
                     Product prod = biz.Products.FirstOrDefault(p => p.Name == vName);
                     if (prod == null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Произошла ошибка, транспорта такой модели нет на складе.", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "An error occurred, a vehicle of this model is not in stock.", 3000);
                         RemoteEvent_carroomCancel(player);
                         return;
                     }
@@ -192,7 +192,7 @@ namespace NeptuneEvo.Core
                     {
                         if (vehiclesCount >= Houses.GarageManager.GarageTypes[Houses.GarageManager.Garages[house.GarageID].Type].MaxCars)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас максимальное кол-во машин, которое поддерживает Ваше место жительства.", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You have the maximum number of cars that your residence supports.", 3000);
                             RemoteEvent_carroomCancel(player);
                             return;
                         }
@@ -205,7 +205,7 @@ namespace NeptuneEvo.Core
                             {
                                 if (!BusinessManager.takeProd(biz.ID, 1, vName, prod.Price))
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Машин этой модели больше нет на складе", 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "No more cars of this model in stock", 3000);
                                     RemoteEvent_carroomCancel(player);
                                     return;
                                 }
@@ -216,7 +216,7 @@ namespace NeptuneEvo.Core
                         {
                             if (!BusinessManager.takeProd(biz.ID, 1, vName, prod.Price))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Машин этой модели больше нет на складе", 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "No more cars of this model in stock", 3000);
                                 RemoteEvent_carroomCancel(player);
                                 return;
                             }
@@ -224,11 +224,11 @@ namespace NeptuneEvo.Core
                         }
                     }
                     MoneySystem.Wallet.Change(player, -prod.Price);
-                    
+
                     VehicleManager.Create(player, vName, carColors[color], carColors[color], Logs: $"buyCar({vName}");
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.YouBuyCarV2, vName, prod.Price), DateTime.Now);
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.YouBuyCarV2, vName, prod.Price), DateTime.Now);
                 }
-                else if (id == 2) // В организацию
+                else if (id == 2) // For organization
                 {
                     if (!player.IsOrganizationAccess(RankToAccess.OrgBuyCars))
                     {
@@ -236,7 +236,7 @@ namespace NeptuneEvo.Core
                         return;
                     }
                     var organizationData = player.GetOrganizationData();
-                    if (organizationData == null) 
+                    if (organizationData == null)
                         return;
 
                     int maxcars;
@@ -255,8 +255,8 @@ namespace NeptuneEvo.Core
                     }
                     if (organizationData.Vehicles.Count >= maxcars)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вашей семьи уже максимальное количество транспортных средств.", 6000);
-                        if (upgraded <= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы можете увеличить количество транспортных средств купив улучшение для семьи!", 6000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Your family already has the maximum number of vehicles.", 6000);
+                        if (upgraded <= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can increase the number of vehicles by purchasing an upgrade for the family!", 6000);
                         RemoteEvent_carroomCancel(player);
                         return;
                     }
@@ -271,9 +271,9 @@ namespace NeptuneEvo.Core
                     MoneySystem.Wallet.Change(player, -price);
                     GameLog.Money($"player({characterData.UUID})", $"server", price, $"buyOrgCar({vName})");
                     string vNumber = Organizations.Manager.CreateVehicle(organizationData.Id, vName, carColors[color]);
-                    //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы купили {vName} с номером {vNumber} за {price}$.", 3000);
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.YouBuyCarV, vName, vNumber, price), DateTime.Now);
-                    Organizations.Table.Logs.Repository.AddLogs(player, OrganizationLogsType.BuyCar, $"Купил {vName} ({vNumber})");
+                    //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You bought a {vName} with the number {vNumber} for ${price}.", 3000);
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.YouBuyCarV, vName, vNumber, price), DateTime.Now);
+                    Organizations.Table.Logs.Repository.AddLogs(player, OrganizationLogsType.BuyCar, $"Bought {vName} ({vNumber})");
                 }
 
                 RemoteEvent_carroomCancel(player);
@@ -293,10 +293,10 @@ namespace NeptuneEvo.Core
         [RemoteEvent("AutoroomGosDonateBuy")]
         public static void DonateAutoroomBuy(ExtPlayer player, string vName, string color, int id)
         {
-            
+
             if (!FunctionsAccess.IsWorking("DonateAutoroomBuy"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
 
@@ -315,28 +315,28 @@ namespace NeptuneEvo.Core
                 NAPI.Entity.SetEntityPosition(player, characterData.ExteriorPos);
                 characterData.ExteriorPos = new Vector3();
                 Trigger.Dimension(player, 0);
-                
+
                 var busProductData = BusinessManager.GetBusProductData(vName);
                 if (busProductData == null) return;
-                
+
                 int vehiclePrice = !isDonate ? busProductData.Price : busProductData.OtherPrice;
 
                 if (!isDonate && id == 1)
                     vehiclePrice = vehiclePrice + (vehiclePrice * busProductData.Percent / 100);
-                
+
                 if (!isDonate && UpdateData.CanIChange(player, vehiclePrice, true) != 255)
                 {
                     RemoteEvent_carroomCancel(player);
                     return;
                 }
-                
+
                 if (isDonate && accountData.RedBucks < vehiclePrice)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return;
                 }
-                
-                if (id == 1) // Для себя
+
+                if (id == 1) // For myself
                 {
                     if (!VehicleModel.AirAutoRoom.isAirCar(vName))
                     {
@@ -344,7 +344,7 @@ namespace NeptuneEvo.Core
                         if (vehiclesCount >= Houses.GarageManager.MaxGarageCars)
                         {
                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                                $"У Вас максимальное кол-во машин", 3000);
+                                $"You have the maximum number of cars", 3000);
                             RemoteEvent_carroomCancel(player);
                             return;
                         }
@@ -356,7 +356,7 @@ namespace NeptuneEvo.Core
                                 .GarageTypes[Houses.GarageManager.Garages[house.GarageID].Type].MaxCars)
                             {
                                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                                    $"У Вас максимальное кол-во машин, которое поддерживает Ваше место жительства.",
+                                    $"You have the maximum number of cars that your residence supports.",
                                     3000);
                                 RemoteEvent_carroomCancel(player);
                                 return;
@@ -365,24 +365,24 @@ namespace NeptuneEvo.Core
                     }
 
                     VehicleManager.Create(player, vName, carColors[color], carColors[color], Logs: $"buyCar_donate({vName}");
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.YouBuyCarV3, vName), DateTime.Now);
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.YouBuyCarV3, vName), DateTime.Now);
                 }
-                else if (id == 2) // В организацию
+                else if (id == 2) // For organization
                 {
                     if (!player.IsOrganizationAccess(RankToAccess.OrgBuyCars))
                     {
                         RemoteEvent_carroomCancel(player);
                         return;
                     }
-                    
+
                     if (VehicleModel.AirAutoRoom.isAirCar(vName))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Вы не можете купить в организацию данное т/с.", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You cannot buy this vehicle for an organization.", 3000);
                         return;
                     }
-     
+
                     var organizationData = player.GetOrganizationData();
-                    if (organizationData == null) 
+                    if (organizationData == null)
                         return;
 
                     int maxcars;
@@ -402,23 +402,23 @@ namespace NeptuneEvo.Core
 
                     if (organizationData.Vehicles.Count >= maxcars)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В Вашей семье уже максимальное количество транспортных средств.", 6000);
-                        if (upgraded <= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы можете увеличить количество транспортных средств купив улучшение для семьи!", 6000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Your family already has the maximum number of vehicles.", 6000);
+                        if (upgraded <= 1) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You can increase the number of vehicles by purchasing an upgrade for the family!", 6000);
                         RemoteEvent_carroomCancel(player);
                         return;
                     }
 
                     string vNumber = Organizations.Manager.CreateVehicle(organizationData.Id, vName, carColors[color]);
-                    //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы купили {vName} с номером {vNumber}", 3000);
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.YouBuyCarV, vName, vNumber, vehiclePrice), DateTime.Now);
-                    Organizations.Table.Logs.Repository.AddLogs(player, OrganizationLogsType.BuyCar, $"Купил {vName} ({vNumber})");
+                    //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You bought a {vName} with the number {vNumber}", 3000);
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.YouBuyCarV, vName, vNumber, vehiclePrice), DateTime.Now);
+                    Organizations.Table.Logs.Repository.AddLogs(player, OrganizationLogsType.BuyCar, $"Bought {vName} ({vNumber})");
                 }
-                
+
                 if (!isDonate)
                     MoneySystem.Wallet.Change(player, -vehiclePrice);
                 else
-                    UpdateData.RedBucks(player, -vehiclePrice, msg:LangFunc.GetText(LangType.Ru, DataName.PremCarBuy, vName, vehiclePrice));
-                //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.PremCarBuy, vName), DateTime.Now.AddSeconds(10));
+                    UpdateData.RedBucks(player, -vehiclePrice, msg: LangFunc.GetText(LangType.En, DataName.PremCarBuy, vName, vehiclePrice));
+                //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.PremCarBuy, vName), DateTime.Now.AddSeconds(10));
             }
             catch (Exception e)
             {
@@ -432,12 +432,12 @@ namespace NeptuneEvo.Core
             try
             {
                 var sessionData = player.GetSessionData();
-                if (sessionData == null) 
+                if (sessionData == null)
                     return;
                 var characterData = player.GetCharacterData();
-                if (characterData == null) 
+                if (characterData == null)
                     return;
-                
+
                 sessionData.TempBizID = -1;
 
                 NAPI.Entity.SetEntityPosition(player, characterData.ExteriorPos);
@@ -469,24 +469,24 @@ namespace NeptuneEvo.Core
                 }
 
                 MoneySystem.Wallet.Change(player, -correctPrice);
-                
+
                 Trigger.Dimension(player, 555);
 
                 var positionData = (new Vector3(), new Vector3());
-                
+
                 if (VehicleModel.AirAutoRoom.isAirCar(vName))
                     positionData = VehicleModel.AirAutoRoom.GetSpawnPosition();
                 else
                 {
                     positionData.Item1 = TestDrivePositions[Step];
                     positionData.Item2.Z = -99f;
-                    
+
                     if (Step++ >= TestDrivePositions.Length - 1) Step = 0;
                 }
 
                 player.Position = positionData.Item1;
                 var number = VehicleManager.GenerateNumber(VehicleAccess.AutoRoom, "AUTOROOM");
-                var veh = (ExtVehicle) VehicleStreaming.CreateVehicle(NAPI.Util.GetHashKey(vName), positionData.Item1, positionData.Item2.Z, 1, 1, number, acc: VehicleAccess.AutoRoom, workdriv: characterData.UUID, petrol: 9999, dimension: 555, engine: true);
+                var veh = (ExtVehicle)VehicleStreaming.CreateVehicle(NAPI.Util.GetHashKey(vName), positionData.Item1, positionData.Item2.Z, 1, 1, number, acc: VehicleAccess.AutoRoom, workdriv: characterData.UUID, petrol: 9999, dimension: 555, engine: true);
                 veh.CustomPrimaryColor = carColors[color];
                 veh.CustomSecondaryColor = carColors[color];
 
@@ -498,11 +498,11 @@ namespace NeptuneEvo.Core
                     veh.SetMod(15, 3);
                     veh.SetMod(12, 2);
                 }
-                
+
                 sessionData.TestDriveVehicle = veh;
 
                 Trigger.ClientEvent(player, "startTestDrive", veh);
-                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы получили транспортное средство на тест-драйв. Тест-драйв будет окончен через 2 минуты или при выходе из транспортного средства.", 7000);
+                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You have received a vehicle for a test drive. The test drive will end in 2 minutes or upon exiting the vehicle.", 7000);
                 sessionData.TimersData.TestDriveTimer = Timers.StartOnce(120000, () => timer_exitVehicle(player, false), true);
                 GameLog.Money($"player({characterData.UUID})", $"server", correctPrice, $"testDrive({vName}, {sessionData.TempBizID})");
                 BattlePass.Repository.UpdateReward(player, 33);
@@ -528,16 +528,16 @@ namespace NeptuneEvo.Core
         }
         public static void timer_exitVehicle(ExtPlayer player, bool quit = false)
         {
-            if (OnExitTestDrive (player) && !quit)
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Время, выделенное на тест-драйв, закончилось.", 3000);
+            if (OnExitTestDrive(player) && !quit)
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"The time allotted for the test drive has expired.", 3000);
         }
 
         [ServerEvent(Event.PlayerExitVehicle)]
         public void onPlayerExitVehicleHandler(ExtPlayer player, ExtVehicle vehicle)
         {
-            if (OnExitTestDrive (player))
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Тест-драйв был окончен, так как Вы покинули транспорт.", 3000);
-           
+            if (OnExitTestDrive(player))
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"The test drive was ended because you left the vehicle.", 3000);
+
         }
 
         public static bool OnExitTestDrive(ExtPlayer player, bool isDeath = false)
@@ -564,9 +564,9 @@ namespace NeptuneEvo.Core
                     Trigger.Dimension(player, 0);
                     if (characterData.ExteriorPos != new Vector3())
                     {
-                        if (!isDeath) 
+                        if (!isDeath)
                             NAPI.Entity.SetEntityPosition(player, characterData.ExteriorPos);
-                        else 
+                        else
                             NAPI.Player.SpawnPlayer(player, characterData.ExteriorPos);
                     }
                     else

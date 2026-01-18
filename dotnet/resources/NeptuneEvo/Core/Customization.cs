@@ -876,7 +876,7 @@ namespace NeptuneEvo.Core
         public static int DimensionID = 1;
 
         #region Methods
-        public static void ApplyCharacter(ExtPlayer player)//Сделать только в нужных моментах
+        public static void ApplyCharacter(ExtPlayer player)//Do only at the necessary moments
         {
             try
             {
@@ -1025,7 +1025,7 @@ namespace NeptuneEvo.Core
                     {
                         try
                         {
-                            await using var db = new ServerBD("MainDB");//В отдельном потоке
+                            await using var db = new ServerBD("MainDB");//On Separate Thread
 
                             await db.InsertAsync(new Customizations
                             {
@@ -1324,7 +1324,7 @@ namespace NeptuneEvo.Core
                             sessionData.LoggedIn = true;
                             Main.HelloText(player);
                             
-                            Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.NewChar, player.Name, player.Value));
+                            Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.NewChar, player.Name, player.Value));
                             
                             Trigger.ClientEvent(player, "client:OnOpenHelpMenu");
                             characterData.SpawnPos = GetSpawnPos();
@@ -1346,7 +1346,7 @@ namespace NeptuneEvo.Core
                     else
                     {
                         
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await SaveCharacter(db, player, characterData.UUID, UpdateCreate: true);
                     }

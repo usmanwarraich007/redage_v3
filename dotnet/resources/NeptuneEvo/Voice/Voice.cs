@@ -1,4 +1,4 @@
-﻿using GTANetworkAPI;
+using GTANetworkAPI;
 using NeptuneEvo.Handles;
 using System;
 using NeptuneEvo.Core;
@@ -56,7 +56,7 @@ namespace NeptuneEvo.Voice
                     int pSim = characterData.Sim;
                     string playerName = (targetCharacterData.Contacts.ContainsKey(pSim)) ? targetCharacterData.Contacts[pSim] : pSim.ToString();
 
-                    Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerHangPhone, playerName), 3000);
+                    Notify.Send(target, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerHangPhone, playerName), 3000);
                     targetPhoneMeta.Target = null;
                     targetPhoneMeta.CallingState = "nothing";
                     targetSessionData.AntiAnimDown = false;
@@ -81,7 +81,7 @@ namespace NeptuneEvo.Voice
             try
             {
                 if (!player.IsCharacterData()) return;
-                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.Vreload));
+                Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.Vreload));
                 Trigger.ClientEvent(player, "v_reload");
                 Selecting.UnMuteAllList(player);
             }
@@ -208,7 +208,7 @@ namespace NeptuneEvo.Voice
                 else if (sessionData.WalkieTalkieFrequency != -99) access = 2;
 
                 if (access > 0) Trigger.ClientEvent(player, "openWalkieTalkieMenu", access == 1, sessionData.WalkieTalkieFrequency);
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoWalkieTalkie), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoWalkieTalkie), 3000);
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace NeptuneEvo.Voice
                 {
                     if (DangerButtonChecker != -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Panic15sec), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Panic15sec), 3000);
                         return;
                     }
 
@@ -246,7 +246,7 @@ namespace NeptuneEvo.Voice
                         {
                             Trigger.ClientEvent(foreachPlayer, "createWaypoint", player.Position.X, player.Position.Y);
                             Trigger.ClientEvent(foreachPlayer, "StartDangerButtonSound_client", "sounds/panic.mp3");
-                            Trigger.SendChatMessage(foreachPlayer, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.PanicActivator, player.Name, player.Value));
+                            Trigger.SendChatMessage(foreachPlayer, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.PanicActivator, player.Name, player.Value));
                         }
                         else if (foreachPlayer.Position.DistanceTo(player.Position) < 3)
                         {
@@ -286,7 +286,7 @@ namespace NeptuneEvo.Voice
                 {
                     if (!sessionData.WorkData.OnDuty && Fractions.Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                         return;
                     }
                     
@@ -306,7 +306,7 @@ namespace NeptuneEvo.Voice
                         if (foreachMemberFractionData == null) continue;
 
                         if (foreachMemberFractionData.Id == (int)Fractions.Models.Fractions.POLICE || foreachMemberFractionData.Id == (int)Fractions.Models.Fractions.FIB || foreachMemberFractionData.Id == (int)Fractions.Models.Fractions.SHERIFF)
-                            Trigger.SendChatMessage(foreachPlayer, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.Code0accept, player.Name, player.Value, sender_id));
+                            Trigger.SendChatMessage(foreachPlayer, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.Code0accept, player.Name, player.Value, sender_id));
                         player.AddTableScore(TableTaskId.Item5);
                         player.AddTableScore(TableTaskId.Item6);
                     }
@@ -326,7 +326,7 @@ namespace NeptuneEvo.Voice
                 if (sessionData == null) return;
                 Trigger.ClientEvent(player, "LeaveRadio");
                 sessionData.WalkieTalkieFrequency = value;
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WalkieWave, value), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WalkieWave, value), 3000);
             }
             catch (Exception e)
             {
@@ -340,7 +340,7 @@ namespace NeptuneEvo.Voice
             {
                 if (!FunctionsAccess.IsWorking("radio"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var sessionData = player.GetSessionData();
@@ -403,7 +403,7 @@ namespace NeptuneEvo.Voice
                 if (sessionData == null) return;
                 if (!FunctionsAccess.IsWorking("radio"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var memberFractionData = player.GetFractionMemberData();
@@ -614,7 +614,7 @@ namespace NeptuneEvo.Voice
                 player.SetSharedData("VoiceDist", value);
                 if (addMicroToHand)
                 {
-                    Commands.RPChat("sme", player, $"достал" + (characterData.Gender ? "" : "а") + $" Микрофон");
+                    Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.TookOutMicrophone, characterData.Gender ? "" : "a"));
                     Attachments.AddAttachment(player, Attachments.AttachmentsName.News_mic);
                     if (!player.IsInVehicle) player.PlayAnimation("anim@heists@humane_labs@finale@keycards", "ped_b_enter_loop", 49);
                     // Trigger.ClientEventInRange(player.Position, 250f, "PlayAnimToKey", player, false, "microphone");

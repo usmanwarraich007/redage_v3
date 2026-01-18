@@ -23,7 +23,7 @@ namespace NeptuneEvo.Businesses
             
             if (characterData.BizIDs.Count == 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
 
@@ -115,7 +115,7 @@ namespace NeptuneEvo.Businesses
             
             if (characterData.BizIDs.Count == 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
 

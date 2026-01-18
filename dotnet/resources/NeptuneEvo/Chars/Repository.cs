@@ -42,12 +42,12 @@ using NeptuneEvo.VehicleData.LocalData.Models;
 namespace NeptuneEvo.Chars
 {
     /// <summary>
-    /// Работа с данными персонажа
+    /// Handling character data
     /// </summary>
     class Repository : Script
     {
         /// <summary>
-        /// Логгер
+        /// Logger
         /// </summary>
         private static readonly nLog Log = new nLog("Chars.Repository");
 
@@ -65,14 +65,14 @@ namespace NeptuneEvo.Chars
             }
         }
 
-        #region обмен
+        #region trade
         /// <summary>
-        /// обмен
+        /// Trade
         /// </summary>
-        /// <param name="player">Игрок</param>
-        /// <param name="target">Логин</param>
-        /// <param name="type">Тип обмена</param>
-        /// <returns>Событие обмена</returns>
+        /// <param name="player">Player</param>
+        /// <param name="target">Target login</param>
+        /// <param name="type">Type of trade</param>
+        /// <returns>Trade event</returns>
         public static TradeCharacterResponse TradeCharacter(ExtPlayer player, ExtPlayer target, string type)
         {
             try
@@ -83,7 +83,7 @@ namespace NeptuneEvo.Chars
                 if (characterData == null) return TradeCharacterResponse.Error;
                 else if (type == "business" && characterData.BizIDs.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                     return TradeCharacterResponse.Error;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -92,7 +92,7 @@ namespace NeptuneEvo.Chars
                 if (targetCharacterData == null) return TradeCharacterResponse.Error;
                 else if (type == "business" && targetCharacterData.BizIDs.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHaveNoBusiness), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHaveNoBusiness), 3000);
                     return TradeCharacterResponse.Error;
                 }
                 else if(targetSessionData.SellItemData.Seller != null || targetSessionData.SellItemData.Buyer != null) return TradeCharacterResponse.ErrorTrade;
@@ -120,7 +120,7 @@ namespace NeptuneEvo.Chars
                     var targetSessionData = dataTrade.Player.GetSessionData();
                     if (targetSessionData != null && targetSessionData.TradePropertyData != null)
                     {
-                        if (message) Notify.Send(dataTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCancel), 3000);
+                        if (message) Notify.Send(dataTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCancel), 3000);
                         targetSessionData.TradePropertyData = null;
                     }
                     dataTrade = null;
@@ -143,7 +143,7 @@ namespace NeptuneEvo.Chars
                     {
                         if (DateTime.Now >= PlayerTrade[dataTrade.Player.Value].Time)
                         {
-                            Notify.Send(dataTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCancel), 3000);
+                            Notify.Send(dataTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCancel), 3000);
                             if (PlayerTrade.ContainsKey(dataTrade.Player.Value)) PlayerTrade.Remove(dataTrade.Player.Value);
                             if (PlayerTrade.ContainsKey(player.Value)) PlayerTrade.Remove(player.Value);
                             return false;
@@ -172,7 +172,7 @@ namespace NeptuneEvo.Chars
                     {
                         if (targetSessionData != null && targetSessionData.TradePropertyData != null)
                         {
-                            Notify.Send(dataTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCancel), 3000);
+                            Notify.Send(dataTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCancel), 3000);
                             targetSessionData.TradePropertyData = null;
                         }
                         dataTrade = null;
@@ -205,7 +205,7 @@ namespace NeptuneEvo.Chars
             try
             {
                 if (!player.IsCharacterData() || !target.IsCharacterData()) return;
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 /*else if (sessionData.RequestData.IsRequested)
                 {
                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Подождите немного, у вас есть активные предложения.", 3000);
@@ -250,7 +250,7 @@ namespace NeptuneEvo.Chars
                 Log.Write($"TradeStart Exception: {e.ToString()}");
             }
         }
-        #region Бизнес
+        #region Business
         /*public static void TradeBusinessesStart(ExtPlayer player)
         {
             try
@@ -266,13 +266,13 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
                 else if (characterData.BizIDs.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -282,7 +282,7 @@ namespace NeptuneEvo.Chars
                 menu.Callback = CallbackTradeBusinesses;
 
                 Menu.Item menuItem = new Menu.Item("header", Menu.MenuItem.Header);
-                menuItem.Text = LangFunc.GetText(LangType.Ru, DataName.YouBusinesses);
+                menuItem.Text = LangFunc.GetText(LangType.En, DataName.YouBusinesses);
                 menu.Add(menuItem);
 
                 foreach (int id in characterData.BizIDs)
@@ -293,7 +293,7 @@ namespace NeptuneEvo.Chars
                 }
 
                 menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-                menuItem.Text = LangFunc.GetText(LangType.Ru, DataName.Close);
+                menuItem.Text = LangFunc.GetText(LangType.En, DataName.Close);
                 menu.Add(menuItem);
 
                 menu.Open(player);
@@ -319,14 +319,14 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
                 if (item.ID == "close")
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     return;
                 }
                 TradePropertyData dataTrade = sessionData.TradePropertyData;
@@ -341,7 +341,7 @@ namespace NeptuneEvo.Chars
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerChosingBiz), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerChosingBiz), 3000);
                 }
             }
             catch (Exception e)
@@ -365,7 +365,7 @@ namespace NeptuneEvo.Chars
                 var targetCharacterData = sessionData.TradePropertyData.Player.GetCharacterData();
                 if (targetSessionData == null || targetCharacterData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -373,7 +373,7 @@ namespace NeptuneEvo.Chars
                 TradePropertyData dataTrade = sessionData.TradePropertyData;
                 if (!characterData.BizIDs.Contains(Convert.ToInt32(dataTrade.Number)))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBusiness), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBusiness), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -381,7 +381,7 @@ namespace NeptuneEvo.Chars
                 if (!targetCharacterData.BizIDs.Contains(Convert.ToInt32(dataTargetTrade.Number)))
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorChelBiz), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorChelBiz), 3000);
                     return;
                 }
                 Business biz = BusinessManager.BizList[Convert.ToInt32(dataTrade.Number)];
@@ -411,7 +411,7 @@ namespace NeptuneEvo.Chars
                 var targetCharacterData = sessionData.TradePropertyData.Player.GetCharacterData();
                 if (targetSessionData == null || targetCharacterData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -420,8 +420,8 @@ namespace NeptuneEvo.Chars
 
                 if (!toggled)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeSucCancelled), 3000);
-                    Notify.Send(dataTargetTrade.Player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerCancelTrade), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeSucCancelled), 3000);
+                    Notify.Send(dataTargetTrade.Player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerCancelTrade), 3000);
                     TradeClear(player);
                     TradeClear(dataTargetTrade.Player);
                 }
@@ -432,38 +432,38 @@ namespace NeptuneEvo.Chars
                     {
                         if (player.Position.DistanceTo(dataTargetTrade.Player.Position) > 3)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                             TradeClear(player);
                             TradeClear(dataTargetTrade.Player);
                             return;
                         }
                         else if (!characterData.BizIDs.Contains(Convert.ToInt32(dataTrade.Number)))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBusiness), 3000);
-                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorChelBiz), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBusiness), 3000);
+                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorChelBiz), 3000);
                             TradeClear(player);
                             TradeClear(dataTargetTrade.Player);
                             return;
                         }
                         else if (!targetCharacterData.BizIDs.Contains(Convert.ToInt32(dataTargetTrade.Number)))
                         {
-                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBusiness), 3000);
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorChelBiz), 3000);
+                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBusiness), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorChelBiz), 3000);
                             TradeClear(player);
                             TradeClear(dataTargetTrade.Player);
                             return;
                         }
                         TradeUpdate(player, "business", dataTargetTrade);
                         TradeUpdate(dataTargetTrade.Player, "business", dataTrade);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
-                        Notify.Send(dataTargetTrade.Player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
+                        Notify.Send(dataTargetTrade.Player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
                         TradeClear(player, false);
                         TradeClear(dataTargetTrade.Player, false);
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeBusinessesConfirmed, dataTargetTrade.Player.Name, dataTargetTrade.Player.Value), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeBusinessesConfirmed, dataTargetTrade.Player.Name, dataTargetTrade.Player.Value), 3000);
                     }
                 }
             }
@@ -473,7 +473,7 @@ namespace NeptuneEvo.Chars
             }
         }*/
         #endregion
-        #region Машина
+        #region Vehicle
         /*public static void TradeVehicleStart(ExtPlayer player)
         {
             try
@@ -488,7 +488,7 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -498,7 +498,7 @@ namespace NeptuneEvo.Chars
                 if (vehiclesNumber.Count == 0)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoCar), 3000);
                     return;
                 }
                 Menu menu = new Menu("tradecar", false, true);
@@ -517,7 +517,7 @@ namespace NeptuneEvo.Chars
                 }
 
                 menuItem = new Menu.Item("close", Menu.MenuItem.Button);
-                menuItem.Text = LangFunc.GetText(LangType.Ru, DataName.Close);
+                menuItem.Text = LangFunc.GetText(LangType.En, DataName.Close);
                 menu.Add(menuItem);
 
                 menu.Open(player);
@@ -543,7 +543,7 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -551,7 +551,7 @@ namespace NeptuneEvo.Chars
                 if (item.ID == "close")
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     return;
                 }
                 dataTrade.Number = item.ID;
@@ -565,7 +565,7 @@ namespace NeptuneEvo.Chars
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerChosingVeh), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerChosingVeh), 3000);
                 }
             }
             catch (Exception e)
@@ -587,7 +587,7 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -597,7 +597,7 @@ namespace NeptuneEvo.Chars
                 if (vehicleData == null)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNeVladeetVehTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNeVladeetVehTrade), 3000);
                     return;
                 }
                 string vName = vehicleData.Model;
@@ -606,7 +606,7 @@ namespace NeptuneEvo.Chars
                 if (vehicleDataTarget == null)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNeVladeetVehTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNeVladeetVehTrade), 3000);
                     return;
                 }
 
@@ -634,7 +634,7 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -643,7 +643,7 @@ namespace NeptuneEvo.Chars
 
                 if (!toggled)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeSucCancelled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeSucCancelled), 3000);
                     TradeClear(player);
                 }
                 else
@@ -653,36 +653,36 @@ namespace NeptuneEvo.Chars
                     {
                         if (player.Position.DistanceTo(dataTargetTrade.Player.Position) > 3)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
-                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
+                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                             TradeClear(player, false);
                             return;
                         }
                         var vehicleData = VehicleManager.GetVehicleToNumber(dataTrade.Number);
                         if (vehicleData == null || vehicleData.Holder != player.Name)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNeVladeetVehTrade), 3000);
-                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNeVladeetVehTrade), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNeVladeetVehTrade), 3000);
+                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNeVladeetVehTrade), 3000);
                             TradeClear(player, false);
                             return;
                         }
                         var vehicleDataTarget = VehicleManager.GetVehicleToNumber(dataTargetTrade.Number);
                         if (vehicleDataTarget == null || vehicleDataTarget.Holder != dataTargetTrade.Player.Name)
                         {
-                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNeVladeetVehTrade), 3000);
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNeVladeetVehTrade), 3000);
+                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNeVladeetVehTrade), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNeVladeetVehTrade), 3000);
                             TradeClear(player, false);
                             return;
                         }
                         TradeUpdate(player, "vehicle", dataTargetTrade);
                         TradeUpdate(dataTargetTrade.Player, "vehicle", dataTrade);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
-                        Notify.Send(dataTargetTrade.Player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
+                        Notify.Send(dataTargetTrade.Player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
                         TradeClear(player, false);
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeBusinessesConfirmed, dataTargetTrade.Player.Name, dataTargetTrade.Player.Value), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeBusinessesConfirmed, dataTargetTrade.Player.Name, dataTargetTrade.Player.Value), 3000);
                     }
                 }
             }
@@ -692,7 +692,7 @@ namespace NeptuneEvo.Chars
             }
         }*/
         #endregion
-        #region Дом
+        #region House
         /*public static void TradeHouseConfirm(ExtPlayer player)
         {
             try
@@ -707,7 +707,7 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -717,14 +717,14 @@ namespace NeptuneEvo.Chars
                 if (house == null || house.Owner != player.Name)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
                 var garage = house.GetGarageData();
                 if (garage == null)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
                 var garageType = GarageManager.GarageTypes[garage.BDType];
@@ -736,7 +736,7 @@ namespace NeptuneEvo.Chars
                 if (houseTarget == null)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonNoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonNoHome), 3000);
                     return;
                 }
 
@@ -745,7 +745,7 @@ namespace NeptuneEvo.Chars
                 if (garageTarget == null)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonNoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonNoHome), 3000);
                     return;
                 }
                 
@@ -754,8 +754,8 @@ namespace NeptuneEvo.Chars
                 int vehiclesCount = VehicleManager.GetVehiclesCarCountToPlayer(player.Name);
                 if (vehiclesCount > garageTargetType.MaxCars)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorMaxGarageCars, garageTargetType.MaxCars), 3000);
-                    Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerErrorMaxGarageCars, garageTargetType.MaxCars), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorMaxGarageCars, garageTargetType.MaxCars), 3000);
+                    Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerErrorMaxGarageCars, garageTargetType.MaxCars), 3000);
                     TradeClear(player, false);
                     return;
                 }
@@ -785,7 +785,7 @@ namespace NeptuneEvo.Chars
                 var targetSessionData = sessionData.TradePropertyData.Player.GetSessionData();
                 if (targetSessionData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -794,7 +794,7 @@ namespace NeptuneEvo.Chars
 
                 if (!toggled)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeSucCancelled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeSucCancelled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -805,33 +805,33 @@ namespace NeptuneEvo.Chars
                     {
                         if (player.Position.DistanceTo(dataTargetTrade.Player.Position) > 3)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                             TradeClear(player);
                             return;
                         }
                         var house = HouseManager.GetHouse(player, true);
                         if (house == null || house.Owner != player.Name)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoreHouse), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoreHouse), 3000);
                             TradeClear(player);
                             return;
                         }
                         House houseTarget = HouseManager.GetHouse(dataTrade.Player, true);
                         if (houseTarget == null || houseTarget.Owner != dataTrade.Player.Name)
                         {
-                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoreHouse), 3000);
+                            Notify.Send(dataTargetTrade.Player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoreHouse), 3000);
                             TradeClear(player);
                             return;
                         }
                         TradeUpdate(player, "house", dataTargetTrade);
                         TradeUpdate(dataTrade.Player, "house", dataTrade);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
-                        Notify.Send(dataTrade.Player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
+                        Notify.Send(dataTrade.Player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
                         TradeClear(player, false);
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeBusinessesConfirmed, dataTrade.Player.Name, dataTrade.Player.Value), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeBusinessesConfirmed, dataTrade.Player.Name, dataTrade.Player.Value), 3000);
                     }
                 }
             }
@@ -857,7 +857,7 @@ namespace NeptuneEvo.Chars
                 var targetCharacterData = dataTrade.Player.GetCharacterData();
                 if (targetSessionData == null || targetCharacterData == null || targetSessionData.TradePropertyData == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCanceled), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCanceled), 3000);
                     TradeClear(player);
                     return;
                 }
@@ -930,125 +930,125 @@ namespace NeptuneEvo.Chars
 
         public static RouletteCategory[] RoulleteCategoryList =
         {
-            new RouletteCategory("Бесплатные", "keys_2", new int[] {0, 1, 2}),
-            new RouletteCategory("Стандартные", "keys_5", new int[] {3, 4, 5, 6, 7}),
-            new RouletteCategory("Элитные", "keys_7", new int[] {8, 9, 12, 14, 11, 10, 13}),
+            new RouletteCategory("Free", "keys_2", new int[] {0, 1, 2}),
+            new RouletteCategory("Standard", "keys_5", new int[] {3, 4, 5, 6, 7}),
+            new RouletteCategory("Elite", "keys_7", new int[] {8, 9, 12, 14, 11, 10, 13}),
         };
 
         public static string RoulleteCategoryListJson = "";
-        
-        
+
+
         public static List<RouletteCaseData> RouletteCasesData = new List<RouletteCaseData> { 
-            /* 
-            Case 'Free Common' - 10 items 
-            Blue    25.00% 
-            Yellow  40.00% 
-            Pink    30.00% 
-            Red     5.00% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case0, "Бесплатный ежедневный кейс", 0, new List<RouletteItemData>(), "keys_0", "Бесплатный кейс, можно открыть спустя 3 часа игры."), 
-            /* 
-            Case 'Free Weapon' - 20 items 
-            Blue    40.00% 
-            Yellow  30.00% 
-            Pink    27.00% 
-            Red     3.00% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case1, "Бесплатный оружейный кейс", 0, new List<RouletteItemData>(), "keys_1", "Бесплатный кейс с оружием, можно открыть спустя 5 часов игры."), 
-            /* 
-            Case 'Free Vehicle' - 28 items 
-            Blue    40.00% 
-            Yellow  47.00% 
-            Pink    10.00% 
-            Red     3.00% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case2, "Бесплатный автомобильный кейс", 0, new List<RouletteItemData>(), "keys_2", "Бесплатный кейс с машинами, можно открыть спустя 8 часов игры."), 
-            /* 
-            Case 'Standart' - 16 items 
-            Blue    48.40% 
-            Yellow  27.50% 
-            Pink    15.00% 
-            Red     9.10% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case3, "Стандартный кейс", 99, new List<RouletteItemData>(), "keys_3", "Стандартный кейс со стандартными призами."),             
-            /* 
-            Case 'VIP' - 19 items 
-            Blue    40.00% 
-            Yellow  14.80% 
-            Pink    35.00% 
-            Red     10.20% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case4, "Странный кейс", 249, new List<RouletteItemData>(), "keys_4", "Неплохой кейс для начинающих."), 
-            /* 
-            Case 'Premium' - 20 items 
-            Blue    40.00% 
-            Yellow  0.00% 
-            Pink    47.20% 
-            Red     12.80% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case5, "Особенный кейс", 499, new List<RouletteItemData>(), "keys_5", "Сочный кейс, есть возможность серьёзно окупиться!"), 
-            /* 
-            Case 'Rare' - 15 items 
-            Blue    29.00% 
-            Yellow  40.00% 
-            Pink    25.00% 
-            Red     6.00% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case6, "Редкий кейс", 999, new List<RouletteItemData>(), "keys_6", "Кейс с вещами и автомобилями повышенной редкости."), 
-            /* 
-            Case 'Exclusive' - 16 items 
-            Blue    38.00% 
-            Yellow  15.75% 
-            Pink    35.00% 
-            Red     11.25% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case7, "Лютый кейс", 2499, new List<RouletteItemData>(), "keys_7", "Очень лютый кейс. Суперприз - Bugatti, самый быстрый автомобиль."), 
-                        /* 
-            Case 'Case M' - 12 items 
-            Blue    38.00% 
-            Yellow  15.75% 
-            Pink    35.00% 
-            Red     11.25% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case8, "Мужской кейс", 2999, new List<RouletteItemData>(), "keys_9", "Кейс с МУЖСКОЙ одеждой из донатного магазина одежды. Испытай удачу и будь стильным, или продай кому-то и будь богатым. А можешь и подарить..."), 
-                        /* 
-            Case 'Case JE' - 12 items 
-            Blue    38.00% 
-            Yellow  15.75% 
-            Pink    35.00% 
-            Red     11.25% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case9, "Женский кейс", 2999, new List<RouletteItemData>(), "keys_10", "Кейс с ЖЕНСКОЙ одеждой из донатного магазина одежды. Отличный вариант, если хочется что-нибудь подарить."), 
-                        /* 
-            Case 'Exotic' - 12 items 
-            Blue    38.00% 
-            Yellow  15.75% 
-            Pink    35.00% 
-            Red     11.25% 
-            Total   10000 - 100.00% 
-            */ 
-            new RouletteCaseData(ItemId.Case10, "Экзотический кейс", 7777, new List<RouletteItemData>(), "keys_8", "Кейс с автомобилями из DonateRoom Autoroom. Доната Редбаксовна одобряет!"),              
-            new RouletteCaseData(ItemId.Case11, "Легендарный кейс", 5555, new List<RouletteItemData>(), "keys_11", "Все или ничего! Хочешь рискнуть и стать обладателем легендарной кофты RedAge? Тогда крути кейс!"), 
-            new RouletteCaseData(ItemId.Case12, "Интересный кейс", 3999, new List<RouletteItemData>(), "keys_12", "Давно хочешь себе уникальную машину которая нигде не продается? Пожалуйста! Dodge Charger - стоит на вооружении у полиции, обладает довольно высокими характеристиками."), 
-            new RouletteCaseData(ItemId.Case13, "Вертолетный кейс", 8888, new List<RouletteItemData>(), "keys_13", "Любишь смотреть на людей свысока? Пожалуй, для этого идеально подойдет вертолёт!"), 
-            new RouletteCaseData(ItemId.Case14, "Бронированный кейс", 5000, new List<RouletteItemData>(), "keys_14", "Классный новый кейс с модными бронированными тачками!"),
-            new RouletteCaseData(ItemId.Case15, "Эксклюзивный кейс", 100, new List<RouletteItemData>(), "keys_15", "Классный новый с размещаемыми предметами!"),
-            new RouletteCaseData(ItemId.Case16, "Снежный кейс [М]", 5000, new List<RouletteItemData>(), "keys_16", "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. Насколько быстро ты сможешь собрать свой сет?"),   
-            new RouletteCaseData(ItemId.Case17, "Аметистовый кейс [М]", 5000, new List<RouletteItemData>(), "keys_17", "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. Насколько быстро ты сможешь собрать свой сет?"),   
-            new RouletteCaseData(ItemId.Case18, "Праздничный кейс [М]", 5000, new List<RouletteItemData>(), "keys_18", "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. Насколько быстро ты сможешь собрать свой сет?"),   
-            new RouletteCaseData(ItemId.Case19, "Снежный кейс [Ж]", 5000, new List<RouletteItemData>(), "keys_19", "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. Насколько быстро ты сможешь собрать свой сет?"),  
-            new RouletteCaseData(ItemId.Case20, "Аметистовый кейс [Ж]", 5000, new List<RouletteItemData>(), "keys_20", "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. Насколько быстро ты сможешь собрать свой сет?"),  
-            new RouletteCaseData(ItemId.Case21, "Праздничный кейс [Ж]", 5000, new List<RouletteItemData>(), "keys_21", "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. Насколько быстро ты сможешь собрать свой сет?"),  
+             /* 
+             Case 'Free Common' - 10 items 
+             Blue    25.00% 
+             Yellow  40.00% 
+             Pink    30.00% 
+             Red     5.00% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case0, "Free Daily Case", 0, new List<RouletteItemData>(), "keys_0", "A free case, can be opened after 3 hours of playtime."), 
+             /* 
+             Case 'Free Weapon' - 20 items 
+             Blue    40.00% 
+             Yellow  30.00% 
+             Pink    27.00% 
+             Red     3.00% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case1, "Free Weapon Case", 0, new List<RouletteItemData>(), "keys_1", "A free case with weapons, can be opened after 5 hours of playtime."), 
+             /* 
+             Case 'Free Vehicle' - 28 items 
+             Blue    40.00% 
+             Yellow  47.00% 
+             Pink    10.00% 
+             Red     3.00% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case2, "Free Vehicle Case", 0, new List<RouletteItemData>(), "keys_2", "A free case with cars, can be opened after 8 hours of playtime."), 
+             /* 
+             Case 'Standart' - 16 items 
+             Blue    48.40% 
+             Yellow  27.50% 
+             Pink    15.00% 
+             Red     9.10% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case3, "Standard Case", 99, new List<RouletteItemData>(), "keys_3", "A standard case with standard prizes."),             
+             /* 
+             Case 'VIP' - 19 items 
+             Blue    40.00% 
+             Yellow  14.80% 
+             Pink    35.00% 
+             Red     10.20% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case4, "Strange Case", 249, new List<RouletteItemData>(), "keys_4", "A decent case for beginners."), 
+             /* 
+             Case 'Premium' - 20 items 
+             Blue    40.00% 
+             Yellow  0.00% 
+             Pink    47.20% 
+             Red     12.80% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case5, "Special Case", 499, new List<RouletteItemData>(), "keys_5", "A juicy case, with a chance for a serious profit!"), 
+             /* 
+             Case 'Rare' - 15 items 
+             Blue    29.00% 
+             Yellow  40.00% 
+             Pink    25.00% 
+             Red     6.00% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case6, "Rare Case", 999, new List<RouletteItemData>(), "keys_6", "A case with items and vehicles of higher rarity."), 
+             /* 
+             Case 'Exclusive' - 16 items 
+             Blue    38.00% 
+             Yellow  15.75% 
+             Pink    35.00% 
+             Red     11.25% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case7, "Fierce Case", 2499, new List<RouletteItemData>(), "keys_7", "A very fierce case. The grand prize is a Bugatti, the fastest car."), 
+             /* 
+             Case 'Case M' - 12 items 
+             Blue    38.00% 
+             Yellow  15.75% 
+             Pink    35.00% 
+             Red     11.25% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case8, "Men's Case", 2999, new List<RouletteItemData>(), "keys_9", "A case with MEN'S clothing from the donation store. Test your luck and be stylish, or sell it and be rich. Or you could even gift it..."), 
+             /* 
+             Case 'Case JE' - 12 items 
+             Blue    38.00% 
+             Yellow  15.75% 
+             Pink    35.00% 
+             Red     11.25% 
+             Total   10000 - 100.00% 
+             */ 
+             new RouletteCaseData(ItemId.Case9, "Women's Case", 2999, new List<RouletteItemData>(), "keys_10", "A case with WOMEN'S clothing from the donation store. A great option if you want to give a gift."), 
+             /* 
+             Case 'Exotic' - 12 items 
+             Blue    38.00% 
+             Yellow  15.75% 
+             Pink    35.00% 
+             Red     11.25% 
+             Total   10000 - 100.00% 
+             */ 
+            new RouletteCaseData(ItemId.Case10, "Exotic Case", 7777, new List<RouletteItemData>(), "keys_8", "A case with cars from the Donate Room Autoroom. Donata Redbucksovna approves!"),
+            new RouletteCaseData(ItemId.Case11, "Legendary Case", 5555, new List<RouletteItemData>(), "keys_11", "All or nothing! Want to risk it and become the owner of the legendary RedAge sweater? Then spin the case!"),
+            new RouletteCaseData(ItemId.Case12, "Interesting Case", 3999, new List<RouletteItemData>(), "keys_12", "Been wanting a unique car that isn't sold anywhere? Here you go! The Dodge Charger - used by the police, with fairly high specs."),
+            new RouletteCaseData(ItemId.Case13, "Helicopter Case", 8888, new List<RouletteItemData>(), "keys_13", "Love looking down on people? A helicopter is probably perfect for that!"),
+            new RouletteCaseData(ItemId.Case14, "Armored Case", 5000, new List<RouletteItemData>(), "keys_14", "A cool new case with trendy armored cars!"),
+            new RouletteCaseData(ItemId.Case15, "Exclusive Case", 100, new List<RouletteItemData>(), "keys_15", "A cool new case with placeable items!"),
+            new RouletteCaseData(ItemId.Case16, "Snow Case [M]", 5000, new List<RouletteItemData>(), "keys_16", "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. How quickly can you collect your set?"),
+            new RouletteCaseData(ItemId.Case17, "Amethyst Case [M]", 5000, new List<RouletteItemData>(), "keys_17", "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. How quickly can you collect your set?"),
+            new RouletteCaseData(ItemId.Case18, "Holiday Case [M]", 5000, new List<RouletteItemData>(), "keys_18", "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. How quickly can you collect your set?"),
+            new RouletteCaseData(ItemId.Case19, "Snow Case [F]", 5000, new List<RouletteItemData>(), "keys_19", "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. How quickly can you collect your set?"),
+            new RouletteCaseData(ItemId.Case20, "Amethyst Case [F]", 5000, new List<RouletteItemData>(), "keys_20", "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. How quickly can you collect your set?"),
+            new RouletteCaseData(ItemId.Case21, "Holiday Case [F]", 5000, new List<RouletteItemData>(), "keys_21", "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. How quickly can you collect your set?"),
         };
 
         public static List<List<object>> RouletteCasesDataJson = new List<List<object>>();
@@ -1247,62 +1247,62 @@ namespace NeptuneEvo.Chars
                         }
                         if (accountData.VipLvl > 0 && accountData.VipLvl < rank)//Если выйгранная выше нынешнеей
                         {
-                            returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinVip, Group.GroupNames[rank], Amount, Group.GroupNames[accountData.VipLvl]);
+                            returnText = LangFunc.GetText(LangType.En, DataName.CaseWinVip, Group.GroupNames[rank], Amount, Group.GroupNames[accountData.VipLvl]);
                         }
                         else if (accountData.VipLvl > 0 && accountData.VipLvl > rank)//Если нынешняя випка выше выйграной
                         {
-                            returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinVipHueviy, Group.GroupNames[rank], Amount);
+                            returnText = LangFunc.GetText(LangType.En, DataName.CaseWinVipHueviy, Group.GroupNames[rank], Amount);
                         }
-                        else returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinVipNoVip, Group.GroupNames[rank], Amount);//если нет випки
+                        else returnText = LangFunc.GetText(LangType.En, DataName.CaseWinVipNoVip, Group.GroupNames[rank], Amount);//если нет випки
                         break;
                     case "Игровая валюта":
-                        returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinMoney, Wallet.Format(Amount));
+                        returnText = LangFunc.GetText(LangType.En, DataName.CaseWinMoney, Wallet.Format(Amount));
                         break;
                     case "EXP":
-                        returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinExp, Amount);
+                        returnText = LangFunc.GetText(LangType.En, DataName.CaseWinExp, Amount);
                         break;
                     case "RedBucks":
-                        returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinRB, Wallet.Format(Amount));
+                        returnText = LangFunc.GetText(LangType.En, DataName.CaseWinRB, Wallet.Format(Amount));
                         break;
                     case "Маска":
-                        returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinMask);
+                        returnText = LangFunc.GetText(LangType.En, DataName.CaseWinMask);
                         break;
                     case "Лицензия на вертолёт":
-                        if (characterData.Licenses[4]) returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinFlylicEst);
-                        else returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinFlylic);
+                        if (characterData.Licenses[4]) returnText = LangFunc.GetText(LangType.En, DataName.CaseWinFlylicEst);
+                        else returnText = LangFunc.GetText(LangType.En, DataName.CaseWinFlylic);
                         break;
                     case "Лицензия на самолёт":
-                        if (characterData.Licenses[5]) returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinSamoletEst);
-                        else returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinSamolet);
+                        if (characterData.Licenses[5]) returnText = LangFunc.GetText(LangType.En, DataName.CaseWinSamoletEst);
+                        else returnText = LangFunc.GetText(LangType.En, DataName.CaseWinSamolet);
                         break;
                     case "Лицензия парамедика":
-                        if (characterData.Licenses[8]) returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinParamedic);
-                        else returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinParamedicEst);
+                        if (characterData.Licenses[8]) returnText = LangFunc.GetText(LangType.En, DataName.CaseWinParamedic);
+                        else returnText = LangFunc.GetText(LangType.En, DataName.CaseWinParamedicEst);
                         break;
                     case "Сим-карта":
-                        if (characterData.Sim != -1) returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinSimCard, Amount);
-                        else returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinSimCard, Amount);
+                        if (characterData.Sim != -1) returnText = LangFunc.GetText(LangType.En, DataName.CaseWinSimCard, Amount);
+                        else returnText = LangFunc.GetText(LangType.En, DataName.CaseWinSimCard, Amount);
                         break;
                     case "Чай":
-                        returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinTea, Amount);
+                        returnText = LangFunc.GetText(LangType.En, DataName.CaseWinTea, Amount);
                         break;
                     default:
-                        returnText = LangFunc.GetText(LangType.Ru, DataName.CaseWinItem, Name);
+                        returnText = LangFunc.GetText(LangType.En, DataName.CaseWinItem, Name);
                         break;
                 }
 
                 if (Price > 0)
                 {
-                    returnText += LangFunc.GetText(LangType.Ru, DataName.CaseSellRB, Price);
-                    if (BtnTake) returnText += LangFunc.GetText(LangType.Ru, DataName.CaseOstavitPriz);
+                    returnText += LangFunc.GetText(LangType.En, DataName.CaseSellRB, Price);
+                    if (BtnTake) returnText += LangFunc.GetText(LangType.En, DataName.CaseOstavitPriz);
                 }
-                else if (BtnTake) returnText += LangFunc.GetText(LangType.Ru, DataName.CaseGetPrize);
+                else if (BtnTake) returnText += LangFunc.GetText(LangType.En, DataName.CaseGetPrize);
                 return returnText;
             }
             catch (Exception e)
             {
                 Log.Write($"RouletteToItemsText Exception: {e.ToString()}");
-                return LangFunc.GetText(LangType.Ru, DataName.CaseWinItem, Name);
+                return LangFunc.GetText(LangType.En, DataName.CaseWinItem, Name);
             }
         }
 
@@ -1318,12 +1318,12 @@ namespace NeptuneEvo.Chars
                 if (accountData == null) return false;
                 else if (!typeCurrency && accountData.RedBucks < amount)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return false;
                 }
                 else if (typeCurrency && characterData.Money < (amount * Convert.ToInt32(100 * Main.DonateSettings.Convert)))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                     return false;
                 }
                 return true;
@@ -1371,7 +1371,7 @@ namespace NeptuneEvo.Chars
             if (accountData == null) return;
             if (caseid >= RouletteCasesData.Count)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CaseNeDostupen), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CaseNeDostupen), 3000);
                 return;
             }
             RouletteCaseData caseData = RouletteCasesData[caseid];
@@ -1383,12 +1383,12 @@ namespace NeptuneEvo.Chars
             if (isFreeSlots(player, caseData.ItemId, count, send: false) != 0)
             {
                 Chars.Repository.AddNewItemWarehouse(player, caseData.ItemId, count);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CaseGetSklad), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CaseGetSklad), 3000);
                 return;
             }     
 
             AddNewItem(player, $"char_{characterData.UUID}", "inventory", caseData.ItemId, count);
-            Notify.Send(player, NotifyType.Success, NotifyPosition.Top, LangFunc.GetText(LangType.Ru, DataName.CaseGetInventory), 2000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.Top, LangFunc.GetText(LangType.En, DataName.CaseGetInventory), 2000);
         }
         public static void RouletteOpenCase(ExtPlayer player, int caseid, int count, bool typeCurrency = false)
         {
@@ -1396,7 +1396,7 @@ namespace NeptuneEvo.Chars
             {
                 if (!FunctionsAccess.IsWorking("opencase"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var characterData = player.GetCharacterData();
@@ -1409,7 +1409,7 @@ namespace NeptuneEvo.Chars
                 if (accountData == null) return;
                 else if (caseid >= RouletteCasesData.Count)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CaseNeDostupen), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CaseNeDostupen), 3000);
                     return;
                 }
                 /*else if (caseid == 0 && accountData.FreeCase[0] == 0)
@@ -1437,12 +1437,12 @@ namespace NeptuneEvo.Chars
                 ItemStruct aItem = Repository.isItem(player, "inventory", caseData.ItemId);
                 if (aItem == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoCase), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoCase), 3000);
                     return;
                 }
                 else if (count > aItem.Item.Count)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.Ru, DataName.YouHaveCases, aItem.Item.Count), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,LangFunc.GetText(LangType.En, DataName.YouHaveCases, aItem.Item.Count), 3000);
                     return;
                 }
 
@@ -1518,7 +1518,7 @@ namespace NeptuneEvo.Chars
                     if (sessionData.RouletteData[0].CreateTime < DateTime.Now) Events.RoulleteConfirm(player, false, -1);
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WaitTillNextTry), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WaitTillNextTry), 3000);
                         return null;
                     }
                 }
@@ -1764,8 +1764,8 @@ namespace NeptuneEvo.Chars
                 var accountData = player.GetAccountData();
 
                 if (accountData == null) return;
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WinOneFreeCase), 3000);
-                Commands.RPChat("sb", player, LangFunc.GetText(LangType.Ru, DataName.WonOneFreeCase));
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WinOneFreeCase), 3000);
+                Commands.RPChat("sb", player, LangFunc.GetText(LangType.En, DataName.WonOneFreeCase));
                 AddNewItemWarehouse(player, ItemId.Case0, 1);
             }
             catch (Exception e)
@@ -1804,18 +1804,18 @@ namespace NeptuneEvo.Chars
                             Wallet.Change(player, +returnPlayerData.Amount);
                             GameLog.Money($"system", $"player({characterData.UUID})", returnPlayerData.Amount, $"caseWin");
                             //PlayerStats(player);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonMoneyAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
                             break;
                         case "RedBucks":
                             RouletteUpdateWallet(player, returnPlayerData.Amount, returnPlayerData.TypeCurrency);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
                             break;
                         default:
                             if (returnPlayerData.Item.Name == "Сим-карта")
                                 Players.Phone.Sim.Repository.Add(returnPlayerData.Amount);
                             
                             RouletteUpdateWallet(player, returnPlayerData.Price, returnPlayerData.TypeCurrency);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonItemRBAmount, returnPlayerData.Item.Name, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonItemRBAmount, returnPlayerData.Item.Name, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
                             break;
                     }
                 }
@@ -1827,13 +1827,13 @@ namespace NeptuneEvo.Chars
                             Wallet.Change(player, +returnPlayerData.Amount);
                             GameLog.Money($"system", $"player({characterData.UUID})", returnPlayerData.Amount, $"caseWin");
                             //PlayerStats(player);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetMoneyAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetMoneyAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
                             break;
                         case "EXP":
                             UpdateData.Exp(player, returnPlayerData.Amount);
                             GameLog.Money($"system", $"player({characterData.UUID})", 0, $"caseWinExp({returnPlayerData.Amount})");
                             //PlayerStats(player);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItemAmount, returnPlayerData.Item.Name, returnPlayerData.Amount), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItemAmount, returnPlayerData.Item.Name, returnPlayerData.Amount), 3000);
                             break;
                         case "VIP Silver":
                         case "VIP Gold":
@@ -1862,11 +1862,11 @@ namespace NeptuneEvo.Chars
 
                             GameLog.Money($"system", $"player({characterData.UUID})", 0, $"caseWinVIP({rank}lvl, {returnPlayerData.Amount}d, стало до {accountData.VipDate.ToString("s")})");
                             //PlayerStats(player);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetVipAmount, returnPlayerData.Item.Name, returnPlayerData.Amount), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetVipAmount, returnPlayerData.Item.Name, returnPlayerData.Amount), 3000);
                             break;
                         case "RedBucks":
                             RouletteUpdateWallet(player, returnPlayerData.Amount, returnPlayerData.TypeCurrency);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Amount)), 3000);
                             break;
                         case "Маска":
                             Random rand = new Random();
@@ -1874,56 +1874,56 @@ namespace NeptuneEvo.Chars
                             //if (!ChangeAccessoriesItem(player, 1, $"{maskRand.Variation}_{maskRand.Colors[0]}_{characterData.Gender}"))
                             if (AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.Mask, 1, $"{maskRand.Variation}_{maskRand.Colors[0]}_{characterData.Gender}") == -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                                 RouletteUpdateWallet(player, returnPlayerData.Price, returnPlayerData.TypeCurrency);
                                 return;
                             }
                             GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinMask({maskRand.Variation})");
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetNewMask), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetNewMask), 3000);
                             break;
                         case "Лицензия на вертолёт":
                             if (characterData.Licenses[4])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyHaveLic), 3000);
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveLic), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
                                 RouletteUpdateWallet(player, returnPlayerData.Price, returnPlayerData.TypeCurrency);
                                 return;
                             }
                             GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinLic(4)");
                             characterData.Licenses[4] = true;
                             //PlayerStats(player);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouActivatedLicFly), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouActivatedLicFly), 3000);
                             break;
                         case "Лицензия на самолёт":
                             if (characterData.Licenses[5])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyHaveLic), 3000);
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveLic), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
                                 RouletteUpdateWallet(player, returnPlayerData.Price, returnPlayerData.TypeCurrency);
                                 return;
                             }
                             GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinLic(5)");
                             characterData.Licenses[5] = true;
                             //PlayerStats(player);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouActivatedLicSamolet), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouActivatedLicSamolet), 3000);
                             break;
                         case "Лицензия парамедика":
                             if (characterData.Licenses[8])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyHaveLic), 3000);
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveLic), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWonRbAmount, MoneySystem.Wallet.Format(returnPlayerData.Price)), 3000);
                                 RouletteUpdateWallet(player, returnPlayerData.Price, returnPlayerData.TypeCurrency);
                                 return;
                             }
                             GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinLic(8)");
                             characterData.Licenses[8] = true;
                             //PlayerStats(player);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouActivatedPMLic), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouActivatedPMLic), 3000);
                             break;
                         case "Сим-карта":
                             AddNewItemWarehouse(player, ItemId.SimCard, 1, returnPlayerData.Amount.ToString());
                             GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinItem({ItemId.SimCard},{returnPlayerData.Item.Name})");
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetSimCard, returnPlayerData.Amount), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetSimCard, returnPlayerData.Amount), 3000);
                             break;
 
                         default:
@@ -1934,7 +1934,7 @@ namespace NeptuneEvo.Chars
                                 success = true;
                                 AddNewItemWarehouse(player, nameWeapon, returnPlayerData.Amount, returnPlayerData.Item.ItemData);
                                 GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinItem({nameWeapon},{returnPlayerData.Item.Name})");
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItemSclad, returnPlayerData.Item.Name), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItemSclad, returnPlayerData.Item.Name), 3000);
                             }
                             else
                             {
@@ -1946,7 +1946,7 @@ namespace NeptuneEvo.Chars
                                         success = true;
                                         AddNewItemWarehouse(player, nameWeapon, returnPlayerData.Amount, nameWeapon == ItemId.BodyArmor ? 100.ToString() : "DRoulette");
                                         GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinItem({nameWeapon},{returnPlayerData.Item.Name})");
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItemSclad, returnPlayerData.Item.Name), 3000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItemSclad, returnPlayerData.Item.Name), 3000);
                                         break;
                                     }
                                 }
@@ -1956,7 +1956,7 @@ namespace NeptuneEvo.Chars
                                 ItemId nameWeapon = ItemId.CarCoupon;
                                 AddNewItemWarehouse(player, nameWeapon, 1, returnPlayerData.Item.Name);
                                 GameLog.Money($"system", $"player({characterData.UUID})", 1, $"caseWinItem({nameWeapon},{returnPlayerData.Item.Name})");
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItemSclad, returnPlayerData.Item.Name), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItemSclad, returnPlayerData.Item.Name), 3000);
                             }
                             /*if (!success && BusinessManager.ProductsOrderPrice.ContainsKey(returnPlayerData.Item.Name))
                             {
@@ -2109,7 +2109,7 @@ namespace NeptuneEvo.Chars
                 if (vehiclesNumber.Count == 0)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNeedNot2Cars), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNeedNot2Cars), 3000);
                     return;
                 }
                 int count = 0;
@@ -2123,7 +2123,7 @@ namespace NeptuneEvo.Chars
                 if (count <= 1)
                 {
                     TradeClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNeedNot2CarsPremium), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNeedNot2CarsPremium), 3000);
                     return;
                 }
                 string Number1 = null;
@@ -2178,13 +2178,13 @@ namespace NeptuneEvo.Chars
                 if (vehicleData1 == null)
                 {
                     ChangeAutoNumberClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarBoleeNetu), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarBoleeNetu), 3000);
                     return;
                 }
                 if (BusinessManager.CarsNames[2].Contains(vehicleData1.Model) || BusinessManager.CarsNames[3].Contains(vehicleData1.Model))
                 {
                     ChangeAutoNumberClear(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehNePodhoditDlyaObmena), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehNePodhoditDlyaObmena), 3000);
                     return;
                 }
                 var sessionData = player.GetSessionData();
@@ -2199,13 +2199,13 @@ namespace NeptuneEvo.Chars
                     if (vehicleData2 == null)
                     {
                         ChangeAutoNumberClear(player);
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarBoleeNetu), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarBoleeNetu), 3000);
                         return;
                     }
                     if (BusinessManager.CarsNames[2].Contains(vehicleData2.Model) || BusinessManager.CarsNames[3].Contains(vehicleData2.Model))
                     {
                         ChangeAutoNumberClear(player);
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehNePodhoditDlyaObmena), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehNePodhoditDlyaObmena), 3000);
                         return;
                     }
                     sessionData.ChangeAutoNumber.Number2 = number;
@@ -2237,7 +2237,7 @@ namespace NeptuneEvo.Chars
 
                 if (characterData.Money < 70000)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                     return;
                 }
                 var changeAutoNumber = sessionData.ChangeAutoNumber;
@@ -2246,7 +2246,7 @@ namespace NeptuneEvo.Chars
                 var vehicle2Data = VehicleManager.GetVehicleToNumber(changeAutoNumber.Number2);
                 if (vehicle1Data == null || vehicle2Data == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehDoesntExist), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehDoesntExist), 3000);
                     return;
                 }
                 Wallet.Change(player, -70000);
@@ -2261,7 +2261,7 @@ namespace NeptuneEvo.Chars
                 ChangeAutoNumberUpdate(changeAutoNumber.Number2, vehicle1Data, garage);
                 ChangeAutoNumberUpdate(changeAutoNumber.Number1, vehicle2Data, garage);
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucNumberTrade), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucNumberTrade), 3000);
             }
             catch (Exception e)
             {
@@ -2371,386 +2371,385 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
             { ClothesComponent.Shoes, new ClothesComponentId(6, ItemId.Feet, 13) },
             { ClothesComponent.Decals, new ClothesComponentId(10, ItemId.Decals, 14) },
         };
-        
+
         public static IReadOnlyDictionary<ItemId, ItemsInfo> ItemsInfo = new Dictionary<ItemId, ItemsInfo>()
         {
-            { ItemId.Mask, new ItemsInfo("Маска", "Помогает скрыть личность, но в тоже время служит украшением. Может быть сорвана полицейским.", "inv-item-mask", "Одежда", 3887136870, 1, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Clothes) },
-            { ItemId.Gloves, new ItemsInfo("Перчатки", "Согреют тебя холодной зимой.", "inv-item-glove", "Одежда", 3125389411, 1, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Clothes) },
-            { ItemId.Ears, new ItemsInfo("Наушники", ".", "inv-item-ears", "Одежда", 3125389411, 1, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Clothes) },
-            { ItemId.Leg, new ItemsInfo("Штаны", "Не дадут тебе замёрзнуть.", "inv-item-shorts", "Одежда", 2086911125, 1, new Vector3(0.0,0.0,-0.85), new Vector3(), newItemType.Clothes) },
+            { ItemId.Mask, new ItemsInfo("Mask", "Helps to hide your identity, but also serves as a decoration. Can be torn off by a police officer.", "inv-item-mask", "Clothing", 3887136870, 1, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Clothes) },
+            { ItemId.Gloves, new ItemsInfo("Gloves", "Will keep you warm on a cold winter day.", "inv-item-glove", "Clothing", 3125389411, 1, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Clothes) },
+            { ItemId.Ears, new ItemsInfo("Headphones", ".", "inv-item-ears", "Clothing", 3125389411, 1, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Clothes) },
+            { ItemId.Leg, new ItemsInfo("Pants", "They won't let you freeze.", "inv-item-shorts", "Clothing", 2086911125, 1, new Vector3(0.0,0.0,-0.85), new Vector3(), newItemType.Clothes) },
 
-            { ItemId.Bag, new ItemsInfo("Сумка", "Позволяет переносить в себе любые предметы.", "inv-item-backpack", "Одежда", NAPI.Util.GetHashKey("prop_cs_heist_bag_02"), 1, new Vector3(0, 0, -0.85), new Vector3(), newItemType.Clothes) },
+            { ItemId.Bag, new ItemsInfo("Bag", "Allows you to carry any items inside.", "inv-item-backpack", "Clothing", NAPI.Util.GetHashKey("prop_cs_heist_bag_02"), 1, new Vector3(0, 0, -0.85), new Vector3(), newItemType.Clothes) },
 
-            { ItemId.Feet, new ItemsInfo("Обувь", "Современная модель, которая никогда тебя не подведёт.", "inv-item-sneakers", "Одежда", 1682675077, 1, new Vector3(0.0,0.0,-0.95), new Vector3(), newItemType.Clothes) },
-            { ItemId.Jewelry, new ItemsInfo("Аксессуар", "Позволяет улучшить внешний вид персонажа.", "inv-item-necklace", "Одежда", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
-            { ItemId.Undershit, new ItemsInfo("Нижняя одежда", "Может быть надета под верхней одеждой, придаёт стильный вид твоему персонажу.", "inv-item-shirt", "Одежда", 578126062, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
-            { ItemId.BodyArmor, new ItemsInfo("Бронежилет", "Служит средством защиты персонажа, способен впитать 100 урона, прежде чем сломается.", "inv-item-armor", "Одежда", 701173564, 1, new Vector3(0.0,0.0,-0.88), new Vector3(90, 90, 0), newItemType.Clothes) },
-            { ItemId.Decals, new ItemsInfo("Украшения", "Позволяют улучшить внешний вид персонажа.", "inv-item-clock", "Одежда", 0, 1, new Vector3(), new Vector3(), newItemType.Clothes) },
-            { ItemId.Top, new ItemsInfo("Верхняя одежда", "Может быть надета над нижней одеждой, придаёт стильный вид твоему персонажу.", "inv-item-jacket", "Одежда", 3038378640, 1, new Vector3(0.0,0.0,-0.96), new Vector3(), newItemType.Clothes) },
-            { ItemId.Hat, new ItemsInfo("Головной убор", "Спасёт тебя от солнечного удара в жаркий день.", "inv-item-cap", "Одежда", 1619813869, 1, new Vector3(0.0,0.0,-0.93), new Vector3(), newItemType.Clothes) },
-            { ItemId.Glasses, new ItemsInfo("Очки", "Защищат от солнца в самый солнечный день.", "inv-item-glasses", "Одежда", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
-            { ItemId.Bracelets, new ItemsInfo("Браслет", "Позволяют улучшить внешний вид персонажа.", "inv-item-bracelet", "Одежда", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
-            { ItemId.Watches, new ItemsInfo("Часы", "Показывает статусность твоего персонажа.", "inv-item-clock", "Одежда", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
+            { ItemId.Feet, new ItemsInfo("Footwear", "A modern style that will never let you down.", "inv-item-sneakers", "Clothing", 1682675077, 1, new Vector3(0.0,0.0,-0.95), new Vector3(), newItemType.Clothes) },
+            { ItemId.Jewelry, new ItemsInfo("Accessory", "Allows you to improve your character's appearance.", "inv-item-necklace", "Clothing", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
+            { ItemId.Undershit, new ItemsInfo("Undershirt", "Can be worn under outerwear, gives your character a stylish look.", "inv-item-shirt", "Clothing", 578126062, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
+            { ItemId.BodyArmor, new ItemsInfo("Body Armor", "Serves as protection for the character, able to absorb 100 damage before it breaks.", "inv-item-armor", "Clothing", 701173564, 1, new Vector3(0.0,0.0,-0.88), new Vector3(90, 90, 0), newItemType.Clothes) },
+            { ItemId.Decals, new ItemsInfo("Decals", "Allows you to improve your character's appearance.", "inv-item-clock", "Clothing", 0, 1, new Vector3(), new Vector3(), newItemType.Clothes) },
+            { ItemId.Top, new ItemsInfo("Top/Jacket", "Can be worn over an undershirt, gives your character a stylish look.", "inv-item-jacket", "Clothing", 3038378640, 1, new Vector3(0.0,0.0,-0.96), new Vector3(), newItemType.Clothes) },
+            { ItemId.Hat, new ItemsInfo("Headwear", "Will save you from sunstroke on a hot day.", "inv-item-cap", "Clothing", 1619813869, 1, new Vector3(0.0,0.0,-0.93), new Vector3(), newItemType.Clothes) },
+            { ItemId.Glasses, new ItemsInfo("Glasses", "Will protect you from the sun on the sunniest day.", "inv-item-glasses", "Clothing", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
+            { ItemId.Bracelets, new ItemsInfo("Bracelet", "Allows you to improve your character's appearance.", "inv-item-bracelet", "Clothing", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
+            { ItemId.Watches, new ItemsInfo("Watch", "Shows the status of your character.", "inv-item-clock", "Clothing", 2329969874, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.Clothes) },
 
             { ItemId.Debug, new ItemsInfo("None", "", "", "", 0, 0, new Vector3(), new Vector3(), newItemType.None) },
-            { ItemId.BagWithDrill, new ItemsInfo("Сумка с дрелью", "Используется для взлома хранилища.","inv-item-Bag-drill", "Остальное", NAPI.Util.GetHashKey("prop_cs_heist_bag_02"), 1, new Vector3(0, 0, -0.85), new Vector3(), newItemType.None) },
-            { ItemId.GasCan, new ItemsInfo("Канистра", "Можно заправить транспортное средство.","inv-item-gasoline", "Инструменты", 786272259, 2, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.None) },
-            { ItemId.Crisps, new ItemsInfo("Чипсы", "Закуска, восстанавливает 30% здоровья.","inv-item-Chips", "Еда", 2564432314, 4, new Vector3(0.0,0.0,-1.0), new Vector3(90, 90, 0), newItemType.Eat) },
-            { ItemId.Beer, new ItemsInfo("Пиво", "Пивка для рывка!","inv-item-beer", "Вода", 1940235411, 5, new Vector3(0.0,0.0,-0.97), new Vector3(-80, 0, 0), newItemType.Water) },
-            { ItemId.Pizza, new ItemsInfo("Пицца", "Ммм... Пицца... Восстанавливает 30% здоровья.","inv-item-pizza", "Еда", 604847691, 3, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Eat) },
-            { ItemId.Burger, new ItemsInfo("Бургер", "Булка с котлеткой, восстанавливает 30% здоровья.","inv-item-burger", "Еда", 2240524752, 4, new Vector3(0.0,0.0,-0.97), new Vector3(), newItemType.Eat) },
-            { ItemId.HotDog, new ItemsInfo("Хот-Дог", "Булка с сосиской, восстанавливает 30% здоровья.","inv-item-hot-dog", "Еда", 2565741261, 5, new Vector3(0.0,0.0,-0.97), new Vector3(), newItemType.Eat) },
-            { ItemId.Sandwich, new ItemsInfo("Сэндвич", "Несколько ломтиков хлеба и мяса, восстанавливает 30% здоровья.","inv-item-sandwich", "Еда", 987331897, 7, new Vector3(0.0,0.0,-0.99), new Vector3(), newItemType.Eat) },
-            { ItemId.eCola, new ItemsInfo("eCola", "Безалкогольный газированный напиток, восстанавливает 10% здоровья.","inv-item-eCola", "Вода", 144995201, 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Water) },
-            { ItemId.Sprunk, new ItemsInfo("Sprunk", "Сильногазированный прохладительный напиток, восстанавливает 10% здоровья.","inv-item-eCola", "Вода", 2973713592, 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Water) },
-            { ItemId.Lockpick, new ItemsInfo("Отмычка для замков", "Инструмент для вскрытия замков без ключа.","inv-item-picklock", "Инструмент", 977923025, 10, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
-            { ItemId.BagWithMoney, new ItemsInfo("Сумка с деньгами", "Туда можно сложить все деньги после ограбления 24/7.","inv-item-briefcase", "Остальное", NAPI.Util.GetHashKey("p_ld_heist_bag_s_pro"), 1, new Vector3(0, 0, -1.1), new Vector3(0, 30, 110), newItemType.None) },
-            { ItemId.Material, new ItemsInfo("Материалы", "Нужны для создания оружия и патронов.","inv-item-fraction", "Остальное", 3045218749, 4000, new Vector3(0.0,0.0,-0.6), new Vector3(), newItemType.None) },
-            { ItemId.Drugs, new ItemsInfo("Наркотики", "Волшебный чай накладывает эффект наркотического опьянения.","inv-item-marijuana", "Остальное", 4293279169, 50, new Vector3(0.0,0.0,-0.95), new Vector3(), newItemType.None) },
-            { ItemId.HealthKit, new ItemsInfo("Аптечка","Нужна для лечения, можно использовать 1 раз в 5 минут.","inv-item-medical-kit", "Остальное", 678958360, 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.BagWithDrill, new ItemsInfo("Bag with Drill", "Used to break into the vault.","inv-item-Bag-drill", "Other", NAPI.Util.GetHashKey("prop_cs_heist_bag_02"), 1, new Vector3(0, 0, -0.85), new Vector3(), newItemType.None) },
+            { ItemId.GasCan, new ItemsInfo("Gas Can", "Can be used to refuel a vehicle.","inv-item-gasoline", "Tools", 786272259, 2, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.None) },
+            { ItemId.Crisps, new ItemsInfo("Chips", "A snack, restores 30% health.","inv-item-Chips", "Food", 2564432314, 4, new Vector3(0.0,0.0,-1.0), new Vector3(90, 90, 0), newItemType.Eat) },
+            { ItemId.Beer, new ItemsInfo("Beer", "A cold one for the road!","inv-item-beer", "Water", 1940235411, 5, new Vector3(0.0,0.0,-0.97), new Vector3(-80, 0, 0), newItemType.Water) },
+            { ItemId.Pizza, new ItemsInfo("Pizza", "Mmm... Pizza... Restores 30% health.","inv-item-pizza", "Food", 604847691, 3, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Eat) },
+            { ItemId.Burger, new ItemsInfo("Burger", "A bun with a patty, restores 30% health.","inv-item-burger", "Food", 2240524752, 4, new Vector3(0.0,0.0,-0.97), new Vector3(), newItemType.Eat) },
+            { ItemId.HotDog, new ItemsInfo("Hot Dog", "A bun with a sausage, restores 30% health.","inv-item-hot-dog", "Food", 2565741261, 5, new Vector3(0.0,0.0,-0.97), new Vector3(), newItemType.Eat) },
+            { ItemId.Sandwich, new ItemsInfo("Sandwich", "A few slices of bread and meat, restores 30% health.","inv-item-sandwich", "Food", 987331897, 7, new Vector3(0.0,0.0,-0.99), new Vector3(), newItemType.Eat) },
+            { ItemId.eCola, new ItemsInfo("eCola", "A non-alcoholic carbonated drink, restores 10% health.","inv-item-eCola", "Water", 144995201, 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Water) },
+            { ItemId.Sprunk, new ItemsInfo("Sprunk", "A highly carbonated soft drink, restores 10% health.","inv-item-eCola", "Water", 2973713592, 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Water) },
+            { ItemId.Lockpick, new ItemsInfo("Lockpick", "A tool for opening locks without a key.","inv-item-picklock", "Tool", 977923025, 10, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
+            { ItemId.BagWithMoney, new ItemsInfo("Bag with Money", "You can put all the money in here after robbing a 24/7.","inv-item-briefcase", "Other", NAPI.Util.GetHashKey("p_ld_heist_bag_s_pro"), 1, new Vector3(0, 0, -1.1), new Vector3(0, 30, 110), newItemType.None) },
+            { ItemId.Material, new ItemsInfo("Materials", "Needed to create weapons and ammunition.","inv-item-fraction", "Other", 3045218749, 4000, new Vector3(0.0,0.0,-0.6), new Vector3(), newItemType.None) },
+            { ItemId.Drugs, new ItemsInfo("Drugs", "This magical tea produces a narcotic effect.","inv-item-marijuana", "Other", 4293279169, 50, new Vector3(0.0,0.0,-0.95), new Vector3(), newItemType.None) },
+            { ItemId.HealthKit, new ItemsInfo("First-Aid Kit","Needed for healing, can be used once every 5 minutes.","inv-item-medical-kit", "Other", 678958360, 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
 
-            { ItemId.ArmyLockpick, new ItemsInfo("Военная отмычка", "Инструмент для вскрытия замков военных автомобилей.","inv-item-picklock", "Инструмент", 977923025, 10, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
-            { ItemId.Pocket, new ItemsInfo("Мешок", "Обычный мешок. Говорят, его можно надеть кому-то на голову...","inv-item-bag", "Инструмент", 3887136870, 5, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
-            { ItemId.Cuffs, new ItemsInfo("Стяжки", "Позволяют связать человека с поднятыми руками.","inv-item-stretching", "Инструмент", 3887136870, 5, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
-            { ItemId.CarKey, new ItemsInfo("Ключи от машины", "Инструмент, позволяющий открыть/закрыть автомобиль и завести его.","inv-item-key", "Инструмент", 977923025, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
-            { ItemId.Present, new ItemsInfo("Подарок", "Содержит в себе что-то интересное! Открывай быстрее!","inv-item-gift", "Инструмент", 1580014892, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
-            { ItemId.KeyRing, new ItemsInfo("Связка ключей", "Собирает все ключи в одну большую связку и экономит место в карманах!","inv-item-key-2", "Инструмент", 977923025, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
+            { ItemId.ArmyLockpick, new ItemsInfo("Military Lockpick", "A tool for opening the locks of military vehicles.","inv-item-picklock", "Tool", 977923025, 10, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
+            { ItemId.Pocket, new ItemsInfo("Sack", "A regular sack. They say you can put it on someone's head...","inv-item-bag", "Tool", 3887136870, 5, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
+            { ItemId.Cuffs, new ItemsInfo("Zip Ties", "Allows you to tie up a person with their hands up.","inv-item-stretching", "Tool", 3887136870, 5, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
+            { ItemId.CarKey, new ItemsInfo("Car Keys", "A tool that allows you to lock/unlock and start a car.","inv-item-key", "Tool", 977923025, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
+            { ItemId.Present, new ItemsInfo("Gift", "Contains something interesting! Open it quickly!","inv-item-gift", "Tool", 1580014892, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
+            { ItemId.KeyRing, new ItemsInfo("Key Ring", "Gathers all your keys into one large ring and saves space in your pockets!","inv-item-key-2", "Tool", 977923025, 1, new Vector3(0.0,0.0,-0.98), new Vector3(), newItemType.None) },
             /* Drinks */
-            { ItemId.RusDrink1, new ItemsInfo("<На корке лимона>", "Алкогольный напиток с нотками лимона, накладывает эффект алкогольного опьянения.","inv-item-On-lemon-peel", "Спиртное", NAPI.Util.GetHashKey("prop_rum_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.RusDrink2, new ItemsInfo("<На бруснике>", "Алкогольный напиток с легкой ноткой брусники, накладывает эффект алкогольного опьянения.","inv-item-The-cranberries", "Спиртное", NAPI.Util.GetHashKey("h4_prop_h4_t_bottle_01a"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.RusDrink3, new ItemsInfo("<Русский стандарт>", "Старая добрая Русская водка, накладывает эффект алкогольного опьянения.","inv-item-Russian-standard", "Спиртное", NAPI.Util.GetHashKey("prop_vodka_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.YakDrink1, new ItemsInfo("<Asahi>", "Пиво с низким содержанием солода, накладывает эффект алкогольного опьянения.","inv-item-Asahi", "Спиртное", NAPI.Util.GetHashKey("prop_bottle_brandy"), 5, new Vector3(0.0,0.0,-0.87), new Vector3(), newItemType.Alco) },
-            { ItemId.YakDrink2, new ItemsInfo("<Midori>", "Сладкий дынный ликер, накладывает эффект алкогольного опьянения.","inv-item-Midori", "Спиртное", NAPI.Util.GetHashKey("prop_bottle_cognac"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.YakDrink3, new ItemsInfo("<Yamazaki>", "Японский виски, накладывает эффект алкогольного опьянения.","inv-item-Yamazaki", "Спиртное", NAPI.Util.GetHashKey("prop_bottle_macbeth"), 5, new Vector3(0.0,0.0,-0.87), new Vector3(), newItemType.Alco) },
-            { ItemId.LcnDrink1, new ItemsInfo("<Martini Asti>", "Игристое вино, накладывает эффект алкогольного опьянения.","inv-item-Martini-Asti", "Спиртное", NAPI.Util.GetHashKey("p_amb_bag_bottle_01"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.LcnDrink2, new ItemsInfo("<Sambuca>", "Крепкий ликер с приятным анисовым вкусом, накладывает эффект алкогольного опьянения.","inv-item-Sambuca", "Спиртное", NAPI.Util.GetHashKey("prop_cs_whiskey_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.LcnDrink3, new ItemsInfo("<Campari>", "Горький ликер на основе ароматических трав и фруктов.","inv-item-Campari", "Спиртное", NAPI.Util.GetHashKey("prop_bottle_richard"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.ArmDrink1, new ItemsInfo("<Дживан>", "Армянский коньяк, накладывает эффект алкогольного опьянения.","inv-item-alcohol", "Спиртное", NAPI.Util.GetHashKey("h4_prop_h4_t_bottle_02a"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.ArmDrink2, new ItemsInfo("<Арарат>", "Армянский коньяк с фруктово-цветочными нотками, накладывает эффект алкогольного опьянения.","inv-item-ararat", "Спиртное", NAPI.Util.GetHashKey("p_cs_bottle_01"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
-            { ItemId.ArmDrink3, new ItemsInfo("<Noyan Tapan>", "Армянский винный напиток, накладывает эффект алкогольного опьянения.","inv-item-Noyan-Tapan", "Спиртное", NAPI.Util.GetHashKey("prop_tequila_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.RusDrink1, new ItemsInfo("<On a Lemon Peel>", "An alcoholic drink with notes of lemon, causes an intoxicating effect.","inv-item-On-lemon-peel", "Alcohol", NAPI.Util.GetHashKey("prop_rum_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.RusDrink2, new ItemsInfo("<On Lingonberry>", "An alcoholic drink with a light note of lingonberry, causes an intoxicating effect.","inv-item-The-cranberries", "Alcohol", NAPI.Util.GetHashKey("h4_prop_h4_t_bottle_01a"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.RusDrink3, new ItemsInfo("<Russian Standard>", "Good old Russian vodka, causes an intoxicating effect.","inv-item-Russian-standard", "Alcohol", NAPI.Util.GetHashKey("prop_vodka_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.YakDrink1, new ItemsInfo("<Asahi>", "A beer with low malt content, causes an intoxicating effect.","inv-item-Asahi", "Alcohol", NAPI.Util.GetHashKey("prop_bottle_brandy"), 5, new Vector3(0.0,0.0,-0.87), new Vector3(), newItemType.Alco) },
+            { ItemId.YakDrink2, new ItemsInfo("<Midori>", "A sweet melon liqueur, causes an intoxicating effect.","inv-item-Midori", "Alcohol", NAPI.Util.GetHashKey("prop_bottle_cognac"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.YakDrink3, new ItemsInfo("<Yamazaki>", "A Japanese whiskey, causes an intoxicating effect.","inv-item-Yamazaki", "Alcohol", NAPI.Util.GetHashKey("prop_bottle_macbeth"), 5, new Vector3(0.0,0.0,-0.87), new Vector3(), newItemType.Alco) },
+            { ItemId.LcnDrink1, new ItemsInfo("<Martini Asti>", "A sparkling wine, causes an intoxicating effect.","inv-item-Martini-Asti", "Alcohol", NAPI.Util.GetHashKey("p_amb_bag_bottle_01"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.LcnDrink2, new ItemsInfo("<Sambuca>", "A strong liqueur with a pleasant anise flavor, causes an intoxicating effect.","inv-item-Sambuca", "Alcohol", NAPI.Util.GetHashKey("prop_cs_whiskey_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.LcnDrink3, new ItemsInfo("<Campari>", "A bitter liqueur based on aromatic herbs and fruits.","inv-item-Campari", "Alcohol", NAPI.Util.GetHashKey("prop_bottle_richard"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.ArmDrink1, new ItemsInfo("<Jivan>", "An Armenian cognac, causes an intoxicating effect.","inv-item-alcohol", "Alcohol", NAPI.Util.GetHashKey("h4_prop_h4_t_bottle_02a"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.ArmDrink2, new ItemsInfo("<Ararat>", "An Armenian cognac with fruity-floral notes, causes an intoxicating effect.","inv-item-ararat", "Alcohol", NAPI.Util.GetHashKey("p_cs_bottle_01"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
+            { ItemId.ArmDrink3, new ItemsInfo("<Noyan Tapan>", "An Armenian wine drink, causes an intoxicating effect.","inv-item-Noyan-Tapan", "Alcohol", NAPI.Util.GetHashKey("prop_tequila_bottle"), 5, new Vector3(0.0,0.0,-1.0), new Vector3(), newItemType.Alco) },
             /* Weapons */
             /* Pistols */
-            { ItemId.Pistol, new ItemsInfo("Pistol", "Стандартный пистолет, обойма вмещает в себя 12 патронов.","inv-item-Pistol", "Оружие", 1467525553, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CombatPistol, new ItemsInfo("Combat Pistol", "Боевой пистолет, обойма вмещает в себя 12 патронов.","inv-item-Pistol", "Оружие", 403140669, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Pistol50, new ItemsInfo("Pistol 50", "Мощный пистолет 0.50 калибра, обойма вмещает в себя 9 патронов.","inv-item-Pistol-50", "Оружие", 4116483281, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SNSPistol, new ItemsInfo("SNS Pistol", "Карманный пистолет 0.25 калибра, обойма вмещает в себя 6 патронов.","inv-item-SNS-Pistol", "Оружие", 339962010, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.HeavyPistol, new ItemsInfo("Heavy Pistol", "Тяжелый пистолет, обойма вмещает в себя 18 патронов.","inv-item-Heavy-Pistol", "Оружие", 1927398017, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.VintagePistol, new ItemsInfo("Vintage Pistol", "Винтажный пистолет, обойма вмещает в себя 7 патронов.","inv-item-Vintage-Pistol", "Оружие", 3170921020, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.MarksmanPistol, new ItemsInfo("Marksman Pistol", "Марксманский пистолет, обойма вмещает в себя 1 патрон.","inv-item-Marksman-Pistol", "Оружие", 4191177435, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Revolver, new ItemsInfo("Revolver", "Револьвер, обойма вмещает в себя 6 патронов.","inv-item-Heavy-Revolver", "Оружие", 914615883, 1, new Vector3(0.0,0.0,-0.95), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.APPistol, new ItemsInfo("AP Pistol", "Бронебойный пистолет, обойма вмещает в себя 18 патронов.","inv-item-AP-Pistol", "Оружие", 905830540, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.StunGun, new ItemsInfo("Stun Gun", "Электрошоковое оружие, обойма вмещает в себя 1 заряд.","inv-item-Stun-Gun", "Оружие ближнего боя", 1609356763, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.FlareGun, new ItemsInfo("Flare Gun", "Сигнальный пистолет.","inv-item-Flare-Gun", "Оружие", 1349014803, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.DoubleAction, new ItemsInfo("Double Action Revolver", "Самовзводный револьвер, обойма вмещает в себя 6 патронов.","inv-item-Double-Action-Revolver", "Оружие", 1393678102, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.PistolMk2, new ItemsInfo("Pistol Mk2", "Улучшенная версия обычного пистолета, обойма вмещает в себя 12 патронов.","inv-item-Pistol-Mk-II", "Оружие", 995074671, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SNSPistolMk2, new ItemsInfo("SNSPistol Mk2", "Улучшенная версия карманного пистолета, обойма вмещает в себя 6 патронов.","inv-item-SNS-Pistol-Mk-II", "Оружие", 4221916961, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.RevolverMk2, new ItemsInfo("Heavy Revolver Mk2", "Улучшенная версия стандартного револьвера, обойма вмещает в себя 6 патронов.","inv-item-Heavy-Revolver-Mk-II", "Оружие", 4065179617, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Pistol, new ItemsInfo("Pistol", "Standard pistol, magazine holds 12 rounds.","inv-item-Pistol", "Weapon", 1467525553, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CombatPistol, new ItemsInfo("Combat Pistol", "Combat pistol, magazine holds 12 rounds.","inv-item-Pistol", "Weapon", 403140669, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Pistol50, new ItemsInfo("Pistol .50", "Powerful .50 caliber pistol, magazine holds 9 rounds.","inv-item-Pistol-50", "Weapon", 4116483281, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SNSPistol, new ItemsInfo("SNS Pistol", "Pocket-sized .25 caliber pistol, magazine holds 6 rounds.","inv-item-SNS-Pistol", "Weapon", 339962010, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.HeavyPistol, new ItemsInfo("Heavy Pistol", "Heavy pistol, magazine holds 18 rounds.","inv-item-Heavy-Pistol", "Weapon", 1927398017, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.VintagePistol, new ItemsInfo("Vintage Pistol", "Vintage pistol, magazine holds 7 rounds.","inv-item-Vintage-Pistol", "Weapon", 3170921020, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MarksmanPistol, new ItemsInfo("Marksman Pistol", "Marksman pistol, holds 1 round.","inv-item-Marksman-Pistol", "Weapon", 4191177435, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Revolver, new ItemsInfo("Revolver", "Revolver, holds 6 rounds.","inv-item-Heavy-Revolver", "Weapon", 914615883, 1, new Vector3(0.0,0.0,-0.95), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.APPistol, new ItemsInfo("AP Pistol", "Armor-piercing pistol, magazine holds 18 rounds.","inv-item-AP-Pistol", "Weapon", 905830540, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.StunGun, new ItemsInfo("Stun Gun", "An electroshock weapon, holds 1 charge.","inv-item-Stun-Gun", "Melee Weapon", 1609356763, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.FlareGun, new ItemsInfo("Flare Gun", "A signal pistol.","inv-item-Flare-Gun", "Weapon", 1349014803, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.DoubleAction, new ItemsInfo("Double Action Revolver", "Self-cocking revolver, holds 6 rounds.","inv-item-Double-Action-Revolver", "Weapon", 1393678102, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.PistolMk2, new ItemsInfo("Pistol Mk2", "An improved version of the standard pistol, magazine holds 12 rounds.","inv-item-Pistol-Mk-II", "Weapon", 995074671, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SNSPistolMk2, new ItemsInfo("SNS Pistol Mk2", "An improved version of the pocket pistol, magazine holds 6 rounds.","inv-item-SNS-Pistol-Mk-II", "Weapon", 4221916961, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.RevolverMk2, new ItemsInfo("Heavy Revolver Mk2", "An improved version of the standard revolver, holds 6 rounds.","inv-item-Heavy-Revolver-Mk-II", "Weapon", 4065179617, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
             /* SMG */
-            { ItemId.MicroSMG, new ItemsInfo("Micro SMG", "Малогабаритный пистолет - пулемёт, обойма вмещает в себя 16 патронов.","inv-item-Micro-SMG", "Оружие", 3238253642, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.MachinePistol, new ItemsInfo("Machine Pistol", "Автоматический пистолет, обойма вмещает в себя 12 патронов.","inv-item-Machine-Pistol", "Оружие", 3963421467, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SMG, new ItemsInfo("SMG", "Пистолет - пулемет, обойма вмещает в себя 30 патронов.","inv-item-SMG", "Оружие", 3794909300, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.AssaultSMG, new ItemsInfo("Assault SMG", "Штурмовое автоматическое оружие, обойма вмещает в себя 30 патронов.","inv-item-Assault-SMG", "Оружие", 3821393119, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CombatPDW, new ItemsInfo("Combat PDW", "Малогабаритная штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-Combat-PDW", "Оружие", 2901952492, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.MG, new ItemsInfo("MG", "Тяжелый пулемет, обойма вмещает в себя 54 патронов.","inv-item-MG", "Оружие", 2238602894, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CombatMG, new ItemsInfo("Combat MG", "Пулемёт специального назначения, обойма вмещает в себя 100 патронов.","inv-item-Combat-MG", "Оружие", 3555572849, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Gusenberg, new ItemsInfo("Gusenberg", "Пистолет - пулемет, обойма вмещает в себя 30 патронов.","inv-item-Gusenberg-Sweeper", "Оружие", 574348740, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.MiniSMG, new ItemsInfo("Mini SMG", "Малогабаритный пистолет - пулемёт, обойма вмещает в себя 20 патронов.","inv-item-Mini-SMG", "Оружие", 3322144245, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SMGMk2, new ItemsInfo("SMG Mk2", "Улучшенный пистолет-пулемёт, обойма вмещает в себя 30 патронов.","inv-item-SMG-Mk-II", "Оружие", 2547423399, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CombatMGMk2, new ItemsInfo("Combat MG Mk2", "Обновлённый единый пулемёт, вмещает в себя 100 патронов.", "inv-item-Combat-MG-Mk-II", "Оружие", 2969831089, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MicroSMG, new ItemsInfo("Micro SMG", "Compact submachine gun, magazine holds 16 rounds.","inv-item-Micro-SMG", "Weapon", 3238253642, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MachinePistol, new ItemsInfo("Machine Pistol", "Automatic pistol, magazine holds 12 rounds.","inv-item-Machine-Pistol", "Weapon", 3963421467, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SMG, new ItemsInfo("SMG", "Submachine gun, magazine holds 30 rounds.","inv-item-SMG", "Weapon", 3794909300, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.AssaultSMG, new ItemsInfo("Assault SMG", "Assault submachine gun, magazine holds 30 rounds.","inv-item-Assault-SMG", "Weapon", 3821393119, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CombatPDW, new ItemsInfo("Combat PDW", "Compact assault rifle, magazine holds 30 rounds.","inv-item-Combat-PDW", "Weapon", 2901952492, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MG, new ItemsInfo("MG", "Heavy machine gun, magazine holds 54 rounds.","inv-item-MG", "Weapon", 2238602894, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CombatMG, new ItemsInfo("Combat MG", "Special purpose machine gun, magazine holds 100 rounds.","inv-item-Combat-MG", "Weapon", 3555572849, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Gusenberg, new ItemsInfo("Gusenberg Sweeper", "Submachine gun, magazine holds 30 rounds.","inv-item-Gusenberg-Sweeper", "Weapon", 574348740, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MiniSMG, new ItemsInfo("Mini SMG", "Compact submachine gun, magazine holds 20 rounds.","inv-item-Mini-SMG", "Weapon", 3322144245, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SMGMk2, new ItemsInfo("SMG Mk2", "Improved submachine gun, magazine holds 30 rounds.","inv-item-SMG-Mk-II", "Weapon", 2547423399, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CombatMGMk2, new ItemsInfo("Combat MG Mk2", "Upgraded general-purpose machine gun, holds 100 rounds.", "inv-item-Combat-MG-Mk-II", "Weapon", 2969831089, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
             /* Rifles */
-            { ItemId.AssaultRifle, new ItemsInfo("Assault Rifle", "Штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-Assault-Rifle", "Оружие", 273925117, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CarbineRifle, new ItemsInfo("Carbine Rifle", "Американская полуавтоматическая винтовка, обойма вмещает в себя 30 патронов.","inv-item-Carbine-Rifle", "Оружие", 1026431720, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.AdvancedRifle, new ItemsInfo("Advanced Rifle", "Усовершенствованная штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-Advanced-Rifle", "Оружие", 2587382322, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SpecialCarbine, new ItemsInfo("Special Carbine",  "Штурмовая винтовка с меньшей отдачей, обойма вмещает в себя 30 патронов.","inv-item-Special-Carbine", "Оружие", 2549323539, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.BullpupRifle, new ItemsInfo("Bullpup Rifle", "Китайская штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-Bullpup-Rifle", "Оружие", 3006407723, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CompactRifle, new ItemsInfo("Compact Rifle", "Укороченная винтовка, обойма вмещает в себя 30 патронов.","inv-item-Compact-Rifle", "Оружие", 1931114084, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.AssaultRifleMk2, new ItemsInfo("Assault Rifle Mk2", "Улучшенная штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-Assault-Rifle-Mk-II", "Оружие", 1762764713, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CarbineRifleMk2, new ItemsInfo("Carbine Rifle Mk2", "Улучшеная полуавтоматическая винтовка, обойма вмещает в себя 30 патронов.","inv-item-Carbine-Rifle-Mk-II", "Оружие", 1520780799, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SpecialCarbineMk2, new ItemsInfo("Special Carbine Mk2", "Улучшенная штурмовая винтовка с более коротким стволом, обойма вмещает в себя 30 патронов.","inv-item-Special-Carbine-Mk-II", "Оружие", 2379721761, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.BullpupRifleMk2, new ItemsInfo("Bullpup Rifle Mk2", "Улучшеная штурмовая винтовка из Китая, обойма вмещает в себя 30 патронов.","inv-item-Bullpup-Rifle-Mk-II", "Оружие", 1415744902, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.MilitaryRifle, new ItemsInfo("Military Rifle", "Усовершенствованная штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-militaryrifle", "Оружие", 1415744902, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.AssaultRifle, new ItemsInfo("Assault Rifle", "Assault rifle, magazine holds 30 rounds.","inv-item-Assault-Rifle", "Weapon", 273925117, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CarbineRifle, new ItemsInfo("Carbine Rifle", "American semi-automatic rifle, magazine holds 30 rounds.","inv-item-Carbine-Rifle", "Weapon", 1026431720, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.AdvancedRifle, new ItemsInfo("Advanced Rifle", "Advanced assault rifle, magazine holds 30 rounds.","inv-item-Advanced-Rifle", "Weapon", 2587382322, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SpecialCarbine, new ItemsInfo("Special Carbine",  "Assault rifle with less recoil, magazine holds 30 rounds.","inv-item-Special-Carbine", "Weapon", 2549323539, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.BullpupRifle, new ItemsInfo("Bullpup Rifle", "Chinese assault rifle, magazine holds 30 rounds.","inv-item-Bullpup-Rifle", "Weapon", 3006407723, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CompactRifle, new ItemsInfo("Compact Rifle", "Shortened rifle, magazine holds 30 rounds.","inv-item-Compact-Rifle", "Weapon", 1931114084, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.AssaultRifleMk2, new ItemsInfo("Assault Rifle Mk2", "Improved assault rifle, magazine holds 30 rounds.","inv-item-Assault-Rifle-Mk-II", "Weapon", 1762764713, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CarbineRifleMk2, new ItemsInfo("Carbine Rifle Mk2", "Improved semi-automatic rifle, magazine holds 30 rounds.","inv-item-Carbine-Rifle-Mk-II", "Weapon", 1520780799, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SpecialCarbineMk2, new ItemsInfo("Special Carbine Mk2", "Improved assault rifle with a shorter barrel, magazine holds 30 rounds.","inv-item-Special-Carbine-Mk-II", "Weapon", 2379721761, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.BullpupRifleMk2, new ItemsInfo("Bullpup Rifle Mk2", "Improved Chinese assault rifle, magazine holds 30 rounds.","inv-item-Bullpup-Rifle-Mk-II", "Weapon", 1415744902, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MilitaryRifle, new ItemsInfo("Military Rifle", "Advanced assault rifle, magazine holds 30 rounds.","inv-item-militaryrifle", "Weapon", 1415744902, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
             /* Sniper */
-            { ItemId.SniperRifle, new ItemsInfo("Sniper Rifle", "Снайперская винтовка, обойма вмещает в себя 10 патронов.","inv-item-Sniper-Rifle", "Оружие", 346403307, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.HeavySniper, new ItemsInfo("Heavy Sniper", "Крупнокалиберная снайперская винтовка, обойма вмещает в себя 6 патронов.","inv-item-Heavy-Sniper", "Оружие", 3548001216, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.MarksmanRifle, new ItemsInfo("Marksman Rifle", "Марксманская снайперская винтовка, обойма вмещает в себя 8 патронов.","inv-item-Marksman-Rifle", "Оружие", 2583718658, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.HeavySniperMk2, new ItemsInfo("Heavy Sniper Mk2", "Улучшенная крупнокалиберная снайперская винтовка, обойма вмещает в себя 6 патронов.","inv-item-Heavy-Sniper-Mk-II", "Оружие", 619715967, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.MarksmanRifleMk2, new ItemsInfo("Marksman Rifle Mk2", "Улучшенная марксманская снайперская винтовка, обойма вмещает в себя 8 патронов.","inv-item-Marksman-Rifle-Mk-II", "Оружие", 2436666926, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SniperRifle, new ItemsInfo("Sniper Rifle", "Sniper rifle, magazine holds 10 rounds.","inv-item-Sniper-Rifle", "Weapon", 346403307, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.HeavySniper, new ItemsInfo("Heavy Sniper", "High-caliber sniper rifle, magazine holds 6 rounds.","inv-item-Heavy-Sniper", "Weapon", 3548001216, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MarksmanRifle, new ItemsInfo("Marksman Rifle", "Marksman sniper rifle, magazine holds 8 rounds.","inv-item-Marksman-Rifle", "Weapon", 2583718658, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.HeavySniperMk2, new ItemsInfo("Heavy Sniper Mk2", "Improved high-caliber sniper rifle, magazine holds 6 rounds.","inv-item-Heavy-Sniper-Mk-II", "Weapon", 619715967, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.MarksmanRifleMk2, new ItemsInfo("Marksman Rifle Mk2", "Improved marksman sniper rifle, magazine holds 8 rounds.","inv-item-Marksman-Rifle-Mk-II", "Weapon", 2436666926, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
             /* Shotguns */
-            { ItemId.PumpShotgun, new ItemsInfo("Pump Shotgun", "Тактический боевой помповый дробовик, обойма вмещает в себя 8 патронов.","inv-item-Pump-Shotgun", "Оружие", 689760839, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SawnOffShotgun, new ItemsInfo("SawnOff Shotgun", "Обрез, обойма вмещает в себя 8 патронов.","inv-item-Sawed-Off-Shotgun", "Оружие", 3619125910, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.BullpupShotgun, new ItemsInfo("Bullpup Shotgun", "Помповый дробовик, обойма вмещает в себя 14 патронов.","inv-item-Bullpup-Shotgun", "Оружие", 2696754462, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.AssaultShotgun, new ItemsInfo("Assault Shotgun", "Штурмовой дробовик, обойма вмещает в себя 8 патронов.","inv-item-Assault-Shotgun", "Оружие", 1255410010, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Musket, new ItemsInfo("Musket", "Ручное огнестрельное оружие, обойма вмещает в себя 1 патрон.","inv-item-Musket", "Оружие", 1652015642, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.HeavyShotgun, new ItemsInfo("Heavy Shotgun", "Тяжелый шестизарядный дробовик, обойма вмещает в себя 6 патронов.","inv-item-Heavy-Shotgun", "Оружие", 3085098415, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.DoubleBarrelShotgun, new ItemsInfo("Double Barrel Shotgun", "Двуствольный дробовик, обойма вмещает в себя 2 патрона.","inv-item-Double-Barrel-Shotgun", "Оружие", 222483357, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.SweeperShotgun, new ItemsInfo("Sweeper Shotgun", "Компактный скорострельный дробовик, обойма вмещает в себя 10 патронов.","inv-item-Sweeper-Shotgun", "Оружие", NAPI.Util.GetHashKey("w_sg_sweeper"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.PumpShotgunMk2, new ItemsInfo("Pump Shotgun Mk2", "Улучшенный помповый дробовик, обойма вмещает в себя 8 патронов.","inv-item-Pump-Shotgun-Mk-II", "Оружие", 3194406291, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-             
+            { ItemId.PumpShotgun, new ItemsInfo("Pump Shotgun", "Tactical combat pump shotgun, holds 8 shells.","inv-item-Pump-Shotgun", "Weapon", 689760839, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SawnOffShotgun, new ItemsInfo("Sawn-Off Shotgun", "Sawn-off shotgun, holds 8 shells.","inv-item-Sawed-Off-Shotgun", "Weapon", 3619125910, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.BullpupShotgun, new ItemsInfo("Bullpup Shotgun", "Pump shotgun, holds 14 shells.","inv-item-Bullpup-Shotgun", "Weapon", 2696754462, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.AssaultShotgun, new ItemsInfo("Assault Shotgun", "Assault shotgun, holds 8 shells.","inv-item-Assault-Shotgun", "Weapon", 1255410010, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Musket, new ItemsInfo("Musket", "Handheld firearm, holds 1 round.","inv-item-Musket", "Weapon", 1652015642, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.HeavyShotgun, new ItemsInfo("Heavy Shotgun", "Heavy six-shot shotgun, holds 6 shells.","inv-item-Heavy-Shotgun", "Weapon", 3085098415, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.DoubleBarrelShotgun, new ItemsInfo("Double Barrel Shotgun", "Double-barrel shotgun, holds 2 shells.","inv-item-Double-Barrel-Shotgun", "Weapon", 222483357, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.SweeperShotgun, new ItemsInfo("Sweeper Shotgun", "Compact rapid-fire shotgun, holds 10 shells.","inv-item-Sweeper-Shotgun", "Weapon", NAPI.Util.GetHashKey("w_sg_sweeper"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.PumpShotgunMk2, new ItemsInfo("Pump Shotgun Mk2", "Improved pump shotgun, holds 8 shells.","inv-item-Pump-Shotgun-Mk-II", "Weapon", 3194406291, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+     
             /* NEW WEAPONS */
-            { ItemId.RayPistol, new ItemsInfo("Up-n-Atomizer", "Футуристичный пистолет, по внешнему виду похож на инопланетный пистолет, не требует боеприпасов.", "inv-item-Vintage-Pistol", "Оружие", NAPI.Util.GetHashKey("w_pi_raygun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CeramicPistol, new ItemsInfo("Ceramic Pistol", "Керамический пистолет, обойма вмещает в себя 12 патронов.", "inv-item-Combat-Pistol", "Оружие", NAPI.Util.GetHashKey("w_pi_ceramic_pistol"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.NavyRevolver, new ItemsInfo("Navy Revolver", "Армейский револьвер, обойма вмещает в себя 6 патрон.", "inv-item-Heavy-Revolver-Mk-II", "Оружие", NAPI.Util.GetHashKey("w_pi_wep2_gun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.RayCarbine, new ItemsInfo("Unholy Hellbringer", "Футуристичная плазменная винтовка, имеет необычный внешний вид.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_ar_srifle"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.GrenadeLauncher, new ItemsInfo("Grenade Launcher", "Легкий гранатомёт с полуавтоматическим функционалом, вмещает в себя до 10 боеприпасов.", "", "Оружие", NAPI.Util.GetHashKey("w_lr_grenadelauncher"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.RPG, new ItemsInfo("RPG", "Ручной противотанковый гранатомёт, вмещает в себя 1 боеприпас.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_lr_rpg"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Minigun, new ItemsInfo("Minigun", "6-стовольный пулемет, имеет очень высокую скорострельность, а также вмещает в себя 595 боеприпасов.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_mg_minigun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Firework, new ItemsInfo("Firework Launcher", "Пусковая установка для запуска фейерверков, поможет поднять настроение или устроить праздник.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_mg_minigun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Railgun, new ItemsInfo("Railgun", "Рельсовое тяжелое оружие, имеет большой урон, а также вмещает в себя до 20 боеприпасов.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_ar_railgun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.HomingLauncher, new ItemsInfo("Homing Launcher", "Ракетная установка с инфракрасным наведением на цель, вмещает в себя 1 боеприпас.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_lr_homing"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.GrenadeLauncherSmoke, new ItemsInfo("Grenade Launcher Smoke", "Легкий гранатомёт, запускает вместо обычных гранат дымовые.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_lr_grenadelauncher"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.CompactGrenadeLauncher, new ItemsInfo("Compact Grenade Launcher", "Компактный гранатомёт, вмещает в себя всего 1 боеприпас.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_lr_compactgl"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Widowmaker, new ItemsInfo("Widowmaker", "Футуристичный плазменый пулемет, вмещает в себя до 9999 боеприпасов.", "NEEDTEXT", "Оружие", NAPI.Util.GetHashKey("w_mg_sminigun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.RayPistol, new ItemsInfo("Up-n-Atomizer", "Futuristic pistol resembling an alien gun, requires no ammunition.", "inv-item-Vintage-Pistol", "Weapon", NAPI.Util.GetHashKey("w_pi_raygun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CeramicPistol, new ItemsInfo("Ceramic Pistol", "Ceramic pistol, magazine holds 12 rounds.", "inv-item-Combat-Pistol", "Weapon", NAPI.Util.GetHashKey("w_pi_ceramic_pistol"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.NavyRevolver, new ItemsInfo("Navy Revolver", "Army revolver, holds 6 rounds.", "inv-item-Heavy-Revolver-Mk-II", "Weapon", NAPI.Util.GetHashKey("w_pi_wep2_gun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.RayCarbine, new ItemsInfo("Unholy Hellbringer", "Futuristic plasma rifle with an unusual appearance.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_ar_srifle"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.GrenadeLauncher, new ItemsInfo("Grenade Launcher", "Lightweight semi-automatic grenade launcher, holds up to 10 rounds.", "", "Weapon", NAPI.Util.GetHashKey("w_lr_grenadelauncher"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.RPG, new ItemsInfo("RPG", "Handheld anti-tank rocket launcher, holds 1 rocket.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_lr_rpg"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Minigun, new ItemsInfo("Minigun", "6-barrel machine gun with a very high rate of fire, holds 595 rounds.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_mg_minigun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Firework, new ItemsInfo("Firework Launcher", "A launcher for fireworks, helps to lift the mood or celebrate a holiday.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_mg_minigun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Railgun, new ItemsInfo("Railgun", "A heavy rail weapon with high damage, holds up to 20 rounds.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_ar_railgun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.HomingLauncher, new ItemsInfo("Homing Launcher", "A rocket launcher with infrared homing, holds 1 rocket.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_lr_homing"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.GrenadeLauncherSmoke, new ItemsInfo("Smoke Grenade Launcher", "A light grenade launcher that fires smoke grenades instead of regular ones.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_lr_grenadelauncher"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.CompactGrenadeLauncher, new ItemsInfo("Compact Grenade Launcher", "A compact grenade launcher that holds only 1 round.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_lr_compactgl"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Widowmaker, new ItemsInfo("Widowmaker", "A futuristic plasma machine gun, holds up to 9999 rounds.", "NEEDTEXT", "Weapon", NAPI.Util.GetHashKey("w_mg_sminigun"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
  
             /* MELEE WEAPONS */
-            { ItemId.Knife, new ItemsInfo("Нож", "Острый нож, которым можно порезаться.","inv-item-Knife", "Оружие ближнего боя", 2312523967, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Nightstick, new ItemsInfo("Дубинка", "Нашли нарушителя порядка? Пора воспользоваться дубинкой.","inv-item-Nightstick", "Оружие ближнего боя", 2659989060, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Hammer, new ItemsInfo("Молоток", "Молоток поможет вам в домашних делах.","inv-item-Hammer", "Оружие ближнего боя", 64104227, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Bat, new ItemsInfo("Бита", "Бита отлично подходит для игры в бейсбол.","inv-item-Baseball-Bat", "Оружие ближнего боя", 32653987, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Crowbar, new ItemsInfo("Лом", "Лом один из самых популярных инструментов.","inv-item-crowbar", "Оружие ближнего боя", 1862268168, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.GolfClub, new ItemsInfo("Гольф клюшка", "Позволит отлично провести время на поле для гольфа.","inv-item-Golf-Club", "Оружие ближнего боя", 3714771050, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Bottle, new ItemsInfo("Бутылка", "Розочка.","inv-item-Broken-Bottle", "Оружие ближнего боя", 1150762982, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Dagger, new ItemsInfo("Кинжал", "Очень хорошо подходит для коллекционеров редким оружием.","inv-item-Antique-Cavalry-Dagger", "Оружие ближнего боя", 601713565, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Hatchet, new ItemsInfo("Топор", "Нужно нарубить дров? Топор отличный помощник в этом.","inv-item-Hatchet", "Оружие ближнего боя", 1653948529, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.KnuckleDuster, new ItemsInfo("Кастет", "Отличный помощник в уличных боях.","inv-item-Brass-Knuckles", "Оружие ближнего боя", 3005998612, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Machete, new ItemsInfo("Мачете", "Одно из самых эффективных оружий для выживания в диких джунглях. ","inv-item-Machete", "Оружие ближнего боя", 2239480765, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Flashlight, new ItemsInfo("Фонарик", "Яркий свет, поможет вам если вы потерялись в темном лесу.","inv-item-Flashlight", "Оружие ближнего боя", 2278481040, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.SwitchBlade, new ItemsInfo("Швейцарский нож", "Складной нож, поможет вам в решении многих проблем.","inv-item-Switchblade", "Оружие ближнего боя", 3331136096, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.PoolCue, new ItemsInfo("Кий", "Отлично подойдет для игры в бильярд","inv-item-Pool-Cue", "Оружие ближнего боя", 1184113278, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.Wrench, new ItemsInfo("Ключ", "Ключ, самый верный помощник если что то сломалось.","inv-item-Pipe-Wrench", "Оружие ближнего боя", 1959553115, 1, new Vector3(0.0,0.0,-0.985), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
-            { ItemId.BattleAxe, new ItemsInfo("Боевой топор", "Нужно нарубить врагов? Топор отличный помощник в этом.","inv-item-Battle-Axe", "Оружие ближнего боя", 3406411762, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Knife, new ItemsInfo("Knife", "A sharp knife that you can cut yourself with.","inv-item-Knife", "Melee Weapon", 2312523967, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Nightstick, new ItemsInfo("Nightstick", "Found a lawbreaker? Time to use the nightstick.","inv-item-Nightstick", "Melee Weapon", 2659989060, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Hammer, new ItemsInfo("Hammer", "A hammer will help you with household chores.","inv-item-Hammer", "Melee Weapon", 64104227, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Bat, new ItemsInfo("Baseball Bat", "A bat is great for playing baseball.","inv-item-Baseball-Bat", "Melee Weapon", 32653987, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Crowbar, new ItemsInfo("Crowbar", "The crowbar is one of the most popular tools.","inv-item-crowbar", "Melee Weapon", 1862268168, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.GolfClub, new ItemsInfo("Golf Club", "Will let you have a great time on the golf course.","inv-item-Golf-Club", "Melee Weapon", 3714771050, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Bottle, new ItemsInfo("Broken Bottle", "A shiv made from a bottle.","inv-item-Broken-Bottle", "Melee Weapon", 1150762982, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Dagger, new ItemsInfo("Dagger", "Very suitable for collectors of rare weapons.","inv-item-Antique-Cavalry-Dagger", "Melee Weapon", 601713565, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Hatchet, new ItemsInfo("Hatchet", "Need to chop some wood? The hatchet is an excellent helper.","inv-item-Hatchet", "Melee Weapon", 1653948529, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.KnuckleDuster, new ItemsInfo("Brass Knuckles", "An excellent helper in street fights.","inv-item-Brass-Knuckles", "Melee Weapon", 3005998612, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Machete, new ItemsInfo("Machete", "One of the most effective weapons for survival in the wild jungle. ","inv-item-Machete", "Melee Weapon", 2239480765, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Flashlight, new ItemsInfo("Flashlight", "A bright light that will help you if you get lost in a dark forest.","inv-item-Flashlight", "Melee Weapon", 2278481040, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.SwitchBlade, new ItemsInfo("Switchblade", "A folding knife that will help you solve many problems.","inv-item-Switchblade", "Melee Weapon", 3331136096, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.PoolCue, new ItemsInfo("Pool Cue", "Perfect for playing billiards.","inv-item-Pool-Cue", "Melee Weapon", 1184113278, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.Wrench, new ItemsInfo("Pipe Wrench", "The wrench is your truest helper if something breaks.","inv-item-Pipe-Wrench", "Melee Weapon", 1959553115, 1, new Vector3(0.0,0.0,-0.985), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
+            { ItemId.BattleAxe, new ItemsInfo("Battle Axe", "Need to chop up some enemies? The axe is an excellent helper for that.","inv-item-Battle-Axe", "Melee Weapon", 3406411762, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.MeleeWeapons) },
             /* Ammo */
-            { ItemId.PistolAmmo, new ItemsInfo("Пистолетный калибр", "Данные патроны отлично подойдут к вашему пистолету.","inv-item-ammo-pistol", "Патроны", NAPI.Util.GetHashKey("v_ret_gc_ammo5"), 100, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
-            { ItemId.RiflesAmmo, new ItemsInfo("Автоматный калибр", "Данные патроны отлично подходят для штурмовых винтовок.","inv-item-ammo-average", "Патроны", NAPI.Util.GetHashKey("prop_ld_ammo_pack_03"), 250, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
-            { ItemId.ShotgunsAmmo, new ItemsInfo("Дробь",  "Подходят для любого вида дробовиков.","inv-item-ammo-shotgun", "Патроны", NAPI.Util.GetHashKey("prop_ld_ammo_pack_02"), 50, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
-            { ItemId.SMGAmmo, new ItemsInfo("Малый калибр", "Отлично подойдут к вашему пистолету-пулемёту и другому малокалиберному оружию.","inv-item-ammo-small", "Патроны", NAPI.Util.GetHashKey("v_ret_gc_ammo1"), 300, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
-            { ItemId.SniperAmmo, new ItemsInfo("Снайперский калибр", "Подходят для всех снайперских винтовок.","inv-item-ammo-sniper", "Патроны", NAPI.Util.GetHashKey("v_ret_gc_ammo2"), 48, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
+            { ItemId.PistolAmmo, new ItemsInfo("Pistol Ammo", "This ammo is perfect for your pistol.","inv-item-ammo-pistol", "Ammo", NAPI.Util.GetHashKey("v_ret_gc_ammo5"), 100, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
+            { ItemId.RiflesAmmo, new ItemsInfo("Rifle Ammo", "This ammo is perfect for assault rifles.","inv-item-ammo-average", "Ammo", NAPI.Util.GetHashKey("prop_ld_ammo_pack_03"), 250, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
+            { ItemId.ShotgunsAmmo, new ItemsInfo("Shotgun Shells",  "Suitable for any type of shotgun.","inv-item-ammo-shotgun", "Ammo", NAPI.Util.GetHashKey("prop_ld_ammo_pack_02"), 50, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
+            { ItemId.SMGAmmo, new ItemsInfo("SMG Ammo", "Perfect for your submachine gun and other small-caliber weapons.","inv-item-ammo-small", "Ammo", NAPI.Util.GetHashKey("v_ret_gc_ammo1"), 300, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
+            { ItemId.SniperAmmo, new ItemsInfo("Sniper Ammo", "Suitable for all sniper rifles.","inv-item-ammo-sniper", "Ammo", NAPI.Util.GetHashKey("v_ret_gc_ammo2"), 48, new Vector3(0.0,0.0,-0.7), new Vector3(), newItemType.Ammo) },
             /* NEW */
-            { ItemId.Snowball, new ItemsInfo("Снежный шарик", "Кинь в кого-нибудь!","inv-item-marijuana", "Особое", 1297482736, 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Weapons) },
-            { ItemId.Ball, new ItemsInfo("Мячик", "Для игр с питомцем","inv-item-ball", "Особое", 1297482736, 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Weapons) },
-            
+            { ItemId.Snowball, new ItemsInfo("Snowball", "Throw it at someone!","inv-item-marijuana", "Special", 1297482736, 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.Ball, new ItemsInfo("Ball", "For playing with your pet.","inv-item-ball", "Special", 1297482736, 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Weapons) },
+    
             //
-            { ItemId.cVarmod, new ItemsInfo("Раскраска на оружие", "С помощью этого компонента можно разукрасить оружие, сделав его внешне более привлекательным.","inv-item-Varmod", "Особое", NAPI.Util.GetHashKey("prop_paint_spray01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cClip, new ItemsInfo("Магазин на оружие", "Улучшенный магазин позволит расширить максимальный боезапас патронов в оружии.","inv-item-Clips", "Особое", NAPI.Util.GetHashKey("w_ar_assaultriflemk2_mag1"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cSuppressor, new ItemsInfo("Глушитель на оружие", "Глушитель, будучи установленным на оружие, приглушает звук выстрелов и позволяет совершать бесшумные убийства.","inv-item-Suppressors", "Особое", NAPI.Util.GetHashKey("w_at_ar_supp"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cScope, new ItemsInfo("Прицел на оружие", "Прицел, будучи установленным, позволит владельцу оружия точнее выцеливать своих врагов (Используйте колёсико мыши)","inv-item-Scopes", "Особое", NAPI.Util.GetHashKey("w_at_scope_medium"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cMuzzlebrake, new ItemsInfo("Дульный тормоз на оружие", "Данный компонент уменьшает отдачу оружия.","inv-item-Muzzle-Brakes", "Особое", NAPI.Util.GetHashKey("w_at_muzzle_1"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cBarrel, new ItemsInfo("Ствол на оружие", "Улучшенный ствол на оружие позволяет увеличить точность и урон с оружия.","inv-item-Barrels", "Особое", NAPI.Util.GetHashKey("w_at_sr_barrel_1"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cFlashlight, new ItemsInfo("Фонарик на оружие", "Фонарик, установленный на оружие - отличный способ найти своих врагов в темноте. (Включается на Е)","inv-item-Flashlights", "Особое", NAPI.Util.GetHashKey("w_at_ar_flsh"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cGrip, new ItemsInfo("Рукоять на оружие", "Улучшенная рукоять оружия обеспечивает более комфортную стрельбу.","inv-item-Grips", "Особое", NAPI.Util.GetHashKey("w_at_afgrip_2"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-            { ItemId.cCamo, new ItemsInfo("Камуфляж для оружия", "С помощью расцветки можно разнообразить внешний вид оружия.","inv-item-Varmod", "Особое", NAPI.Util.GetHashKey("prop_paint_spray01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
-        
+            { ItemId.cVarmod, new ItemsInfo("Weapon Tint", "With this component, you can paint a weapon, making it more visually appealing.","inv-item-Varmod", "Special", NAPI.Util.GetHashKey("prop_paint_spray01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cClip, new ItemsInfo("Weapon Magazine", "An improved magazine will expand the maximum ammo capacity of the weapon.","inv-item-Clips", "Special", NAPI.Util.GetHashKey("w_ar_assaultriflemk2_mag1"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cSuppressor, new ItemsInfo("Weapon Suppressor", "A suppressor, when installed, muffles the sound of shots and allows for silent kills.","inv-item-Suppressors", "Special", NAPI.Util.GetHashKey("w_at_ar_supp"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cScope, new ItemsInfo("Weapon Scope", "A scope, when installed, will allow the weapon's owner to aim more precisely at their enemies (Use the mouse wheel).","inv-item-Scopes", "Special", NAPI.Util.GetHashKey("w_at_scope_medium"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cMuzzlebrake, new ItemsInfo("Weapon Muzzle Brake", "This component reduces weapon recoil.","inv-item-Muzzle-Brakes", "Special", NAPI.Util.GetHashKey("w_at_muzzle_1"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cBarrel, new ItemsInfo("Weapon Barrel", "An improved weapon barrel increases accuracy and damage.","inv-item-Barrels", "Special", NAPI.Util.GetHashKey("w_at_sr_barrel_1"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cFlashlight, new ItemsInfo("Weapon Flashlight", "A flashlight mounted on a weapon is a great way to find your enemies in the dark (Press E to turn on).","inv-item-Flashlights", "Special", NAPI.Util.GetHashKey("w_at_ar_flsh"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cGrip, new ItemsInfo("Weapon Grip", "An improved weapon grip provides more comfortable shooting.","inv-item-Grips", "Special", NAPI.Util.GetHashKey("w_at_afgrip_2"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+            { ItemId.cCamo, new ItemsInfo("Weapon Camo", "With a new skin, you can diversify the appearance of your weapon.","inv-item-Varmod", "Special", NAPI.Util.GetHashKey("prop_paint_spray01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.Modification) },
+
             //
-            { ItemId.HalloweenCoin, new ItemsInfo("Halloween 2020 Coin", "Хеллоуинская монета, за которую можно получить особые призы в дни проведения мероприятия.","inv-item-EventCoin", "Особое", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Firework1, new ItemsInfo("Фейерверк обычный", "Красивый фейерверк.","inv-item-Firework1", "Развлечение", NAPI.Util.GetHashKey("ind_prop_firework_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Firework2, new ItemsInfo("Фейерверк звезда", "Красивый фейерверк в виде звезды.","inv-item-Firework2", "Развлечение", NAPI.Util.GetHashKey("ind_prop_firework_02"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Firework3, new ItemsInfo("Фейерверк взрывной", "Красивый фейерверк в виде взрыва.","inv-item-Firework3", "Развлечение", NAPI.Util.GetHashKey("ind_prop_firework_03"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Firework4, new ItemsInfo("Фейерверк фонтан", "Красивый фейерверк в виде фонтана.","inv-item-Firework4", "Развлечение", NAPI.Util.GetHashKey("ind_prop_firework_04"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.HalloweenCoin, new ItemsInfo("Halloween 2020 Coin", "A Halloween coin that can be exchanged for special prizes during the event.","inv-item-EventCoin", "Special", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Firework1, new ItemsInfo("Regular Firework", "A beautiful firework.","inv-item-Firework1", "Entertainment", NAPI.Util.GetHashKey("ind_prop_firework_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Firework2, new ItemsInfo("Star Firework", "A beautiful star-shaped firework.","inv-item-Firework2", "Entertainment", NAPI.Util.GetHashKey("ind_prop_firework_02"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Firework3, new ItemsInfo("Burst Firework", "A beautiful explosive-burst firework.","inv-item-Firework3", "Entertainment", NAPI.Util.GetHashKey("ind_prop_firework_03"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Firework4, new ItemsInfo("Fountain Firework", "A beautiful fountain-shaped firework.","inv-item-Firework4", "Entertainment", NAPI.Util.GetHashKey("ind_prop_firework_04"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.CarCoupon, new ItemsInfo("Купон на машину", "Содержит в себе автомобиль, который будет доставлен в гараж после активации.","inv-item-car", "Купоны", 3125389411, 1, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.CarCoupon, new ItemsInfo("Car Coupon", "Contains a vehicle that will be delivered to your garage upon activation.","inv-item-car", "Coupons", 3125389411, 1, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.MerryChristmasCoin, new ItemsInfo("Christmas 2021 Coin", "Рождественская монета, за которую можно получить особые призы в дни проведения мероприятия.","inv-item-EventCoin", "Особое", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.MerryChristmasCoin, new ItemsInfo("Christmas 2021 Coin", "A Christmas coin that can be exchanged for special prizes during the event.","inv-item-EventCoin", "Special", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.Bear, new ItemsInfo("Медведь Любви", "Подари приятному человеку!","inv-item-teddy-bear", "Особое", NAPI.Util.GetHashKey("v_ilev_mr_rasberryclean"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            
-            { ItemId.Note, new ItemsInfo("Записка", "С помощью записки можно оставить послание, передать какой-то секрет или другую важную информацию.","inv-item-Note", "Особое", NAPI.Util.GetHashKey("p_amanda_note_01_s"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.LoveNote, new ItemsInfo("Любовная записка", "Валентинка поможет описать свои теплые чувства к человеку.","inv-item-LoveNote", "Особое", NAPI.Util.GetHashKey("p_amanda_note_01_s"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Bear, new ItemsInfo("Love Bear", "Give it to someone nice!","inv-item-teddy-bear", "Special", NAPI.Util.GetHashKey("v_ilev_mr_rasberryclean"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.Vape, new ItemsInfo("Вейп", "Напас сочного вейпика всегда поднимает настроение.","inv-item-Vape", "Особое", NAPI.Util.GetHashKey("ba_prop_battle_vape_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Note, new ItemsInfo("Note", "With a note, you can leave a message, pass a secret, or other important information.","inv-item-Note", "Special", NAPI.Util.GetHashKey("p_amanda_note_01_s"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.LoveNote, new ItemsInfo("Love Note", "A valentine will help describe your warm feelings for someone.","inv-item-LoveNote", "Special", NAPI.Util.GetHashKey("p_amanda_note_01_s"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.Rose, new ItemsInfo("Роза", "Прекрасный подарок для любимого человека!","inv-item-rose", "Особое", NAPI.Util.GetHashKey("prop_single_rose"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Barbell, new ItemsInfo("Гриф", "Для желающих подравнять свою эстетику.","inv-item-barbell", "Особое", NAPI.Util.GetHashKey("prop_barbell_02"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Binoculars, new ItemsInfo("Бинокль", "Позволяет видеть обьекты на дальнем расстоянии.","inv-item-binoculars", "Особое", NAPI.Util.GetHashKey("prop_binoc_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Bong, new ItemsInfo("Бонг", "Удобная штучка для употребления травки.","inv-item-bong", "Особое", NAPI.Util.GetHashKey("prop_bong_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Umbrella, new ItemsInfo("Зонтик", "Позволит укрыться от дождя и придаст стиля.","inv-item-umbrella", "Особое", NAPI.Util.GetHashKey("p_amb_brolly_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Camera, new ItemsInfo("Камера", "Свет... Камера... Мотор!","inv-item-camera", "Особое", NAPI.Util.GetHashKey("prop_v_cam_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Microphone, new ItemsInfo("Микрофон", "Предмет настоящего оратора.","inv-item-microphone", "Особое", NAPI.Util.GetHashKey("p_ing_microphonel_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Guitar, new ItemsInfo("Гитара", "Так и просится в руки... Сыграй что-нибудь!","inv-item-guitar", "Особое", NAPI.Util.GetHashKey("prop_acc_guitar_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Vape, new ItemsInfo("Vape", "A puff of juicy vape always lifts the mood.","inv-item-Vape", "Special", NAPI.Util.GetHashKey("ba_prop_battle_vape_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.Pickaxe1, new ItemsInfo("Обычная кирка", "С помощью этой штуки можно работать на шахте.", "inv-item-pickaxe1", "Особое", NAPI.Util.GetHashKey("prop_tool_pickaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Pickaxe2, new ItemsInfo("Усиленная кирка", "С помощью этой штуки можно мощно работать на шахте.", "inv-item-pickaxe2", "Особое", NAPI.Util.GetHashKey("prop_tool_pickaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Pickaxe3, new ItemsInfo("Профессиональная кирка", "С помощью этой штуки можно профессионально работать на шахте.", "inv-item-pickaxe3", "Особое", NAPI.Util.GetHashKey("prop_tool_pickaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Coal, new ItemsInfo("Ископаемый уголь", "Ископаемое из шахты.", "inv-item-coal", "Особое", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Iron, new ItemsInfo("Железная руда", "Ископаемое из шахты.", "inv-item-iron", "Особое", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Gold, new ItemsInfo("Золотая руда", "Ископаемое из шахты.", "inv-item-gold", "Особое", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Sulfur, new ItemsInfo("Серная руда", "Редкое ископаемое из шахты.", "inv-item-sulfur", "Особое", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Emerald, new ItemsInfo("Изумруд", "Крайне редкое ископаемое из шахты.", "inv-item-emerald", "Особое", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.Ruby, new ItemsInfo("Рубин", "Очень редкое ископаемое из шахты.", "inv-item-ruby", "Особое", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Rose, new ItemsInfo("Rose", "A beautiful gift for a loved one!","inv-item-rose", "Special", NAPI.Util.GetHashKey("prop_single_rose"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Barbell, new ItemsInfo("Barbell", "For those who want to work on their physique.","inv-item-barbell", "Special", NAPI.Util.GetHashKey("prop_barbell_02"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Binoculars, new ItemsInfo("Binoculars", "Allows you to see objects at a long distance.","inv-item-binoculars", "Special", NAPI.Util.GetHashKey("prop_binoc_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Bong, new ItemsInfo("Bong", "A handy thing for consuming weed.","inv-item-bong", "Special", NAPI.Util.GetHashKey("prop_bong_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Umbrella, new ItemsInfo("Umbrella", "Allows you to take cover from the rain and adds style.","inv-item-umbrella", "Special", NAPI.Util.GetHashKey("p_amb_brolly_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Camera, new ItemsInfo("Camera", "Lights... Camera... Action!","inv-item-camera", "Special", NAPI.Util.GetHashKey("prop_v_cam_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Microphone, new ItemsInfo("Microphone", "The item of a true orator.","inv-item-microphone", "Special", NAPI.Util.GetHashKey("p_ing_microphonel_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Guitar, new ItemsInfo("Guitar", "It's just asking to be played... Play something!","inv-item-guitar", "Special", NAPI.Util.GetHashKey("prop_acc_guitar_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.Radio, new ItemsInfo("Рация", "С помощью рации можно общаться с другими обладателями рации, или даже подслушать полицейскую или другую секретную волну.", "hud__icon-walkie-talkie", "Особое", NAPI.Util.GetHashKey("prop_cs_hand_radio"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Pickaxe1, new ItemsInfo("Regular Pickaxe", "With this thing, you can work at the mine.", "inv-item-pickaxe1", "Special", NAPI.Util.GetHashKey("prop_tool_pickaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Pickaxe2, new ItemsInfo("Reinforced Pickaxe", "With this thing, you can work powerfully at the mine.", "inv-item-pickaxe2", "Special", NAPI.Util.GetHashKey("prop_tool_pickaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Pickaxe3, new ItemsInfo("Professional Pickaxe", "With this thing, you can work professionally at the mine.", "inv-item-pickaxe3", "Special", NAPI.Util.GetHashKey("prop_tool_pickaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Coal, new ItemsInfo("Coal", "A resource from the mine.", "inv-item-coal", "Special", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Iron, new ItemsInfo("Iron Ore", "A resource from the mine.", "inv-item-iron", "Special", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Gold, new ItemsInfo("Gold Ore", "A resource from the mine.", "inv-item-gold", "Special", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Sulfur, new ItemsInfo("Sulfur Ore", "A rare resource from the mine.", "inv-item-sulfur", "Special", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Emerald, new ItemsInfo("Emerald", "An extremely rare resource from the mine.", "inv-item-emerald", "Special", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Ruby, new ItemsInfo("Ruby", "A very rare resource from the mine.", "inv-item-ruby", "Special", NAPI.Util.GetHashKey("prop_rock_5_smash2"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.WorkAxe, new ItemsInfo("Рабочий топор", "Инструмент для работы лесорубом.", "inv-item-workaxe", "Особое", NAPI.Util.GetHashKey("prop_ld_fireaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.WoodOak, new ItemsInfo("Дуб", "Древесина.", "inv-item-woodoak", "Особое", NAPI.Util.GetHashKey("prop_fncwood_16e"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.WoodMaple, new ItemsInfo("Клен", "Древесина.", "inv-item-woodmaple", "Особое", NAPI.Util.GetHashKey("prop_fncwood_16e"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.WoodPine, new ItemsInfo("Сосна", "Древесина.", "inv-item-woodpine", "Особое", NAPI.Util.GetHashKey("prop_fncwood_16e"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Radio, new ItemsInfo("Walkie-Talkie", "With a walkie-talkie, you can communicate with other owners, or even eavesdrop on police or other secret frequencies.", "hud__icon-walkie-talkie", "Special", NAPI.Util.GetHashKey("prop_cs_hand_radio"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.Boombox, new ItemsInfo("Бумбокс", "Позволяет проигрывать свою музыку для людей вокруг. Раскачай тусу!", "inv-item-boombox", "Особое", NAPI.Util.GetHashKey("prop_ghettoblast_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(0, 0, 0), newItemType.None) },
-            { ItemId.Hookah, new ItemsInfo("Кальян", "Калюмбас для лютого распыха! Двойное яблочко и полетели...", "inv-item-hookah", "Особое", NAPI.Util.GetHashKey("hookah_model"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.WorkAxe, new ItemsInfo("Work Axe", "A tool for working as a lumberjack.", "inv-item-workaxe", "Special", NAPI.Util.GetHashKey("prop_ld_fireaxe"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.WoodOak, new ItemsInfo("Oak Wood", "Wood.", "inv-item-woodoak", "Special", NAPI.Util.GetHashKey("prop_fncwood_16e"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.WoodMaple, new ItemsInfo("Maple Wood", "Wood.", "inv-item-woodmaple", "Special", NAPI.Util.GetHashKey("prop_fncwood_16e"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.WoodPine, new ItemsInfo("Pine Wood", "Wood.", "inv-item-woodpine", "Special", NAPI.Util.GetHashKey("prop_fncwood_16e"), 250, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.Case0, new ItemsInfo(RouletteCasesData[0].Name, "Бесплатный кейс, можно получить спустя 3 часа игры.", "inv-item-case0", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case1, new ItemsInfo(RouletteCasesData[1].Name, "Бесплатный кейс с оружием, можно получить спустя 5 часов игры.", "inv-item-case1", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case2, new ItemsInfo(RouletteCasesData[2].Name, "Бесплатный кейс с машинами, можно получить спустя 8 часов игры.", "inv-item-case2", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case3, new ItemsInfo(RouletteCasesData[3].Name, "Стандартный кейс со стандартными призами.", "inv-item-case3", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case4, new ItemsInfo(RouletteCasesData[4].Name, "Неплохой кейс для начинающих.", "inv-item-case4", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case5, new ItemsInfo(RouletteCasesData[5].Name, "Сочный кейс, есть возможность серьёзно окупиться!", "inv-item-case5", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case6, new ItemsInfo(RouletteCasesData[6].Name, "Кейс с вещами и автомобилями повышенной редкости.", "inv-item-case6", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case7, new ItemsInfo(RouletteCasesData[7].Name, "Очень лютый кейс. Суперприз - Bugatti, самый быстрый автомобиль.", "inv-item-case7", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case8, new ItemsInfo(RouletteCasesData[8].Name, "Кейс с МУЖСКОЙ одеждой из донатного магазина одежды. Испытай удачу и будь стильным, или продай кому-то и будь богатым. А можешь и подарить...", "inv-item-case8", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case9, new ItemsInfo(RouletteCasesData[9].Name, "Кейс с ЖЕНСКОЙ одеждой из донатного магазина одежды. Отличный вариант, если хочется что-нибудь подарить.", "inv-item-case9", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case10, new ItemsInfo(RouletteCasesData[10].Name, "Кейс с автомобилями из Exotic DonateRoom. Доната Редбаксовна одобряет!", "inv-item-case10", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case11, new ItemsInfo(RouletteCasesData[11].Name, "Все или ничего! Хочешь рискнуть и стать обладателем легендарной кофты RedAge? Тогда крути кейс!", "inv-item-case11", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case12, new ItemsInfo(RouletteCasesData[12].Name, "Давно хочешь себе уникальную машину которая нигде не продается? Dodge Charger в этом кейсике!", "inv-item-case12", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case13, new ItemsInfo(RouletteCasesData[13].Name, "Любишь смотреть на людей свысока? Пожалуй, для этого идеально подойдет вертолёт!", "inv-item-case13", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case14, new ItemsInfo(RouletteCasesData[14].Name, "Классный новый кейс с модными бронированными тачками!", "inv-item-case14", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case15, new ItemsInfo(RouletteCasesData[15].Name, "Крутой новый кейс с размещаемыми предметами!", "inv-item-case15", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
-            { ItemId.Case16, new ItemsInfo(RouletteCasesData[16].Name, "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. ", "inv-item-case16", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },  
-            { ItemId.Case17, new ItemsInfo(RouletteCasesData[17].Name, "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. ", "inv-item-case17", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },  
-            { ItemId.Case18, new ItemsInfo(RouletteCasesData[18].Name, "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. ", "inv-item-case18", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },  
-            { ItemId.Case19, new ItemsInfo(RouletteCasesData[19].Name, "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. ", "inv-item-case19", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) }, 
-            { ItemId.Case20, new ItemsInfo(RouletteCasesData[20].Name, "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. ", "inv-item-case20", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },  
-            { ItemId.Case21, new ItemsInfo(RouletteCasesData[21].Name, "Эксклюзивный кейс из Battle Pass, в нем находится несколько комплектов одежды с одинаковым шансов выпадения. ", "inv-item-case21", "Особое", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },  
+            { ItemId.Boombox, new ItemsInfo("Boombox", "Allows you to play your own music for people around. Get the party started!", "inv-item-boombox", "Special", NAPI.Util.GetHashKey("prop_ghettoblast_01"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(0, 0, 0), newItemType.None) },
+            { ItemId.Hookah, new ItemsInfo("Hookah", "A hookah for a fierce smoke! Double apple and let's fly...", "inv-item-hookah", "Special", NAPI.Util.GetHashKey("hookah_model"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
 
-            { ItemId.SummerCoin, new ItemsInfo("Jaguar Coin", "Монета, за которую можно получить особые призы в дни проведения мероприятия. НЕ ЯВЛЯЕТСЯ ДОНАТ ВАЛЮТОЙ!","inv-item-EventCoin", "Особое", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.CandyCane, new ItemsInfo("Новогодний леденец", "Новогодний леденец, за который можно получить особые призы в дни проведения мероприятия.","inv-item-EventCoin", "Особое", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) }, 
-            { ItemId.Qr, new ItemsInfo("QR-код", "QR-код, содержащий в себе информацию о перенесенном заболевании и/или вакцинации. Предъявить по требованию.","inv-item-QR", "Особое", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) }, 
-            { ItemId.QrFake, new ItemsInfo("QR-код", "QR-код, содержащий в себе информацию о перенесенном заболевании и/или вакцинации. Предъявить по требованию.","inv-item-QR", "Особое", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
-            { ItemId.SimCard, new ItemsInfo("Сим-карта", "Сим-карта с номером телефона. Её можно вставить в любой современный смартфон и пользоваться сотовой сетью: писать смс, звонить и многое другое.","inv-item-SimCard", "Особое", NAPI.Util.GetHashKey("prop_ld_contact_card"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) }, /// SIMCARD NEWPHONE
-            { ItemId.VehicleNumber, new ItemsInfo("Номер на автомобиль", "Номерной знак транспортного средства. Можно установить на свою машину, продать или подарить кому-нибудь!","inv-item-SimCard", "Особое", NAPI.Util.GetHashKey("p_num_plate_02"), 1, new Vector3(0.0,0.0,-0.935), new Vector3(-90, 0, 90), newItemType.None) },
-            { ItemId.Bint, new ItemsInfo("Бинт", "Бинт, восстанавливает 40% здоровья. Можно использовать раз в 3 минуты. ","inv-item-SimCard", "Остальное", 678958360, 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) }, //
-            { ItemId.Cocaine, new ItemsInfo("Белый порошок", "Волшебный порошочек накладывает эффект наркотического опьянения.","inv-item-SimCard", "Остальное", NAPI.Util.GetHashKey("bkr_prop_coke_powder_02"), 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Rub100, new ItemsInfo("100 рублей", "Этот предмет ты можешь обменять на реальные деньги у Руководителя проекта! ","inv-item-SimCard", "Остальное", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Rub200, new ItemsInfo("200 рублей", "Этот предмет ты можешь обменять на реальные деньги у Руководителя проекта! ","inv-item-SimCard", "Остальное", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Rub500, new ItemsInfo("500 рублей", "Этот предмет ты можешь обменять на реальные деньги у Руководителя проекта! ","inv-item-SimCard", "Остальное", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Rub1000, new ItemsInfo("1000 рублей", "Этот предмет ты можешь обменять на реальные деньги у Руководителя проекта!","inv-item-SimCard", "Остальное", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Case0, new ItemsInfo(RouletteCasesData[0].Name, "A free case, can be obtained after 3 hours of play.", "inv-item-case0", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case1, new ItemsInfo(RouletteCasesData[1].Name, "A free weapon case, can be obtained after 5 hours of play.", "inv-item-case1", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case2, new ItemsInfo(RouletteCasesData[2].Name, "A free vehicle case, can be obtained after 8 hours of play.", "inv-item-case2", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case3, new ItemsInfo(RouletteCasesData[3].Name, "A standard case with standard prizes.", "inv-item-case3", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case4, new ItemsInfo(RouletteCasesData[4].Name, "A decent case for beginners.", "inv-item-case4", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case5, new ItemsInfo(RouletteCasesData[5].Name, "A juicy case, with a chance for a serious profit!", "inv-item-case5", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case6, new ItemsInfo(RouletteCasesData[6].Name, "A case with items and vehicles of higher rarity.", "inv-item-case6", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case7, new ItemsInfo(RouletteCasesData[7].Name, "A very fierce case. The grand prize is a Bugatti, the fastest car.", "inv-item-case7", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case8, new ItemsInfo(RouletteCasesData[8].Name, "A case with MEN'S clothing from the donation store. Test your luck and be stylish, or sell it and be rich. Or you could even gift it...", "inv-item-case8", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case9, new ItemsInfo(RouletteCasesData[9].Name, "A case with WOMEN'S clothing from the donation store. A great option if you want to give a gift.", "inv-item-case9", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case10, new ItemsInfo(RouletteCasesData[10].Name, "A case with cars from the Exotic DonateRoom. Donata Redbucksovna approves!", "inv-item-case10", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case11, new ItemsInfo(RouletteCasesData[11].Name, "All or nothing! Want to risk it and become the owner of the legendary RedAge sweater? Then spin the case!", "inv-item-case11", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case12, new ItemsInfo(RouletteCasesData[12].Name, "Been wanting a unique car that isn't sold anywhere? The Dodge Charger is in this case!", "inv-item-case12", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case13, new ItemsInfo(RouletteCasesData[13].Name, "Love looking down on people? A helicopter is probably perfect for that!", "inv-item-case13", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case14, new ItemsInfo(RouletteCasesData[14].Name, "A cool new case with trendy armored cars!", "inv-item-case14", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case15, new ItemsInfo(RouletteCasesData[15].Name, "A cool new case with placeable items!", "inv-item-case15", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case16, new ItemsInfo(RouletteCasesData[16].Name, "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. ", "inv-item-case16", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case17, new ItemsInfo(RouletteCasesData[17].Name, "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. ", "inv-item-case17", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case18, new ItemsInfo(RouletteCasesData[18].Name, "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. ", "inv-item-case18", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case19, new ItemsInfo(RouletteCasesData[19].Name, "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. ", "inv-item-case19", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case20, new ItemsInfo(RouletteCasesData[20].Name, "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. ", "inv-item-case20", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+            { ItemId.Case21, new ItemsInfo(RouletteCasesData[21].Name, "An exclusive case from the Battle Pass, containing several clothing sets with an equal drop chance. ", "inv-item-case21", "Special", NAPI.Util.GetHashKey("prop_idol_case_02"), 100, new Vector3(0.0,0.0,-1.0), new Vector3(90, 0, 0), newItemType.Cases) },
+
+            { ItemId.SummerCoin, new ItemsInfo("Jaguar Coin", "A coin that can be obtained for special prizes during the event. THIS IS NOT A DONATION CURRENCY!","inv-item-EventCoin", "Special", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.CandyCane, new ItemsInfo("Candy Cane", "A Christmas candy cane that can be exchanged for special prizes during the event.","inv-item-EventCoin", "Special", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999999, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.Qr, new ItemsInfo("QR Code", "A QR code containing information about a past illness and/or vaccination. To be presented on demand.","inv-item-QR", "Special", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.QrFake, new ItemsInfo("QR Code", "A QR code containing information about a past illness and/or vaccination. To be presented on demand.","inv-item-QR", "Special", NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.SimCard, new ItemsInfo("SIM Card", "A SIM card with a phone number. It can be inserted into any modern smartphone to use the cellular network: send SMS, make calls, and more.","inv-item-SimCard", "Special", NAPI.Util.GetHashKey("prop_ld_contact_card"), 1, new Vector3(0.0,0.0,-0.92), new Vector3(90, 0, 0), newItemType.None) }, /// SIMCARD NEWPHONE
+            { ItemId.VehicleNumber, new ItemsInfo("Vehicle License Plate", "A vehicle license plate. You can install it on your car, sell it, or give it to someone!","inv-item-SimCard", "Special", NAPI.Util.GetHashKey("p_num_plate_02"), 1, new Vector3(0.0,0.0,-0.935), new Vector3(-90, 0, 90), newItemType.None) },
+            { ItemId.Bint, new ItemsInfo("Bandage", "A bandage that restores 40% health. Can be used once every 3 minutes. ","inv-item-SimCard", "Other", 678958360, 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) }, //
+            { ItemId.Cocaine, new ItemsInfo("White Powder", "This magical powder induces a narcotic effect.","inv-item-SimCard", "Other", NAPI.Util.GetHashKey("bkr_prop_coke_powder_02"), 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Rub100, new ItemsInfo("100 Rubles", "You can exchange this item for real money with the Project Lead! ","inv-item-SimCard", "Other", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Rub200, new ItemsInfo("200 Rubles", "You can exchange this item for real money with the Project Lead! ","inv-item-SimCard", "Other", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Rub500, new ItemsInfo("500 Rubles", "You can exchange this item for real money with the Project Lead! ","inv-item-SimCard", "Other", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Rub1000, new ItemsInfo("1000 Rubles", "You can exchange this item for real money with the Project Lead!","inv-item-SimCard", "Other", NAPI.Util.GetHashKey("bkr_prop_money_wrapped_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
             //
-            { ItemId.RadioInterceptor, new ItemsInfo("Радиоперехватчик", "Позволяет получать данные о HeliCrash.","hud__icon-walkie-talkie", "Остальное", NAPI.Util.GetHashKey("prop_cs_mini_tv"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Epinephrine, new ItemsInfo("Адреналин","Нужна для лечения, можно использовать 1 раз в 5 минут.","inv-item-medical-kit", "Остальное",  NAPI.Util.GetHashKey("p_syringe_01_s"), 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.AppleCoin, new ItemsInfo("Apple Coin","Летняя монета, которую можно получить в дни проведения мероприятия. F за Apple Pay.","inv-item-medical-kit", "Остальное",  NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.RadioInterceptor, new ItemsInfo("Radio Interceptor", "Allows you to receive data about HeliCrashes.","hud__icon-walkie-talkie", "Other", NAPI.Util.GetHashKey("prop_cs_mini_tv"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Epinephrine, new ItemsInfo("Epinephrine","Needed for treatment, can be used once every 5 minutes.","inv-item-medical-kit", "Other",  NAPI.Util.GetHashKey("p_syringe_01_s"), 10, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.AppleCoin, new ItemsInfo("Apple Coin","A summer coin that can be obtained during the event. F for Apple Pay.","inv-item-medical-kit", "Other",  NAPI.Util.GetHashKey("ch_prop_arcade_fortune_coin_01a"), 999, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
             //
-            { ItemId.Fire, new ItemsInfo("Костер", "Подойдет для вечерних посиделок, не обожгитесь!","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beach_fire"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Matras, new ItemsInfo("Надувной матрас", "Для пляжного отдыха и чтобы не утонуть","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beach_lilo_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Tent, new ItemsInfo("Палатка", "Для кемпинга, пикника и бурной ночи","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_skid_tent_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Lezhak, new ItemsInfo("Лежак", "Для пляжного отдыха, можно лечь и думать о светлом будущем","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_patio_lounger_3"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Towel, new ItemsInfo("Свернутое полотенце", "Для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beach_towel_04"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flag, new ItemsInfo("Флаг", "Российский флаг, не забудьте приобрести флагшток","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_us_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Barrell, new ItemsInfo("Бочка", "Подойдет для различных нужд","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_wooden_barrel"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Surf, new ItemsInfo("Доска для сёрфа", "Для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_surf_board_03"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Vedro, new ItemsInfo("Ведро", "Такое же большое, как киска твоей бывшей, подойдет для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_buck_spade_03"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagstok, new ItemsInfo("Флаг Sprunk с флагштоком", "Флагшток с прикрепленным большим флагом Sprunk","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("stt_prop_flagpole_1b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Tenttwo, new ItemsInfo("Палатка", "Для кемпинга, пикника и бурной ночи","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_skid_tent_01b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Polotence, new ItemsInfo("Пляжное полотенце", "Для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("p_cs_beachtowel_01_s"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Beachbag, new ItemsInfo("Пляжная сумка", "Для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beach_bag_03"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-		    { ItemId.Zontik, new ItemsInfo("Зонтик", "Защитит от солнца и подойдет для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beach_parasol_04"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-	        { ItemId.Zontiktwo, new ItemsInfo("Зонтик", "Защитит от солнца и подойдет для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beach_parasol_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Zontikthree, new ItemsInfo("Зонтик", "Защитит от солнца и подойдет для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_parasol_04c"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },						        
-            { ItemId.Closedzontik, new ItemsInfo("Закрытый зонтик", "Не защитит от солнца, но подойдет для пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_parasol_04e"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Vball, new ItemsInfo("Воллейбольный мяч", "Для веселых игр и пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beach_volball01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Bball, new ItemsInfo("Пляжный мяч", "Для веселых игр и пляжного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beachball_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Boomboxxx, new ItemsInfo("Бумбокс", "Подойдет для посиделок с друзьями","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_boombox_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Table, new ItemsInfo("Стол", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("bkr_prop_coke_table01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Tabletwo, new ItemsInfo("Стол", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_ld_farm_table02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Tablethree, new ItemsInfo("Стол", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_proxy_chateau_table"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Tablefour, new ItemsInfo("Стол", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_table_03b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Chair, new ItemsInfo("Стул", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("hei_prop_hei_skid_chair"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Chairtwo, new ItemsInfo("Стул", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_chair_01b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Chaierthree, new ItemsInfo("Стул", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_direct_chair_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Chaierfour, new ItemsInfo("Стул", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_table_03_chr"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Chairtable, new ItemsInfo("Стол и стул", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_picnictable_01_lod"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Korzina, new ItemsInfo("Корзина", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_fruit_basket"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Light, new ItemsInfo("Освещение", "Освещение, которое пригодится в темное время суток","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_worklight_03b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Alco, new ItemsInfo("Бутылка бренди", "Дорогая бутылка бренди для веселья и хорошей ночи с девушкой или парнем","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_bottle_brandy"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Alcotwo, new ItemsInfo("Бутылка коньяка", "Дорогая бутылка коньяка для веселья и хорошей ночи с девушкой или парнем","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_bottle_cognac"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Alcothree, new ItemsInfo("Бутылка текилы", "Дорогая бутылка текилкы для веселья и хорошей ночи с девушкой или парнем","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_tequila_bottle"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Alcofour, new ItemsInfo("Бутылка пива", "Дешевое пиво, подойдет для посиделок с друзьями на природе","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_beer_am"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Cocktail, new ItemsInfo("Коктейль", "Смесь цитрусовых фруктов и алкоголя, идеально подойдет для твоей девушки","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_cocktail"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Cocktailtwo, new ItemsInfo("Коктейль", "Смесь цитрусовых фруктов и алкоголя, идеально подойдет для твоей девушки","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_cocktail_glass"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Fruit, new ItemsInfo("Тарелка с фруктами", "Вкусная и ароматная тарелка с фруктами","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("ex_mp_h_acc_fruitbowl_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Fruittwo, new ItemsInfo("Тарелка с фруктами", "Вкусная и ароматная тарелка с фруктами","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_bar_fruit"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Packet, new ItemsInfo("Пакет", "Подойдет для пикника","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("ng_proc_food_bag01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Buter, new ItemsInfo("Бутерброд", "Подойдет для пикника","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_food_bs_burg3"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Patatoes, new ItemsInfo("Картошка фри", "Подойдет для пикника","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_food_bs_chips"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Coffee, new ItemsInfo("Горячий кофе", "Подойдет для пикника","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_food_bs_coffee"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Podnosfood, new ItemsInfo("Поднос с едой", "Подойдет для пикника","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_food_bs_tray_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Bbqtwo, new ItemsInfo("Барбекю", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_bbq_4_l1"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-			{ ItemId.Bbq, new ItemsInfo("Большое барбекю", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_bbq_5"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flowerrr, new ItemsInfo("Букет цветов", "Красивый букет с разноцветными цветами, который понравится вашей даме","prop_snow_flower_02", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_snow_flower_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Vaza, new ItemsInfo("Ваза с цветами", "Ваза с красивыми белыми цветами, которая понравится вашей даме","vw_prop_flowers_vase_01a", "Размещаемые предметы", NAPI.Util.GetHashKey("vw_prop_flowers_vase_01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagwtokk, new ItemsInfo("Флагшток", "Подойдет для пикника или обычного отдыха","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_flagpole_2a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Fire, new ItemsInfo("Campfire", "Suitable for evening gatherings, don't get burned!","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beach_fire"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Matras, new ItemsInfo("Inflatable Mattress", "For beach holidays and to avoid drowning.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beach_lilo_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Tent, new ItemsInfo("Tent", "For camping, picnics, and a wild night.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_skid_tent_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Lezhak, new ItemsInfo("Sun Lounger", "For beach holidays, you can lie down and think about a bright future.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_patio_lounger_3"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Towel, new ItemsInfo("Rolled Towel", "For beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beach_towel_04"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flag, new ItemsInfo("Flag", "Russian flag, don't forget to purchase a flagpole.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_us_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Barrell, new ItemsInfo("Barrel", "Suitable for various needs.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_wooden_barrel"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Surf, new ItemsInfo("Surfboard", "For beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_surf_board_03"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Vedro, new ItemsInfo("Bucket", "Suitable for beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_buck_spade_03"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagstok, new ItemsInfo("Sprunk Flagpole", "A flagpole with a large Sprunk flag attached.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("stt_prop_flagpole_1b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Tenttwo, new ItemsInfo("Tent", "For camping, picnics, and a wild night.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_skid_tent_01b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Polotence, new ItemsInfo("Beach Towel", "For beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("p_cs_beachtowel_01_s"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Beachbag, new ItemsInfo("Beach Bag", "For beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beach_bag_03"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Zontik, new ItemsInfo("Umbrella", "Will protect from the sun and is suitable for beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beach_parasol_04"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Zontiktwo, new ItemsInfo("Umbrella", "Will protect from the sun and is suitable for beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beach_parasol_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Zontikthree, new ItemsInfo("Umbrella", "Will protect from the sun and is suitable for beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_parasol_04c"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Closedzontik, new ItemsInfo("Closed Umbrella", "Won't protect from the sun, but is suitable for beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_parasol_04e"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Vball, new ItemsInfo("Volleyball", "For fun games and beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beach_volball01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Bball, new ItemsInfo("Beach Ball", "For fun games and beach holidays.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beachball_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Boomboxxx, new ItemsInfo("Boombox", "Suitable for hanging out with friends.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_boombox_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Table, new ItemsInfo("Table", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("bkr_prop_coke_table01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Tabletwo, new ItemsInfo("Table", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_ld_farm_table02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Tablethree, new ItemsInfo("Table", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_proxy_chateau_table"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Tablefour, new ItemsInfo("Table", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_table_03b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Chair, new ItemsInfo("Chair", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("hei_prop_hei_skid_chair"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Chairtwo, new ItemsInfo("Chair", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_chair_01b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Chaierthree, new ItemsInfo("Chair", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_direct_chair_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Chaierfour, new ItemsInfo("Chair", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_table_03_chr"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Chairtable, new ItemsInfo("Table and Chair", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_picnictable_01_lod"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Korzina, new ItemsInfo("Basket", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_fruit_basket"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Light, new ItemsInfo("Lighting", "Lighting that will be useful in the dark.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_worklight_03b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Alco, new ItemsInfo("Bottle of Brandy", "An expensive bottle of brandy for fun and a good night with a girl or guy.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_bottle_brandy"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Alcotwo, new ItemsInfo("Bottle of Cognac", "An expensive bottle of cognac for fun and a good night with a girl or guy.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_bottle_cognac"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Alcothree, new ItemsInfo("Bottle of Tequila", "An expensive bottle of tequila for fun and a good night with a girl or guy.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_tequila_bottle"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Alcofour, new ItemsInfo("Bottle of Beer", "Cheap beer, suitable for hanging out with friends in nature.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_beer_am"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Cocktail, new ItemsInfo("Cocktail", "A mix of citrus fruits and alcohol, perfect for your girlfriend.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_cocktail"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Cocktailtwo, new ItemsInfo("Cocktail", "A mix of citrus fruits and alcohol, perfect for your girlfriend.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_cocktail_glass"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Fruit, new ItemsInfo("Plate of Fruit", "A delicious and fragrant plate of fruit.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("ex_mp_h_acc_fruitbowl_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Fruittwo, new ItemsInfo("Plate of Fruit", "A delicious and fragrant plate of fruit.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_bar_fruit"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Packet, new ItemsInfo("Bag", "Suitable for a picnic.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("ng_proc_food_bag01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Buter, new ItemsInfo("Burger", "Suitable for a picnic.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_food_bs_burg3"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Patatoes, new ItemsInfo("French Fries", "Suitable for a picnic.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_food_bs_chips"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Coffee, new ItemsInfo("Hot Coffee", "Suitable for a picnic.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_food_bs_coffee"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Podnosfood, new ItemsInfo("Food Tray", "Suitable for a picnic.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_food_bs_tray_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Bbqtwo, new ItemsInfo("BBQ", "Suitable for a picnic or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_bbq_4_l1"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Bbq, new ItemsInfo("Large BBQ", "Suitable for a picnic or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_bbq_5"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flowerrr, new ItemsInfo("Bouquet of Flowers", "A beautiful bouquet of colorful flowers that your lady will like.","prop_snow_flower_02", "Placeable Items", NAPI.Util.GetHashKey("prop_snow_flower_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Vaza, new ItemsInfo("Vase with Flowers", "A vase with beautiful white flowers that your lady will like.","vw_prop_flowers_vase_01a", "Placeable Items", NAPI.Util.GetHashKey("vw_prop_flowers_vase_01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagwtokk, new ItemsInfo("Flagpole", "Suitable for picnics or general relaxation.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_flagpole_2a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
 
-            { ItemId.Flagau, new ItemsInfo("Флаг Австралии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_australia", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_australia"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagbr, new ItemsInfo("Флаг Бразилии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_brazil", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_brazil"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagch, new ItemsInfo("Флаг Китая", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_china", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_china"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagcz, new ItemsInfo("Флаг Чехии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_czechrep", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_czechrep"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flageng, new ItemsInfo("Флаг Англии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_england", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_england"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagau, new ItemsInfo("Flag of Australia", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_australia", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_australia"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagbr, new ItemsInfo("Flag of Brazil", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_brazil", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_brazil"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagch, new ItemsInfo("Flag of China", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_china", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_china"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagcz, new ItemsInfo("Flag of Czech Republic", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_czechrep", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_czechrep"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flageng, new ItemsInfo("Flag of England", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_england", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_england"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
 
-            { ItemId.Flageu, new ItemsInfo("Флаг Евросоюза", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_eu_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_eu_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flageu, new ItemsInfo("Flag of the European Union", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_eu_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_eu_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
 
-            { ItemId.Flagfin, new ItemsInfo("Флаг Финляндии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_finland", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_finland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagfr, new ItemsInfo("Флаг Франции", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_france", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_france"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagger, new ItemsInfo("Флаг Германии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_german_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_german_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagire, new ItemsInfo("Флаг Ирландии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_ireland", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_ireland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagisr, new ItemsInfo("Флаг Израиля", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_israel", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_israel"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagit, new ItemsInfo("Флаг Италии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_italy", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_italy"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagjam, new ItemsInfo("Флаг Ямайки", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_jamaica", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_jamaica"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagjap, new ItemsInfo("Флаг Японии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_japan_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_japan_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagmex, new ItemsInfo("Флаг Мексики", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_mexico_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_mexico_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagnet, new ItemsInfo("Флаг Нидерландов", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_netherlands", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_netherlands"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagnig, new ItemsInfo("Флаг Нигерии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_nigeria", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_nigeria"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagnorw, new ItemsInfo("Флаг Норвегии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_norway", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_norway"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagpol, new ItemsInfo("Флаг Польши", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_poland", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_poland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagrus, new ItemsInfo("Флаг России", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_russia_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_russia_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagbel, new ItemsInfo("Флаг Бельгии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_belgium", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_belgium"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagfin, new ItemsInfo("Flag of Finland", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_finland", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_finland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagfr, new ItemsInfo("Flag of France", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_france", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_france"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagger, new ItemsInfo("Flag of Germany", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_german_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_german_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagire, new ItemsInfo("Flag of Ireland", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_ireland", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_ireland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagisr, new ItemsInfo("Flag of Israel", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_israel", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_israel"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagit, new ItemsInfo("Flag of Italy", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_italy", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_italy"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagjam, new ItemsInfo("Flag of Jamaica", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_jamaica", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_jamaica"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagjap, new ItemsInfo("Flag of Japan", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_japan_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_japan_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagmex, new ItemsInfo("Flag of Mexico", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_mexico_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_mexico_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagnet, new ItemsInfo("Flag of the Netherlands", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_netherlands", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_netherlands"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagnig, new ItemsInfo("Flag of Nigeria", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_nigeria", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_nigeria"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagnorw, new ItemsInfo("Flag of Norway", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_norway", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_norway"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagpol, new ItemsInfo("Flag of Poland", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_poland", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_poland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagrus, new ItemsInfo("Flag of Russia", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_russia_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_russia_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagbel, new ItemsInfo("Flag of Belgium", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_belgium", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_belgium"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
 
-            { ItemId.Flagscot, new ItemsInfo("Флаг Шотландии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_scotland_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_scotland_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagscr, new ItemsInfo("Флаг Скрипт", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_script", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_script"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagscot, new ItemsInfo("Flag of Scotland", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_scotland_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_scotland_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagscr, new ItemsInfo("Script Flag", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_script", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_script"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
 
-            { ItemId.Flagslov, new ItemsInfo("Флаг Словакии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_slovakia", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_slovakia"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagslovak, new ItemsInfo("Флаг Словении", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_slovenia", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_slovenia"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagsou, new ItemsInfo("Флаг Кореи", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_southkorea", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_southkorea"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagspain, new ItemsInfo("Флаг Испании", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_spain", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_spain"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagswede, new ItemsInfo("Флаг Швеции", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_sweden", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_sweden"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagswitz, new ItemsInfo("Флаг Швейцарии", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_switzerland", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_switzerland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagturk, new ItemsInfo("Флаг Турции", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_turkey", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_turkey"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagslov, new ItemsInfo("Flag of Slovakia", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_slovakia", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_slovakia"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagslovak, new ItemsInfo("Flag of Slovenia", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_slovenia", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_slovenia"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagsou, new ItemsInfo("Flag of South Korea", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_southkorea", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_southkorea"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagspain, new ItemsInfo("Flag of Spain", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_spain", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_spain"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagswede, new ItemsInfo("Flag of Sweden", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_sweden", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_sweden"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagswitz, new ItemsInfo("Flag of Switzerland", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_switzerland", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_switzerland"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagturk, new ItemsInfo("Flag of Turkey", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_turkey", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_turkey"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
             //
-            { ItemId.Flaguk, new ItemsInfo("Флаг Великобритании", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_uk_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_uk_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagus, new ItemsInfo("Флаг Америки", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_us_yt", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_us_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Flagwales, new ItemsInfo("Флаг Уэльса", "Флаг среднего размера, для крепления необходим флагшток","apa_prop_flag_wales", "Размещаемые предметы", NAPI.Util.GetHashKey("apa_prop_flag_wales"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flaguk, new ItemsInfo("Flag of the United Kingdom", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_uk_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_uk_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagus, new ItemsInfo("Flag of America", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_us_yt", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_us_yt"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Flagwales, new ItemsInfo("Flag of Wales", "Medium-sized flag, requires a flagpole for mounting.","apa_prop_flag_wales", "Placeable Items", NAPI.Util.GetHashKey("apa_prop_flag_wales"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
             //
-  		    { ItemId.Konus, new ItemsInfo("Конус", "Подойдет в качестве ограждения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_byard_net02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Konuss, new ItemsInfo("Светящийся конус", "Подойдет в качестве ограждения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_air_conelight"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Otboynik1, new ItemsInfo("Отбойник", "Подойдет в качестве ограждения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_barrier_wat_03a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Otboynik2, new ItemsInfo("Отбойник", "Подойдет в качестве ограждения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_barrier_wat_03b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Dontcross, new ItemsInfo("Перекрытие", "Подойдет в качестве ограждения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_barrier_work05"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Stop, new ItemsInfo("Знак STOP", "Подойдет для ПДД","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_sign_road_01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.NetProezda, new ItemsInfo("Знак НЕТ ПРОЕЗДА", "Подойдет для ПДД","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_sign_road_03a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Zabor1, new ItemsInfo("Большой забор", "Подойдет для пикника","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("xm_prop_base_fence_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Kpp, new ItemsInfo("КПП", "Подойдет в качестве установки блок-поста","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_air_sechut_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Zabor2, new ItemsInfo("Маленький забор", "Подойдет в качестве ограждения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("xm_prop_base_fence_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Airlight, new ItemsInfo("Ночной свет", "Подойдет в качестве ограждения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_air_lights_02b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Camera1, new ItemsInfo("Камера видеонаблюдения", "Подойдет для наблюдения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_cctv_cam_05a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            { ItemId.Camera2, new ItemsInfo("Камера видеонаблюдения", "Подойдет для наблюдения","placingprop", "Размещаемые предметы", NAPI.Util.GetHashKey("prop_snow_cam_03a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
-            
-            { ItemId.TacticalRifle, new ItemsInfo("Tactical Rifle", "Усовершенствованная штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-militaryrifle", "Оружие", 273925117, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
-            
-            { ItemId.PrecisionRifle, new ItemsInfo("Precision Rifle", "Усовершенствованная снайперская  винтовка, обойма вмещает в себя 6 патронов.","inv-item-militaryrifle", "Оружие", 346403307, 1, new Vector3(0.0,0.0,-0.99),new Vector3(90, 0, 0), newItemType.Weapons) },
+		            { ItemId.Konus, new ItemsInfo("Cone", "Suitable as a barrier.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_byard_net02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Konuss, new ItemsInfo("Luminous Cone", "Suitable as a barrier.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_air_conelight"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Otboynik1, new ItemsInfo("Barrier", "Suitable as a barrier.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_barrier_wat_03a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Otboynik2, new ItemsInfo("Barrier", "Suitable as a barrier.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_barrier_wat_03b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Dontcross, new ItemsInfo("Roadblock", "Suitable as a barrier.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_barrier_work05"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Stop, new ItemsInfo("STOP Sign", "Suitable for traffic rules.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_sign_road_01a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.NetProezda, new ItemsInfo("NO ENTRY Sign", "Suitable for traffic rules.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_sign_road_03a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Zabor1, new ItemsInfo("Large Fence", "Suitable for a picnic.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("xm_prop_base_fence_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Kpp, new ItemsInfo("Checkpoint Booth", "Suitable for setting up a checkpoint.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_air_sechut_01"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Zabor2, new ItemsInfo("Small Fence", "Suitable as a barrier.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("xm_prop_base_fence_02"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Airlight, new ItemsInfo("Night Light", "Suitable as a barrier.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_air_lights_02b"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Camera1, new ItemsInfo("CCTV Camera", "Suitable for surveillance.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_cctv_cam_05a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
+            { ItemId.Camera2, new ItemsInfo("CCTV Camera", "Suitable for surveillance.","placingprop", "Placeable Items", NAPI.Util.GetHashKey("prop_snow_cam_03a"), 1, new Vector3(0.0,0.0,-0.9), new Vector3(), newItemType.None) },
 
-            { ItemId.CombatShotgun, new ItemsInfo("Combat Shotgun", "Усовершенствованный  дробовик, обойма вмещает в себя 10 патронов.","inv-item-militaryrifle", "Оружие", 689760839, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.TacticalRifle, new ItemsInfo("Tactical Rifle", "Advanced assault rifle, magazine holds 30 rounds.","inv-item-militaryrifle", "Weapon", 273925117, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
 
-            { ItemId.HeavyRifle, new ItemsInfo("Heavy Rifle", "Усовершенствованная штурмовая винтовка, обойма вмещает в себя 30 патронов.","inv-item-militaryrifle", "Оружие", 2379721761, 1, new Vector3(0.0,0.0,-0.99),new Vector3(90, 0, 0), newItemType.Weapons) },
-            
-            { ItemId.NeonStick, new ItemsInfo("Неоновые палочки", "Палочки красного цвета, которые можно держать в руках.","inv-item-Assault-Rifle", "Особое", 3455618605, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.None) },
-            
-            { ItemId.GlowStick, new ItemsInfo("Светящиеся палочки", "Красивые светящиеся палочки, которые можно держать в руках.","inv-item-Assault-Rifle", "Особое", NAPI.Util.GetHashKey("ba_prop_battle_glowstick_01"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.PrecisionRifle, new ItemsInfo("Precision Rifle", "Advanced sniper rifle, magazine holds 6 rounds.","inv-item-militaryrifle", "Weapon", 346403307, 1, new Vector3(0.0,0.0,-0.99),new Vector3(90, 0, 0), newItemType.Weapons) },
 
-            { ItemId.Giftcoin, new ItemsInfo("Подарок", "Коробка с подарком, которую запрятал для тебя Санта!","inv-item-Assault-Rifle", "Особое", NAPI.Util.GetHashKey(""), 999, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.None) },
+            { ItemId.CombatShotgun, new ItemsInfo("Combat Shotgun", "Advanced shotgun, holds 10 shells.","inv-item-militaryrifle", "Weapon", 689760839, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
 
-            { ItemId.CombatRifle, new ItemsInfo("Combat Rifle", "Сносящая все на своем пути винтовка","inv-item-Carbine-Rifle", "Оружие", 2379721761, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.HeavyRifle, new ItemsInfo("Heavy Rifle", "Advanced assault rifle, magazine holds 30 rounds.","inv-item-militaryrifle", "Weapon", 2379721761, 1, new Vector3(0.0,0.0,-0.99),new Vector3(90, 0, 0), newItemType.Weapons) },
 
-            { ItemId.Glock, new ItemsInfo("Banana Glock", "Банана Глок топ","inv-item-Carbine-Rifle", "Оружие", 651271362, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+            { ItemId.NeonStick, new ItemsInfo("Neon Sticks", "Red sticks that you can hold in your hands.","inv-item-Assault-Rifle", "Special", 3455618605, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.None) },
 
+            { ItemId.GlowStick, new ItemsInfo("Glow Sticks", "Beautiful glowing sticks that you can hold in your hands.","inv-item-Assault-Rifle", "Special", NAPI.Util.GetHashKey("ba_prop_battle_glowstick_01"), 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.None) },
+
+            { ItemId.Giftcoin, new ItemsInfo("Gift", "A gift box that Santa hid for you!","inv-item-Assault-Rifle", "Special", NAPI.Util.GetHashKey(""), 999, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.None) },
+
+            { ItemId.CombatRifle, new ItemsInfo("Combat Rifle", "A rifle that mows down everything in its path.","inv-item-Carbine-Rifle", "Weapon", 2379721761, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
+
+            { ItemId.Glock, new ItemsInfo("Banana Glock", "Banana Glock is top-tier.","inv-item-Carbine-Rifle", "Weapon", 651271362, 1, new Vector3(0.0,0.0,-0.99), new Vector3(90, 0, 0), newItemType.Weapons) },
         };
 
-        
-           
+
+
         private static void OnSaveJsonItemsInfo()
         {
             try
@@ -3955,7 +3954,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 if (success == -1 && addInWarehouse)
                 {
                     AddNewItemWarehouse(player, ItemId, count, ItemData);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventoryThenSclad), 10000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventoryThenSclad), 10000);
                 }
                 
                 return success;
@@ -4052,7 +4051,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     ItemsData[locationName][Location].TryRemove(SlotId, out _);
                 
                 ItemsData[locationName][Location].TryAdd(SlotId, new InventoryItemData(-1, ItemId, count, ItemData, SlotId));
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Warehouse, LangFunc.GetText(LangType.Ru, DataName.Posilka, Chars.Repository.ItemsInfo[ItemId].Name), DateTime.Now);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Warehouse, LangFunc.GetText(LangType.En, DataName.Posilka, Chars.Repository.ItemsInfo[ItemId].Name), DateTime.Now);
                 
                 Trigger.SetTask(() =>
                 {
@@ -4071,7 +4070,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 string locationName = $"warehouse_{uuid}";
                 string Location = "warehouse";
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 int itemSqlID = await db.InsertWithInt32IdentityAsync(new ItemsData
                 {
@@ -4140,7 +4139,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
             try
             {
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 int itemSqlID = await db.InsertWithInt32IdentityAsync(new ItemsData
                 {
@@ -4396,7 +4395,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     {
                         if (maxStack == allCount)
                         {
-                            if (send) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveItemStack, ItemsInfo[ItemId].Name, maxStack), 3000);
+                            if (send) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveItemStack, ItemsInfo[ItemId].Name, maxStack), 3000);
                             return -1;
                         }
                         if (maxStack >= (allCount + count)) rData = 0;
@@ -4411,19 +4410,19 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 }
                 if (send && rData == -1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);// "Недостаточно места в инвентаре"
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);// "Недостаточно места в инвентаре"
                 }
                 else if (send && rData == -2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveWeapon, ItemsInfo[ItemId].Name), 3000); //"Невозможно взять {0}, потому что в инвентаре уже есть {0}"
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveWeapon, ItemsInfo[ItemId].Name), 3000); //"Невозможно взять {0}, потому что в инвентаре уже есть {0}"
                 }
                 else if (send && rData == -3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveItem, ItemsInfo[ItemId].Name), 3000); //"У Вас уже есть {0}
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveItem, ItemsInfo[ItemId].Name), 3000); //"У Вас уже есть {0}
                 }
                 else if (send && rData != 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveItemStack, ItemsInfo[ItemId].Name, maxStack), 3000); // Нет места для {0}, максимум можно иметь при себе - {1} шт.
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveItemStack, ItemsInfo[ItemId].Name, maxStack), 3000); // Нет места для {0}, максимум можно иметь при себе - {1} шт.
                 }
                 /*else if(send && rData != 0)
                 {
@@ -4590,12 +4589,12 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     }
                 }
 
-                return $"Оружия: {otherCount} шт. | Патронов: {ammoCount} шт.";
+                return $"Weapons: {otherCount} pcs. | Ammo: {ammoCount} pcs.";
             }
             catch (Exception e)
             {
                 Log.Write($"getCountToStockItems Exception: {e.ToString()}");
-                return $"Оружия: 0 шт. | Патронов: 0 шт.";
+                return $"Weapons: 0 pcs. | Ammo: 0 pcs.";
             }
         }
         public static void UpdateSqlItemData(string locationName, string Location, int SlotId, InventoryItemData item, ItemId ItemIdDell = ItemId.Debug)
@@ -5272,14 +5271,14 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 {
                     if (Index == 8 && (Item.ItemId == ItemId.BagWithDrill || Item.ItemId == ItemId.BagWithMoney))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                         return;
                     }
                     if (Item.ItemId == ItemId.BodyArmor) 
                     {
                         if (player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantSnyatBronikInVeh), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantSnyatBronikInVeh), 3000);
                             return;
                         }
 
@@ -5289,7 +5288,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                     if (AddItem(player, $"char_{characterData.UUID}", "inventory", Item) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                         return;
                     }
                     Sounds.PlayPlayer3d(player, "inventory/clothes");
@@ -5305,11 +5304,11 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 {
                     if (AddItem(player, $"char_{characterData.UUID}", "inventory", Item) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                         return;
                     }
                     SetItemData(player, ArrayName, Index, new InventoryItemData(), true);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGot, Name), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGot, Name), 3000);
                     return;
                 }
 
@@ -5321,13 +5320,13 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 {                        
                     if (Item.ItemId == ItemId.BodyArmor && player.IsInVehicle)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Невозможно надеть бронежилет находясь в транспорте.", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You can't put on body armor while in a vehicle.", 3000);
                         return;
                     }
                     if (Item.ItemId != ItemId.Bag && Item.ItemId != ItemId.BodyArmor && Item.ItemId != ItemId.Mask && gender != Item.GetGender())
                     {
-                        string error_gender = (Item.GetGender()) ? LangFunc.GetText(LangType.Ru, DataName.MansC) : LangFunc.GetText(LangType.Ru, DataName.WomansC);
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorGender, error_gender), 3000);
+                        string error_gender = (Item.GetGender()) ? LangFunc.GetText(LangType.En, DataName.MansC) : LangFunc.GetText(LangType.En, DataName.WomansC);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorGender, error_gender), 3000);
                         return;
                     }
                     foreach (KeyValuePair<int, ItemId> key in AccessoriesInfo)
@@ -5337,7 +5336,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             InventoryItemData AccessoriesItem = GetItemData(player, "accessories", key.Key);
                             if (key.Key == 8 && (AccessoriesItem.ItemId == ItemId.BagWithDrill || AccessoriesItem.ItemId == ItemId.BagWithMoney))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                                 return;
                             }
                             if (AccessoriesItem.ItemId == ItemId.BodyArmor) AccessoriesItem.Data = player.Armor.ToString();
@@ -5360,11 +5359,11 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     }
                     if (AddItem(player, $"char_{characterData.UUID}", "fastSlots", Item, MaxSlots: InventoryMaxSlots["fastSlots"]) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                         return;
                     }
                     SetItemData(player, ArrayName, Index, new InventoryItemData(), true);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FastSlotAdd), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FastSlotAdd), 3000);
                     return;
                 }
                 else if (Item.ItemId == ItemId.Beer)
@@ -5390,7 +5389,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             Log.Write($"ItemsUse Task#1 Exception: {e.ToString()}");
                         }
                     }, 3000);
-                    Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.Bahnuv) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.Ru, DataName.Pivka));
+                    Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.Bahnuv) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.En, DataName.Pivka));
 
                     GameLog.Items($"usedItem({Item.SqlId})", $"char_{characterData.UUID}", Convert.ToInt32(Item.ItemId), 1, Item.Data);
                     success = true;
@@ -5404,7 +5403,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                     if (rdata.Ban)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SoDrunk), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SoDrunk), 3000);
                         return;
                     }
                     int curStage = rdata.Stage;
@@ -5529,7 +5528,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             if (itemData.ItemId == Item.ItemId)
                             {
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyModifiedWeapon), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyModifiedWeapon), 3000);
                                 return;
                             };
                         }
@@ -5538,11 +5537,11 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                     if (AddItem(player, $"weapon_{aItemStruct.Item.SqlId}", "weapon", Item, MaxSlots: WeaponComponents.WeaponsComponents[weaponHash].Count) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.KeyChainNoSpace), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.KeyChainNoSpace), 3000);
                         return;
                     }
                     SetItemData(player, ArrayName, Index, new InventoryItemData(), true);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ModifWeapon), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ModifWeapon), 3000);
                     return;
                 }
 
@@ -5560,11 +5559,11 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                         if (AddItem(player, $"CarKey_{aItemStruct.Item.SqlId}", "CarKey", Item, MaxSlots: InventoryMaxSlots["CarKey"]) == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.KeyChainNoSpace), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.KeyChainNoSpace), 3000);
                             return;
                         }
                         SetItemData(player, ArrayName, Index, new InventoryItemData(), true);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.KeyChainSucc), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.KeyChainSucc), 3000);
                         BattlePass.Repository.UpdateReward(player, 73);
                         return;
                     case ItemId.Material:
@@ -5577,7 +5576,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             /*if (player.Health >= 100 || sessionData.InTanksLobby > -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontWantToEat), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontWantToEat), 3000);
                                 return;
                             }*/
                             sessionData.TimingsData.NextEat = DateTime.Now.AddSeconds(5);
@@ -5589,7 +5588,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                             return;
                         }
                         break;
@@ -5602,34 +5601,34 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             switch (Main.rnd.Next(10))
                             {
                                 case 0:
-                                    Commands.RPChat("sme", player, $"задымил" + (characterData.Gender ? "" : "а") + " блант");
+                                    Commands.RPChat("sme", player, $"smoked a blunt");
                                     break;
                                 case 1:
-                                    Commands.RPChat("sme", player, $"вмазал" + (characterData.Gender ? "" : "а") + " плюшку");
+                                    Commands.RPChat("sme", player, $"hit a bowl");
                                     break;
                                 case 2:
-                                    Commands.RPChat("sme", player, $"заварил" + (characterData.Gender ? "" : "а") + " плюху");
+                                    Commands.RPChat("sme", player, $"packed a bowl");
                                     break;
                                 case 3:
-                                    Commands.RPChat("sme", player, $"подкурил" + (characterData.Gender ? "" : "а") + " джоинт");
+                                    Commands.RPChat("sme", player, $"lit up a joint");
                                     break;
                                 case 4:
-                                    Commands.RPChat("sme", player, $"сделал" + (characterData.Gender ? "" : "а") + " хапку");
+                                    Commands.RPChat("sme", player, $"took a hit");
                                     break;
                                 case 5:
-                                    Commands.RPChat("sme", player, $"дунул" + (characterData.Gender ? "" : "а") + " трубку");
+                                    Commands.RPChat("sme", player, $"hit the pipe");
                                     break;
                                 case 6:
-                                    Commands.RPChat("sme", player, $"затянул" + (characterData.Gender ? "" : "а") + " дурь");
+                                    Commands.RPChat("sme", player, $"took a drag of some good stuff");
                                     break;
                                 case 7:
-                                    Commands.RPChat("sme", player, $"взорвал" + (characterData.Gender ? "" : "а") + " ракету");
+                                    Commands.RPChat("sme", player, $"blasted a pinner");
                                     break;
                                 case 8:
-                                    Commands.RPChat("sme", player, $"хапнул" + (characterData.Gender ? "" : "а") + " шмальца");
+                                    Commands.RPChat("sme", player, $"took a toke");
                                     break;
                                 default:
-                                    Commands.RPChat("sme", player, $"закурил" + (characterData.Gender ? "" : "а") + " косяк");
+                                    Commands.RPChat("sme", player, $"sparked a joint");
                                     break;
                             }
                             sessionData.TimingsData.NextDrugs = DateTime.Now.AddMinutes(1.5);
@@ -5637,7 +5636,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DrugsTooMany), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DrugsTooMany), 3000);
                             return;
                         }
                         break;
@@ -5650,34 +5649,34 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             switch (Main.rnd.Next(10))
                             {
                                 case 0:
-                                    Commands.RPChat("sme", player, $"нюхнул" + (characterData.Gender ? "" : "а") + " дорожку");
+                                    Commands.RPChat("sme", player, $"snorted a line");
                                     break;
                                 case 1:
-                                    Commands.RPChat("sme", player, $"вмазал" + (characterData.Gender ? "" : "а") + " дорожку");
+                                    Commands.RPChat("sme", player, $"did a line");
                                     break;
                                 case 2:
-                                    Commands.RPChat("sme", player, $"носиком всосал" + (characterData.Gender ? "" : "а") + " дорожку");
+                                    Commands.RPChat("sme", player, $"did a bump of blow");
                                     break;
                                 case 3:
-                                    Commands.RPChat("sme", player, $"занюхнул" + (characterData.Gender ? "" : "а") + " дорогу");
+                                    Commands.RPChat("sme", player, $"railed a line");
                                     break;
                                 case 4:
-                                    Commands.RPChat("sme", player, $"сделал" + (characterData.Gender ? "" : "а") + " внюх");
+                                    Commands.RPChat("sme", player, $"took a key bump");
                                     break;
                                 case 5:
-                                    Commands.RPChat("sme", player, $"дунул" + (characterData.Gender ? "" : "а") + " кокоса");
+                                    Commands.RPChat("sme", player, $"snorted some yayo");
                                     break;
                                 case 6:
-                                    Commands.RPChat("sme", player, $"нюхнул" + (characterData.Gender ? "" : "а") + " дурь");
+                                    Commands.RPChat("sme", player, $"sniffed some blow");
                                     break;
                                 case 7:
-                                    Commands.RPChat("sme", player, $"поднюхнул" + (characterData.Gender ? "" : "а") + " кокосик");
+                                    Commands.RPChat("sme", player, $"did a bump of coke");
                                     break;
                                 case 8:
-                                    Commands.RPChat("sme", player, $"хапнул" + (characterData.Gender ? "" : "а") + " кокосик");
+                                    Commands.RPChat("sme", player, $"hit a line of coke");
                                     break;
                                 default:
-                                    Commands.RPChat("sme", player, $"занюхнул" + (characterData.Gender ? "" : "а") + " кокс");
+                                    Commands.RPChat("sme", player, $"snorted some coke");
                                     break;
                             }
                             sessionData.TimingsData.NextDrugs = DateTime.Now.AddMinutes(1.5);
@@ -5685,7 +5684,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DrugsTooMany), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DrugsTooMany), 3000);
                             return;
                         }
                         break;
@@ -5694,25 +5693,25 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             /*if (player.Health >= 100 || sessionData.InTanksLobby > -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontWantToEat), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontWantToEat), 3000);
                                 return;
                             }*/
                             sessionData.TimingsData.NextEat = DateTime.Now.AddSeconds(5);
-                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.Drink) + (characterData.Gender ? "" : "а") + $" {ItemInfo.Name}");
+                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.Drink) + (characterData.Gender ? "" : "а") + $" {ItemInfo.Name}");
                             BattlePass.Repository.UpdateReward(player, 138);
                             UseEat(player, 3);
                             Sounds.PlayPlayer3d(player, "inventory/drink");
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                             return;
                         }
                         break;
                     case ItemId.GasCan:
                         if (!player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                             ItemsClose(player, true);
                             return;
                         }
@@ -5724,7 +5723,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             int fuel = vehicleLocalData.Petrol;
                             if (fuel >= VehicleManager.VehicleTank[veh.Class])
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FullFuel), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FullFuel), 3000);
                                 ItemsClose(player, true);
                                 return;
                             }
@@ -5750,12 +5749,12 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             if (player.Health >= 100)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouFullHP), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouFullHP), 3000);
                                 return;
                             }
                             player.Health = 100;
                             sessionData.TimingsData.NextMedKit = DateTime.Now.AddMinutes(5);
-                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.used) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.Ru, DataName.healthkity));
+                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.used) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.En, DataName.healthkity));
                             Main.OnAntiAnim(player);
                             Sounds.PlayPlayer3d(player, "inventory/medkit");
                             Trigger.ClientEvent(player, "blockMove", true);
@@ -5787,7 +5786,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             long ticks = sessionData.TimingsData.NextMedKit.Ticks - DateTime.Now.Ticks;
                             if (ticks <= 0) return;
                             DateTime g = new DateTime(ticks);
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AptekCooldown, g.Minute, g.Second), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AptekCooldown, g.Minute, g.Second), 3000);
                             return;
                         }
                         BattlePass.Repository.UpdateReward(player, 94);
@@ -5795,12 +5794,12 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     case ItemId.Epinephrine:
                         if (player.Health >= 100)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouFullHP), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouFullHP), 3000);
                             return;
                         }
                         player.Health = 100;
                         sessionData.TimingsData.NextMedKit = DateTime.Now.AddMinutes(5);
-                        Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.used) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.Ru, DataName.healthkity));
+                        Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.used) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.En, DataName.healthkity));
                         Main.OnAntiAnim(player);
                         Sounds.PlayPlayer3d(player, "inventory/medkit");
                         Trigger.ClientEvent(player, "blockMove", true);
@@ -5831,13 +5830,13 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                          {
                              if (player.Health >= 100)
                              {
-                                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouFullHP), 3000);
+                                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouFullHP), 3000);
                                  return;
                              }
                              
                              player.Health += 40;
                              sessionData.TimingsData.NextMedKit = DateTime.Now.AddSeconds(30);
-                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.used) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.Ru, DataName.bint));
+                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.used) + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.En, DataName.bint));
                             Main.OnAntiAnim(player);
                             Sounds.PlayPlayer3d(player, "inventory/medkit");
                             Trigger.ClientEvent(player, "blockMove", true);
@@ -5865,7 +5864,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             long ticks = sessionData.TimingsData.NextMedKit.Ticks - DateTime.Now.Ticks;
                             if (ticks <= 0) return;
                             DateTime g = new DateTime(ticks);
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BintCooldown, g.Minute, g.Second), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BintCooldown, g.Minute, g.Second), 3000);
                             return;
                         }
                         break;
@@ -5874,7 +5873,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             /*if (player.Health >= 100 || sessionData.InTanksLobby > -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontWantToEat), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontWantToEat), 3000);
                                 return;
                             }*/
                             sessionData.TimingsData.NextEat = DateTime.Now.AddSeconds(5);
@@ -5886,29 +5885,29 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                             return;
                         }
                         break;
                     case ItemId.ArmyLockpick:
                         if (!player.IsInVehicle || player.Vehicle.Model != (uint)VehicleHash.Barracks && player.Vehicle.Model != (uint)VehicleHash.Brickade)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeInArmyTruck), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeInArmyTruck), 3000);
                             return;
                         }
                         var vehicle = (ExtVehicle) player.Vehicle;
                         if (VehicleStreaming.GetEngineState(vehicle))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarAlreadyOn), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarAlreadyOn), 3000);
                             return;
                         }
                         int lucky = new Random().Next(0, 5);
-                        if (lucky == 5) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorCarOn), 3000);
+                        if (lucky == 5) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorCarOn), 3000);
                         else
                         {
                             Sounds.PlayPlayer3d(player, "inventory/keys");
                             VehicleStreaming.SetEngineState(vehicle, true);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarOn), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarOn), 3000);
                         }
                         break;
                     case ItemId.Pizza:
@@ -5916,7 +5915,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             /*if (player.Health >= 100 || sessionData.InTanksLobby > -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontWantToEat), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontWantToEat), 3000);
                                 return;
                             }*/
                             sessionData.TimingsData.NextEat = DateTime.Now.AddSeconds(5);
@@ -5928,7 +5927,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                             return;
                         }
                         break;
@@ -5937,7 +5936,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             /*if (player.Health >= 100 || sessionData.InTanksLobby > -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontWantToEat), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontWantToEat), 3000);
                                 return;
                             }*/
                             sessionData.TimingsData.NextEat = DateTime.Now.AddSeconds(5);
@@ -5949,7 +5948,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                             return;
                         }
                         break;
@@ -5958,7 +5957,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             /*if (player.Health >= 100 || sessionData.InTanksLobby > -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontWantToEat), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontWantToEat), 3000);
                                 return;
                             }*/
                             sessionData.TimingsData.NextEat = DateTime.Now.AddSeconds(5);
@@ -5970,7 +5969,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                             return;
                         }
                         break;
@@ -5979,7 +5978,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         {
                             /*if (player.Health >= 100 || sessionData.InTanksLobby > -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DontWantToEat), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DontWantToEat), 3000);
                                 return;
                             }*/
                             sessionData.TimingsData.NextEat = DateTime.Now.AddSeconds(5);
@@ -5991,7 +5990,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                             return;
                         }
                         break;
@@ -6004,13 +6003,13 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         if (AccessoriesItem.ItemId != ItemId.Debug) SetItemData(player, ArrayName, Index, AccessoriesItem, true);
                         else SetItemData(player, ArrayName, Index, new InventoryItemData(), true);
                         SetItemData(player, "accessories", 8, Item, true);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucWearing, ItemInfo.Name), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucWearing, ItemInfo.Name), 3000);
                         return;
                     case ItemId.CarCoupon:
                         int vehiclesCount = VehicleManager.GetVehiclesCarCountToPlayer(player.Name);
                         if (vehiclesCount >= GarageManager.MaxGarageCars)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxcarsCoupon), 6000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxcarsCoupon), 6000);
                             return;
                         }
                         var house = HouseManager.GetHouse(player, true);
@@ -6019,11 +6018,11 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             var garage = house.GetGarageData();
                             if (garage == null || vehiclesCount >= GarageManager.GarageTypes[garage.Type].MaxCars)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxcarsCoupon), 6000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxcarsCoupon), 6000);
                                 return;
                             }
                         }
-                        VehicleManager.Create(player, Item.Data, new Color(225, 225, 225), new Color(225, 225, 225), Text: LangFunc.GetText(LangType.Ru, DataName.CouponActivate, Item.Data), Logs: $"CarCoupon({Item.Data}");
+                        VehicleManager.Create(player, Item.Data, new Color(225, 225, 225), new Color(225, 225, 225), Text: LangFunc.GetText(LangType.En, DataName.CouponActivate, Item.Data), Logs: $"CarCoupon({Item.Data}");
                         break;
                     case ItemId.Note:
                     case ItemId.LoveNote:
@@ -6042,7 +6041,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         if (value <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VapeBroken), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VapeBroken), 3000);
                             Chars.Repository.RemoveIndex(player, ArrayName, Index);
                             return;
                         }
@@ -6363,7 +6362,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         if (value <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VapeBroken), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VapeBroken), 3000);
                             Chars.Repository.RemoveIndex(player, ArrayName, Index);
                             return;
                         }
@@ -6382,7 +6381,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                         if (phoneData.Settings.SimUpdateAntiFlood > DateTime.Now)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Сим карту можно менять раз в 5 минут", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You can change your SIM card once every 5 minutes.", 3000);
                             return;
                         }
                         phoneData.Settings.SimUpdateAntiFlood = DateTime.Now.AddMinutes(5);
@@ -6400,12 +6399,12 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     default:
                         if (!success)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNowv2), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNowv2), 3000);
                             return;
                         }
                         break;
                 }
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouUsed, Name), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouUsed, Name), 3000);
                 GameLog.Items($"usedItem({Item.SqlId})", $"char_{characterData.UUID}", Convert.ToInt32(Item.ItemId), 1, Item.Data);
                 RemoveIndex(player, ArrayName, Index, 1);
                 ItemsClose(player, true);
@@ -6440,7 +6439,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
             {
                 if (!player.IsCharacterData()) return;
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var note = await db.Notes
                     .Where(v => v.ItemId == Item.SqlId)
@@ -6574,13 +6573,13 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 int playerDrugsAmount = getCountToLacationItem($"char_{characterData.UUID}", "inventory", ItemId.Drugs);
                 if (playerDrugsAmount < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NeedNarcoToUse), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NeedNarcoToUse), 3000);
                     return;
                 }
 
                 if (DateTime.Now < sessionData.TimingsData.NextDrugs)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BongTooMany), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BongTooMany), 3000);
                     return;
                 }
 
@@ -6588,38 +6587,38 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                 WeaponRepository.RemoveHands(player);
                 Main.OnAntiAnim(player);
-                
+
                 switch (Main.rnd.Next(10))
                 {
                     case 0:
-                        Commands.RPChat("sme", player, $"задымил" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"milked the bong");
                         break;
                     case 1:
-                        Commands.RPChat("sme", player, $"вмазал" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"hit the bong");
                         break;
                     case 2:
-                        Commands.RPChat("sme", player, $"заварил" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"packed the bong");
                         break;
                     case 3:
-                        Commands.RPChat("sme", player, $"подкурил" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"sparked the bowl in the bong");
                         break;
                     case 4:
-                        Commands.RPChat("sme", player, $"сделал" + (characterData.Gender ? "" : "а") + " затяжику из бонга");
+                        Commands.RPChat("sme", player, $"took a rip from the bong");
                         break;
                     case 5:
-                        Commands.RPChat("sme", player, $"дунул" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"ripped the bong");
                         break;
                     case 6:
-                        Commands.RPChat("sme", player, $"затянул" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"cleared the bong");
                         break;
                     case 7:
-                        Commands.RPChat("sme", player, $"подолбил" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"torched the bowl of the bong");
                         break;
                     case 8:
-                        Commands.RPChat("sme", player, $"хапнул" + (characterData.Gender ? "" : "а") + " шмальца из бонга");
+                        Commands.RPChat("sme", player, $"took a massive toke from the bong");
                         break;
                     default:
-                        Commands.RPChat("sme", player, $"закурил" + (characterData.Gender ? "" : "а") + " бонг");
+                        Commands.RPChat("sme", player, $"hit the bong");
                         break;
                 }
                 Attachments.AddAttachment(player, Attachments.AttachmentsName.Bong);
@@ -6708,7 +6707,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                         }
                         if (value <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VapeBroken), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VapeBroken), 3000);
                             Chars.Repository.RemoveIndex(player, ArrayName, Index);
                             return -1;
                         }
@@ -6895,13 +6894,13 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
         {
             try
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucSaveLetter), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucSaveLetter), 3000);
                 Trigger.SetTask(async () =>
                 {
                     var characterData = player.GetCharacterData();
                     if (characterData == null) return;
 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.InsertAsync(new Notes
                     {
@@ -7027,7 +7026,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                                 if (!characterData.Achievements[21])
                                 {
                                     characterData.Achievements[21] = true;
-                                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Ukrytiefivehp), 5000);
+                                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Ukrytiefivehp), 5000);
                                 }
                                 return;
                             }
@@ -7352,7 +7351,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 if (FireworkTypeData.ContainsKey (Item.ItemId))
                 {
                     SetItemData(player, arrayName, index, new InventoryItemData(Item.SqlId), true);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.fireworkstand), 7000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.fireworkstand), 7000);
                     BattlePass.Repository.UpdateReward(player, 23);
                     uint dim = UpdateData.GetPlayerDimension(player);
                     var obj = NAPI.Object.CreateObject(ItemInfo.Model, new Vector3(posX, posY, posZ), new Vector3(0, 0, rotZ), 255, dim);
@@ -7403,7 +7402,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 if (characterData == null) return;
                 else if (sessionData.CuffedData.Cuffed || sessionData.DeathData.InDeath || characterData.LVL < 1)
                 {
-                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantTrade, player.Value), 3000);
+                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantTrade, player.Value), 3000);
                     return;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -7412,7 +7411,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 if (targetCharacterData == null) return;
                 else if (targetSessionData.CuffedData.Cuffed || targetSessionData.DeathData.InDeath || targetCharacterData.LVL < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantTrade, player.Value), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantTrade, player.Value), 3000);
                     return;
                 }
                 sessionData.ItemsTrade = new ItemsTrade(target);
@@ -7572,7 +7571,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     if (myCount < 1 && TradeData.Money < 1 &&
                         tCount < 1 && targetSessionData.ItemsTrade.Money < 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NobodyVibral, target.Name), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NobodyVibral, target.Name), 3000);
                         return;
                     }
 
@@ -7580,12 +7579,12 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     int tInvCount = ItemsData.ContainsKey(tLocationName) && ItemsData[tLocationName].ContainsKey("inventory") ? ItemsData[tLocationName]["inventory"].Count : 0;
                     if (myCount > (InventoryMaxSlots["inventory"] - tInvCount))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetMestaTrade, target.Name), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetMestaTrade, target.Name), 3000);
                         return;
                     }
                     else if (tCount > (InventoryMaxSlots["inventory"] - myInvCount))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNetMestaTrade, target.Name), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNetMestaTrade, target.Name), 3000);
                         return;
                     }
                 }
@@ -7646,7 +7645,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 }
                 else if (characterData.Money < value)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                     TradeData.Money = (int)characterData.Money;
                     Trigger.ClientEvent(target, "client.inventory.tradeMoney", "WithMoney", TradeData.Money);
                     Trigger.ClientEvent(player, "client.inventory.tradeMoney", "YourMoney", TradeData.Money);
@@ -7688,32 +7687,32 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 var targetCharacterData = target.GetCharacterData();
                 if (targetSessionData == null || targetCharacterData == null || targetSessionData.ItemsTrade == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TradeCancelled), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TradeCancelled), 3000);
                     ItemsClose(player, true);
                     return;
                 }
                 else if (UpdateData.CanIChange(player, TradeData.Money) != 255)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
-                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DoesntHaveMoney, player.Name), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
+                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DoesntHaveMoney, player.Name), 3000);
                     ItemsClose(player, true);
                     return;
                 }
                 else if (UpdateData.CanIChange(target, targetSessionData.ItemsTrade.Money) != 255)
                 {
-                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DoesntHaveMoney, target.Name), 3000);
+                    Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DoesntHaveMoney, target.Name), 3000);
                     ItemsClose(target, true);
                     return;
                 }
                 /*else if (Main.ServerNumber != 0 && (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 6))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdminTransferRestricted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdminTransferRestricted), 3000);
                     return;
                 }
                 else if (Main.ServerNumber != 0 && (targetCharacterData.AdminLVL >= 1 && targetCharacterData.AdminLVL <= 6))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdminTransferRestricted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdminTransferRestricted), 3000);
                     return;
                 }*/
 
@@ -7781,7 +7780,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     //     targetSessionData.LastCashOperationSum = TradeData.Money;
                     // }
                 }
-                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
+                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
 
                 locationName = GetLocationName(target, "trade");
                 TradeData = targetSessionData.ItemsTrade;
@@ -7834,7 +7833,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     Wallet.Change(target, -TradeData.Money);
                     Wallet.Change(player, TradeData.Money);
                     GameLog.Money($"player({targetCharacterData.UUID})", $"player({characterData.UUID})", TradeData.Money, $"trade");
-                    Commands.RPChat("sme", target, "передал" + (targetCharacterData.Gender ? "" : "а") + $" {Wallet.Format(TradeData.Money)}$ " + "{name}", player);
+                    Commands.RPChat("sme", target, "handed over" + (targetCharacterData.Gender ? "" : "а") + $" {Wallet.Format(TradeData.Money)}$ " + "{name}", player);
                     
                     // if (TradeData.Money >= 1000000)
                     //     Admin.AdminsLog(1, $"[ВНИМАНИЕ] Игрок {player.Name}({player.Value}) получил {TradeData.Money}$ единой операцией от {target.Name}({target.Value}) (ConfirmTrade-1 - Обмен)", 1, "#FF0000");
@@ -7849,7 +7848,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     //     targetSessionData.LastCashOperationSum = TradeData.Money;
                     // }
                 }
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DealSuccess), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DealSuccess), 3000);
                 BattlePass.Repository.UpdateReward(player, 72);
                 BattlePass.Repository.UpdateReward(target, 72);
                 ItemsClose(player, true);
@@ -8185,9 +8184,9 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                 GameLog.Money($"player({characterData.UUID})", $"player({targetCharacterData.UUID})", price, $"itemTent");
 
-                //Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouItemBuyed, ItemsInfo[Item.ItemId].Name, price), 10000);
+                //Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouItemBuyed, ItemsInfo[Item.ItemId].Name, price), 10000);
                 
-                Players.Phone.Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.Ru, DataName.YouItemBuyed, ItemsInfo[Item.ItemId].Name, price), DateTime.Now);  
+                Players.Phone.Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.En, DataName.YouItemBuyed, ItemsInfo[Item.ItemId].Name, price), DateTime.Now);  
 
                 BattlePass.Repository.UpdateReward(player, 48);
                 
@@ -8224,39 +8223,39 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 {
                     if (locationName == "vehicle" || Location == "vehicle")
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantMoveItem), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantMoveItem), 3000);
                         return;
                     }
                 }
 
                 if (Value < 1 || ((Id == 0 && Item.Count <= Value) || (Id != 0 && Item.Count < Value)))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomethingWrong), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomethingWrong), 3000);
                     return;
                 }
                 if (Id == 0)
                 {
                     if (AddNewItem(player, locationName, Location, Item.ItemId, Value, Item.Data, false, MaxSlots: GetMaxSlots(player, Location)) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                         return;
                     }
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccSplit, itemInfo.Name), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccSplit, itemInfo.Name), 3000);
                 }
                 else if (Id == 1)
                 {
                     /*if (DateTime.Now < sessionData.TimingsData.NextDropItem)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Drop1secOnly), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Drop1secOnly), 3000);
                         return;
                     }
                     else */if (player.IsInVehicle)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDropFromCar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDropFromCar), 3000);
                         return;
                     }
                     if (!ItemsDrop(player, new InventoryItemData(0, Item.ItemId, Value, Item.Data))) return;
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccDrop, itemInfo.Name), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccDrop, itemInfo.Name), 3000);
                 }
                 else
                 {
@@ -8287,7 +8286,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                             Index = Index,
                             Value = Value
                         };
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.ItemSell), LangFunc.GetText(LangType.Ru, DataName.ItemSellInput), 8, "sell_tent");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.ItemSell), LangFunc.GetText(LangType.En, DataName.ItemSellInput), 8, "sell_tent");
                         return;
                     }
                     else if (Location == "inventory" && isFreeSlots(player, Item.ItemId, Value) != 0) return;
@@ -8299,26 +8298,26 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                     {
                         if (!InventoryMaxSlots.ContainsKey(Location) || AddItem(player, locationName, Location, Item, MaxSlots: GetMaxSlots(player, Location)) == -1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                             return;
                         }
                         SetItemData(player, ArrayName, Index, new InventoryItemData(), true);
-                        if (isBuy) EventSys.SendCoolMsg(player,"Рынок", "Покупка предмета", LangFunc.GetText(LangType.Ru, DataName.YouBuy, itemInfo.Name, itemPrice), "", 5000);
-                            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBuy, itemInfo.Name), 3000);
-                        else if (ArrayName != "other" && ArrayName != "backpack" && ArrayName != "trade") Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouSuccGive, itemInfo.Name), 3000);
-                        else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItem, itemInfo.Name), 3000);
+                        if (isBuy) EventSys.SendCoolMsg(player,"Рынок", "Покупка предмета", LangFunc.GetText(LangType.En, DataName.YouBuy, itemInfo.Name, itemPrice), "", 5000);
+                            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBuy, itemInfo.Name), 3000);
+                        else if (ArrayName != "other" && ArrayName != "backpack" && ArrayName != "trade") Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouSuccGive, itemInfo.Name), 3000);
+                        else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItem, itemInfo.Name), 3000);
                         return;
                     }
 
                     if (AddNewItem(player, locationName, Location, Item.ItemId, Value, Item.Data, MaxSlots: GetMaxSlots(player, Location)) == -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                         return;
                     }
-                    if (isBuy) EventSys.SendCoolMsg(player,"Рынок", "Покупка предмета", LangFunc.GetText(LangType.Ru, DataName.YouBuy, itemInfo.Name, itemPrice), "", 5000);
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBuy, itemInfo.Name), 3000);
-                    else if (ArrayName != "other" && ArrayName != "backpack" && ArrayName != "trade") Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouSuccGive, itemInfo.Name), 3000);
-                    else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGetItem, itemInfo.Name), 3000);
+                    if (isBuy) EventSys.SendCoolMsg(player,"Рынок", "Покупка предмета", LangFunc.GetText(LangType.En, DataName.YouBuy, itemInfo.Name, itemPrice), "", 5000);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBuy, itemInfo.Name), 3000);
+                    else if (ArrayName != "other" && ArrayName != "backpack" && ArrayName != "trade") Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouSuccGive, itemInfo.Name), 3000);
+                    else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGetItem, itemInfo.Name), 3000);
                 }
                 RemoveIndex(player, ArrayName, Index, Value);
             }
@@ -8362,7 +8361,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 if (sessionData.SappeData != -1) return;
                 else if (accountData.RedBucks < amount)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return;
                 }
                 UpdateData.RedBucks(player, -amount, msg: "Мини - игра «Сапёр»");
@@ -8399,12 +8398,12 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
                 if (sessionData.SappeData == -1) return;
                 if (type != -2)
                 {
-                    if (type <= 0 || type > SappeCoef.Count) UpdateData.RedBucks(player, sessionData.SappeData, msg: LangFunc.GetText(LangType.Ru, DataName.SapperGame));
+                    if (type <= 0 || type > SappeCoef.Count) UpdateData.RedBucks(player, sessionData.SappeData, msg: LangFunc.GetText(LangType.En, DataName.SapperGame));
                     else 
                     {
                         int winrb = Convert.ToInt32(sessionData.SappeData * SappeCoef[type - 1]);
-                        UpdateData.RedBucks(player, winrb, msg: LangFunc.GetText(LangType.Ru, DataName.SapperGameWin));
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.SappWin, winrb), DateTime.Now);
+                        UpdateData.RedBucks(player, winrb, msg: LangFunc.GetText(LangType.En, DataName.SapperGameWin));
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.SappWin, winrb), DateTime.Now);
                     }
                 }
                 sessionData.SappeData = -1;
@@ -8443,7 +8442,7 @@ public static IReadOnlyDictionary<ClothesComponent, ItemId> ClothesComponentToIt
 
                 if (sessionData.SappeData != -1)
                 {
-                    UpdateData.RedBucks(player, sessionData.SappeData, msg: LangFunc.GetText(LangType.Ru, DataName.SapperGameGetBack));
+                    UpdateData.RedBucks(player, sessionData.SappeData, msg: LangFunc.GetText(LangType.En, DataName.SapperGameGetBack));
                     sessionData.SappeData = -1;
                 }
             }

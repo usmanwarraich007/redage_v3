@@ -266,7 +266,7 @@ namespace NeptuneEvo.NewCasino
                 }
 
                 VehicleManager.Create(player, model, new GTANetworkAPI.Color(225, 225, 225), new GTANetworkAPI.Color(225, 225, 225));
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.YouBuyCarV3, model), DateTime.Now);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.YouBuyCarV3, model), DateTime.Now);
 
                 EventSys.SendPlayersToEvent("LuckyWheel", "Diamond Casino", $"Вы получили уникальный автомообиль {model}.", "", 3000);
 

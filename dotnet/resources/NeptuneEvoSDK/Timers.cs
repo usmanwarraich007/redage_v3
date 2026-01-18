@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,10 +70,10 @@ namespace Redage.SDK
         }
 
         /// <summary>
-        /// Находит и возвращает объект таймера
+        /// Finds and returns a timer object
         /// </summary>
-        /// <param name="id">Уникальный идентификатор таймера</param>
-        /// <returns>Объект таймера</returns>
+        /// <param name="id">Unique timer ID</param>
+        /// <returns>Timer object</returns>
         public static nTimer Get(string id)
         {
             try
@@ -89,12 +89,12 @@ namespace Redage.SDK
         }
 
         /// <summary>
-        /// Start() запускает таймер и возвращает случайный ID
+        /// Start() starts the timer and returns a random ID
         /// </summary>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <param name="isnapitask">Нужно ли выполнить это в главном потоке</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <param name="isnapitask">Whether to execute this in the main thread</param>
+        /// <returns>Unique timer ID</returns>
         public static string Start(int interval, Action action, bool isnapitask = false)
         {
             try
@@ -114,16 +114,16 @@ namespace Redage.SDK
             }
         }
         /// <summary>
-        /// Start() запускает таймер с уникальным ID
+        /// Start() starts a timer with a unique ID
         /// </summary>
         /// <exception>
-        /// Exception возникает при передаче уже существующего ID или значения null
+        /// Exception is thrown when passing an existing ID or a null value
         /// </exception>
-        /// <param name="id">Уникальный идентификатор таймера</param>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <param name="isnapitask">Нужно ли выполнить это в главном потоке</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="id">Unique timer ID</param>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <param name="isnapitask">Whether to execute this in the main thread</param>
+        /// <returns>Unique timer ID</returns>
         public static string Start(string id, int interval, Action action, bool isnapitask = false)
         {
             try
@@ -144,12 +144,12 @@ namespace Redage.SDK
             }
         }
         /// <summary>
-        /// StartOnce() запускает таймер один раз и возвращает случайный ID
+        /// StartOnce() starts the timer once and returns a random ID
         /// </summary>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <param name="isnapitask">Нужно ли выполнить это в главном потоке</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <param name="isnapitask">Whether to execute this in the main thread</param>
+        /// <returns>Unique timer ID</returns>
         public static string StartOnce(int interval, Action action, bool isnapitask = false)
         {
             try
@@ -169,16 +169,16 @@ namespace Redage.SDK
             }
         }
         /// <summary>
-        /// StartOnce() запускает таймер один раз и возвращает ID
+        /// StartOnce() starts the timer once and returns an ID
         /// </summary>
         /// <exception>
-        /// Exception возникает при передаче уже существующего ID или значения null
+        /// Exception is thrown when passing an existing ID or a null value
         /// </exception>
-        /// <param name="id">Уникальный идентификатор таймера</param>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <param name="isnapitask">Нужно ли выполнить это в главном потоке</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="id">Unique timer ID</param>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <param name="isnapitask">Whether to execute this in the main thread</param>
+        /// <returns>Unique timer ID</returns>
         public static string StartOnce(string id, int interval, Action action, bool isnapitask = false)
         {
             try
@@ -199,11 +199,11 @@ namespace Redage.SDK
             }
         }
         /// <summary>
-        /// StartTask() запускает таймер отдельной задачей и возвращает случайный ID
+        /// StartTask() starts the timer as a separate task and returns a random ID
         /// </summary>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <returns>Unique timer ID</returns>
         public static string StartTask(int interval, Action action)
         {
             try
@@ -223,15 +223,15 @@ namespace Redage.SDK
             }
         }
         /// <summary>
-        /// StartTask() запускает таймер отдельной задачей и возвращает ID
+        /// StartTask() starts the timer as a separate task and returns an ID
         /// </summary>
         /// <exception>
-        /// Exception возникает при передаче уже существующего ID или значения null
+        /// Exception is thrown when passing an existing ID or a null value
         /// </exception>
-        /// <param name="id">Уникальный идентификатор таймера</param>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="id">Unique timer ID</param>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <returns>Unique timer ID</returns>
         public static string StartTask(string id, int interval, Action action)
         {
             try
@@ -253,11 +253,11 @@ namespace Redage.SDK
             }
         }
         /// <summary>
-        /// StartOnceTask() запускает таймер один раз отдельной задачей и возвращает случайный ID
+        /// StartOnceTask() starts the timer once as a separate task and returns a random ID
         /// </summary>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <returns>Unique timer ID</returns>
         public static string StartOnceTask(int interval, Action action)
         {
             try
@@ -277,15 +277,15 @@ namespace Redage.SDK
             }
         }
         /// <summary>
-        /// StartOnceTask() запускает таймер один раз отдельной задачей и возвращает ID
+        /// StartOnceTask() starts the timer once as a separate task and returns an ID
         /// </summary>
         /// <exception>
-        /// Exception возникает при передаче уже существующего ID или значения null
+        /// Exception is thrown when passing an existing ID or a null value
         /// </exception>
-        /// <param name="id">Уникальный идентификатор таймера</param>
-        /// <param name="interval">Интервал срабатывания действия</param>
-        /// <param name="action">Лямбда-выражение с действием</param>
-        /// <returns>Уникальный ID таймера</returns>
+        /// <param name="id">Unique timer ID</param>
+        /// <param name="interval">Action trigger interval</param>
+        /// <param name="action">Lambda expression with an action</param>
+        /// <returns>Unique timer ID</returns>
         public static string StartOnceTask(string id, int interval, Action action)
         {
             try

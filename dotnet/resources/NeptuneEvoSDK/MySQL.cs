@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using MySqlConnector;
 using System.Data.Common;
 using System.Data;
@@ -51,9 +51,9 @@ namespace Redage.SDK
         }
 
         /// <summary>
-        /// Тест соединения с базой
+        /// Test connection to the database
         /// </summary>
-        /// <returns>True - если все хорошо</returns>
+        /// <returns>True - if everything is fine</returns>
         public static bool Test()
         {
             Log.Debug("Testing connection...");
@@ -69,7 +69,7 @@ namespace Redage.SDK
             }
             catch (ArgumentException ae)
             {
-                Log.Write($"Сonnection string contains an error\n{ae.ToString()}", nLog.Type.Error);
+                Log.Write($"Connection string contains an error\n{ae.ToString()}", nLog.Type.Error);
                 return false;
             }
             catch (MySqlException me)

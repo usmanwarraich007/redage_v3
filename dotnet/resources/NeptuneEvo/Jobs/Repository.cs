@@ -33,7 +33,7 @@ namespace NeptuneEvo.Jobs
 
             if (vehicleLocalData.WorkDriver != characterData.UUID)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehBusy), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehBusy), 3000);
                 VehicleManager.WarpPlayerOutOfVehicle(player);
                 return;
             }
@@ -60,8 +60,8 @@ namespace NeptuneEvo.Jobs
             if (vehicleLocalData == null || vehicleLocalData.WorkId == JobsId.None || vehicleLocalData.WorkDriver != characterData.UUID)
                 return;
 
-            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.FjobNotify));
-            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehjobNotify), 8000);
+            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.FjobNotify));
+            Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehjobNotify), 8000);
    
             if (sessionData.TimersData.WorkExitTimer != null)
             {

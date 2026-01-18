@@ -88,7 +88,7 @@ namespace NeptuneEvo.NewCasino
                 }
                 if (!SpinsWorking)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 GameLog.CasinoSpinsLog(-money);
@@ -211,13 +211,13 @@ namespace NeptuneEvo.NewCasino
                     return;
                 if (!FunctionsAccess.IsWorking("spin"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 if (SpinsState[id])
                 {
                     Trigger.ClientEvent(player, "client.spin.OCCUPY_SLOT", null);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlaceOwned), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlaceOwned), 3000);
                     return;
                 }
 

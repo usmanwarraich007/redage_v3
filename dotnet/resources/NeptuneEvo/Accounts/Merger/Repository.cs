@@ -31,7 +31,7 @@ namespace NeptuneEvo.Accounts.Merger
             {
                 if (Admin.IsServerStoping)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MergeErrorRestart), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MergeErrorRestart), 3000);
                     return;
                 }
                 if (serverId != 2 && serverId != 3)
@@ -310,7 +310,7 @@ namespace NeptuneEvo.Accounts.Merger
 
                 await Save.Repository.SaveSql(saveDB, player);
 
-                UpdateData.RedBucks(player, redBucks, LangFunc.GetText(LangType.Ru, DataName.Merge));
+                UpdateData.RedBucks(player, redBucks, LangFunc.GetText(LangType.En, DataName.Merge));
                 
                 Trigger.ClientEvent(player, "client.merger.progress", 999);
 
@@ -395,7 +395,7 @@ namespace NeptuneEvo.Accounts.Merger
                         break;
                     }
                 }
-                if (renamed) Notify.Send(player, NotifyType.Success, NotifyPosition.TopCenter, LangFunc.GetText(LangType.Ru, DataName.CharSuccMerged, OldFirstname, OldLastname), 10000);
+                if (renamed) Notify.Send(player, NotifyType.Success, NotifyPosition.TopCenter, LangFunc.GetText(LangType.En, DataName.CharSuccMerged, OldFirstname, OldLastname), 10000);
 
                 var charMoney = await db.Money
                     .Where(v => v.Id == character.Bank)
@@ -649,7 +649,7 @@ namespace NeptuneEvo.Accounts.Merger
                         if (officeUpgrade >= 1) moneyTo += Convert.ToInt32(Main.PricesSettings.FirstOrgPrice / 1);
                         if (officeUpgrade >= 2)
                         {
-                            UpdateData.RedBucks(player, Convert.ToInt32(Main.PricesSettings.SecondOrgPrice / 1), LangFunc.GetText(LangType.Ru, DataName.CashBackOrgMerge));
+                            UpdateData.RedBucks(player, Convert.ToInt32(Main.PricesSettings.SecondOrgPrice / 1), LangFunc.GetText(LangType.En, DataName.CashBackOrgMerge));
                         }
                         if (Convert.ToBoolean(orgData.Customs)) moneyTo += Convert.ToInt32(Main.PricesSettings.CustomsPrice / 1);
                         if (Convert.ToBoolean(orgData.Stock)) moneyTo += Convert.ToInt32(Main.PricesSettings.StockPrice / 1);
@@ -670,7 +670,7 @@ namespace NeptuneEvo.Accounts.Merger
                         
                         await saveDB.Characters
                             .Where(c => c.Uuid == charId)
-                            .Set(c => c.Money, moneyTo)//Доедлать
+                            .Set(c => c.Money, moneyTo)//Needs to be completed
                             .UpdateAsync();
                     }
                 }

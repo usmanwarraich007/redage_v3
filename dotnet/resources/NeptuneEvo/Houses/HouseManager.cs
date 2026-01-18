@@ -751,16 +751,16 @@ namespace NeptuneEvo.Houses
         public static List<HouseType> HouseTypeList = new List<HouseType>
         {
             // name, position
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.Trailer), new Vector3(1973.056, 3816.448, 32.728), new Vector3(), 0.0f, "trevorstrailer"),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.Economy), new Vector3(151.0683, -1007.486, -99.70), new Vector3(), 0.0f,"hei_hw1_blimp_interior_v_motel_mp_milo_"),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.EcenomyPlus), new Vector3(265.9691, -1007.078, -102.0758), new Vector3(), 0.0f,"hei_hw1_blimp_interior_v_studio_lo_milo_"),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.Comfort), new Vector3(346.6991, -1013.023, -100.3162), new Vector3(349.5223, -994.5601, -99.7562), 264.0f, "hei_hw1_blimp_interior_v_apart_midspaz_milo_"),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.ComfortPlus), new Vector3(-31.35483, -594.9686, 78.9109),  new Vector3(-25.42115, -581.4933, 79.12776), 159.84f, "hei_hw1_blimp_interior_32_dlc_apart_high2_new_milo_"),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.Premium), new Vector3(-17.85757, -589.0983, 88.99482), new Vector3(-38.84652, -578.466, 88.58952), 50.8f, "hei_hw1_blimp_interior_10_dlc_apart_high_new_milo_"),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.PremiumPlus), new Vector3(-173.9419, 497.8622, 136.8341), new Vector3(-164.9799, 480.7568, 137.1526), 40.0f, "apa_ch2_05e_interior_0_v_mp_stilts_b_milo_"),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.Parking), new Vector3(), new Vector3(), 0.0f, ""),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.PremiumPlusPlus), new Vector3(373.53, 423.47, 145.05), new Vector3(373.5995, 404.09, 145.407), 234.0f, ""),
-            new HouseType(LangFunc.GetText(LangType.Ru, DataName.Lux), new Vector3(-774.0425, 342.072, 195.7), new Vector3(-778.88, 320.96, 195.32), 255.0f, "apa_v_mp_h_05_b"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.Trailer), new Vector3(1973.056, 3816.448, 32.728), new Vector3(), 0.0f, "trevorstrailer"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.Economy), new Vector3(151.0683, -1007.486, -99.70), new Vector3(), 0.0f,"hei_hw1_blimp_interior_v_motel_mp_milo_"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.EcenomyPlus), new Vector3(265.9691, -1007.078, -102.0758), new Vector3(), 0.0f,"hei_hw1_blimp_interior_v_studio_lo_milo_"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.Comfort), new Vector3(346.6991, -1013.023, -100.3162), new Vector3(349.5223, -994.5601, -99.7562), 264.0f, "hei_hw1_blimp_interior_v_apart_midspaz_milo_"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.ComfortPlus), new Vector3(-31.35483, -594.9686, 78.9109),  new Vector3(-25.42115, -581.4933, 79.12776), 159.84f, "hei_hw1_blimp_interior_32_dlc_apart_high2_new_milo_"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.Premium), new Vector3(-17.85757, -589.0983, 88.99482), new Vector3(-38.84652, -578.466, 88.58952), 50.8f, "hei_hw1_blimp_interior_10_dlc_apart_high_new_milo_"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.PremiumPlus), new Vector3(-173.9419, 497.8622, 136.8341), new Vector3(-164.9799, 480.7568, 137.1526), 40.0f, "apa_ch2_05e_interior_0_v_mp_stilts_b_milo_"),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.Parking), new Vector3(), new Vector3(), 0.0f, ""),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.PremiumPlusPlus), new Vector3(373.53, 423.47, 145.05), new Vector3(373.5995, 404.09, 145.407), 234.0f, ""),
+            new HouseType(LangFunc.GetText(LangType.En, DataName.Lux), new Vector3(-774.0425, 342.072, 195.7), new Vector3(-778.88, 320.96, 195.32), 255.0f, "apa_v_mp_h_05_b"),
         };
 
 
@@ -1063,18 +1063,18 @@ namespace NeptuneEvo.Houses
             if (house == null) return;
             else if (!house.Owner.Equals(player.Name) && !house.Roommates.ContainsKey(player.Name))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHasNoHouse), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHasNoHouse), 3000);
                 return;
             }
             else if (house.HealkitTime > DateTime.Now)
             {
                 string left = Convert.ToDateTime((house.HealkitTime - DateTime.Now).ToString()).ToString("mm:ss");
-                Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HealthkitUseCan, left), 1500);
+                Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HealthkitUseCan, left), 1500);
                 return;
             }
             house.HealkitTime = DateTime.Now.AddHours(1);
             player.Health = 100;
-            Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HealthkitUse), 3000);
+            Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HealthkitUse), 3000);
         }
 
         [Interaction(ColShapeEnums.EnterHouse, In: true)]
@@ -1130,12 +1130,12 @@ namespace NeptuneEvo.Houses
                     {
                         if (sessionData.Following != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                             return;
                         }
                         if (sessionData.Follower != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OtpustiteChela), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OtpustiteChela), 3000);
                             return;
                         }
                         var playerHouse = GetHouse(player);
@@ -1145,7 +1145,7 @@ namespace NeptuneEvo.Houses
                         {
                             if (!FunctionsAccess.IsWorking("crowbar"))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                                 return;
                             }
                             if (characterData.AdminLVL < 5)
@@ -1153,7 +1153,7 @@ namespace NeptuneEvo.Houses
                                 if (house.Price == 0) return;
                                 if (house.HijackTime > DateTime.Now)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NedavnoGrabili), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NedavnoGrabili), 3000);
                                     return;
                                 }
                                 if (sessionData.ActiveWeap.Item != null)
@@ -1179,13 +1179,13 @@ namespace NeptuneEvo.Houses
                                                     {
                                                         Notify.Send(player, NotifyType.Error,
                                                             NotifyPosition.BottomCenter,
-                                                            LangFunc.GetText(LangType.Ru, DataName.HomeGrabit3Rank),
+                                                            LangFunc.GetText(LangType.En, DataName.HomeGrabit3Rank),
                                                             3000);
                                                         return;
                                                     }
 
                                                     break;
-                                                default: // Организации с улучшением крайм-принадлежностей
+                                                default: // Organizations with enhanced crime-related assets
                                                     if (!player.IsOrganizationAccess(RankToAccess.OrgCrime)) return;
                                                     break;
                                             }
@@ -1202,7 +1202,7 @@ namespace NeptuneEvo.Houses
                                         Trigger.ClientEvent(player, "freeze", true);
                                         sessionData.CurrentStage = 0;
                                         Trigger.ClientEvent(player, "dial", "open", house.LockAngles[0]);
-                                        Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.HackingHome));
+                                        Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.HackingHome));
                                     }
                                 }
                             }
@@ -1229,7 +1229,7 @@ namespace NeptuneEvo.Houses
             if (house == null) return;
             if (sessionData.HouseData.Editing)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustFinishEdit), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustFinishEdit), 3000);
                 return;
             }
             house.RemovePlayer(player);
@@ -1274,14 +1274,14 @@ namespace NeptuneEvo.Houses
                     var item = Chars.Repository.GetItemData(player, "fastSlots", sessionData.ActiveWeap.Index);
                     if (item.ItemId != ItemId.Crowbar)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustHaveLom), 2000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustHaveLom), 2000);
                         HouseHijackStop(player);
                         return;
                     }
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustHaveLom), 2000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustHaveLom), 2000);
                     HouseHijackStop(player);
                     return;
                 }
@@ -1291,7 +1291,7 @@ namespace NeptuneEvo.Houses
                     var itemStruct = sessionData.ActiveWeap;
                     Chars.Repository.RemoveIndex(player, "fastSlots", itemStruct.Index);
                     HouseHijackStop(player);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LomBroken), 2000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LomBroken), 2000);
                     return;
                 }
                 var house = Houses.FirstOrDefault(h => h.ID == sessionData.HouseID);
@@ -1313,7 +1313,7 @@ namespace NeptuneEvo.Houses
                     Trigger.ClientEvent(player, "dial", "close");
                     Trigger.ClientEvent(player, "fullblockMove", false);
                     Trigger.ClientEvent(player, "freeze", false);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucVzlomDver), 2000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucVzlomDver), 2000);
                     player.Eval($"mp.game.audio.playSoundFrontend(-1, \"Drill_Pin_Break\", \"DLC_HEIST_FLEECA_SOUNDSET\", true);");
                     house.SetLock(false);
                     house.HijackTime = DateTime.Now.AddHours(3);
@@ -1325,7 +1325,7 @@ namespace NeptuneEvo.Houses
                     {
                         sessionData.CurrentStage = stage;
                         Trigger.ClientEvent(player, "dial", "open", house.LockAngles[stage], true);
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Stage5Suc, stage), 2000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Stage5Suc, stage), 2000);
                         player.Eval($"mp.game.audio.playSoundFrontend(-1, \"Player_Enter_Line\", \"GTAO_FM_Cross_The_Line_Soundset\", true);");
                     }
                 }
@@ -1441,7 +1441,7 @@ namespace NeptuneEvo.Houses
                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Недвижимость, которую Вы покупаете, имеет {maxcars} машиномест, продайте лишние машины", 3000);
                             return;
                         }*/
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.BuyHouse, house.Price), DateTime.Now);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.BuyHouse, house.Price), DateTime.Now);
                         //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы купили эту недвижимость, не забудьте внести налог за неё в банкомате", 3000);
                        // Notify.Send(player, NotifyType.Success, NotifyPosition.Center, $"НЕ ЗАБУДЬТЕ ВНЕСТИ НАЛОГИ В БЛИЖАЙШЕМ БАНКОМАТЕ!", 8000);
                         CheckAndKick(player);
@@ -1611,7 +1611,7 @@ namespace NeptuneEvo.Houses
                 var house = GetHouse(player, true);
                 if (house == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
 
@@ -1649,7 +1649,7 @@ namespace NeptuneEvo.Houses
                     GameLog.Money($"server", $"player({characterData.UUID})", Convert.ToInt32(price), $"houseSell({house.ID})");
                 
                 //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы продали свою недвижимость государству за {MoneySystem.Wallet.Format(price)}$", 3000);
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.SellDomGos, MoneySystem.Wallet.Format(price)), DateTime.Now);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.SellDomGos, MoneySystem.Wallet.Format(price)), DateTime.Now);
                 
                 // if (price >= 1000000)
                 //     Admin.AdminsLog(1, $"[ВНИМАНИЕ] Игрок {player.Name}({player.Value}) продал свою недвижимость ({house.ID}) государству за {MoneySystem.Wallet.Format(price)}$", 1, "#FF0000");
@@ -2344,7 +2344,7 @@ namespace NeptuneEvo.Houses
                         int vClass = NAPI.Vehicle.GetVehicleClass(NAPI.Util.VehicleNameToModel(vehicleData.Model));
                         if (!MoneySystem.Wallet.Change(player, -VehicleManager.VehicleRepairPrice[vClass]))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                             return;
                         }
                         //vData.Items = new List<nItem>();
@@ -2570,7 +2570,7 @@ namespace NeptuneEvo.Houses
                                 if (characterData.InsideGarageID == -1)
                                 {
                                     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                                        LangFunc.GetText(LangType.Ru, DataName.MustBeInGarage), 3000);
+                                        LangFunc.GetText(LangType.En, DataName.MustBeInGarage), 3000);
                                     return;
                                 }
                             }
@@ -2612,7 +2612,7 @@ namespace NeptuneEvo.Houses
                 var house = GetHouse(player, true);
                 if (house == null || house.Type == 7)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
                 if ((sessionData.SellItemData.Buyer != null || sessionData.SellItemData.Seller != null) && Chars.Repository.TradeGet(player))
@@ -2901,7 +2901,7 @@ namespace NeptuneEvo.Houses
 
                 if ((sessionData.SellItemData.Seller != null || sessionData.SellItemData.Buyer != null) && Chars.Repository.TradeGet(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantTrade), 3000);
                     return;
                 }
                 if (player.Position.DistanceTo(target.Position) > 2)
@@ -2912,7 +2912,7 @@ namespace NeptuneEvo.Houses
                 var house = GetHouse(player, true);
                 if (house == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
                 if (GetHouse(target, true) != null)
@@ -2942,7 +2942,7 @@ namespace NeptuneEvo.Houses
                 }
                 if ((targetSessionData.SellItemData.Seller != null || targetSessionData.SellItemData.Buyer != null) && Chars.Repository.TradeGet(target))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerAlreadyTraded), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerAlreadyTraded), 3000);
                     return;
                 }
                 targetSessionData.SellItemData.Seller = player;
@@ -2982,7 +2982,7 @@ namespace NeptuneEvo.Houses
                 if (sellerCharacterData == null)
                 {
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SellerNotOnline), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SellerNotOnline), 3000);
                     return;
                 }
                 if (GetHouse(player, true) != null)
@@ -3024,7 +3024,7 @@ namespace NeptuneEvo.Houses
                 }
                 else if (Main.ServerNumber != 0 && (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 6))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdminTransferRestricted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdminTransferRestricted), 3000);
                     return;
                 }
                 MoneySystem.Wallet.Change(player, -price);

@@ -1,4 +1,4 @@
-﻿using GTANetworkAPI;
+using GTANetworkAPI;
 using NeptuneEvo.Handles;
 using NeptuneEvo.Accounts;
 using NeptuneEvo.Players.Models;
@@ -29,7 +29,7 @@ namespace NeptuneEvo.World
                 if (characterData == null) return;
                 if (characterData.Unmute > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true) || sessionData.DeathData.InDeath) return;
@@ -44,7 +44,7 @@ namespace NeptuneEvo.World
                 var adminConfig = characterData.ConfigData.AdminOption;
 
                 if (characterData.AdminLVL > 0 && adminConfig.RedName) 
-                    text = "(( Администратор {name}: " + message + " ))";
+                    text = "(( Admin {name}: " + message + " ))";
 
                 foreach (ExtPlayer foreachPlayer in Main.GetPlayersInRadiusOfPosition(player.Position, 10f, UpdateData.GetPlayerDimension(player)))
                 {
@@ -59,7 +59,7 @@ namespace NeptuneEvo.World
                     if (targetCharacterData == null) return;
                     int pSim = characterData.Sim;
                     string contactName = (targetCharacterData.Contacts.ContainsKey(pSim)) ? targetCharacterData.Contacts[pSim] : pSim.ToString();
-                    Trigger.SendChatMessage(target, $"[В телефоне] {contactName}: {message}");
+                    Trigger.SendChatMessage(target, $"[Phone] {contactName}: {message}");
                     GameLog.AddInfo($"(CChat) player({characterData.UUID}) {message} -> player({targetCharacterData.UUID})");
                 }
                 else GameLog.AddInfo($"(Chat) player({characterData.UUID}) {message}");

@@ -287,11 +287,11 @@ namespace NeptuneEvo.Players.Phone.Gps
                 new GpsItem("Стоянка газонокосилок", -1330.482f, 42.12986f),
 
                 new GpsItem("Отделение почты", 133.0764f, 96.67652f),
-                new GpsItem(LangFunc.GetText(LangType.Ru, DataName.TaxiRent), 899.3858f, -172.74521f),
-                new GpsItem(LangFunc.GetText(LangType.Ru, DataName.BusRent), 435.23758f, -653.01117f),
-                new GpsItem(LangFunc.GetText(LangType.Ru, DataName.MechanikRent), -229.61082f, -1378.2086f),
-                new GpsItem(LangFunc.GetText(LangType.Ru, DataName.FuraRent), 1018.9361f, -2511.5688f),
-                new GpsItem(LangFunc.GetText(LangType.Ru, DataName.FurgonRent), -196.52617f, -830.6757f)
+                new GpsItem(LangFunc.GetText(LangType.En, DataName.TaxiRent), 899.3858f, -172.74521f),
+                new GpsItem(LangFunc.GetText(LangType.En, DataName.BusRent), 435.23758f, -653.01117f),
+                new GpsItem(LangFunc.GetText(LangType.En, DataName.MechanikRent), -229.61082f, -1378.2086f),
+                new GpsItem(LangFunc.GetText(LangType.En, DataName.FuraRent), 1018.9361f, -2511.5688f),
+                new GpsItem(LangFunc.GetText(LangType.En, DataName.FurgonRent), -196.52617f, -830.6757f)
 
             };
 

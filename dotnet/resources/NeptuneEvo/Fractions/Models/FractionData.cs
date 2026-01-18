@@ -50,7 +50,7 @@ namespace NeptuneEvo.Fractions.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     foreach (var rankData in this.Ranks)
                     {
@@ -77,7 +77,7 @@ namespace NeptuneEvo.Fractions.Models
                     if (!this.Ranks.ContainsKey(id))
                         return;
                     
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var rankData = this.Ranks[id];
                  
@@ -102,7 +102,7 @@ namespace NeptuneEvo.Fractions.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Fractions
                         .Where(v => v.Id == this.Id)
@@ -121,7 +121,7 @@ namespace NeptuneEvo.Fractions.Models
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Fractions
                         .Where(v => v.Id == this.Id)

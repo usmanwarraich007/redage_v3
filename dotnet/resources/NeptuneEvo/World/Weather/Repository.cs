@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using GTANetworkAPI;
@@ -50,7 +50,7 @@ namespace NeptuneEvo.World.Weather
         public static string WeatherJson = "";
         
         private static int MaxRandom = 8;
-        private static int MaxTimeSeconds = 1800; // 30 мин 
+        private static int MaxTimeSeconds = 1800; // 30 min 
         public static int NextTime = 0;
 
         private static void UpdateNextTime()

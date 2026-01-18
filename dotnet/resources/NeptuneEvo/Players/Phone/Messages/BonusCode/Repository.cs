@@ -31,11 +31,11 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
             
             if (characterData.LVL <= Main.ServerSettings.BonusCodeLvl)
             {
-                return LangFunc.GetText(LangType.Ru, DataName.Bonus1lvl);
+                return LangFunc.GetText(LangType.En, DataName.Bonus1lvl);
             }
             if (DateTime.Now < sessionData.TimingsData.NextBonusCode)
             {
-                return LangFunc.GetText(LangType.Ru, DataName.Bonus30minCd);
+                return LangFunc.GetText(LangType.En, DataName.Bonus30minCd);
             }
             text = text.ToLower();
             if (Main.BonusCodes.ContainsKey(text))
@@ -44,7 +44,7 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                 {
                     if (accountData.BonusCodes.Contains(text))
                     {
-                        return LangFunc.GetText(LangType.Ru, DataName.BonusUsed);
+                        return LangFunc.GetText(LangType.En, DataName.BonusUsed);
                     }
                     var pcdata = Main.BonusCodes[text];
                     if (pcdata.UsedLimit == 0 || pcdata.UsedTimes < pcdata.UsedLimit)
@@ -59,7 +59,7 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                         {
                             try
                             {
-                                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                                 await db.Bonuscodes
                                     .Where(v => v.Code == text)
@@ -84,19 +84,19 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                                 switch (pcdata.RewardVipLvl)
                                 {
                                     case 1:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BronzeBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BronzeBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     case 2:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SilverBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SilverBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     case 3:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GoldBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GoldBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     case 4:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlatinumBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlatinumBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     default:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                 }
                                 accountData.VipLvl = pcdata.RewardVipLvl;
@@ -108,19 +108,19 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                                 switch (pcdata.RewardVipLvl)
                                 {
                                     case 1:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BronzeBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BronzeBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     case 2:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SilverBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SilverBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     case 3:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GoldBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GoldBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     case 4:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlatinumBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlatinumBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                     default:
-                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorBonus, pcdata.RewardVipDays), 15000);
+                                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorBonus, pcdata.RewardVipDays), 15000);
                                         break;
                                 }
                                 accountData.VipDate = accountData.VipDate.AddDays(pcdata.RewardVipDays);
@@ -158,7 +158,7 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                                 }
                                 accountData.VipDate = accountData.VipDate.AddDays(days);
                                 GameLog.Money($"system", $"player({characterData.UUID})", 0, $"bonusVIP({accountData.VipLvl}lvl, {days}d, стало до {accountData.VipDate.ToString("s")})");
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DaysDop, days), 15000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DaysDop, days), 15000);
                             }
                             //if (pcdata.RewardExp == 0) Chars.Repository.PlayerStats(player);
                         }
@@ -172,7 +172,7 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                                 {
                                     WeaponRepository.GiveWeapon(player, item.ItemId, item.Data, item.Count);
                                 }
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BonusItems, pcdata.RewardItemsMale.Count), 15000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BonusItems, pcdata.RewardItemsMale.Count), 15000);
                             }
                         }
                         else
@@ -183,7 +183,7 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                                 {
                                     WeaponRepository.GiveWeapon(player, item.ItemId, item.Data, item.Count);
                                 }
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BonusItems, pcdata.RewardItemsFemale.Count), 15000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BonusItems, pcdata.RewardItemsFemale.Count), 15000);
                             }
                         }
                         if (pcdata.RewardExp != 0)
@@ -195,10 +195,10 @@ namespace NeptuneEvo.Players.Phone.Messages.BonusCode
                         return pcdata.RewardMessage;
                     }
                     if (pcdata.UsedLimit != 0 && pcdata.UsedTimes >= pcdata.UsedLimit) 
-                        return LangFunc.GetText(LangType.Ru, DataName.BonusEnd, pcdata.UsedLimit);
+                        return LangFunc.GetText(LangType.En, DataName.BonusEnd, pcdata.UsedLimit);
                 }
             }
-            return LangFunc.GetText(LangType.Ru, DataName.NoBonusMore);
+            return LangFunc.GetText(LangType.En, DataName.NoBonusMore);
         }
     }
 }

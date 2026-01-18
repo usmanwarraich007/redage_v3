@@ -106,7 +106,7 @@ namespace NeptuneEvo.Players.Disconnect
                         {
                             targetSessionData.DicePlayingWith = null;
                             targetSessionData.DiceMoney = 0;
-                            Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ChelVishelNoGame), 3000);
+                            Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ChelVishelNoGame), 3000);
                         }
                         sessionData.DicePlayingWith = null;
                         sessionData.DiceMoney = 0;
@@ -122,7 +122,7 @@ namespace NeptuneEvo.Players.Disconnect
                             if (buyerSessionData != null)
                             {
                                 buyerSessionData.SellItemData = new SellItemData();
-                                Notify.Send(buyer, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DisconnectedSellClose), 3000);
+                                Notify.Send(buyer, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DisconnectedSellClose), 3000);
                             }
                         }
                         else if (buyer == player)
@@ -130,7 +130,7 @@ namespace NeptuneEvo.Players.Disconnect
                             if (sellerSessionData != null)
                             {
                                 sellerSessionData.SellItemData = new SellItemData();
-                                Notify.Send(seller, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DisconnectedSellClose), 3000);
+                                Notify.Send(seller, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DisconnectedSellClose), 3000);
                             }
                         }
                         sessionData.SellItemData = new SellItemData();
@@ -161,12 +161,12 @@ namespace NeptuneEvo.Players.Disconnect
                         {
                             if (cufdata.CuffedByCop)
                             {
-                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.DemorganCuffs, player.Name));
+                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.DemorganCuffs, player.Name));
                                 GameLog.Admin($"server", $"demorgan(4ч,выход из игры в наручниках)", $"{player.Name}");
                             }
                             else if (cufdata.CuffedByMafia)
                             {
-                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.Ru, DataName.DemorganStyzahka, player.Name));
+                                NAPI.Chat.SendChatMessageToAll(LangFunc.GetText(LangType.En, DataName.DemorganStyzahka, player.Name));
                                 GameLog.Admin($"server", $"demorgan(4ч,выход из игры в стяжках)", $"{player.Name}");
                             }
 
@@ -241,7 +241,7 @@ namespace NeptuneEvo.Players.Disconnect
                     if (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 5)
                         Trigger.SendToAdmins(1, $"!{{#FFB833}}[A] {player.Name} отключился ({characterData.AdminLVL} lvl)");
                     
-                    Commands.RPChat("sb", player, LangFunc.GetText(LangType.Ru, DataName.PlayerDisconnect), optName: player.Name + $" ({player.Value})");
+                    Commands.RPChat("sb", player, LangFunc.GetText(LangType.En, DataName.PlayerDisconnect), optName: player.Name + $" ({player.Value})");
 
                     if (Main.PlayerUUIDToPlayerId.ContainsKey(characterData.UUID)) 
                         Main.PlayerUUIDToPlayerId.TryRemove(characterData.UUID, out _);     
@@ -339,7 +339,7 @@ namespace NeptuneEvo.Players.Disconnect
                     {
                         try
                         {
-                            await using var db = new ServerBD("MainDB"); //В отдельном потоке
+                            await using var db = new ServerBD("MainDB"); //On Separate Thread
 
                             await Accounts.Save.Repository.SaveSql(db, player);
 

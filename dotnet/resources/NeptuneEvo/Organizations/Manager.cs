@@ -16,6 +16,7 @@ using NeptuneEvo.Functions;
 using NeptuneEvo.GUI;
 using Newtonsoft.Json;
 using Redage.SDK;
+using Localization;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -579,7 +580,7 @@ namespace NeptuneEvo.Organizations
                     {
                         try
                         {
-                            await using var db = new ServerBD("MainDB");//В отдельном потоке
+                            await using var db = new ServerBD("MainDB");//On Separate Thread
 
                             await db.Orgvehicles
                                 .Where(v => v.Number == number)
@@ -618,7 +619,7 @@ namespace NeptuneEvo.Organizations
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.InsertAsync(new Orgvehicles
                         {
@@ -756,7 +757,7 @@ namespace NeptuneEvo.Organizations
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Organizations
                             .Where(o => o.Organization == orgId)
@@ -809,7 +810,7 @@ namespace NeptuneEvo.Organizations
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Organizations
                             .Where(o => o.Organization == orgId)
@@ -948,7 +949,7 @@ namespace NeptuneEvo.Organizations
                 
                 if (newRank >= memberOrganizationData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantUpToRank), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantUpToRank), 3000);
                     return;
                 }
                 if (targetMemberOrganizationData.Rank >= memberOrganizationData.Rank)
@@ -1111,7 +1112,7 @@ namespace NeptuneEvo.Organizations
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Organizations
                             .Where(o => o.Organization == organizationData.Id)
@@ -1221,7 +1222,7 @@ namespace NeptuneEvo.Organizations
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Organizations
                             .Where(o => o.Organization == organizationData.Id)
@@ -1409,7 +1410,7 @@ namespace NeptuneEvo.Organizations
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Organizations
                             .Where(o => o.Organization == organizationData.Id)
@@ -1454,7 +1455,7 @@ namespace NeptuneEvo.Organizations
                 if (characterData == null) return;
                 if (DateTime.Now < sessionData.TimingsData.NextGlobalChat)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Block10Min), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Block10Min), 4500);
                     return;
                 }
                 if (player.IsOrganizationMemberData()) return;
@@ -1476,7 +1477,7 @@ namespace NeptuneEvo.Organizations
                 orgName = Main.BlockSymbols(Main.RainbowExploit(orgName));
                 if (orgName.Length < 3 || orgName.Length > 30)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxRankNameLenght), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxRankNameLenght), 4500);
                     return;
                 }
                 
@@ -1485,8 +1486,8 @@ namespace NeptuneEvo.Organizations
                 if (Main.stringGlobalBlock.Any(c => testmsg.Contains(c)))
                 {
                     sessionData.TimingsData.NextGlobalChat = DateTime.Now.AddMinutes(10);
-                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.Ru, DataName.AdminAlertFTableNews, player.Name, player.Value, orgName));
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RestrictedWordsTableNews), 15000);
+                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.En, DataName.AdminAlertFTableNews, player.Name, player.Value, orgName));
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RestrictedWordsTableNews), 15000);
                     Trigger.ClientEvent(player, "client.org.create.close");
                     return;
                 }
@@ -1511,7 +1512,7 @@ namespace NeptuneEvo.Organizations
                     try
                     {
                         var date = DateTime.Now;
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         var id = await db.InsertWithInt32IdentityAsync(new global::Database.Organizations
                         {
@@ -1686,19 +1687,19 @@ namespace NeptuneEvo.Organizations
                 }
                 if (Chars.Repository.itemCount(player, "inventory", ItemId.BodyArmor) >= Chars.Repository.maxItemCount)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveBronik), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveBronik), 3000);
                     return;
                 }
                 ItemStruct mItem = Chars.Repository.isItem(player, "inventory", ItemId.Material);
                 int count = (mItem == null) ? 0 : mItem.Item.Count;
                 if (count < 400)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMats), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMats), 3000);
                     return;
                 }
                 if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.BodyArmor, 1, "100") == -1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                     return;
                 }
                 Chars.Repository.RemoveIndex(player, mItem.Location, mItem.Index, 400);
@@ -1788,7 +1789,7 @@ namespace NeptuneEvo.Organizations
                             stockContains = organizationData.Materials;
                             if (stockContains + amount > MaxMats)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseTooMuch), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseTooMuch), 3000);
                                 return;
                             }
                             playerHave = Chars.Repository.getCountToLacationItem($"char_{characterData.UUID}", "inventory", ItemId.Material);
@@ -1798,7 +1799,7 @@ namespace NeptuneEvo.Organizations
                             stockContains = organizationData.Drugs;
                             if (stockContains + amount > 10000)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NarkoWarehouseTooMuch), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NarkoWarehouseTooMuch), 3000);
                                 return;
                             }
                             playerHave = Chars.Repository.getCountToLacationItem($"char_{characterData.UUID}", "inventory", ItemId.Drugs);
@@ -1816,7 +1817,7 @@ namespace NeptuneEvo.Organizations
 
                         if (playerHave < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCoins), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCoins), 3000);
                             return;
                         }
 
@@ -1878,7 +1879,7 @@ namespace NeptuneEvo.Organizations
                             playerHave = Chars.Repository.getCountItem($"char_{characterData.UUID}", ItemId.Material, bagsToggled: false);
                             if (playerHave + amount > Chars.Repository.ItemsInfo[ItemId.Material].Stack)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.InventoryFilled), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InventoryFilled), 3000);
                                 return;
                             }
                         }
@@ -1888,7 +1889,7 @@ namespace NeptuneEvo.Organizations
                             playerHave = Chars.Repository.getCountItem($"char_{characterData.UUID}", ItemId.Drugs, bagsToggled: false);
                             if (playerHave + amount > 50)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.InventoryFilled), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InventoryFilled), 3000);
                                 return;
                             }
                         }
@@ -1905,7 +1906,7 @@ namespace NeptuneEvo.Organizations
 
                         if (stockContains < amount)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseEmptyNet), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseEmptyNet), 3000);
                             return;
                         }
 
@@ -1992,7 +1993,7 @@ namespace NeptuneEvo.Organizations
             if (characterData == null) return;
             if (sessionData.Following != null)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                 return;
             }
             else if (sessionData.Follower != null)
@@ -2018,7 +2019,7 @@ namespace NeptuneEvo.Organizations
                 if (characterData == null) return;
                 if (sessionData.Following != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                     return;
                 }
                 else if (sessionData.Follower != null)
@@ -2087,18 +2088,18 @@ namespace NeptuneEvo.Organizations
                 {
                     case "createorg":
                         var frameList = new FrameListData();
-                        frameList.Header = LangFunc.GetText(LangType.Ru, DataName.Famka);
+                        frameList.Header = LangFunc.GetText(LangType.En, DataName.Famka);
                         frameList.Callback = callback_organizations1;
 
-                        frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.OfficePreview), "ofprev"));
+                        frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.OfficePreview), "ofprev"));
 
-                        //frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.OfficeUpg), "ofprevinfo"));
+                        //frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.OfficeUpg), "ofprevinfo"));
 
-                        frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.GaragePreview), "garprev"));
+                        frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.GaragePreview), "garprev"));
 
-                        //frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.GarageUpg), "garprevinfo"));
+                        //frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.GarageUpg), "garprevinfo"));
 
-                        frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru,DataName.CreatePrice, Main.PricesSettings.CreateOrgPrice), "createorg"));
+                        frameList.List.Add(new ListData(LangFunc.GetText(LangType.En,DataName.CreatePrice, Main.PricesSettings.CreateOrgPrice), "createorg"));
                         
                         Players.Popup.List.Repository.Open(player, frameList); 
                         break;
@@ -2369,7 +2370,7 @@ namespace NeptuneEvo.Organizations
 
                 if (characterData.Unmute > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                     return;
                 }
                 if (characterData.DemorganTime >= 1) return;
@@ -2411,7 +2412,7 @@ namespace NeptuneEvo.Organizations
                 
                 if (characterData.Unmute > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMutedMins, characterData.Unmute / 60), 3000);
                     return;
                 }
                 if (characterData.DemorganTime >= 1) return;

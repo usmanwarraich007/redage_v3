@@ -34,7 +34,7 @@ namespace NeptuneEvo.Core
                 //NAPI.TextLabel.CreateTextLabel(Main.StringToU16("~w~Автошкола"), enterSchool + new Vector3(0, 0, 1f), 5f, 0.3f, 0, new Color(255, 255, 255));
 
                //Main.CreateBlip(new Main.BlipData(498, "Автошкола", enterSchool, 2, true));
-                PedSystem.Repository.CreateQuest("mp_m_securoguard_01", enterSchool, -60.65183f, title: "~y~NPC~w~ Офицер Бенсон\nВыдача лицензий", colShapeEnums: ColShapeEnums.DriveSchool);
+                PedSystem.Repository.CreateQuest("mp_m_securoguard_01", enterSchool, -60.65183f, title: "~y~NPC~w~ Officer Benson\nLicense Issuance", colShapeEnums: ColShapeEnums.DriveSchool);
 
                 /*for (int i = 0; i < 72; i++)
                 {
@@ -92,7 +92,7 @@ namespace NeptuneEvo.Core
                 if (sessionData.DSchoolData.Vehicle == vehicle)
                 {
                     if (sessionData.TimersData.SchoolTimer == null) sessionData.TimersData.SchoolTimer = Timers.StartOnce(60000, () => timer_exitVehicle(player), true);
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FailExamIfNotSit), 7000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FailExamIfNotSit), 7000);
                     return;
                 }
             }
@@ -120,7 +120,7 @@ namespace NeptuneEvo.Core
                     Timers.Stop(sessionData.TimersData.SchoolTimer);
                     sessionData.TimersData.SchoolTimer = null;
                 }
-                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FailExam), 5000);
+                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FailExam), 5000);
             }
             catch (Exception e)
             {
@@ -156,7 +156,7 @@ namespace NeptuneEvo.Core
             {
                 if (!FunctionsAccess.IsWorking("startDrivingCourse"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var sessionData = player.GetSessionData();
@@ -165,12 +165,12 @@ namespace NeptuneEvo.Core
                 if (characterData == null) return;
                 if (sessionData.DSchoolData.IsDriving || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoThisNow), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoThisNow), 3000);
                     return;
                 }
                 if (characterData.Licenses[index])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouAlreadyHaveLic), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveLic), 3000);
                     return;
                 }
                 var fractionData = Fractions.Manager.GetFractionData((int) Fractions.Models.Fractions.CITY);
@@ -184,7 +184,7 @@ namespace NeptuneEvo.Core
                         MoneySystem.Wallet.Change(player, -Main.LicPrices[0]);
                         //fractionData.Money += Main.LicPrices[3];
                         //GameLog.Money($"player({characterData.UUID})", $"frac(6)", Main.LicPrices[3], $"buyLic");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucBuyMotoLic), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucBuyMotoLic), 3000);
                         //Repository.PlayerStats(player);
                         return;
                     case 1:
@@ -195,7 +195,7 @@ namespace NeptuneEvo.Core
                         MoneySystem.Wallet.Change(player, -Main.LicPrices[1]);
                         //fractionData.Money += Main.LicPrices[3];
                         //GameLog.Money($"player({characterData.UUID})", $"frac(6)", Main.LicPrices[3], $"buyLic");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucBuyVehLic), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucBuyVehLic), 3000);
                         //Repository.PlayerStats(player);
                         return;
                     case 2:
@@ -204,7 +204,7 @@ namespace NeptuneEvo.Core
                         MoneySystem.Wallet.Change(player, -Main.LicPrices[2]);
                         //fractionData.Money += Main.LicPrices[3];
                         //GameLog.Money($"player({characterData.UUID})", $"frac(6)", Main.LicPrices[3], $"buyLic");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucBuyGruzLic), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucBuyGruzLic), 3000);
                         //Repository.PlayerStats(player);
                         return;
                     /*case 0:
@@ -285,35 +285,35 @@ namespace NeptuneEvo.Core
                         MoneySystem.Wallet.Change(player, -Main.LicPrices[3]);
                         fractionData.Money += Main.LicPrices[3];
                         GameLog.Money($"player({characterData.UUID})", $"frac(6)", Main.LicPrices[3], $"buyLic");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucBuySeaLic), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucBuySeaLic), 3000);
                         //Repository.PlayerStats(player);
                         return;
                     case 4:
                         if (Chars.UpdateData.CanIChange(player, Main.LicPrices[4], true) != 255) return;
                         if (characterData.LVL < 20)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LicMustBe20), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LicMustBe20), 3000);
                             return;
                         }
                         characterData.Licenses[4] = true;
                         MoneySystem.Wallet.Change(player, -Main.LicPrices[4]);
                         fractionData.Money += Main.LicPrices[4];
                         GameLog.Money($"player({characterData.UUID})", $"frac(6)", Main.LicPrices[4], $"buyLic");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucBuyHeliLic), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucBuyHeliLic), 3000);
                         //Repository.PlayerStats(player);
                         return;
                     case 5:
                         if (Chars.UpdateData.CanIChange(player, Main.LicPrices[5], true) != 255) return;
                         if (characterData.LVL < 20)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LicMustBe20), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LicMustBe20), 3000);
                             return;
                         }
                         characterData.Licenses[5] = true;
                         MoneySystem.Wallet.Change(player, -Main.LicPrices[5]);
                         fractionData.Money += Main.LicPrices[5];
                         GameLog.Money($"player({characterData.UUID})", $"frac(6)", Main.LicPrices[5], $"buyLic");
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucBuyPlaneLic), 3000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucBuyPlaneLic), 3000);
                         //Repository.PlayerStats(player);
                         return;
                     default:
@@ -338,17 +338,17 @@ namespace NeptuneEvo.Core
 
                 frameList.Header = "Лицензии";
                 frameList.Callback = callback_driveschool;
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.MotoLic, Main.LicPrices[0]), 0));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.MotoLic, Main.LicPrices[0]), 0));
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.LegLic, Main.LicPrices[1]), 1));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.LegLic, Main.LicPrices[1]), 1));
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.GruzLic, Main.LicPrices[2]), 2));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.GruzLic, Main.LicPrices[2]), 2));
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.VodLic, Main.LicPrices[3]), 3));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.VodLic, Main.LicPrices[3]), 3));
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.VertLic, Main.LicPrices[4]), 4));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.VertLic, Main.LicPrices[4]), 4));
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.SamLic, Main.LicPrices[5]), 5));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.SamLic, Main.LicPrices[5]), 5));
                 
                 Players.Popup.List.Repository.Open(player, frameList); 
                 BattlePass.Repository.UpdateReward(player, 149);

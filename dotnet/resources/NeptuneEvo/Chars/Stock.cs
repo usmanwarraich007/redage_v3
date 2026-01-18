@@ -20,8 +20,8 @@ namespace NeptuneEvo.Chars
         {
             try
             {
-                Main.CreateBlip(new Main.BlipData(478, "Хранилище 'GoPostal'", new Vector3(-545.02136, -204.28348, 38.2), 32, true));
-                Main.CreateBlip(new Main.BlipData(525, "Центр занятости", new Vector3(-116.56201, -604.71436, 36.28072), 0, true));
+                Main.CreateBlip(new Main.BlipData(478, "GoPostal Warehouse", new Vector3(-545.02136, -204.28348, 38.2), 32, true));
+                Main.CreateBlip(new Main.BlipData(525, "Job Center", new Vector3(-116.56201, -604.71436, 36.28072), 0, true));
                 //NAPI.Marker.CreateMarker(1, new Vector3(-545.02136, -204.28348, 38.2) - new Vector3(0, 0, 1.5), new Vector3(), new Vector3(), 1f, new Color(255, 255, 255, 220));
                 //CustomColShape.CreateCylinderColShape(new Vector3(132.9969, 96.3529, 83.5076), 1f, 2, 0, ColShapeEnums.WarehouseEnter);
                 CustomColShape.CreateCylinderColShape(new Vector3(1048.2255, -3097.1624, -38.9999), 1f, 2, 5, ColShapeEnums.WarehouseExit);
@@ -57,12 +57,12 @@ namespace NeptuneEvo.Chars
             if (sessionData == null) return;
             else if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;
@@ -81,7 +81,7 @@ namespace NeptuneEvo.Chars
                 {
                     if (!FunctionsAccess.IsWorking("warehouseopen"))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                         return;
                     }
 

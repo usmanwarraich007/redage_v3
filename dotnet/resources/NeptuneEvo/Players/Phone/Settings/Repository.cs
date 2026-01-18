@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Database;
 using LinqToDB;
+using Localization;
 using NeptuneEvo.Character;
 using NeptuneEvo.Chars.Models;
 using NeptuneEvo.Core;
@@ -30,7 +31,7 @@ namespace NeptuneEvo.Players.Phone.Settings
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Characters
                         .Where(c => c.Uuid == characterData.UUID)
@@ -56,7 +57,7 @@ namespace NeptuneEvo.Players.Phone.Settings
                 if (Main.SimCards.ContainsKey(sim))
                     Main.SimCards.TryRemove(sim, out _);
              
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, "Сим-карта была заменена.", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SimReplaced), 3000);
                 
                 return sim;   
             }
@@ -73,7 +74,7 @@ namespace NeptuneEvo.Players.Phone.Settings
             
             if (sim == -1)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Сим карта не вставлена", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SimNotInserted), 3000);
                 return;
             }
             if (Chars.Repository.isFreeSlots(player, ItemId.SimCard, 1) != 0) 
@@ -91,7 +92,7 @@ namespace NeptuneEvo.Players.Phone.Settings
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Characters
                         .Where(c => c.Uuid == characterData.UUID)
@@ -140,7 +141,7 @@ namespace NeptuneEvo.Players.Phone.Settings
 
             if (phoneData.Settings.IsAirAntiFlood > DateTime.Now)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Авиа режим можно менять раз в 5 минут", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirplaneModeError), 3000);
                 return;
             }
             phoneData.Settings.IsAirAntiFlood = DateTime.Now.AddMinutes(5);
@@ -157,7 +158,7 @@ namespace NeptuneEvo.Players.Phone.Settings
                         if (characterData == null) 
                             return;
                     
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
                     
                         var messagesList = await Messages.Repository.Load(db, characterData.UUID, characterData.Sim);
 

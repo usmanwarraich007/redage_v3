@@ -1,16 +1,27 @@
+using Database;
 using GTANetworkAPI;
-using NeptuneEvo.Handles;
+using LinqToDB;
+using Localization;
 using MySqlConnector;
 using NeptuneEvo.Accounts;
-using NeptuneEvo.Players.Models;
-using NeptuneEvo.Players;
-using NeptuneEvo.Character.Models;
 using NeptuneEvo.Character;
+using NeptuneEvo.Character.Models;
 using NeptuneEvo.Chars;
 using NeptuneEvo.Chars.Models;
 using NeptuneEvo.Fractions;
+using NeptuneEvo.Fractions.Models;
+using NeptuneEvo.Fractions.Player;
 using NeptuneEvo.Functions;
+using NeptuneEvo.Handles;
 using NeptuneEvo.Houses;
+using NeptuneEvo.Organizations.Player;
+using NeptuneEvo.Players;
+using NeptuneEvo.Players.Models;
+using NeptuneEvo.Table.Models;
+using NeptuneEvo.Table.Tasks.Models;
+using NeptuneEvo.Table.Tasks.Player;
+using NeptuneEvo.VehicleData.LocalData;
+using NeptuneEvo.VehicleData.LocalData.Models;
 using NeptuneEvo.VehicleModel;
 using Newtonsoft.Json;
 using Redage.SDK;
@@ -18,17 +29,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Database;
-using LinqToDB;
-using Localization;
-using NeptuneEvo.Fractions.Models;
-using NeptuneEvo.Fractions.Player;
-using NeptuneEvo.Organizations.Player;
-using NeptuneEvo.Table.Models;
-using NeptuneEvo.Table.Tasks.Models;
-using NeptuneEvo.Table.Tasks.Player;
-using NeptuneEvo.VehicleData.LocalData;
-using NeptuneEvo.VehicleData.LocalData.Models;
+using System.Text;
 
 namespace NeptuneEvo.Core
 {
@@ -101,7 +102,7 @@ namespace NeptuneEvo.Core
                 if (odata == null || odata.entity == null || !odata.entity.Exists) return;
                 if (odata.entity.Position.DistanceTo(player.Position) >= 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 1500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 1500);
                     return;
                 }
                 if (odata.PickedTemp) return;
@@ -114,7 +115,7 @@ namespace NeptuneEvo.Core
                     case "BurglarProofSafe":
                         if (!FunctionsAccess.IsWorking("lockpick"))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                             return;
                         }
                         if (characterData.InsideHouseID == -1) return;
@@ -127,14 +128,14 @@ namespace NeptuneEvo.Core
                             int count = (lockpick == null) ? 0 : lockpick.Item.Count;
                             if (count == 0)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LockpickNeedForHijackMebel), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LockpickNeedForHijackMebel), 3000);
                                 return;
                             }
                             else
                             {
                                 if (objType == "BurglarProofSafe")
                                 {
-                                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SafeCantHijacked), 5000);
+                                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SafeCantHijacked), 5000);
                                     return;
                                 }
                                 var memberFractionData = player.GetFractionMemberData();
@@ -148,12 +149,12 @@ namespace NeptuneEvo.Core
                                             if (memberFractionData.Rank < 3)
                                             {
                                                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                                                    LangFunc.GetText(LangType.Ru, DataName.HijackFrom3Rank), 3000);
+                                                    LangFunc.GetText(LangType.En, DataName.HijackFrom3Rank), 3000);
                                                 return;
                                             }
 
                                             break;
-                                        default: // Организации с улучшением крайм-принадлежностей
+                                        default: // Organizations with enhanced crime-related assets
                                             if (!player.IsOrganizationAccess(RankToAccess.OrgCrime))
                                                 return;
                                             break;
@@ -162,12 +163,12 @@ namespace NeptuneEvo.Core
 
                                 if (house.ItemsGot <= 0)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MebelEmpty), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MebelEmpty), 3000);
                                     return;
                                 }
                                 if (sessionData.IsHicjacking) return;
                                 sessionData.IsHicjacking = true;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.StartHijackMebel), 5000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.StartHijackMebel), 5000);
                                 Trigger.PlayAnimation(player, "amb@code_human_wander_texting@male@base", "static", 39);
                                 // Trigger.ClientEventInRange(player.Position, 250f, "PlayAnimToKey", player, false, "vzlommeb");
                                 Main.OnAntiAnim(player);
@@ -186,25 +187,25 @@ namespace NeptuneEvo.Core
                                         odata = FindObjectByID(entityid);
                                         if (odata == null || odata.entity == null || !odata.entity.Exists || odata.entity.Position.DistanceTo(player.Position) >= 10)
                                         {
-                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MebelTooFar), 3000);
+                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MebelTooFar), 3000);
                                             return;
                                         }
                                         lockpick = Chars.Repository.isItem(player, "inventory", ItemId.Lockpick);
                                         count = (lockpick == null) ? 0 : lockpick.Item.Count;
                                         if (count == 0)
                                         {
-                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LockpickNeedForHijackMebel), 3000);
+                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LockpickNeedForHijackMebel), 3000);
                                             return;
                                         }
                                         house = HouseManager.Houses.FirstOrDefault(h => h.ID == characterData.InsideHouseID);
                                         if (house == null)
                                         {
-                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouNotInHouse), 3000);
+                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouNotInHouse), 3000);
                                             return;
                                         }
                                         if (house.ItemsGot <= 0)
                                         {
-                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MebelEmpty), 3000);
+                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MebelEmpty), 3000);
                                             return;
                                         }
                                         Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", ItemId.Lockpick, 1);
@@ -217,7 +218,7 @@ namespace NeptuneEvo.Core
                                                     HouseHiJackItem(player, house, 0, odata.Id.ToString());
                                                     player.AddTableScore(TableTaskId.Item29);
                                                 }
-                                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LockpickBroken), 3000);
+                                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LockpickBroken), 3000);
                                                 break;
                                             case "SubjectSafe": // Мебель с патронами
                                                 if (luck < 30)
@@ -225,7 +226,7 @@ namespace NeptuneEvo.Core
                                                     HouseHiJackItem(player, house, 1, odata.Id.ToString());
                                                     player.AddTableScore(TableTaskId.Item29);
                                                 }
-                                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LockpickBroken), 3000);
+                                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LockpickBroken), 3000);
                                                 break;
                                             case "ClothesSafe": // Мебель со шмотьём
                                                 if (luck < 50)
@@ -233,10 +234,10 @@ namespace NeptuneEvo.Core
                                                     HouseHiJackItem(player, house, 2, odata.Id.ToString());
                                                     player.AddTableScore(TableTaskId.Item29);
                                                 }
-                                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LockpickBroken), 3000);
+                                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LockpickBroken), 3000);
                                                 break;
                                             default:
-                                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LickpickError), 3000);
+                                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LickpickError), 3000);
                                                 return;
                                         }
                                     }
@@ -275,7 +276,7 @@ namespace NeptuneEvo.Core
                 if (house == null || house.ID != characterData.InsideHouseID) return;
                 if (house.ItemsGot <= 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MebelEmpty), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MebelEmpty), 3000);
                     return;
                 }
                 house.ItemsGot -= 1;
@@ -307,23 +308,23 @@ namespace NeptuneEvo.Core
                         case 0:
                             GameLog.Money($"system", $"player({characterData.UUID})", 1200, $"hijackWeaponSafe({house.ID})");
                             MoneySystem.Wallet.Change(player, 1200);
-                            if (item != null) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccHijackWeaponSafeW), 5000);
-                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccHijackWeaponSafe), 5000);
+                            if (item != null) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccHijackWeaponSafeW), 5000);
+                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccHijackWeaponSafe), 5000);
                             break;
                         case 1:
                             GameLog.Money($"system", $"player({characterData.UUID})", 900, $"hijackSubjectSafe({house.ID})");
                             MoneySystem.Wallet.Change(player, 900);
-                            if (item != null) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccHijackItemSafeW), 5000);
-                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccHijackItemSafe), 5000);
+                            if (item != null) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccHijackItemSafeW), 5000);
+                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccHijackItemSafe), 5000);
                             break;
                         case 2:
                             GameLog.Money($"system", $"player({characterData.UUID})", 600, $"hijackClothesSafe({house.ID})");
                             MoneySystem.Wallet.Change(player, 600);
-                            if (item != null) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccHijackClothesSafeW), 5000);
-                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SuccHijackClothesSafe), 5000);
+                            if (item != null) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccHijackClothesSafeW), 5000);
+                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SuccHijackClothesSafe), 5000);
                             break;
                         default:
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HijackError, house.ID), 5000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HijackError, house.ID), 5000);
                             return;
                     }
                     if (item != null)
@@ -342,7 +343,7 @@ namespace NeptuneEvo.Core
                 {
                     GameLog.Money($"system", $"player({characterData.UUID})", 600, $"hijackEmptySafe({house.ID})");
                     MoneySystem.Wallet.Change(player, 600);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HijackEmptyMebel), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HijackEmptyMebel), 3000);
                     return;
                 }
             }
@@ -382,7 +383,7 @@ namespace NeptuneEvo.Core
                 if (VehicleManager.IsVehicleDeath(vehicle)) return;
                 if (vehicle == null || player.Position.DistanceTo(vehicle.Position) > 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarTooFar), 3000);
                     return;
                 }
                 bool access = true;
@@ -393,7 +394,7 @@ namespace NeptuneEvo.Core
                         access = VehicleManager.canAccessByNumber(player, vehicle.NumberPlate);
                         if (!access && characterData.AdminLVL < 3)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                             return;
                         }
 
@@ -401,7 +402,7 @@ namespace NeptuneEvo.Core
                         {
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCapotClosedCar), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCapotClosedCar), 3000);
                                 return;
                             }
                             VehicleStreaming.SetDoorState(vehicle, DoorId.DoorHood, DoorState.DoorOpen);
@@ -428,7 +429,7 @@ namespace NeptuneEvo.Core
                                     access = VehicleManager.canAccessByNumber(player, vehicle.NumberPlate);
                                     if (!access && characterData.AdminLVL < 3)
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                 }
@@ -436,7 +437,7 @@ namespace NeptuneEvo.Core
                                 {
                                     if (!Configs.IsFractionPolic(fracId))
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBagazhnikCar), 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBagazhnikCar), 3000);
                                         return;
                                     }
                                 }
@@ -445,23 +446,23 @@ namespace NeptuneEvo.Core
                                     var memberOrganizationData = player.GetOrganizationMemberData();
                                     if (memberOrganizationData == null || vehicleLocalData1.Fraction != memberOrganizationData.Id)
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBagazhnikCar), 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBagazhnikCar), 3000);
                                         return;
                                     }
                                     else if (vehicleLocalData1.MinRank > memberOrganizationData.Rank)
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccessToVeh), 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccessToVeh), 3000);
                                         return;
                                     }
                                 }
                                 else if (vehicleLocalData1.Access == VehicleAccess.Admin && characterData.AdminLVL < 3)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                     return;
                                 }
                                 VehicleStreaming.SetDoorState(vehicle, DoorId.DoorTrunk, DoorState.DoorOpen);
 
-                                Commands.RPChat("sme", player, $"открыл" + (characterData.Gender ? "" : "а") + " багажник");
+                                Commands.RPChat("sme", player, $"opened the trunk");
                             }
                         }
                         return;
@@ -475,12 +476,12 @@ namespace NeptuneEvo.Core
                             if (characterData.DemorganTime >= 1 || characterData.ArrestTime >= 1) return;
                             if (vehicle.Class == 13 || (vehicleLocalData.Access != VehicleAccess.Garage && vehicleLocalData.Access != VehicleAccess.Personal && vehicleLocalData.Access != VehicleAccess.Fraction && vehicleLocalData.Access != VehicleAccess.Organization && vehicleLocalData.Access != VehicleAccess.OrganizationGarage))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehNoInventory), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehNoInventory), 3000);
                                 return;
                             }
                             if (characterData.AdminLVL == 0 && VehicleStreaming.GetDoorState(vehicle, DoorId.DoorTrunk) == DoorState.DoorClosed)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBagazhnikCarClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBagazhnikCarClosed), 3000);
                                 return;
                             }
 
@@ -488,12 +489,12 @@ namespace NeptuneEvo.Core
                             var vehicleData = VehicleManager.GetVehicleToNumber(number);
                             if (vehicleData != null && vehicleData.Health == 0)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarDead), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarDead), 3000);
                                 return;
                             }
                             if (vehicleLocalData.BagInUse)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OtherUsingBagazh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OtherUsingBagazh), 3000);
                                 return;
                             }
                             vehicleLocalData.BagInUse = true;
@@ -520,12 +521,12 @@ namespace NeptuneEvo.Core
                                         if (memberFractionData.Rank < 3)
                                         {
                                             Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                                                LangFunc.GetText(LangType.Ru, DataName.HijackBagazh3Rank), 3000);
+                                                LangFunc.GetText(LangType.En, DataName.HijackBagazh3Rank), 3000);
                                             return;
                                         }
 
                                         break;
-                                    default: // Организации с улучшением крайм-принадлежностей
+                                    default: // Organizations with enhanced crime-related assets
                                         if (!player.IsOrganizationAccess(RankToAccess.OrgCrime)) return;
                                         break;
                                 }
@@ -534,24 +535,24 @@ namespace NeptuneEvo.Core
                             if (characterData.DemorganTime >= 1 || characterData.ArrestTime >= 1 || sessionData.IsHicjacking) return;
                             if (sessionData.InsideSafeZone != -1)
                             {
-                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HijackSafeZone), 3000);
+                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HijackSafeZone), 3000);
                                 return;
                             }
                             if (vehicleLocalData.Access != VehicleAccess.Personal && vehicleLocalData.Access != VehicleAccess.Fraction && vehicleLocalData.Access != VehicleAccess.Organization)
                             {
-                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehEmptyBagazh), 3000);
+                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehEmptyBagazh), 3000);
                                 return;
                             }
                             else if (!FunctionsAccess.IsWorking("lockpick"))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                                 return;
                             }
                             ItemStruct lockpick = Chars.Repository.isItem(player, "inventory", ItemId.Lockpick);
                             int count = (lockpick == null) ? 0 : lockpick.Item.Count;
                             if (count == 0)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HijackBagazhWithLockpickOnly), 7000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HijackBagazhWithLockpickOnly), 7000);
                                 return;
                             }
 
@@ -562,13 +563,13 @@ namespace NeptuneEvo.Core
                                 if (vehicleData.Holder.Equals(player.Name)) return;
                                 if (vehicleData.HijackTime > DateTime.Now)
                                 {
-                                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehEmptyBagazh), 3000);
+                                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehEmptyBagazh), 3000);
                                     return;
                                 }
                             }
                             else if (vehicleLocalData.VehHijackTime > DateTime.Now)
                             {
-                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehEmptyBagazh), 3000);
+                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehEmptyBagazh), 3000);
                                 return;
                             }
 
@@ -577,7 +578,7 @@ namespace NeptuneEvo.Core
                             CallPoliceHijack(player, 1, Convert.ToString(vehicle.Value));
                             Trigger.PlayAnimation(player, "mini@safe_cracking", "idle_base", 39);
                             // Trigger.ClientEventInRange(player.Position, 250f, "PlayAnimToKey", player, false, "vzlomsafe");
-                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.breakingbagazhnik));
+                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.breakingbagazhnik));
                             Trigger.ClientEvent(player, "fullblockMove", true);
                             Trigger.ClientEvent(player, "freeze", true);
                             NAPI.Task.Run(() =>
@@ -601,7 +602,7 @@ namespace NeptuneEvo.Core
                                         {
                                             if (vehicleData.HijackTime > DateTime.Now)
                                             {
-                                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehEmptyBagazh), 3000);
+                                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehEmptyBagazh), 3000);
                                                 return;
                                             }
                                             vehicleData.HijackTime = DateTime.Now.AddMinutes(30);
@@ -610,7 +611,7 @@ namespace NeptuneEvo.Core
                                         {
                                             if (vehicleLocalData.VehHijackTime > DateTime.Now)
                                             {
-                                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehEmptyBagazh), 3000);
+                                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehEmptyBagazh), 3000);
                                                 return;
                                             }
                                             vehicleLocalData.VehHijackTime = DateTime.Now.AddMinutes(30);
@@ -642,7 +643,7 @@ namespace NeptuneEvo.Core
                                             }
                                             if (item != null)
                                             {
-                                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно взломали авто и нашли в нём 600$, предмет а так же завели его.", 8000);
+                                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You successfully broke into the car, found $600 and an item inside, and started it.", 8000);
                                                 VehicleStreaming.SetEngineState(vehicle, true);
                                                 VehicleStreaming.SetLockStatus(vehicle, false);
                                                 Chars.Repository.ItemsDrop(player, new InventoryItemData(0, item.ItemId, item.Count, item.Data));
@@ -654,21 +655,21 @@ namespace NeptuneEvo.Core
                                                     Chars.Repository.ItemsData[locationName]["vehicle"].TryRemove(item.Index, out _);
                                                 }
                                             }
-                                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BagazhSuccess), 8000);
+                                            else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BagazhSuccess), 8000);
                                             VehicleStreaming.SetEngineState(vehicle, true);
                                             VehicleStreaming.SetLockStatus(vehicle, false);
                                             player.AddTableScore(TableTaskId.Item28);
                                         }
                                         else
                                         {
-                                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BugazhSuccessEmpty), 8000);
+                                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BugazhSuccessEmpty), 8000);
                                             VehicleStreaming.SetEngineState(vehicle, true);
                                             VehicleStreaming.SetLockStatus(vehicle, false);
                                             player.AddTableScore(TableTaskId.Item28);
                                             return;
                                         }
                                     }
-                                    else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LockpickBroken), 3000);
+                                    else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LockpickBroken), 3000);
                                 }
                                 catch (Exception e)
                                 {
@@ -684,21 +685,21 @@ namespace NeptuneEvo.Core
                             if (characterData.DemorganTime >= 1 || characterData.ArrestTime >= 1 || player.IsInVehicle || sessionData.AntiAnimDown) return;
                             if (player.Position.DistanceTo(vehicle.Position) > 2)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarTooFar), 5000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarTooFar), 5000);
                                 return;
                             }
                             if (sessionData.ActiveWeap.Item != null)
                             {
                                 if (sessionData.ActiveWeap.Index == -1)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWrench), 2000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWrench), 2000);
                                     return;
                                 }
                                 InventoryItemData Item = Chars.Repository.GetItemData(player, "fastSlots", sessionData.ActiveWeap.Index);
                                 if (Item.ItemId == ItemId.Debug)
                                 {
                                     sessionData.ActiveWeap = new ItemStruct("", -1, null);
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWrench), 2000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWrench), 2000);
                                     return;
                                 }
                                 else if (Item.ItemId == ItemId.Wrench)
@@ -708,7 +709,7 @@ namespace NeptuneEvo.Core
                                     Main.OnAntiAnim(player);
                                     Trigger.PlayAnimation(player, "anim@amb@garage@chassis_repair@", "base_amy_skater_01", 39);
                                     // Trigger.ClientEventInRange(player.Position, 250f, "PlayAnimToKey", player, false, "repaircar");
-                                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.StartRepairing, vehicle.NumberPlate), 5000);
+                                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.StartRepairing, vehicle.NumberPlate), 5000);
                                     NAPI.Task.Run(() =>
                                     {
                                         try
@@ -720,7 +721,7 @@ namespace NeptuneEvo.Core
                                             NAPI.Entity.SetEntityPosition(player, player.Position + new Vector3(0, 0, 0.2));
                                             if (vehicle == null || vehicleLocalData == null || player.Position.DistanceTo(vehicle.Position) > 3)
                                             {
-                                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarTooFar), 3000);
+                                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarTooFar), 3000);
                                                 return;
                                             }
                                             if (sessionData.ActiveWeap.Item != null)
@@ -729,7 +730,7 @@ namespace NeptuneEvo.Core
                                                 Item = Chars.Repository.GetItemData(player, "fastSlots", sessionData.ActiveWeap.Index);
                                                 if (Item.ItemId != ItemId.Wrench)
                                                 {
-                                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWrench), 2000);
+                                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWrench), 2000);
                                                     return;
                                                 }
                                             }
@@ -739,7 +740,7 @@ namespace NeptuneEvo.Core
                                             NAPI.Entity.SetEntityRotation(vehicle, new Vector3(0, 0, vehicle.Rotation.Z));
                                             ItemStruct ItemStruct = sessionData.ActiveWeap;
                                             Chars.Repository.RemoveIndex(player, "fastSlots", ItemStruct.Index);
-                                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucRepair), 3000);
+                                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucRepair), 3000);
                                             BattlePass.Repository.UpdateReward(player, 12);
                                         }
                                         catch (Exception e)
@@ -748,9 +749,9 @@ namespace NeptuneEvo.Core
                                         }
                                     }, 15000);
                                 }
-                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWrench), 2000);
+                                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWrench), 2000);
                             }
-                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWrench), 2000);
+                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWrench), 2000);
                         }
                         break;
                     case 10:
@@ -760,17 +761,17 @@ namespace NeptuneEvo.Core
                             if (characterData.DemorganTime >= 1 || characterData.ArrestTime >= 1 || sessionData.Following != null || sessionData.CarryPlayer != null || sessionData.Follower != null || UpdateData.GetPlayerDimension(player) != 0) return;
                             if (sessionData.CuffedData.Cuffed)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                                 return;
                             }
                             if (vehicleLocalData.AttachToPlayer != null)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyInBagazh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyInBagazh), 3000);
                                 return;
                             }
                             else if (VehicleStreaming.GetDoorState(vehicle, DoorId.DoorTrunk) == DoorState.DoorClosed)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BagazhClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BagazhClosed), 3000);
                                 return;
                             }
                             sessionData.AttachToVehicle = vehicle;
@@ -791,12 +792,12 @@ namespace NeptuneEvo.Core
                             if (characterData.DemorganTime >= 1 || characterData.ArrestTime >= 1) return;
                             if (vehicleLocalData.AttachToPlayer == null)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NobodyInBagazh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NobodyInBagazh), 3000);
                                 return;
                             }
                             else if (VehicleStreaming.GetDoorState(vehicle, DoorId.DoorTrunk) == DoorState.DoorClosed)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BagazhClosed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BagazhClosed), 3000);
                                 return;
                             }
                             ExtPlayer target = vehicleLocalData.AttachToPlayer;
@@ -820,20 +821,20 @@ namespace NeptuneEvo.Core
                             var vehicleData = VehicleManager.GetVehicleToNumber(number);
                             if (vehicleData == null || !vehicleData.Holder.Equals(player.Name))
                             {
-                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "Сменить можно только на своем авто", 3000);
+                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, "You can only change it on your own car", 3000);
                                 return;
                             }
 
                             if (sessionData.ActiveWeap.Item == null || sessionData.ActiveWeap.Index == -1)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "В руках должен быть номерной знак", 2000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You must be holding a license plate", 2000);
                                 return;
                             }
                             
                             var Item = Chars.Repository.GetItemData(player, "fastSlots", sessionData.ActiveWeap.Index);
                             if (Item.ItemId != ItemId.VehicleNumber)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "В руках должен быть номерной знак", 2000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You must be holding a license plate", 2000);
                                 return;
                             }
 
@@ -910,16 +911,16 @@ namespace NeptuneEvo.Core
                 var Blip = (ExtBlip) NAPI.Blip.CreateBlip(0, player.Position, 1, 70, alpha: 0, drawDistance: 0, shortRange: true, rotation: 0, dimension: 0);
                 if (type == 0)
                 {
-                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.POLICE, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.SignalHouse, sessionData.HouseID), true);
-                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.SHERIFF, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.SignalHouse, sessionData.HouseID), true);
-                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.FIB, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.SignalHouse, sessionData.HouseID), true);
+                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.POLICE, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.SignalHouse, sessionData.HouseID), true);
+                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.SHERIFF, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.SignalHouse, sessionData.HouseID), true);
+                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.FIB, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.SignalHouse, sessionData.HouseID), true);
                     
-                    Blip.Name = $"Сигнализация дома {sessionData.HouseID}";
+                    Blip.Name = $"House alarm {sessionData.HouseID}";
                     Blip.Transparency = 0;
                     Police.PoliceHouseCalls.Add(sessionData.HouseID, Blip);
                     
                     ExtPlayer target = (ExtPlayer) NAPI.Player.GetPlayerFromName(vnumber);
-                    if (target.IsCharacterData()) Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHouseSignal), 5000);
+                    if (target.IsCharacterData()) Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHouseSignal), 5000);
 
                     try
                     {
@@ -930,7 +931,7 @@ namespace NeptuneEvo.Core
                             {
                                 if (!foreachPlayer.IsCharacterData()) continue;
                                 if (house.Roommates.ContainsKey(foreachPlayer.Name)) 
-                                    Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHouseSignal), 5000);
+                                    Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHouseSignal), 5000);
                             }
                         }
                     }
@@ -941,18 +942,18 @@ namespace NeptuneEvo.Core
 
                     if (player.HasSharedData("IS_MASK") && !player.GetSharedData<bool>("IS_MASK") && (characterData.WantedLVL == null || characterData.WantedLVL.Level != 5))
                     {
-                        Police.setPlayerWantedLevel(player, new WantedLevel(5, LangFunc.GetText(LangType.Ru, DataName.Police), DateTime.Now, LangFunc.GetText(LangType.Ru, DataName.ReasonHijackHouse)));
-                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SignalSrabotalWanted), 3000);
+                        Police.setPlayerWantedLevel(player, new WantedLevel(5, LangFunc.GetText(LangType.En, DataName.Police), DateTime.Now, LangFunc.GetText(LangType.En, DataName.ReasonHijackHouse)));
+                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SignalSrabotalWanted), 3000);
                     }
-                    else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SignalSrabotal), 1000);
+                    else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SignalSrabotal), 1000);
                 }
                 else
                 {
-                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.POLICE, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.SignalVeh, vnumber), true);
-                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.SHERIFF, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.SignalVeh, vnumber), true);
-                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.FIB, "!{#F08080}[F] " + LangFunc.GetText(LangType.Ru, DataName.SignalVeh, vnumber), true);
+                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.POLICE, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.SignalVeh, vnumber), true);
+                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.SHERIFF, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.SignalVeh, vnumber), true);
+                    Manager.sendFractionMessage((int)Fractions.Models.Fractions.FIB, "!{#F08080}[F] " + LangFunc.GetText(LangType.En, DataName.SignalVeh, vnumber), true);
                     
-                    Blip.Name = $"Сигнализация машины {vnumber}";
+                    Blip.Name = $"Vehicle alarm {vnumber}";
                     Blip.Transparency = 0;
                     if (Police.PoliceCarsCalls.ContainsKey(Convert.ToInt32(vnumber)))
                     {
@@ -967,10 +968,10 @@ namespace NeptuneEvo.Core
                     ItemStruct maskItem = Chars.Repository.isItem(player, "accessories", ItemId.Mask);
                     if ((maskItem == null || !Chars.Repository.IsBeard(characterData.Gender, maskItem.Item)) && (!player.HasSharedData("IS_MASK") || player.HasSharedData("IS_MASK") && !player.GetSharedData<bool>("IS_MASK")) && (characterData.WantedLVL == null || characterData.WantedLVL.Level != 5))
                     {
-                        Police.setPlayerWantedLevel(player, new WantedLevel(5, LangFunc.GetText(LangType.Ru, DataName.Police), DateTime.Now, LangFunc.GetText(LangType.Ru, DataName.ReasonHijackVeh)));
-                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SignalSrabotalWanted), 3000);
+                        Police.setPlayerWantedLevel(player, new WantedLevel(5, LangFunc.GetText(LangType.En, DataName.Police), DateTime.Now, LangFunc.GetText(LangType.En, DataName.ReasonHijackVeh)));
+                        Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SignalSrabotalWanted), 3000);
                     }
-                    else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SignalSrabotal), 1000);
+                    else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SignalSrabotal), 1000);
                 }
                 
                 NAPI.Task.Run(() =>
@@ -1034,12 +1035,12 @@ namespace NeptuneEvo.Core
                 {
                     if (vehicleLocalData.AttachToPlayer == null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NobodyInBagazh), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NobodyInBagazh), 3000);
                         return;
                     }
                     else if (VehicleStreaming.GetDoorState(vehicle, DoorId.DoorTrunk) == DoorState.DoorClosed)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BagazhClosed), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BagazhClosed), 3000);
                         return;
                     }
                     vehicleLocalData.AttachToPlayer = null;
@@ -1049,7 +1050,7 @@ namespace NeptuneEvo.Core
                 Trigger.StopAnimation(player);
                 player.ResetSharedData("AttachToVehicle");
                 Trigger.ClientEvent(player, "setPocketEnabled", false);
-                Commands.RPChat("sme", player, $"вылез" + (characterData.Gender ? "" : "ла") + $" из багажника");
+                Commands.RPChat("sme", player, "got out of the trunk");
             }
             catch (Exception e)
             {
@@ -1071,7 +1072,7 @@ namespace NeptuneEvo.Core
                 if (targetCharacterData == null) return;
                 if (player.Position.DistanceTo(target.Position) > 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (characterData.DemorganTime >= 1) return;
@@ -1090,15 +1091,15 @@ namespace NeptuneEvo.Core
                     case "givemoney":
                         if (characterData.LVL < 1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.flvltotransact), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.flvltotransact), 3000);
                             return;
                         }
                         else if (!FunctionsAccess.IsWorking("transfer"))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                             return;
                         }
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.GiveMoney), LangFunc.GetText(LangType.Ru, DataName.SumBucks), 4, "player_givemoney");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.GiveMoney), LangFunc.GetText(LangType.En, DataName.SumBucks), 4, "player_givemoney");
                         return;
                     case "handsup":
                         if (player.IsInVehicle) return;
@@ -1113,12 +1114,12 @@ namespace NeptuneEvo.Core
                         
                         if (targetSessionData.Following == null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNoFollowing), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNoFollowing), 3000);
                             return;
                         }
                         if (sessionData.Follower != target)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyFollowing), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyFollowing), 3000);
                             return;
                         }
                         FractionCommands.unFollow(player, target);
@@ -1133,7 +1134,7 @@ namespace NeptuneEvo.Core
                             
                             if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                                 return;
                             }
                             
@@ -1149,14 +1150,14 @@ namespace NeptuneEvo.Core
                                         case 16:
                                             break;
                                         default:
-                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000);
+                                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000);
                                             return;
                                     }
                                     break;
                                 case 14:
                                     if (memberFractionData.Rank <= 9)
                                     {
-                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000);
+                                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000);
                                         return;
                                     }
                                     break;
@@ -1165,10 +1166,10 @@ namespace NeptuneEvo.Core
                             }
                             if (!targetSessionData.CuffedData.Cuffed)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCuffed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCuffed), 3000);
                                 return;
                             }
-                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.SearchingTarget), target);
+                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.SearchingTarget), target);
                             player.AddTableScore(TableTaskId.Item13);
                             
                             List<string> _ItemNames = new List<string>();
@@ -1199,8 +1200,8 @@ namespace NeptuneEvo.Core
                                     ItemInfo = Chars.Repository.ItemsInfo[itemData.Value.ItemId];
                                     if (itemData.Value.ItemId == ItemId.Debug) continue;
                                     else if (ItemInfo.functionType == newItemType.Clothes) continue;
-                                    if (ItemInfo.functionType == newItemType.Weapons) _Weapons.Add(LangFunc.GetText(LangType.Ru, DataName.inabag,ItemInfo.Name, itemData.Value.Data));
-                                    else _ItemNames.Add(LangFunc.GetText(LangType.Ru, DataName.inabag, ItemInfo.Name, itemData.Value.Count));
+                                    if (ItemInfo.functionType == newItemType.Weapons) _Weapons.Add(LangFunc.GetText(LangType.En, DataName.inabag,ItemInfo.Name, itemData.Value.Data));
+                                    else _ItemNames.Add(LangFunc.GetText(LangType.En, DataName.inabag, ItemInfo.Name, itemData.Value.Count));
                                 }
                             }
 
@@ -1221,27 +1222,27 @@ namespace NeptuneEvo.Core
 
                             if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[targetFracId] == FractionsType.Gov)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                                 return;
                             }
                             
                             if (!targetSessionData.CuffedData.Cuffed)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCuffed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCuffed), 3000);
                                 return;
                             }
-                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.LooksPassport), target);
+                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.LooksPassport), target);
                             
-                            string fraction = (targetFracId > (int)Fractions.Models.Fractions.None) ? Fractions.Manager.FractionNames[targetFracId] : LangFunc.GetText(LangType.Ru, DataName.No);
-                            if ((targetFracId >= (int)Fractions.Models.Fractions.FAMILY && targetFracId <= (int)Fractions.Models.Fractions.BLOOD) || (targetFracId >= (int)Fractions.Models.Fractions.LCN && targetFracId <= (int)Fractions.Models.Fractions.ARMENIAN)) fraction = LangFunc.GetText(LangType.Ru, DataName.No);
-                            string work = (targetCharacterData.WorkID > 0) ? Jobs.WorkManager.JobStats[targetCharacterData.WorkID - 1] : LangFunc.GetText(LangType.Ru, DataName.NoWorker);
+                            string fraction = (targetFracId > (int)Fractions.Models.Fractions.None) ? Fractions.Manager.FractionNames[targetFracId] : LangFunc.GetText(LangType.En, DataName.No);
+                            if ((targetFracId >= (int)Fractions.Models.Fractions.FAMILY && targetFracId <= (int)Fractions.Models.Fractions.BLOOD) || (targetFracId >= (int)Fractions.Models.Fractions.LCN && targetFracId <= (int)Fractions.Models.Fractions.ARMENIAN)) fraction = LangFunc.GetText(LangType.En, DataName.No);
+                            string work = (targetCharacterData.WorkID > 0) ? Jobs.WorkManager.JobStats[targetCharacterData.WorkID - 1] : LangFunc.GetText(LangType.En, DataName.NoWorker);
                             List<object> data2 = new List<object>
                             {
                                 targetCharacterData.UUID,
                                 targetCharacterData.FirstName,
                                 targetCharacterData.LastName,
                                 targetCharacterData.CreateDate.ToString("dd.MM.yyyy"),
-                                (targetCharacterData.Gender) ? LangFunc.GetText(LangType.Ru, DataName.Mans) : LangFunc.GetText(LangType.Ru, DataName.Womens),
+                                (targetCharacterData.Gender) ? LangFunc.GetText(LangType.En, DataName.Mans) : LangFunc.GetText(LangType.En, DataName.Womens),
                                 fraction,
                                 work
                             };
@@ -1256,27 +1257,27 @@ namespace NeptuneEvo.Core
 
                             if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                                 return;
                             }
                             
                             if (!targetSessionData.CuffedData.Cuffed)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCuffed), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCuffed), 3000);
                                 return;
                             }
-                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.Ru, DataName.LooksLic), target);
+                            Commands.RPChat("sme", player, LangFunc.GetText(LangType.En, DataName.LooksLic), target);
 
                             string lic = "";
                             for (int i = 0; i < targetCharacterData.Licenses.Count; i++) if (targetCharacterData.Licenses[i]) lic += $"{Main.LicWords[i]} / ";
-                            if (lic == "") lic = LangFunc.GetText(LangType.Ru, DataName.Nothing);
+                            if (lic == "") lic = LangFunc.GetText(LangType.En, DataName.Nothing);
 
                             List<string> data = new List<string>
                             {
                                 targetCharacterData.FirstName,
                                 targetCharacterData.LastName,
                                 targetCharacterData.CreateDate.ToString("dd.MM.yyyy"),
-                                (targetCharacterData.Gender) ? LangFunc.GetText(LangType.Ru, DataName.Mans) : LangFunc.GetText(LangType.Ru, DataName.Womens),
+                                (targetCharacterData.Gender) ? LangFunc.GetText(LangType.En, DataName.Mans) : LangFunc.GetText(LangType.En, DataName.Womens),
                                 lic
                             };
 
@@ -1298,26 +1299,26 @@ namespace NeptuneEvo.Core
 
                         if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                             return;
                         }
                         
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.OfferHealth), LangFunc.GetText(LangType.Ru, DataName.SumBucks), 4, "player_medkit");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.OfferHealth), LangFunc.GetText(LangType.En, DataName.SumBucks), 4, "player_medkit");
                         return;
                     case "offerheal":
                         
                         if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                             return;
                         }
                         
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.OfferHeal), LangFunc.GetText(LangType.Ru, DataName.SumBucks), 4, "player_heal");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.OfferHeal), LangFunc.GetText(LangType.En, DataName.SumBucks), 4, "player_heal");
                         return;
                     case "heal":
                         if (player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantHealveh), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantHealveh), 3000);
                             return;
                         }
                         
@@ -1326,7 +1327,7 @@ namespace NeptuneEvo.Core
                     case "epinephrine":
                         if (player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantHealveh), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantHealveh), 3000);
                             return;
                         }
                         
@@ -1339,10 +1340,10 @@ namespace NeptuneEvo.Core
                         var house = HouseManager.GetHouse(player, true);
                         if (house == null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                             return;
                         }
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.OfferHouse), LangFunc.GetText(LangType.Ru, DataName.SumBucks), 8, "player_offerhousesell");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.OfferHouse), LangFunc.GetText(LangType.En, DataName.SumBucks), 8, "player_offerhousesell");
                         return;
                     case "roommate":
                         HouseManager.InviteToRoom(player, target);
@@ -1353,27 +1354,27 @@ namespace NeptuneEvo.Core
                     case "offer":
                         if (!FunctionsAccess.IsWorking("trade"))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                             return;
                         }
                         else if (targetSessionData.RequestData.IsRequested)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHavBeenBusy), 7000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHavBeenBusy), 7000);
                             return;
                         }
                         else if (targetSessionData.CuffedData.Cuffed || targetSessionData.DeathData.InDeath)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonCantTrade), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonCantTrade), 3000);
                             return;
                         }
                         targetSessionData.RequestData.IsRequested = true;
                         targetSessionData.RequestData.Request = "OFFER_ITEMS";
                         targetSessionData.RequestData.From = player;
                         targetSessionData.RequestData.Time = DateTime.Now.AddSeconds(10);
-                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OfferTrade, player.Value), 10000);
-                        EventSys.SendCoolMsg(target,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.OfferTrade, player.Value)}", "", 10000);
-                        EventSys.SendCoolMsg(player,"Предложение", "Обмен", $"{LangFunc.GetText(LangType.Ru, DataName.OfferedTrade, target.Value)}", "", 5000);
-                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OfferedTrade, target.Value), 3000);
+                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OfferTrade, player.Value), 10000);
+                        EventSys.SendCoolMsg(target, "Offer", "Offer", $"{LangFunc.GetText(LangType.En, DataName.OfferTrade, player.Value)}", "", 10000);
+                        EventSys.SendCoolMsg(player, "Offer", "Offer", $"{LangFunc.GetText(LangType.En, DataName.OfferedTrade, target.Value)}", "", 5000);
+                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OfferedTrade, target.Value), 3000);
                         return;
                     case "pocket":
                         if (player.IsInVehicle) return;
@@ -1393,11 +1394,11 @@ namespace NeptuneEvo.Core
 
                         if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                             return;
                         }
                         sessionData.TicketsData.Target = target;
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.SendTicket), LangFunc.GetText(LangType.Ru, DataName.Sum0to1000), 4, "player_ticketsum");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.SendTicket), LangFunc.GetText(LangType.En, DataName.Sum0to1000), 4, "player_ticketsum");
                         player.AddTableScore(TableTaskId.Item9);
                         return;
                     case "tinter":
@@ -1422,7 +1423,7 @@ namespace NeptuneEvo.Core
             {
                 if (!FunctionsAccess.IsWorking("carryAnimations"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var sessionData = player.GetSessionData();
@@ -1440,7 +1441,7 @@ namespace NeptuneEvo.Core
 
                 if (targetCharacterData == null || targetCharacterData.DemorganTime >= 1 || player.Position.DistanceTo(target.Position) > 5f)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
 
@@ -1456,7 +1457,7 @@ namespace NeptuneEvo.Core
                 {
                     if (targetSessionData.RequestData.IsRequested)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHavBeenBusy), 7000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHavBeenBusy), 7000);
                         return;
                     }
 
@@ -1467,21 +1468,21 @@ namespace NeptuneEvo.Core
 
                     string action_name = "";
 
-                    if (action == 0) action_name = LangFunc.GetText(LangType.Ru, DataName.YouActionNaRuki);
-                    else if (action == 1) action_name = LangFunc.GetText(LangType.Ru, DataName.YouActionNaSheyu);
-                    else if (action == 2) action_name = LangFunc.GetText(LangType.Ru, DataName.YouActionNaPlecho);
-                    else if (action == 3) action_name = LangFunc.GetText(LangType.Ru, DataName.YouActionZalozhnik);
+                    if (action == 0) action_name = LangFunc.GetText(LangType.En, DataName.YouActionNaRuki);
+                    else if (action == 1) action_name = LangFunc.GetText(LangType.En, DataName.YouActionNaSheyu);
+                    else if (action == 2) action_name = LangFunc.GetText(LangType.En, DataName.YouActionNaPlecho);
+                    else if (action == 3) action_name = LangFunc.GetText(LangType.En, DataName.YouActionZalozhnik);
 
-                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerWants, player.Value, action_name), 10000);
-                    EventSys.SendCoolMsg(target,"Предложение", "Парная анимация", $"{LangFunc.GetText(LangType.Ru, DataName.PlayerWants, player.Value, action_name)}", "", 12000);
+                    //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerWants, player.Value, action_name), 10000);
+                    EventSys.SendCoolMsg(target, "Offer", "Paired Animation", $"{LangFunc.GetText(LangType.En, DataName.PlayerWants, player.Value, action_name)}", "", 12000);
 
-                    if (action == 0) action_name = LangFunc.GetText(LangType.Ru, DataName.HeActionHands);
-                    else if (action == 1) action_name = LangFunc.GetText(LangType.Ru, DataName.HeActionSheya);
-                    else if (action == 2) action_name = LangFunc.GetText(LangType.Ru, DataName.HeActionPlecho);
-                    else if (action == 3) action_name = LangFunc.GetText(LangType.Ru, DataName.HeActionZalozhnik);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWant, target.Value, action_name), 5000);
+                    if (action == 0) action_name = LangFunc.GetText(LangType.En, DataName.HeActionHands);
+                    else if (action == 1) action_name = LangFunc.GetText(LangType.En, DataName.HeActionSheya);
+                    else if (action == 2) action_name = LangFunc.GetText(LangType.En, DataName.HeActionPlecho);
+                    else if (action == 3) action_name = LangFunc.GetText(LangType.En, DataName.HeActionZalozhnik);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWant, target.Value, action_name), 5000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantInteractAtThisMoment), 4000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantInteractAtThisMoment), 4000);
 
             }
             catch (Exception e)
@@ -1501,7 +1502,7 @@ namespace NeptuneEvo.Core
 
                 if (targetSessionData.CarryPlayer != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAnim), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAnim), 3000);
                     return;
                 }
                 if (target.IsInVehicle)
@@ -1512,7 +1513,7 @@ namespace NeptuneEvo.Core
                     return;
                 else if (sessionData.CarryPlayer != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAnim), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAnim), 3000);
                     return;
                 }
 
@@ -1524,7 +1525,7 @@ namespace NeptuneEvo.Core
 
                 if (targetCharacterData == null || targetCharacterData.DemorganTime >= 1 || player.Position.DistanceTo(target.Position) > 5f)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 
@@ -1567,7 +1568,7 @@ namespace NeptuneEvo.Core
                     Trigger.ClientEventForAll("syncCarryng", player, carryngData);
                     return;
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantInteractAtThisMoment), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantInteractAtThisMoment), 3000);
 
             }
             catch (Exception e)
@@ -1615,21 +1616,21 @@ namespace NeptuneEvo.Core
 
                 if (targetCharacterData == null || targetCharacterData.DemorganTime >= 1 || player.Position.DistanceTo(target.Position) > 3.0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
 
-                string action_name = LangFunc.GetText(LangType.Ru, DataName.pairanim);
-                if (action == "PAIRED_EMBRACE") action_name = LangFunc.GetText(LangType.Ru, DataName.hug);
-                else if (action == "PAIRED_KISS") action_name = LangFunc.GetText(LangType.Ru, DataName.kiss);
-                else if (action == "PAIRED_FIVE") action_name = LangFunc.GetText(LangType.Ru, DataName.hfive);
-                else if (action == "PAIRED_SLAP") action_name = LangFunc.GetText(LangType.Ru, DataName.giveface);
+                string action_name = LangFunc.GetText(LangType.En, DataName.pairanim);
+                if (action == "PAIRED_EMBRACE") action_name = LangFunc.GetText(LangType.En, DataName.hug);
+                else if (action == "PAIRED_KISS") action_name = LangFunc.GetText(LangType.En, DataName.kiss);
+                else if (action == "PAIRED_FIVE") action_name = LangFunc.GetText(LangType.En, DataName.hfive);
+                else if (action == "PAIRED_SLAP") action_name = LangFunc.GetText(LangType.En, DataName.giveface);
 
                 if (!sessionData.CuffedData.Cuffed && !sessionData.DeathData.InDeath && !targetSessionData.CuffedData.Cuffed && !targetSessionData.DeathData.InDeath && !sessionData.AntiAnimDown && !targetSessionData.AntiAnimDown)
                 {
                     if (targetSessionData.RequestData.IsRequested)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHavBeenBusy), 7000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHavBeenBusy), 7000);
                         return;
                     }
 
@@ -1638,14 +1639,14 @@ namespace NeptuneEvo.Core
                     targetSessionData.RequestData.From = player;
                     targetSessionData.RequestData.Time = DateTime.Now.AddSeconds(10);
 
-                    if (action == "PAIRED_FIVE" || action == "PAIRED_SLAP") EventSys.SendCoolMsg(target,"Предложение", "Парная анимация", $"{LangFunc.GetText(LangType.Ru, DataName.PlayerWantInteractYou, player.Value, action_name)}", "", 10000);
-                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerWantInteractYou, player.Value, action_name), 3000);
-                    else  EventSys.SendCoolMsg(target,"Предложение", "Парная анимация", $"{LangFunc.GetText(LangType.Ru, DataName.YouWantInteract, player.Value, action_name)}", "", 10000);
-                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWantInteract, player.Value, action_name), 3000);
+                    if (action == "PAIRED_FIVE" || action == "PAIRED_SLAP") EventSys.SendCoolMsg(target, "Offer", "Paired Animation", $"{LangFunc.GetText(LangType.En, DataName.PlayerWantInteractYou, player.Value, action_name)}", "", 10000);
+                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerWantInteractYou, player.Value, action_name), 3000);
+                    else  EventSys.SendCoolMsg(target, "Offer", "Paired Animation", $"{LangFunc.GetText(LangType.En, DataName.YouWantInteract, player.Value, action_name)}", "", 10000);
+                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWantInteract, player.Value, action_name), 3000);
 
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWant, target.Value, action_name), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWant, target.Value, action_name), 3000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantInteract, action_name), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantInteract, action_name), 3000);
             }
             catch (Exception e)
             {
@@ -1670,7 +1671,7 @@ namespace NeptuneEvo.Core
                 var targetCharacterData = target.GetCharacterData();
                 if (targetCharacterData == null || player.Position.DistanceTo(target.Position) > 1.5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
 
@@ -1692,36 +1693,36 @@ namespace NeptuneEvo.Core
                         case "PAIRED_EMBRACE":
                             Trigger.TaskPlayAnim(player, "mp_ped_interaction", "hugs_guy_a", 39);
                             Trigger.TaskPlayAnim(target, "mp_ped_interaction", "hugs_guy_b", 39);
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.hugsyou, target.Name), 2000);
-                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.youhug, player.Name), 2000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.hugsyou, target.Name), 2000);
+                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.youhug, player.Name), 2000);
                             break;
 
                         case "PAIRED_KISS":
                             Trigger.TaskPlayAnim(player, "mp_ped_interaction", "kisses_guy_a", 39);
                             Trigger.TaskPlayAnim(target, "mp_ped_interaction", "kisses_guy_b", 39);
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.youkiss, target.Name), 2000);
-                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.kissyou, player.Name), 2000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.youkiss, target.Name), 2000);
+                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.kissyou, player.Name), 2000);
                             break;
 
                         case "PAIRED_FIVE":
                             Trigger.TaskPlayAnim(player, "mp_ped_interaction", "highfive_guy_a", 39);
                             Trigger.TaskPlayAnim(target, "mp_ped_interaction", "highfive_guy_b", 39);
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.givehf, target.Name), 2000);
-                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.hfget, player.Name), 2000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.givehf, target.Name), 2000);
+                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.hfget, player.Name), 2000);
                             break;
 
                         case "PAIRED_SLAP":
                             Trigger.TaskPlayAnim(player, "melee@unarmed@streamed_variations", "victim_takedown_front_slap", 39);
                             Trigger.TaskPlayAnim(target, "melee@unarmed@streamed_variations", "plyr_takedown_front_slap", 39);
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.givenface, target.Name), 2000);
-                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.facegiven, player.Name), 2000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.givenface, target.Name), 2000);
+                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.facegiven, player.Name), 2000);
                             break;
                         default:
                             // Not supposed to end up here. 
                             break;
                     }
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.cantpairanim), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.cantpairanim), 3000);
             }
             catch (Exception e)
             {
@@ -1743,26 +1744,26 @@ namespace NeptuneEvo.Core
                     sessionData.Muted.Remove(target.Name);
                     Trigger.ClientEvent(target, "unMuteMeForPlayer", player.Name);
                     Trigger.ClientEvent(player, "unMutePlayer", target.Name);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.yougagleft, target.Value), 2000);
-                    Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.gagleft, player.Value), 2000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.yougagleft, target.Value), 2000);
+                    Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.gagleft, player.Value), 2000);
                 }
                 else
                 {
                     if (sessionData.Muted.Count >= 10)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.somanymuted), 10000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.somanymuted), 10000);
                         return;
                     }
                     if (targetCharacterData.AdminLVL >= 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.nomuteadmin), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.nomuteadmin), 3000);
                         return;
                     }
                     sessionData.Muted.Add(target.Name);
                     Trigger.ClientEvent(target, "MutedMePlayer", player.Name);
                     Trigger.ClientEvent(player, "MutePlayer", target.Name);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGag, target.Value), 2000);
-                    Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GagYou, player.Value), 2000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGag, target.Value), 2000);
+                    Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GagYou, player.Value), 2000);
                 }
             }
             catch (Exception e)
@@ -1820,7 +1821,7 @@ namespace NeptuneEvo.Core
                 if (targetCharacterData == null) return;
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (characterData.DemorganTime >= 1) return;
@@ -1850,11 +1851,11 @@ namespace NeptuneEvo.Core
                         {
                             if (targetSessionData.Following == player)
                             {
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouReleasePlayer, target.Value), 3000);
-                                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerReleaseYou, player.Value), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouReleasePlayer, target.Value), 3000);
+                                Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerReleaseYou, player.Value), 3000);
                                 FractionCommands.unFollow(player, target);
                             }
-                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyFollowing), 2000);
+                            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyFollowing), 2000);
                         }
                         else FractionCommands.targetFollowPlayer(player, target, true);
                         return;
@@ -1877,18 +1878,18 @@ namespace NeptuneEvo.Core
                 if (characterData == null) return;
                 if (characterData.LVL < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.flvltotransact), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.flvltotransact), 3000);
                     return;
                 }
                 int amount;
                 if (!int.TryParse(arg, out amount))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                     return;
                 }
                 if (amount < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                     return;
                 }
                 ExtPlayer target = sessionData.SelectData.SelectedPlayer;
@@ -1896,25 +1897,25 @@ namespace NeptuneEvo.Core
                 var targetCharacterData = target.GetCharacterData();
                 if (targetSessionData == null || targetCharacterData == null || player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 
                 if (UpdateData.CanIChange(player, amount, true) != 255) return;
                 /*else if (Main.ServerNumber != 0 && (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 6))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdminTransferRestricted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdminTransferRestricted), 3000);
                     return;
                 }*/
 
                 if (DateTime.Now < sessionData.TimingsData.NextTransfer && characterData.AdminLVL == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LowTimeLastTransact), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LowTimeLastTransact), 3000);
                     return;
                 }
                 sessionData.TimingsData.NextTransfer = DateTime.Now.AddSeconds(15);
-                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerGivesYouMoney, player.Value, amount), 3000);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouGivePlayerMoney, target.Value, amount), 3000);
+                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerGivesYouMoney, player.Value, amount), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouGivePlayerMoney, target.Value, amount), 3000);
                 Trigger.PlayAnimation(player, "mp_common", "givetake1_a", 50);
                 Timers.StartOnce(3000, () => {
                     Trigger.StopAnimation(player);
@@ -1965,13 +1966,13 @@ namespace NeptuneEvo.Core
 
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 ItemStruct item = Chars.Repository.isItem(player, "inventory", itemId);
                 if (item == null || item.Item.Count < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoApteka, Chars.Repository.ItemsInfo[itemId].Name), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoApteka, Chars.Repository.ItemsInfo[itemId].Name), 3000);
                     return;
                 }
                 if (targetSessionData.DeathData.IsDying && !targetSessionData.DeathData.IsReviving)
@@ -1980,8 +1981,8 @@ namespace NeptuneEvo.Core
                     Main.OnAntiAnim(player);
                     Trigger.PlayAnimation(player, "missheistfbi3b_ig8_2", "cpr_loop_paramedic", 39);
                     // Trigger.ClientEventInRange(player.Position, 250f, "PlayAnimToKey", player, false, "revive");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouStartReanim, target.Value), 3000);
-                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.StartReanimOnYou, player.Value), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouStartReanim, target.Value), 3000);
+                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.StartReanimOnYou, player.Value), 3000);
                     targetSessionData.DeathData.IsReviving = true;
                     NAPI.Task.Run(() =>
                     {
@@ -2001,14 +2002,14 @@ namespace NeptuneEvo.Core
                             NAPI.Entity.SetEntityPosition(player, player.Position + new Vector3(0, 0, 0.5));
                             if (!target.IsCharacterData())
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ReanimTooFar), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ReanimTooFar), 3000);
                                 return;
                             }
                             if (player.Position.DistanceTo(target.Position) > 4)
                             {
                                 targetSessionData.DeathData.IsReviving = false;
                                 if (targetSessionData.TimersData.DeathTimer == null) Ems.ReviveFunc(target);
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ReanimTooFar), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ReanimTooFar), 3000);
                                 return;
                             }
                             BattlePass.Repository.UpdateReward(player, 7);
@@ -2021,7 +2022,7 @@ namespace NeptuneEvo.Core
                                     if (number <= 3)
                                     {
                                         if (targetSessionData.TimersData.DeathTimer == null) Ems.ReviveFunc(target);
-                                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FailureReanim), 3000);
+                                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FailureReanim), 3000);
                                         return;
                                     }
                                 }
@@ -2030,7 +2031,7 @@ namespace NeptuneEvo.Core
                                     if (number <= 6)
                                     {
                                         if (targetSessionData.TimersData.DeathTimer == null) Ems.ReviveFunc(target);
-                                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FailureReanim), 3000);
+                                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FailureReanim), 3000);
                                         return;
                                     }
                                 }
@@ -2050,8 +2051,8 @@ namespace NeptuneEvo.Core
                                 target.Health = 100;
                             
                             characterData.Revived++;
-                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerReanimYou, player.Value), 3000);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouReanimPlayer, target.Value), 3000);
+                            Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerReanimYou, player.Value), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouReanimPlayer, target.Value), 3000);
                             player.AddTableScore(TableTaskId.Item21);
                         }
                         catch (Exception e)
@@ -2063,8 +2064,8 @@ namespace NeptuneEvo.Core
                 else
                 {
                     Chars.Repository.RemoveIndex(player, item.Location, item.Index, 1);
-                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerHealYou, player.Value), 3000);
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHealPlayer, target.Value), 3000);
+                    Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerHealYou, player.Value), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHealPlayer, target.Value), 3000);
                     target.Health = 100;
                 }
                 return;
@@ -2086,7 +2087,7 @@ namespace NeptuneEvo.Core
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
 
@@ -2096,22 +2097,22 @@ namespace NeptuneEvo.Core
                 if (targetSessionData == null) return;
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (!targetCharacterData.IsAlive)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerDying), 3000);
                     return;
                 }
                 if (!targetSessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCuffed), 3000);
                     return;
                 }
                 Chars.Repository.RemoveAllWeapons(target, true);
-                Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTakeWeaponYou, player.Value), 3000);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouTakeWeaponPlayer, target.Value), 3000);
+                Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTakeWeaponYou, player.Value), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouTakeWeaponPlayer, target.Value), 3000);
             }
             catch (Exception e)
             {
@@ -2129,7 +2130,7 @@ namespace NeptuneEvo.Core
 
                 if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                     return;
                 }
 
@@ -2139,26 +2140,26 @@ namespace NeptuneEvo.Core
                 if (targetSessionData == null) return;
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (!targetCharacterData.IsAlive)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerDying), 3000);
                     return;
                 }
                 if (!targetSessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoCuffed), 3000);
                     return;
                 }
                 if (!Chars.Repository.RemoveAllIllegal(target))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerDoesntIllegalStuff), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerDoesntIllegalStuff), 3000);
                     return;
                 }
-                Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IllegalStuffTaken, player.Value), 3000);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouTakeIllegalStuff, target.Value), 3000);
+                Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IllegalStuffTaken, player.Value), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouTakeIllegalStuff, target.Value), 3000);
                 player.AddTableScore(TableTaskId.Item10);
             }
             catch (Exception e)
@@ -2182,21 +2183,21 @@ namespace NeptuneEvo.Core
                     {
                         if (targetSessionData.RequestData.IsRequested)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonHavBeenBusy), 7000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonHavBeenBusy), 7000);
                             return;
                         }
                         targetSessionData.RequestData.IsRequested = true;
                         targetSessionData.RequestData.Request = "HANDSHAKE";
                         targetSessionData.RequestData.From = player;
                         targetSessionData.RequestData.Time = DateTime.Now.AddSeconds(10);
-                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HandshakeYou, player.Value), 3000);
-                        EventSys.SendCoolMsg(target,"Предложение", "Рукопожатие!", $"{LangFunc.GetText(LangType.Ru, DataName.HandshakeYou, player.Value)}", "", 10000);
-                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHandshake, target.Value), 3000);
-                        EventSys.SendCoolMsg(player,"Предложение", "Рукопожатие!", $"{LangFunc.GetText(LangType.Ru, DataName.YouHandshake, target.Value)}", "", 10000);
+                        //Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HandshakeYou, player.Value), 3000);
+                        EventSys.SendCoolMsg(target, "Offer", "Handshake!", $"{LangFunc.GetText(LangType.En, DataName.HandshakeYou, player.Value)}", "", 10000);
+                        //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHandshake, target.Value), 3000);
+                        EventSys.SendCoolMsg(player, "Offer", "Handshake!", $"{LangFunc.GetText(LangType.En, DataName.YouHandshake, target.Value)}", "", 10000);
                     }
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantHandshake), 3000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantHandshake), 3000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantHandshake), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantHandshake), 3000);
             }
             catch (Exception e)
             {

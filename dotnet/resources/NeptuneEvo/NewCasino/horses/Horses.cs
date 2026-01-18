@@ -107,15 +107,15 @@ namespace NeptuneEvo.NewCasino
                                     MoneySystem.Wallet.Change(foreachPlayer, payment);
                                     GameLog.CasinoHorsesLog(payment);
                                     GameLog.Money($"system", $"player({foreachCharacterData.UUID})", payment, $"HorseWin({rData.Spot})");
-                                    Notify.Send(foreachPlayer, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouWinHorse, MoneySystem.Wallet.Format(payment), rData.Spot), 7000);
+                                    Notify.Send(foreachPlayer, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouWinHorse, MoneySystem.Wallet.Format(payment), rData.Spot), 7000);
                                     bets.Add(payment);
                                 }
                                 else
                                 {
-                                    Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLoseHorse, rData.Spot), 5000);
+                                    Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLoseHorse, rData.Spot), 5000);
                                     bets.Add(-rData.Bet);
                                 }
-                                gametags.Add(LangFunc.GetText(LangType.Ru, DataName.Horse, foreachSessionData.Name, rData.Spot));
+                                gametags.Add(LangFunc.GetText(LangType.En, DataName.Horse, foreachSessionData.Name, rData.Spot));
                             }
                         }
                         Trigger.ClientEventInRange(pos, radius, "client.horse.SHOW_RESULTS", JsonConvert.SerializeObject(gametags), JsonConvert.SerializeObject(bets));
@@ -179,7 +179,7 @@ namespace NeptuneEvo.NewCasino
                 if (!player.IsCharacterData()) return;
                 if (!FunctionsAccess.IsWorking("horse"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 if (!PlayerData.ContainsKey(player))
@@ -189,7 +189,7 @@ namespace NeptuneEvo.NewCasino
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HorseBetAlready, PlayerData[player].Spot), 6000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HorseBetAlready, PlayerData[player].Spot), 6000);
                     return;
                 }
             }
@@ -226,12 +226,12 @@ namespace NeptuneEvo.NewCasino
                 if (characterData == null) return;
                 if (curentScreen != 0)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoStavka), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoStavka), 3000);
                     return;
                 }
                 if (!HorsesWorking)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 else if (UpdateData.CanIChange(player, money, true) != 255) return;
@@ -265,7 +265,7 @@ namespace NeptuneEvo.NewCasino
                     }
                 }
                 Trigger.ClientEventInRange(player.Position, 100f, "client.horse.SHOW_HORSE", JsonConvert.SerializeObject(gametags), horse, JsonConvert.SerializeObject(bets));
-                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BetOnHorse, horse), 3000);
+                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BetOnHorse, horse), 3000);
                 tears_slot(player);
             }
             catch (Exception e)

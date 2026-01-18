@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -193,7 +193,7 @@ namespace NeptuneEvo.Players.Phone.Auction
             
             if (!FunctionsAccess.IsWorking("phoneauction"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
@@ -204,13 +204,13 @@ namespace NeptuneEvo.Players.Phone.Auction
                 var house = Houses.HouseManager.GetHouse(player, true);
                 if (house == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
 
                 if (characterData.InsideGarageID != -1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны выйти из гаража", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustExitGarage), 3000);
                     return;
                 }
                 title = $"Дом #{house.ID}";
@@ -221,7 +221,7 @@ namespace NeptuneEvo.Players.Phone.Auction
             {
                 if (!characterData.BizIDs.Contains(elementId))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                     return;
                 }
 
@@ -237,7 +237,7 @@ namespace NeptuneEvo.Players.Phone.Auction
 
                 if (vehicleData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarBoleeNetu), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarBoleeNetu), 3000);
                     return;
                 }
 
@@ -261,7 +261,7 @@ namespace NeptuneEvo.Players.Phone.Auction
                     var itemData = Chars.Repository.GetItemData(player, "inventory", index);
                     if (itemData.ItemId == ItemId.Debug)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Предмет не найден", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ItemNotFound), 3000);
                         return;
                     }
                     Chars.Repository.SetItemData(player, "inventory", index, new InventoryItemData(), true);
@@ -270,7 +270,7 @@ namespace NeptuneEvo.Players.Phone.Auction
             }
 
             Insert(player, type, elementId, title, text, image, price);
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы успешно создали лот", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LotCreatedSuccessfully), 3000);
         }
         
         private static void Insert(ExtPlayer player, AuctionType type, int elementId, string title, string text, string image, int price)
@@ -283,7 +283,7 @@ namespace NeptuneEvo.Players.Phone.Auction
                     if (characterData == null) 
                         return;
                 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var time = Main.ServerNumber == 0 ? DateTime.Now.AddMinutes(3) : DateTime.Now.AddHours(23);
                 
@@ -472,7 +472,7 @@ namespace NeptuneEvo.Players.Phone.Auction
             
             if (!FunctionsAccess.IsWorking("phoneauction"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             
@@ -481,24 +481,24 @@ namespace NeptuneEvo.Players.Phone.Auction
             if (auctionData == null)
             {
                 Init(player);
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Лот не найден...", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LotNotFound), 3000);
                 return;
             }
             
             if (auctionData.CreateUUID == characterData.UUID)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете сделать ставку на свой лот.", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CannotBidOnYourLot), 3000);
                 return;
             }
 
             if (auctionData.LastBetUUID == characterData.UUID)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Последняя ставка и так ваша.", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YourBidIsLast), 3000);
                 return;
             }
             if (auctionData.LastPrice >= price)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Ставка не может быть меньше, чем текущая.", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BidTooLow), 3000);
                 return;
             }
 
@@ -508,7 +508,7 @@ namespace NeptuneEvo.Players.Phone.Auction
                 var house = Houses.HouseManager.GetHouse(player, true);
                 if (house != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "У вас уже есть дом.", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveHouse), 3000);
                     return;
                 }
 
@@ -517,7 +517,7 @@ namespace NeptuneEvo.Players.Phone.Auction
             {
                 if (characterData.BizIDs.Count > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "У вас уже есть бизнес.", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouAlreadyHaveBiz), 3000);
                     return;
                 }
             }
@@ -525,7 +525,7 @@ namespace NeptuneEvo.Players.Phone.Auction
             var priceAndPercent = price + Convert.ToInt32(price / 100);
             if (!Bank.Change(characterData.Bank, -priceAndPercent))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBankMoney), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBankMoney), 3000);
                 return;
             }
             
@@ -547,7 +547,7 @@ namespace NeptuneEvo.Players.Phone.Auction
             });
             auctionData.IsSave = true;
             
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы сделали ставку.", 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMadeBid), 3000);
             //Update(auctionData);
             if (!isAddMyList)
             {
@@ -581,7 +581,7 @@ namespace NeptuneEvo.Players.Phone.Auction
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
                         
                         var character = await db.Characters
                             .Select(v => new { v.Uuid, v.Money, v.Bank })

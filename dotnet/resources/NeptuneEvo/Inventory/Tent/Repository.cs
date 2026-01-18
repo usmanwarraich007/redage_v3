@@ -92,10 +92,10 @@ namespace NeptuneEvo.Inventory.Tent
                 index++;
             }
 
-            Main.CreateBlip(new Main.BlipData(565, LangFunc.GetText(LangType.Ru, DataName.GlavRinok), TentList.PositionGps[0], 36, true));
+            Main.CreateBlip(new Main.BlipData(565, LangFunc.GetText(LangType.En, DataName.GlavRinok), TentList.PositionGps[0], 36, true));
             CustomColShape.CreateCylinderColShape(TentList.PositionGps[0], 90, 30, 0, colShapeEnums: ColShapeEnums.SafeZoneTent);
 
-            Main.CreateBlip(new Main.BlipData(484, LangFunc.GetText(LangType.Ru, DataName.CherRinok), TentList.PositionGps[1], 54, true));
+            Main.CreateBlip(new Main.BlipData(484, LangFunc.GetText(LangType.En, DataName.CherRinok), TentList.PositionGps[1], 54, true));
             CustomColShape.CreateCylinderColShape(TentList.PositionGps[1], 90, 30, 0, colShapeEnums: ColShapeEnums.SafeZoneTent);
          
             Log.Write($"Load Tent {index}");
@@ -116,7 +116,7 @@ namespace NeptuneEvo.Inventory.Tent
         {
             if (!FunctionsAccess.IsWorking("tent"))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                 return;
             }
             if (!TentsData.ContainsKey(index)) return;
@@ -157,17 +157,17 @@ namespace NeptuneEvo.Inventory.Tent
                 var tentData = TentsData[sessionData.TentIndex];
 
                 var frameList = new FrameListData();
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.Palatka);
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.Palatka);
                 frameList.Callback = callback_menutent;
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.RentTentDo, tentData.RentTime), "info"));
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.RentTentExp, MoneySystem.Wallet.Format(TentPrice)), "rentTime"));
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.CancelRentTent), "remove"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.RentTentDo, tentData.RentTime), "info"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.RentTentExp, MoneySystem.Wallet.Format(TentPrice)), "rentTime"));
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.CancelRentTent), "remove"));
                 
 
                 if (!isPhone)
                 {
-                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.Naming), "name"));
-                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.Inventory), "inventory"));
+                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.Naming), "name"));
+                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.Inventory), "inventory"));
                 }
 
                 Players.Popup.List.Repository.Open(player, frameList); 
@@ -212,14 +212,14 @@ namespace NeptuneEvo.Inventory.Tent
 
                         MoneySystem.Wallet.Change(player, -TentPrice);
 
-                        EventSys.SendCoolMsg(player,"Рынок", "Аренда палатки", $"{LangFunc.GetText(LangType.Ru, DataName.RentTentExpand)}", "", 7000);
-                            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RentTentExpand), 3000);
+                        EventSys.SendCoolMsg(player,"Рынок", "Аренда палатки", $"{LangFunc.GetText(LangType.En, DataName.RentTentExpand)}", "", 7000);
+                            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RentTentExpand), 3000);
                         BattlePass.Repository.UpdateReward(player, 49);
 
                         tentData.RentTime = tentData.RentTime.AddHours(1);                            
                         break;
                     case "name":
-                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.TentName), LangFunc.GetText(LangType.Ru, DataName.NameTentInput), 35, "rentname");
+                        Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.TentName), LangFunc.GetText(LangType.En, DataName.NameTentInput), 35, "rentname");
                         break;
                 }
 
@@ -240,7 +240,7 @@ namespace NeptuneEvo.Inventory.Tent
 
             if (text.Length > 0) text = $"{text}\n";
 
-            if (player.IsCharacterData()) tentData.label.Text = LangFunc.GetText(LangType.Ru, DataName.SellerTent, text, player.Name);
+            if (player.IsCharacterData()) tentData.label.Text = LangFunc.GetText(LangType.En, DataName.SellerTent, text, player.Name);
             else tentData.label.Text = $"#{index + 1}";
         }
 
@@ -258,10 +258,10 @@ namespace NeptuneEvo.Inventory.Tent
                 if (sessionData == null) return;
                 
                 var frameList = new FrameListData(); 
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.Tent); 
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.Tent); 
                 frameList.Callback = callback_renttent;
                 
-                frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.ArendaTelephone, MoneySystem.Wallet.Format(TentPrice)), index)); // почему-то не уверен
+                frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.ArendaTelephone, MoneySystem.Wallet.Format(TentPrice)), index)); // почему-то не уверен
 
                 Players.Popup.List.Repository.Open(player, frameList);   
             }
@@ -293,12 +293,12 @@ namespace NeptuneEvo.Inventory.Tent
 
                 if (sessionData.TentIndex != -1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyTentYou), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyTentYou), 3000);
                     return;
                 }
                 else if (tentData.player != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyTent), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyTent), 3000);
                     return;
                 }
                 else if (UpdateData.CanIChange(player, TentPrice, true) != 255) return;
@@ -307,8 +307,8 @@ namespace NeptuneEvo.Inventory.Tent
 
                 MoneySystem.Wallet.Change(player, -TentPrice);
 
-                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouRentedTent), 10000);
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.Ru, DataName.YouRentedTent), DateTime.Now);  
+                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouRentedTent), 10000);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.En, DataName.YouRentedTent), DateTime.Now);  
                 BattlePass.Repository.UpdateReward(player, 47);
                 
 
@@ -376,15 +376,15 @@ namespace NeptuneEvo.Inventory.Tent
                 switch (type)
                 {
                     case "time":
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TentRentGo), 10000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.Ru, DataName.TentRentGo), DateTime.Now);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TentRentGo), 10000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.En, DataName.TentRentGo), DateTime.Now);
                         break;
                     case "remove":
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TentRentCancel), 10000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.Ru, DataName.TentRentCancel), DateTime.Now);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TentRentCancel), 10000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tent, LangFunc.GetText(LangType.En, DataName.TentRentCancel), DateTime.Now);
                         break;
                     /*case "SafeZoneTent":
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TentZoneCancel), 10000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TentZoneCancel), 10000);
                         break;*/
                 }
 

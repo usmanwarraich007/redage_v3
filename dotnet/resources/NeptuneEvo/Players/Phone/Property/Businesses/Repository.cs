@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Localization;
@@ -27,7 +27,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
 
@@ -164,7 +164,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
 
@@ -177,7 +177,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (product.Ordered)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyOrderedThis), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyOrderedThis), 3000);
                 return;
             }
             
@@ -185,13 +185,13 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
             
             if (value < CountMinOrder(biz.Type))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Enter10To, productsData.MaxCount - product.Lefts), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Enter10To, productsData.MaxCount - product.Lefts), 5000);
                 return;
             }
                         
             if (product.Lefts + value > productsData.MaxCount)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxCol, productsData.MaxCount - product.Lefts), 5000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxCol, productsData.MaxCount - product.Lefts), 5000);
                 return;
             }
             
@@ -200,7 +200,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
             
             if (!Bank.Change(characterData.Bank, -price))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBankMoney), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBankMoney), 3000);
                 return;
             }
             
@@ -220,8 +220,8 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
             
             Trigger.ClientEvent(player, "client.phone.business.cAddOrder", order.UID, order.Name, order.Amount);
             
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OrderedAmount, product.Name, value, order.UID), 3000);
-            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.ZakazNumber, order.UID));
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OrderedAmount, product.Name, value, order.UID), 3000);
+            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.ZakazNumber, order.UID));
         }
 
         public static void MaxProducts(ExtPlayer player)
@@ -238,7 +238,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
             
@@ -277,21 +277,21 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
                     whCount += count;
                     whCost += (count * itemPrice);
                     
-                    message += LangFunc.GetText(LangType.Ru, DataName.AmountCosts, product.Name, count, (count * itemPrice));
+                    message += LangFunc.GetText(LangType.En, DataName.AmountCosts, product.Name, count, (count * itemPrice));
                     success = true;
                 }
             }
             
             if (!success)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoTovarZakaz), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoTovarZakaz), 3000);
                 return;
             }
             
             var bankBalance = Bank.GetBalance(characterData.Bank);
             if ((bankBalance - whCost) < 0)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBankMoney), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBankMoney), 3000);
                 return;
             }
             
@@ -312,7 +312,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
             if (!characterData.BizIDs.Contains(bizId))
             {
                 Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                    LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                    LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
 
@@ -343,7 +343,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
                     
                     if (!Bank.Change(characterData.Bank, -cost))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBankMoney), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBankMoney), 3000);
                         return;
                     }
                     biz.Zatratq += cost;
@@ -361,7 +361,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
                 }
             }
             
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AllTovarSucOrder), 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AllTovarSucOrder), 3000);
 
             GetData(player, bizId);
 
@@ -380,7 +380,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
 
@@ -390,7 +390,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (order == null)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не заказывали этот товар", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DidNotOrderThisItem), 3000);
                 return;
             }
             
@@ -402,7 +402,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (order.Taked)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы не можете отменить заказ, пока его доставляют", 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CannotCancelOrder), 3000);
                 return;
             }
             
@@ -420,7 +420,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
             //Wallet.Change(player, price);
             GameLog.Money($"server", $"player({characterData.UUID})", price, $"orderCancel");
             biz.Zatratq -= price;
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы отменили заказ на {order.Name}", 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCancelledOrder, order.Name), 3000);
         }
 
 
@@ -438,13 +438,13 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
             
             if (name == "Лотерейный билет" || name == "Расходники")
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantLotteryPriceChange), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantLotteryPriceChange), 3000);
                 return;
             }
             
@@ -462,14 +462,14 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
             
             if (value < minPrice || value > maxPrice)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantSetThisPrice), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantSetThisPrice), 3000);
                 return;
             }
             
             product.Price = value;
             
             var ch = (biz.Type == 7 || biz.Type == 11 || biz.Type == 12 || product.Name == "Татуировки" || product.Name == "Парики") ? "%" : "$";
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ThenThisCosts, product.Name, product.Price, ch), 3000);
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ThenThisCosts, product.Name, product.Price, ch), 3000);
             
             if (product.Name == "Бензин") 
                 biz.UpdateLabel();
@@ -491,7 +491,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
             
@@ -519,7 +519,7 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
 
             if (!characterData.BizIDs.Contains(bizId))
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBusiness), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBusiness), 3000);
                 return;
             }
             
@@ -536,8 +536,8 @@ namespace NeptuneEvo.Players.Phone.Property.Businesses
             {
                 biz
             });
-            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы продали бизнес государству за {MoneySystem.Wallet.Format(price)}$", 3000);
-            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.SellBizGos, MoneySystem.Wallet.Format(price)), DateTime.Now);
+            //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouSoldBizToGov, MoneySystem.Wallet.Format(price)), 3000);
+            Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.SellBizGos, MoneySystem.Wallet.Format(price)), DateTime.Now);
         }
 
     }

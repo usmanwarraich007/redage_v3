@@ -409,28 +409,28 @@ namespace NeptuneEvo.Events
                 if (characterData == null) return;
                 else if (!FunctionsAccess.IsWorking("LoadAirsoftLobbyList"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 /*else if (characterData.LVL < 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.lvl3forgame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.lvl3forgame), 3000);
                     return;
                 }*/
 
                 if (sessionData.WorkData.OnDuty || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 else if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -457,41 +457,41 @@ namespace NeptuneEvo.Events
 
                 else if (!FunctionsAccess.IsWorking("airsoft_createLobby_server"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 /*if (characterData.LVL < 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.lvl2forgame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.lvl2forgame), 3000);
                     return;
                 }*/
 
                 if (sessionData.WorkData.OnDuty || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 else if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
 
                 if (lobby_map == 4 && lobby_mode != 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Map1x1only), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Map1x1only), 3000);
                     return;
                 }
 
                 if (LobbyList.ContainsKey(player.Value))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyAlreadyCreated), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyAlreadyCreated), 3000);
                     return;
                 }
 
@@ -502,7 +502,7 @@ namespace NeptuneEvo.Events
 
                 if (characterData.Money < lobby_price)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyNeedMoney, lobby_price), 3000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyNeedMoney, lobby_price), 3000);
                     return;
                 }
 
@@ -530,7 +530,7 @@ namespace NeptuneEvo.Events
                 Wallet.Change(player, -lobby_price);
                 GameLog.Money($"player({characterData.UUID})", $"server", lobby_price, $"createLobby({MaxLobbyPlayers})");
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyCreated), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyCreated), 3000);
 
                 Trigger.ClientEvent(player, "airsoft_lobbyMenuHandler", 3, JsonConvert.SerializeObject(new int[3] { LobbyList[player.Value].LobbyPlayers.Count, lobby_mode == 5 ? 2 : MaxLobbyPlayers, LobbyList[player.Value].MaxPlayers }), "airsoft", LobbyList[player.Value].GameStartSeconds);
             }
@@ -553,29 +553,29 @@ namespace NeptuneEvo.Events
 
                 /*if (characterData.LVL < 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.lvl2forgame), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.lvl2forgame), 3000);
                     return;
                 }*/
                 if (sessionData.WorkData.OnDuty || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
 
                 if (!LobbyList.ContainsKey(index))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyNotFound), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyNotFound), 3000);
                     return;
                 }
 
@@ -592,25 +592,25 @@ namespace NeptuneEvo.Events
 
                 if (LobbyList[index].GameStatus != 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MatchStarted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MatchStarted), 3000);
                     return;
                 }
 
                 if (LobbyList[index].LobbyPassword != null && LobbyList[index].LobbyPassword != password)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyIncorrectPassowrd), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyIncorrectPassowrd), 3000);
                     return;
                 }
 
                 if (LobbyList[index].LobbyPlayers.Count >= LobbyList[index].MaxPlayers)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyFilled), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyFilled), 3000);
                     return;
                 }
 
                 if (characterData.Money < LobbyList[index].LobbyPrice)
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ToEnterNeedMoney, LobbyList[index].LobbyPrice), 1500);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ToEnterNeedMoney, LobbyList[index].LobbyPrice), 1500);
                     return;
                 }
 
@@ -622,7 +622,7 @@ namespace NeptuneEvo.Events
                 Wallet.Change(player, -LobbyList[index].LobbyPrice);
                 GameLog.Money($"player({characterData.UUID})", $"server", LobbyList[index].LobbyPrice, $"joinLobby");
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LobbyConnected), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LobbyConnected), 3000);
 
                 if (LobbyList[index].LobbyMode == 5) // GunGame
                 {
@@ -642,7 +642,7 @@ namespace NeptuneEvo.Events
                             if (foreachPlayer.IsCharacterData())
                             {
                                 Trigger.ClientEvent(foreachPlayer, "airsoft_lobbyMenuHandler", 5, JsonConvert.SerializeObject(new int[3] { LobbyList[index].LobbyPlayers.Count, LobbyList[index].LobbyMode == 5 ? 2 : LobbyList[index].MaxPlayers, LobbyList[index].MaxPlayers }));
-                                Notify.Send(foreachPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MinLobbyOk), 10000);
+                                Notify.Send(foreachPlayer, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MinLobbyOk), 10000);
                             }
                         }
                     }
@@ -750,10 +750,10 @@ namespace NeptuneEvo.Events
                             Trigger.ClientEvent(foreachPlayer, "airsoft_updateStats_client", 1, 0, 0);
                             Trigger.ClientEvent(foreachPlayer, "airsoft_updateStats_client", 3, (MatchTime / 1000));
 
-                            if (LobbyList[index].LobbyMode >= 2) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchOk, NextPlayerTeam + 1));
+                            if (LobbyList[index].LobbyMode >= 2) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchOk, NextPlayerTeam + 1));
                             else SendTextInfoForPlayer(foreachPlayer, "Матч начался.");
 
-                            SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MexitHelp));
+                            SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MexitHelp));
 
                             if (NextPlayerTeam == 0)
                             {
@@ -971,11 +971,11 @@ namespace NeptuneEvo.Events
                                             {
                                                 Wallet.Change(foreachPlayer, LobbyList[lobbyId].LobbyPrice);
                                                 GameLog.Money($"server", $"player({foreachCharacterData.UUID})", LobbyList[lobbyId].LobbyPrice, $"lobbyDraw(GG)");
-                                                SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchNoWinner, LobbyList[lobbyId].LobbyPrice));
+                                                SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchNoWinner, LobbyList[lobbyId].LobbyPrice));
                                             }
                                             else
                                             {
-                                                SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.GungameWinner, GunGameWinner));
+                                                SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.GungameWinner, GunGameWinner));
                                             }
 
                                         }
@@ -1041,17 +1041,17 @@ namespace NeptuneEvo.Events
                                                 {
                                                     Wallet.Change(foreachPlayer, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9));
                                                     GameLog.Money($"server", $"player({foreachCharacterData.UUID})", Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9), $"lobbyWin(DUEL_PVP)");
-                                                    SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchWinner, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9)));
+                                                    SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchWinner, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9)));
                                                 }
                                                 else if (winner_team == -1)
                                                 {
                                                     Wallet.Change(foreachPlayer, LobbyList[lobbyId].LobbyPrice);
                                                     GameLog.Money($"server", $"player({foreachCharacterData.UUID})", LobbyList[lobbyId].LobbyPrice, $"lobbyDraw(DUEL_PVP)");
-                                                    SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchNichya, LobbyList[lobbyId].LobbyPrice));
+                                                    SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchNichya, LobbyList[lobbyId].LobbyPrice));
                                                 }
                                                 else
                                                 {
-                                                    SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.YouLose));
+                                                    SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.YouLose));
                                                 }
 
                                                 foreachSessionData.InAirsoftLobby = -1;
@@ -1306,7 +1306,7 @@ namespace NeptuneEvo.Events
 
                                         Trigger.ClientEvent(foreachPlayer, "airsoft_lobbyMenuHandler", 2);
                                         Trigger.ClientEvent(foreachPlayer, "airsoft_updateStats_client", 0);
-                                        Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPlayersMatch), 3000);
+                                        Notify.Send(foreachPlayer, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoPlayersMatch), 3000);
                                     }
                                 }
                                 catch (Exception e)
@@ -1363,7 +1363,7 @@ namespace NeptuneEvo.Events
                                         Trigger.ClientEvent(foreachPlayer, "airsoft_updateStats_client", 2);
                                         Trigger.ClientEvent(foreachPlayer, "airsoft_updateStats_client", 3, 900);
 
-                                        SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MexitHelp));
+                                        SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MexitHelp));
                                     }
                                 }
                                 catch (Exception e)
@@ -1419,7 +1419,7 @@ namespace NeptuneEvo.Events
                                         int amount = Convert.ToInt32(LobbyList[index].GameFinalReward * 0.9);
                                         Wallet.Change(foreachPlayer, amount);
                                         GameLog.Money($"server", $"player({foreachCharacterData.UUID})", amount, $"lobbyWin(GG)");
-                                        SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchWinner, amount));
+                                        SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchWinner, amount));
                                     }
                                     else
                                     {
@@ -1427,11 +1427,11 @@ namespace NeptuneEvo.Events
                                         {
                                             Wallet.Change(foreachPlayer, LobbyList[index].LobbyPrice);
                                             GameLog.Money($"server", $"player({foreachCharacterData.UUID})", LobbyList[index].LobbyPrice, $"lobbyDraw(GG)");
-                                            SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchNoWinner, LobbyList[index].LobbyPrice));
+                                            SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchNoWinner, LobbyList[index].LobbyPrice));
                                         }
                                         else
                                         {
-                                            SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.GungameWinner, GunGameWinner));
+                                            SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.GungameWinner, GunGameWinner));
                                         }
                                     }
                                 }
@@ -1476,19 +1476,19 @@ namespace NeptuneEvo.Events
                                         Wallet.Change(foreachPlayer, Convert.ToInt32(LobbyList[index].GameFinalReward * 0.9));
                                         GameLog.Money($"server", $"player({foreachCharacterData.UUID})", Convert.ToInt32(LobbyList[index].GameFinalReward * 0.9), $"lobbyWin(TPVP)");
 
-                                        if (LobbyList[index].LobbyMode == 1) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchWinner, Convert.ToInt32(LobbyList[index].GameFinalReward * 0.9)));
-                                        else SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.YouTeamWin, Convert.ToInt32(LobbyList[index].GameFinalReward * 0.9)));
+                                        if (LobbyList[index].LobbyMode == 1) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchWinner, Convert.ToInt32(LobbyList[index].GameFinalReward * 0.9)));
+                                        else SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.YouTeamWin, Convert.ToInt32(LobbyList[index].GameFinalReward * 0.9)));
                                     }
                                     else if (winner_team == -1)
                                     {
                                         Wallet.Change(foreachPlayer, LobbyList[index].LobbyPrice);
                                         GameLog.Money($"server", $"player({foreachCharacterData.UUID})", LobbyList[index].LobbyPrice, $"lobbyDraw(TPVP)");
-                                        SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchNichya, LobbyList[index].LobbyPrice));
+                                        SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchNichya, LobbyList[index].LobbyPrice));
                                     }
                                     else
                                     {
-                                        if (LobbyList[index].LobbyMode == 1) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.YouLose));
-                                        else SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.YouTeamLose));
+                                        if (LobbyList[index].LobbyMode == 1) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.YouLose));
+                                        else SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.YouTeamLose));
                                     }
 
                                     foreachSessionData.InAirsoftLobby = -1;
@@ -1578,7 +1578,7 @@ namespace NeptuneEvo.Events
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorMatch), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorMatch), 3000);
                 }
             }
             catch (Exception e)
@@ -1698,8 +1698,8 @@ namespace NeptuneEvo.Events
                                                 Wallet.Change(foreachPlayer, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9));
                                                 GameLog.Money($"server", $"player({foreachCharacterData.UUID})", Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9), $"lobbyWin(TPVP)");
 
-                                                if (LobbyList[lobbyId].LobbyMode == 0 || LobbyList[lobbyId].LobbyMode == 1) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.MatchWinner, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9)));
-                                                else SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.Ru, DataName.YouTeamWin, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9)));
+                                                if (LobbyList[lobbyId].LobbyMode == 0 || LobbyList[lobbyId].LobbyMode == 1) SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.MatchWinner, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9)));
+                                                else SendTextInfoForPlayer(foreachPlayer, LangFunc.GetText(LangType.En, DataName.YouTeamWin, Convert.ToInt32(LobbyList[lobbyId].GameFinalReward * 0.9)));
                                             }
 
                                             foreachSessionData.InAirsoftLobby = -1;
@@ -1728,8 +1728,8 @@ namespace NeptuneEvo.Events
                         }
                     }
 
-                    if (player.GetSharedData<int>("PlayerAirsoftTeam") == 0 || player.GetSharedData<int>("PlayerAirsoftTeam") == 1 || AirsoftPlayerData.ContainsKey(player) && AirsoftPlayerData[player].IsGunGamePlayer == true) Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LeftMatch), 3000);
-                    else Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LeftLobby), 3000);
+                    if (player.GetSharedData<int>("PlayerAirsoftTeam") == 0 || player.GetSharedData<int>("PlayerAirsoftTeam") == 1 || AirsoftPlayerData.ContainsKey(player) && AirsoftPlayerData[player].IsGunGamePlayer == true) Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LeftMatch), 3000);
+                    else Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LeftLobby), 3000);
 
                     sessionData.InAirsoftLobby = -1;
                     player.SetSharedData("killsWeapon", 0);

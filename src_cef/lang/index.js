@@ -26,64 +26,63 @@ export const translateText = (_langText, key) => {
 //import { get, isString } from "lodash";
 import { writable } from "svelte/store";
 
-import test from './ru.json'
+import test from "./ru.json";
 
 let lang = test;
 
-
 const getData = async (value) => {
-    const response = await fetch(`${url}/${value}.json`);
-    const ajax = await response.json();
-    //lang = ajax;
-}
+  const response = await fetch(`${url}/${value}.json`);
+  const ajax = await response.json();
+  //lang = ajax;
+};
 
-export const currentLang = writable('ru');
-currentLang.subscribe(value => {
-    //getData (value);
+export const currentLang = writable("ru");
+currentLang.subscribe((value) => {
+  //getData (value);
 });
 
 const isString = (text) => typeof text === "string";
 
 const get = (args) => {
-    let formatArgs = false;
-    let text = lang;
-    for (let i = 0; i < args.length; i++) {
-        text = text[args[i]];
+  let formatArgs = false;
+  let text = lang;
+  for (let i = 0; i < args.length; i++) {
+    text = text[args[i]];
 
-        if (typeof text === "undefined") {
-            text = false;
-            break;
-        }
-
-        if (isString (text)) {
-            formatArgs = args;
-            formatArgs.splice(0, i + 1);
-            break;
-        }
+    if (typeof text === "undefined") {
+      text = false;
+      break;
     }
 
-    if (formatArgs && typeof formatArgs[0] !== "undefined") {
-        return {
-            text: text,
-            formatArgs: formatArgs
-        }
+    if (isString(text)) {
+      formatArgs = args;
+      formatArgs.splice(0, i + 1);
+      break;
     }
+  }
 
-    return text;
-}
+  if (formatArgs && typeof formatArgs[0] !== "undefined") {
+    return {
+      text: text,
+      formatArgs: formatArgs,
+    };
+  }
+
+  return text;
+};
 
 const format = (text, ...args) => {
-    return text.replace(/{(\d+)}/g, function (match, number) {
-        return typeof args[number] !== "undefined" ? args[number] : match;
-    });
+  return text.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[number] !== "undefined" ? args[number] : match;
+  });
 };
 
 export const translateText = (...keys) => {
-    let result = get(keys);
+  let result = get(keys);
 
-    if (!isString(result) && result.formatArgs) {
-        result = format(result.text, ...result.formatArgs);
-    }
+  if (!isString(result) && result.formatArgs) {
+    result = format(result.text, ...result.formatArgs);
+  }
 
-    return isString(result) ? result : `Неизвестный ключ ${keys.join(".")}`;
+  return isString(result) ? result : `Unknown key ${keys.join(".")}`;
 };

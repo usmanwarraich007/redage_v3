@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using LinqToDB.Tools;
@@ -224,10 +224,10 @@ namespace NeptuneEvo.Players.Phone.Tinder
                 {
                     var sim = Main.SimCards.FirstOrDefault(u => u.Value == uuid).Key;
                     Trigger.ClientEvent(player, "client.phone.tinder.addLikes", Main.PlayerNames[uuid], List[uuid].Avatar, Main.SimCards.ContainsKey(sim) ? sim : -1);
-                    Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tinder, LangFunc.GetText(LangType.Ru, DataName.TinderMatch), DateTime.Now);
+                    Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Tinder, LangFunc.GetText(LangType.En, DataName.TinderMatch), DateTime.Now);
                     var target = Main.GetPlayerByUUID(uuid);
                     if (target != null) 
-                        Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.Tinder, LangFunc.GetText(LangType.Ru, DataName.TinderMatch), DateTime.Now); 
+                        Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.Tinder, LangFunc.GetText(LangType.En, DataName.TinderMatch), DateTime.Now); 
                 }
             }
             else
@@ -266,7 +266,7 @@ namespace NeptuneEvo.Players.Phone.Tinder
             
             if (text.Length < 5 || text.Length > 150)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Минимальное количество символов - 5, а максимальное - 150", 7000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TinderError), 7000);
                 return;
             }
             
@@ -301,7 +301,7 @@ namespace NeptuneEvo.Players.Phone.Tinder
                 {    
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         db.Insert(new Phonetinders
                         {

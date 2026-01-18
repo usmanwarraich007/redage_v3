@@ -463,7 +463,7 @@ namespace NeptuneEvo.Core
                 var targetSessionData = target.GetSessionData();
                 if (targetSessionData == null || targetSessionData.AnimationUse == null || !AnimList.ContainsKey(targetSessionData.AnimationUse))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerDontAnim), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerDontAnim), 3000);
                     return;
                 }
                 AnimationPlay(player, targetSessionData.AnimationUse);

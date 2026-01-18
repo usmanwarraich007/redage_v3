@@ -126,7 +126,7 @@ namespace NeptuneEvo.Core
         public static BusProductData GetBusProductData(string name)
         {
             name = name.ToLower();
-            
+
             return BusProductsData.FirstOrDefault(pd => pd.Key.ToLower() == name).Value;
         }
         public static void UpdateBusProd(Business data)
@@ -142,11 +142,11 @@ namespace NeptuneEvo.Core
                 foreach (Product prod in data.Products)
                 {
                     if (!BusProductsData.ContainsKey(prod.Name)) continue;
-                    if (data.Type == 0 && prod.Name == "Лотерейный билет")
+                    if (data.Type == 0 && prod.Name == "Lottery ticket")
                     {
                         if (prod.Price != 500)
                         {
-                            prod.Price = 500; // Цена за штуку лотерейного билета.
+                            prod.Price = 500; // Price per lottery ticket.
                             changed = true;
                         }
                     }
@@ -156,12 +156,12 @@ namespace NeptuneEvo.Core
                         if (data.Type == 1) minPrice = Main.PricesSettings.ZapravkaMinPrice;
                         else if (data.Type == 7) minPrice = Main.PricesSettings.ClothesMinPrice;
                         else if (data.Type == 9 || data.Type == 10 || data.Type == 11 || data.Type == 12) minPrice = Main.PricesSettings.TattooBarberMasksLscMinPrice;
-                        
+
                         maxPrice = BusProductsData[prod.Name].Price * Main.BusinessMaxPrice;
                         if (data.Type == 1) maxPrice = Main.PricesSettings.ZapravkaMaxPrice;
                         else if (data.Type == 7) maxPrice = Main.PricesSettings.ClothesMaxPrice;
                         else if (data.Type == 9 || data.Type == 10 || data.Type == 11 || data.Type == 12) maxPrice = Main.PricesSettings.TattooBarberMasksLscMaxPrice;
-                        
+
                         if (prod.Price < minPrice || prod.Price > maxPrice)
                         {
                             if (prod.Price < minPrice) prod.Price = Convert.ToInt32(minPrice);
@@ -180,7 +180,7 @@ namespace NeptuneEvo.Core
                             if (product == null)
                             {
                                 if (busProductData.Value.Type != BusProductToType.Market) continue;
-                                if (busProductData.Key == "Лотерейный билет") data.Products.Add(new Product(500, 0, 0, busProductData.Key, false));
+                                if (busProductData.Key == "Lottery ticket") data.Products.Add(new Product(500, 0, 0, busProductData.Key, false));
                                 else data.Products.Add(new Product(busProductData.Value.Price, 0, 1, busProductData.Key, false));
                                 changed = true;
                             }
@@ -192,11 +192,11 @@ namespace NeptuneEvo.Core
                             }
                         }
 
-                        //Проверяем если на нахождение продукта в базе продуктов)
+                        //Checking if the product exists in the product database)
                         foreach (var product in data.Products.ToList())
                         {
                             if (product == null) continue;
-                            else if (BusProductsData.ContainsKey (product.Name)) continue;
+                            else if (BusProductsData.ContainsKey(product.Name)) continue;
                             data.Products.Remove(product);
                             changed = true;
                         }
@@ -269,17 +269,17 @@ namespace NeptuneEvo.Core
                     {
                         nameprod = data.Products[i].Name;
                         if (!BusProductsData.ContainsKey(nameprod)) continue;
-                        
+
                         minPrice = BusProductsData[nameprod].Price * Main.BusinessMinPrice;
                         if (data.Type == 1) minPrice = Main.PricesSettings.ZapravkaMinPrice;
                         else if (data.Type == 7) minPrice = Main.PricesSettings.ClothesMinPrice;
                         else if (data.Type == 9 || data.Type == 10 || data.Type == 11 || data.Type == 12) minPrice = Main.PricesSettings.TattooBarberMasksLscMinPrice;
-                        
+
                         maxPrice = BusProductsData[nameprod].Price * Main.BusinessMaxPrice;
                         if (data.Type == 1) maxPrice = Main.PricesSettings.ZapravkaMaxPrice;
                         else if (data.Type == 7) maxPrice = Main.PricesSettings.ClothesMaxPrice;
                         else if (data.Type == 9 || data.Type == 10 || data.Type == 11 || data.Type == 12) maxPrice = Main.PricesSettings.TattooBarberMasksLscMaxPrice;
-                        
+
                         if (data.Products[i].Price < minPrice || data.Products[i].Price > maxPrice)
                         {
                             data.Products[i].Price = BusProductsData[nameprod].Price;
@@ -287,7 +287,7 @@ namespace NeptuneEvo.Core
                         }
                     }
                 }
-                if (changed) 
+                if (changed)
                     data.IsSave = true;
             }
             catch (Exception e)
@@ -301,7 +301,7 @@ namespace NeptuneEvo.Core
             try
             {
                 Main.CreateBlip(new Main.BlipData(73, "Premium Clothes Shop", new Vector3(-1126.9141, -1440.1637, 4.108331), 35, true, 1f));
-                PedSystem.Repository.CreateQuest("a_m_y_hipster_01", new Vector3(-1126.9141, -1440.1637, 4.108331 + 1.12), -63.85f, title: "~y~NPC~w~ Вовчик", colShapeEnums: ColShapeEnums.PremiumShop);
+                PedSystem.Repository.CreateQuest("a_m_y_hipster_01", new Vector3(-1126.9141, -1440.1637, 4.108331 + 1.12), -63.85f, title: "~y~NPC~w~ Vovchik", colShapeEnums: ColShapeEnums.PremiumShop);
 
                 using MySqlCommand cmd = new MySqlCommand()
                 {
@@ -348,7 +348,7 @@ namespace NeptuneEvo.Core
                         Log.Write("Cant load Business: " + x.ToString());
                     }
                 }
-                
+
                 Players.Phone.Gps.Repository.Init();
             }
             catch (Exception e)
@@ -384,7 +384,7 @@ namespace NeptuneEvo.Core
         }
 
         public static ConcurrentDictionary<int, Business> BizList = new ConcurrentDictionary<int, Business>();
-        public static ConcurrentDictionary<int, int> Orders = new ConcurrentDictionary<int, int>(); // key - ID заказа, value - ID бизнеса
+        public static ConcurrentDictionary<int, int> Orders = new ConcurrentDictionary<int, int>(); // key - Order ID, value - Business ID
 
         public static string[] BusinessTypeNames = new string[16]
         {
@@ -524,18 +524,18 @@ namespace NeptuneEvo.Core
                 "Tampa2",
                 "Tropos",
                 "Felon2",
-                "Sentinel2", 
-                "Zion2", 
+                "Sentinel2",
+                "Zion2",
                 "Fusilade",
                 "Penumbra",
                 "Rapidgt",
-                "Rapidgt2", 
+                "Rapidgt2",
                 "Schafter3",
-                "Sentinel3", 
+                "Sentinel3",
                 "Voltic",
-                "Gauntlet4", 
-                "Caracara2", 
-                "Issi7", 
+                "Gauntlet4",
+                "Caracara2",
+                "Issi7",
                 "Schafter4",
                 "Novak",
 
@@ -636,9 +636,9 @@ namespace NeptuneEvo.Core
                 "Jester3",
                 "Coquette2",
                 "Gt500",
-                "Stinger", 
-                "Stingergt", 
-                "Italigtb", 
+                "Stinger",
+                "Stingergt",
+                "Italigtb",
                 "Windsor2",
                 "Deviant",
                 "Dominator3",
@@ -653,7 +653,7 @@ namespace NeptuneEvo.Core
                 "Drafter",
                 "Emerus",
                 "Zorrusso",
-                
+
                 "Comet5",
                 "Furia",
                 "Taipan",
@@ -761,8 +761,8 @@ namespace NeptuneEvo.Core
                 "Brioso2",
                 "Weevil",
                 "Tornado5",
-                "Brioso", 
-                "Issi3", 
+                "Brioso",
+                "Issi3",
                 "Tulip",
                 "Vamos",
                 "Hellion",
@@ -930,13 +930,13 @@ namespace NeptuneEvo.Core
                         {
                             if (busProductData.Value.Type != BusProductToType.Market) continue;
                             Product product;
-                            if (busProductData.Key == "Лотерейный билет") product = new Product(500, 0, 0, busProductData.Key, false);
+                            if (busProductData.Key == "Lottery ticket") product = new Product(500, 0, 0, busProductData.Key, false);
                             else product = new Product(busProductData.Value.Price, 0, 1, busProductData.Key, false);
                             _ProductsList.Add(product);
                         }
                         break;
                     case 1:
-                        _ProductsList.Add(new Product(BusProductsData["Бензин"].Price, 0, 0, "Бензин", false));
+                        _ProductsList.Add(new Product(BusProductsData["Gasoline"].Price, 0, 0, "Gasoline", false));
                         break;
                     case 2:
                         foreach (string name in CarsNames[0])
@@ -989,11 +989,11 @@ namespace NeptuneEvo.Core
                             Product product = new Product(busProductData.Value.Price, 0, 5, busProductData.Key, false);
                             _ProductsList.Add(product);
                         }
-                        _ProductsList.Add(new Product(BusProductsData["Патроны"].Price, 0, 5, "Патроны", false));
-                        _ProductsList.Add(new Product(BusProductsData["Модификации"].Price, 0, 5, "Модификации", false));
+                        _ProductsList.Add(new Product(BusProductsData["Ammo"].Price, 0, 5, "Ammo", false));
+                        _ProductsList.Add(new Product(BusProductsData["Modifications"].Price, 0, 5, "Modifications", false));
                         break;
                     case 7:
-                        _ProductsList.Add(new Product(50, 200, 10, "Одежда", false));
+                        _ProductsList.Add(new Product(50, 200, 10, "Clothing", false));
                         break;
                     case 8:
                         foreach (KeyValuePair<string, BusProductData> busProductData in BusProductsData)
@@ -1004,24 +1004,24 @@ namespace NeptuneEvo.Core
                         }
                         break;
                     case 9:
-                        _ProductsList.Add(new Product(80, 100, 0, "Расходники", false));
-                        _ProductsList.Add(new Product(100, 0, 0, "Татуировки", false));
+                        _ProductsList.Add(new Product(80, 100, 0, "Consumables", false));
+                        _ProductsList.Add(new Product(100, 0, 0, "Tattoos", false));
                         break;
                     case 10:
-                        _ProductsList.Add(new Product(80, 100, 0, "Расходники", false));
-                        _ProductsList.Add(new Product(100, 0, 0, "Парики", false));
+                        _ProductsList.Add(new Product(80, 100, 0, "Consumables", false));
+                        _ProductsList.Add(new Product(100, 0, 0, "Wigs", false));
                         break;
                     case 11:
-                        _ProductsList.Add(new Product(100, 50, 0, "Маски", false));
+                        _ProductsList.Add(new Product(100, 50, 0, "Masks", false));
                         break;
                     case 12:
-                        _ProductsList.Add(new Product(100, 1000, 0, "Запчасти", false));
+                        _ProductsList.Add(new Product(100, 1000, 0, "Parts", false));
                         break;
                     case 13:
-                        _ProductsList.Add(new Product(200, 200, 0, "Средство для мытья", false));
+                        _ProductsList.Add(new Product(200, 200, 0, "Washing Agent", false));
                         break;
                     case 14:
-                        _ProductsList.Add(new Product(45000, 20, 0, "Корм для животных", false));
+                        _ProductsList.Add(new Product(45000, 20, 0, "Pet Food", false));
                         break;
                 }
                 return _ProductsList;
@@ -1042,19 +1042,19 @@ namespace NeptuneEvo.Core
                 var characterData = player.GetCharacterData();
                 if (characterData == null) return;
                 if (characterData.DemorganTime >= 1) return;
-                sessionData.BizID = ID; // Нужно переделать.
+                sessionData.BizID = ID; // Needs to be reworked.
                 int bizlistid = sessionData.BizID;
                 if (bizlistid == -1) return;
                 if (sessionData.Following != null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                     return;
                 }
                 if (!BizList.ContainsKey(bizlistid)) return;
                 Business biz = BizList[bizlistid];
                 if (biz.IsOwner() && !Main.PlayerNames.Values.Contains(biz.Owner))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizNotWork, BusinessTypeNames[biz.Type]), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizNotWork, BusinessTypeNames[biz.Type]), 3000);
                     return;
                 }
                 switch (biz.Type)
@@ -1074,7 +1074,7 @@ namespace NeptuneEvo.Core
                     case 15:
                         if (sessionData.Follower != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OtpustiteChela), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OtpustiteChela), 3000);
                             return;
                         }
                         sessionData.TempBizID = biz.ID;
@@ -1088,7 +1088,7 @@ namespace NeptuneEvo.Core
 
                         if ((sessionData.WorkData.OnDuty && Fractions.Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov) || sessionData.WorkData.OnWork)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                             return;
                         }
                         sessionData.TempBizID = biz.ID;
@@ -1097,7 +1097,7 @@ namespace NeptuneEvo.Core
                     case 11:
                         if ((sessionData.WorkData.OnDuty && Fractions.Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov) || sessionData.WorkData.OnWork)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                             return;
                         }
                         sessionData.TempBizID = biz.ID;
@@ -1122,7 +1122,7 @@ namespace NeptuneEvo.Core
                     case 9:
                         if ((sessionData.WorkData.OnDuty && Fractions.Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov) || sessionData.WorkData.OnWork)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                             return;
                         }
                         var custom = player.GetCustomization();
@@ -1130,14 +1130,14 @@ namespace NeptuneEvo.Core
                         sessionData.TempBizID = biz.ID;
                         uint dim = Dimensions.RequestPrivateDimension(player.Value);
                         Trigger.Dimension(player, dim);
-                        
+
                         var realClothes = new List<string>();
                         var tattooPriceList = ClothesComponents.TattooComponentPriceData;
                         var dataJson = new Dictionary<string, List<List<object>>>();
 
                         var prod = biz.Products[1];
-                        
-                        
+
+
                         foreach (var components in tattooPriceList)
                         {
                             var name = components.Key.ToString();
@@ -1148,31 +1148,31 @@ namespace NeptuneEvo.Core
                                 {
                                     componentData[0],
                                     Convert.ToInt32(Convert.ToInt32(componentData[1]) / 100f * prod.Price)
-                                }); 
+                                });
                             }
-                            
+
                             dataJson[name] = clothesData;
                             realClothes.Add(name);
                         }
-                        
+
                         TryUpdateArmor(player);
                         Trigger.ClientEvent(player, "client.shop.open", "tattoo", characterData.Gender, JsonConvert.SerializeObject(realClothes), JsonConvert.SerializeObject(dataJson), 0, JsonConvert.SerializeObject(custom.Tattoos));
                         return;
                     case 10:
                         if ((sessionData.WorkData.OnDuty && Fractions.Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov) || sessionData.WorkData.OnWork)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                             return;
                         }
                         sessionData.TempBizID = biz.ID;
                         dim = Dimensions.RequestPrivateDimension(player.Value);
                         Trigger.Dimension(player, dim);
-                        
+
                         realClothes = new List<string>();
                         var barberPriceList = ClothesComponents.BarberComponentPriceData[characterData.Gender];
 
                         dataJson = new Dictionary<string, List<List<object>>>();
-                        
+
                         foreach (var components in barberPriceList)
                         {
                             var name = components.Key.ToString();
@@ -1183,13 +1183,13 @@ namespace NeptuneEvo.Core
                                 {
                                     componentData[0],
                                     Convert.ToInt32(Convert.ToInt32(componentData[1]) / 100f *  biz.Products[1].Price)
-                                }); 
+                                });
                             }
 
                             dataJson[name] = clothesData;
                             realClothes.Add(name);
                         }
-                        
+
                         TryUpdateArmor(player);
                         Trigger.ClientEvent(player, "client.shop.open", "barber", characterData.Gender, JsonConvert.SerializeObject(realClothes), JsonConvert.SerializeObject(dataJson), 0);
                         return;
@@ -1199,15 +1199,15 @@ namespace NeptuneEvo.Core
                     case 13:
                         if (!player.IsInVehicle)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                             return;
                         }
-                        Trigger.ClientEvent(player, "openDialog", "CARWASH_PAY", LangFunc.GetText(LangType.Ru, DataName.CarWashWant, biz.Products[0].Price));
+                        Trigger.ClientEvent(player, "openDialog", "CARWASH_PAY", LangFunc.GetText(LangType.En, DataName.CarWashWant, biz.Products[0].Price));
                         return;
                     case 14:
                         if (sessionData.Follower != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OtpustiteChela), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OtpustiteChela), 3000);
                             return;
                         }
                         sessionData.TempBizID = biz.ID;
@@ -1224,7 +1224,8 @@ namespace NeptuneEvo.Core
             }
         }
 
-        public static void enterPetShop(ExtPlayer player, string prodname) {
+        public static void enterPetShop(ExtPlayer player, string prodname)
+        {
             try
             {
                 var sessionData = player.GetSessionData();
@@ -1269,31 +1270,31 @@ namespace NeptuneEvo.Core
                 var house = Houses.HouseManager.GetHouse(player, true);
                 if (house == null || house.Type == 7)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                     return;
                 }
                 if (Houses.HouseManager.HouseTypeList[house.Type].PetPosition == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.HomeNotForPets), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.HomeNotForPets), 3000);
                     return;
                 }
                 int price = biz.Products[0].Price;
                 if (characterData.Money < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                     return;
                 }
-                if (!takeProd(biz.ID, 1, "Корм для животных", price))
+                if (!takeProd(biz.ID, 1, "Pet Food", price))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoPets), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoPets), 3000);
                     return;
                 }
                 Wallet.Change(player, -price);
-                biz.BuyItemBusiness(characterData.UUID, "Корм для животных", price);
+                biz.BuyItemBusiness(characterData.UUID, "Pet Food", price);
                 GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", price, $"buyPet({petName})");
                 house.PetName = petName;
                 characterData.PetName = petName;
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NewPet, petName), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NewPet, petName), 3000);
             }
             catch (Exception e)
             {
@@ -1338,7 +1339,7 @@ namespace NeptuneEvo.Core
                 {
                     if (player.VehicleSeat == (int)VehicleSeat.Driver)
                     {
-                        var vehicle = (ExtVehicle) player.Vehicle;
+                        var vehicle = (ExtVehicle)player.Vehicle;
                         var vehicleLocalData = vehicle.GetVehicleLocalData();
                         if (vehicleLocalData == null)
                             return;
@@ -1347,27 +1348,27 @@ namespace NeptuneEvo.Core
                             int price = biz.Products[0].Price;
                             if (characterData.Money < price)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                                 return;
                             }
 
-                            if (!takeProd(biz.ID, 1, "Средство для мытья", price))
+                            if (!takeProd(biz.ID, 1, "Washing Agent", price))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                                 return;
                             }
                             GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", price, "carwash");
                             MoneySystem.Wallet.Change(player, -price);
-                            biz.BuyItemBusiness(characterData.UUID, "Средство для мытья", price);
+                            biz.BuyItemBusiness(characterData.UUID, "Washing Agent", price);
                             VehicleStreaming.SetVehicleDirt(vehicle, 0.0f);
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WashedCar), 5000);
-                            if (vehicleLocalData.Access == VehicleAccess.Fraction) 
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WashedCar), 5000);
+                            if (vehicleLocalData.Access == VehicleAccess.Fraction)
                                 player.AddTableScore(TableTaskId.Item2);
                             BattlePass.Repository.UpdateReward(player, 27);
                         }
-                        else Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotDirtyCar), 5000);
+                        else Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotDirtyCar), 5000);
                     }
-                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OnlyDriverWashCar), 5000);
+                    else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OnlyDriverWashCar), 5000);
                 }
             }
             catch (Exception e)
@@ -1388,42 +1389,42 @@ namespace NeptuneEvo.Core
                 if (characterData == null) return;
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                     return;
                 }
                 if (player.VehicleSeat != (int)VehicleSeat.Driver)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeDriver), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeDriver), 3000);
                     return;
                 }
-                var vehicle = (ExtVehicle) player.Vehicle;
+                var vehicle = (ExtVehicle)player.Vehicle;
                 var vehicleLocalData = vehicle.GetVehicleLocalData();
                 if (vehicleLocalData == null)
                     return;
-                
+
                 if (vehicleLocalData.Access == VehicleAccess.Personal)
                 {
                     if (vehicle.Class == 13)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VeloCantBeTuned), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VeloCantBeTuned), 3000);
                         return;
                     }
                     if (VehicleModel.AirAutoRoom.isAirCar(vehicle.Model))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Воздушный транспорт не может быть затюнингован", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Aircraft cannot be tuned", 3000);
                         return;
                     }
                     //VehicleManager.VehicleData vdata = VehicleManager.Vehicles[vehicle.NumberPlate];
                     //if (!Tuning.ContainsKey(vdata.Model))
                     // {
-                    //     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"В данный момент для Вашего т/с тюнинг не доступен", 3000);
+                    //     Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Tuning is not currently available for your vehicle", 3000);
                     //     return;
                     // }
                     var bizId = sessionData.BizID;
                     if (!BizList.ContainsKey(bizId)) return;
                     if (sessionData.Following != null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                         return;
                     }
                     Business biz = BizList[bizId];
@@ -1449,7 +1450,7 @@ namespace NeptuneEvo.Core
                         vehicle.Position = lsCustomsPlace.Position;
                         vehicle.Rotation = lsCustomsPlace.Rotation;
                     }
-                    
+
                     int modelPrice = BusProductsData[model].Price;
                     modelPrice = CarsNames[2].Contains(model) ? modelPrice * 10 : modelPrice;
 
@@ -1462,19 +1463,19 @@ namespace NeptuneEvo.Core
                     if (!BizList.ContainsKey(bizId)) return;
                     if (sessionData.Following != null)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                         return;
                     }
-                    
+
                     var organizationData = Organizations.Manager.GetOrganizationData(vehicleLocalData.Fraction);
-                    if (organizationData == null) 
+                    if (organizationData == null)
                         return;
-                    
+
                     characterData.TuningShop = bizId;
 
                     var organizationVehicle = organizationData.Vehicles[vehicle.NumberPlate];
                     var model = organizationVehicle.model;
-        
+
                     uint dim = Dimensions.RequestPrivateDimension(player.Value);
                     Trigger.Dimension(vehicle, dim);
                     if (!LsCustomsBusnessToPlacesId.ContainsKey(bizId))
@@ -1488,7 +1489,7 @@ namespace NeptuneEvo.Core
                         vehicle.Position = lsCustomsPlace.Position;
                         vehicle.Rotation = lsCustomsPlace.Rotation;
                     }
-                    
+
                     //Trigger.ClientEvent(player, "vehicle.teleport");
                     int modelPrice = BusProductsData[model].Price;
                     modelPrice = CarsNames[2].Contains(model) ? modelPrice * 10 : modelPrice;
@@ -1512,8 +1513,8 @@ namespace NeptuneEvo.Core
                 if (characterData == null) return;
                 if (!player.IsInVehicle) return;
 
-                var vehicle = (ExtVehicle) player.Vehicle;
-                
+                var vehicle = (ExtVehicle)player.Vehicle;
+
                 var bizId = characterData.TuningShop;
                 switch (eventType)
                 {
@@ -1538,16 +1539,16 @@ namespace NeptuneEvo.Core
                         break;
                     case 1:
                         if (bizId == -1) return;
-                        
+
                         var organizationData = player.GetOrganizationData();
-                        if (organizationData == null) 
+                        if (organizationData == null)
                             return;
 
                         vehicle.Position = new Vector3(BizList[bizId].EnterPoint.X, BizList[bizId].EnterPoint.Y, (BizList[bizId].EnterPoint.Z + 1.0));
-                        vehicle.Rotation = new Vector3(0, 0, player.Vehicle.Rotation.Z);                        
+                        vehicle.Rotation = new Vector3(0, 0, player.Vehicle.Rotation.Z);
                         Trigger.Dimension(vehicle, 0);
 
-                        
+
                         var number = NAPI.Vehicle.GetVehicleNumberPlate(vehicle);
                         var organizationVehicle = organizationData.Vehicles[number];
                         VehicleManager.GetVehicleCustomization(player, vehicle);
@@ -1627,7 +1628,7 @@ namespace NeptuneEvo.Core
                 if (!player.IsInVehicle) return;
                 if (!VehicleManager.canAccessByNumber(player, player.Vehicle.NumberPlate))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                     return;
                 }
                 int bizID = characterData.TuningShop;
@@ -1649,21 +1650,21 @@ namespace NeptuneEvo.Core
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDetailsError), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDetailsError), 3000);
                         return;
                     }
                 }
                 int amount = Convert.ToInt32(price * 0.45 / 2000);
                 if (amount <= 0) amount = 1;
-                if (!takeProd(biz.ID, amount, "Запчасти", price))
+                if (!takeProd(biz.ID, amount, "Parts", price))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDetails), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDetails), 3000);
                     return;
                 }
-                
+
                 if (SetCustomization(player, category, index, otherIndex, r, g, b, price, $"biz({biz.ID})"))
-                    biz.BuyItemBusiness(characterData.UUID, "Запчасти", price);
-                
+                    biz.BuyItemBusiness(characterData.UUID, "Parts", price);
+
             }
             catch (Exception e)
             {
@@ -1681,15 +1682,15 @@ namespace NeptuneEvo.Core
                 if (!player.IsInVehicle) return;
                 if (!VehicleManager.canAccessByNumber(player, player.Vehicle.NumberPlate))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                     return;
                 }
-                
+
                 string number = player.Vehicle.NumberPlate;
                 var vehicleData = VehicleManager.GetVehicleToNumber(number);
                 if (vehicleData == null)
                     return;
-                string vehModel = vehicleData.Model;                
+                string vehModel = vehicleData.Model;
                 int modelPrice = BusProductsData[vehModel].Price;
                 modelPrice = CarsNames[2].Contains(vehModel) ? modelPrice * 10 : modelPrice;
                 int price = GetPrice(category, index, 100, modelPrice);
@@ -1701,7 +1702,7 @@ namespace NeptuneEvo.Core
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDetailsError), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDetailsError), 3000);
                         return;
                     }
                 }
@@ -1718,29 +1719,29 @@ namespace NeptuneEvo.Core
             var characterData = player.GetCharacterData();
             if (characterData == null) return false;
             if (!player.IsInVehicle) return false;
-            
+
             string number = player.Vehicle.NumberPlate;
             var vehicleData = VehicleManager.GetVehicleToNumber(number);
             if (vehicleData == null)
                 return false;
-            
-            if (UpdateData.CanIChange(player, price, true) != 255) 
+
+            if (UpdateData.CanIChange(player, price, true) != 255)
                 return false;
-            
+
             GameLog.Money($"player({characterData.UUID})", textLogs, price, $"buyTuning({player.Vehicle.NumberPlate},{category},{index} ({r}, {g}, {b}))");
             Wallet.Change(player, -price);
-            
+
             vehicleData.Components = GetCustomization(vehicleData.Components, category, index, otherIndex, r, g, b);
-                
-            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuyTunNotify, Wallet.Format(price)), 3000);
+
+            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuyTunNotify, Wallet.Format(price)), 3000);
             BattlePass.Repository.UpdateReward(player, 44);
             Trigger.ClientEvent(player, "client.custom.updatecomponents", JsonConvert.SerializeObject(vehicleData.Components));
-            
+
             Trigger.SetTask(async () =>
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Vehicles
                         .Where(v => v.AutoId == vehicleData.SqlId)
@@ -1752,34 +1753,34 @@ namespace NeptuneEvo.Core
                     Debugs.Repository.Exception(e);
                 }
             });
-            
+
             qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage28, 1, isUpdateHud: true);
-            qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage28, true);
+            qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int)zdobich_quests.Stage28, true);
             return true;
         }
-        
+
         [RemoteEvent("server.custom.orgBuy")]
         public static void RemoteEvent_orgBuyTuning(ExtPlayer player, string category, int index, int otherIndex, int r, int g, int b)
         {
             try
             {
                 if (!player.IsOrganizationAccess(RankToAccess.OrgTuning)) return;
-                
-                var vehicle = (ExtVehicle) player.Vehicle;
+
+                var vehicle = (ExtVehicle)player.Vehicle;
                 if (vehicle == null) return;
-                
+
                 var organizationData = player.GetOrganizationData();
-                if (organizationData == null) 
+                if (organizationData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                     Trigger.ClientEvent(player, "tunBuySuccess", -2);
                     return;
                 }
-                
+
                 var number = NAPI.Vehicle.GetVehicleNumberPlate(vehicle);
                 if (!organizationData.Vehicles.ContainsKey(number))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                     Trigger.ClientEvent(player, "tunBuySuccess", -2);
                     return;
                 }
@@ -1797,7 +1798,7 @@ namespace NeptuneEvo.Core
                     }
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDetailsError), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDetailsError), 3000);
                         return;
                     }
                 }
@@ -1809,7 +1810,7 @@ namespace NeptuneEvo.Core
                 var customization = organizationVehicle.customization;
                 organizationVehicle.customization = GetCustomization(customization, category, index, otherIndex, r, g, b);
                 organizationVehicle.SaveCustomization(number);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuyTunNotify, Wallet.Format(price)), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuyTunNotify, Wallet.Format(price)), 3000);
                 Trigger.ClientEvent(player, "client.custom.updatecomponents", JsonConvert.SerializeObject(customization));
             }
             catch (Exception e)
@@ -1819,7 +1820,7 @@ namespace NeptuneEvo.Core
         }
 
         private static VehicleCustomization GetCustomization(VehicleCustomization myvehcustom, string category, int index, int otherIndex, int r, int g, int b)
-        {                
+        {
             switch (category)
             {
                 case "Spoiler":
@@ -1942,7 +1943,7 @@ namespace NeptuneEvo.Core
                 return false;
             }
         }
-        
+
         public static Vector3 getNearestBiz(ExtPlayer player, int type)
         {
             try
@@ -1971,12 +1972,12 @@ namespace NeptuneEvo.Core
             if (!player.IsCharacterData()) return;
             if (sessionData.CuffedData.Cuffed)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                 return;
             }
             else if (sessionData.DeathData.InDeath)
             {
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                 return;
             }
             else if (Main.IHaveDemorgan(player, true)) return;
@@ -2008,13 +2009,13 @@ namespace NeptuneEvo.Core
                 if (characterData == null) return;
                 if (!FunctionsAccess.IsWorking("ClothesShop"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
                 if ((sessionData.WorkData.OnDuty && Fractions.Manager.FractionTypes[player.GetFractionId()] == FractionsType.Gov) || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustEndWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustEndWorkDay), 3000);
                     return;
                 }
 
@@ -2023,7 +2024,7 @@ namespace NeptuneEvo.Core
                 {
                     foreach (var clothId in dellClothes)
                     {
-                        if (realClothes.Contains(clothId)) 
+                        if (realClothes.Contains(clothId))
                             realClothes.Remove(clothId);
                     }
                 }
@@ -2031,7 +2032,7 @@ namespace NeptuneEvo.Core
                 {
                     foreach (var clothId in addClothes)
                     {
-                        if (!realClothes.Contains(clothId)) 
+                        if (!realClothes.Contains(clothId))
                             realClothes.Add(clothId);
                     }
                 }
@@ -2055,7 +2056,7 @@ namespace NeptuneEvo.Core
                             {
                                 componentData[0],
                                 Convert.ToInt32(Convert.ToInt32(componentData[1]) / 100f *  biz.Products[0].Price)
-                            }); 
+                            });
                         }
 
                         if (clothesData.Count > 0)
@@ -2073,7 +2074,7 @@ namespace NeptuneEvo.Core
                         }
                     }
                 }
-                
+
                 TryUpdateArmor(player);
                 Trigger.ClientEvent(player, "client.shop.open", "clothes", characterData.Gender, JsonConvert.SerializeObject(realClothes), JsonConvert.SerializeObject(dataJson), Convert.ToByte(isDonate));
                 Trigger.Dimension(player, Dimensions.RequestPrivateDimension(player.Value));
@@ -2093,7 +2094,7 @@ namespace NeptuneEvo.Core
                 NeptuneEvo.Chars.Repository.SetItemData(player, "accessories", 7, item, true);
             }
         }
-        
+
         private static Dictionary<ClothesComponent, int> ClothesComponentToSlot = new Dictionary<ClothesComponent, int>()
         {
             { ClothesComponent.Hat, 0 },//
@@ -2159,34 +2160,34 @@ namespace NeptuneEvo.Core
                 }
 
                 int tempPrice = !isDonate ? shoesData.Price : shoesData.Donate;
-                
+
                 int price = !isDonate ? Convert.ToInt32((tempPrice / 100f) * prod.Price) : tempPrice;
 
                 if (price <= 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantBuyThis), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantBuyThis), 3000);
                     return;
                 }
                 if (!isDonate && UpdateData.CanIChange(player, price, true) != 255) return;
                 if (isDonate && accountData.RedBucks < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return;
                 }
-                int amount = Convert.ToInt32(price * 10 * 0.75 / 100); // * 10, чтобы больше матов снимать
+                int amount = Convert.ToInt32(price * 10 * 0.75 / 100); // * 10, to take more mats
                 if (amount <= 0) amount = 1;
 
                 if (slotId == -1 || Chars.Repository.isFreeSlots(player, Chars.Repository.AccessoriesInfo[slotId]) != 0) return;
                 if (!isDonate)
                 {
-                    if (dictionary == ClothesComponent.Masks && !takeProd(biz.ID, (price >= 15000 ? 6 : 1), "Маски", price))
+                    if (dictionary == ClothesComponent.Masks && !takeProd(biz.ID, (price >= 15000 ? 6 : 1), "Masks", price))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                         return;
                     }
-                    else if (!takeProd(biz.ID, amount, "Одежда", price))
-                    { 
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                    else if (!takeProd(biz.ID, amount, "Clothing", price))
+                    {
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                         return;
                     }
                 }
@@ -2196,24 +2197,24 @@ namespace NeptuneEvo.Core
                 {
                     GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", price, $"buyClothes({name}{Data})");
                     Wallet.Change(player, -price);
-                    biz.BuyItemBusiness(characterData.UUID, "Одежда", price);
+                    biz.BuyItemBusiness(characterData.UUID, "Clothing", price);
                 }
                 else
                 {
-                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.PremClothB, price), DateTime.Now);
-                    UpdateData.RedBucks(player, -price, msg: LangFunc.GetText(LangType.Ru, DataName.PremClothB, price));
+                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.PremClothB, price), DateTime.Now);
+                    UpdateData.RedBucks(player, -price, msg: LangFunc.GetText(LangType.En, DataName.PremClothB, price));
                 }
-                
-                EventSys.SendCoolMsg(player,"Покупка", "Покупка одежды", $"{LangFunc.GetText(LangType.Ru, DataName.BuyNewClothes)}", "", 6000);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BuyNewClothesView, price), 2000);
-                
+
+                EventSys.SendCoolMsg(player, "Purchase", "Clothing Purchase", $"{LangFunc.GetText(LangType.En, DataName.BuyNewClothes)}", "", 6000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BuyNewClothesView, price), 2000);
+
                 if (dictionary == ClothesComponent.Masks)
                     BattlePass.Repository.UpdateReward(player, 34);
                 else
                     BattlePass.Repository.UpdateReward(player, 8);
-                
-                if (qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int) zdobich_quests.Stage20, 2, 3, isUpdateHud: true))
-                    qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage20, true);
+
+                if (qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage20, 2, 3, isUpdateHud: true))
+                    qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int)zdobich_quests.Stage20, true);
             }
             catch (Exception e)
             {
@@ -2254,11 +2255,11 @@ namespace NeptuneEvo.Core
             try
             {
                 var sessionData = player.GetSessionData();
-                if (sessionData == null) 
+                if (sessionData == null)
                     return;
 
                 var characterData = player.GetCharacterData();
-                if (characterData == null) 
+                if (characterData == null)
                     return;
 
                 var accountData = player.GetAccountData();
@@ -2289,24 +2290,24 @@ namespace NeptuneEvo.Core
                 if (!isDonate && UpdateData.CanIChange(player, price, true) != 255) return;
                 else if (isDonate && accountData.RedBucks < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return;
                 }
                 if (!isDonate)
                 {
-                    if (!takeProd(biz.ID, 1, "Расходники", price))
+                    if (!takeProd(biz.ID, 1, "Consumables", price))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                         return;
                     }
 
                     GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", price, $"buyBarber({name})");
                     Wallet.Change(player, -price);
-                    biz.BuyItemBusiness(characterData.UUID, "Расходники", price);
+                    biz.BuyItemBusiness(characterData.UUID, "Consumables", price);
                 }
                 else
                 {
-                    UpdateData.RedBucks(player, -price, msg: LangFunc.GetText(LangType.Ru, DataName.PremiumClothesBuy));
+                    UpdateData.RedBucks(player, -price, msg: LangFunc.GetText(LangType.En, DataName.PremiumClothesBuy));
                 }
 
                 switch (dictionary)
@@ -2335,9 +2336,9 @@ namespace NeptuneEvo.Core
 
                         break;
                 }
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BarberBuy, price), 5000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BarberBuy, price), 5000);
                 BattlePass.Repository.UpdateReward(player, 53);
-                qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int) zdobich_quests.Stage20, 0, 1,
+                qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage20, 0, 1,
                     isUpdateHud: true);
             }
             catch (Exception e)
@@ -2363,11 +2364,11 @@ namespace NeptuneEvo.Core
             try
             {
                 var sessionData = player.GetSessionData();
-                if (sessionData == null) 
+                if (sessionData == null)
                     return;
 
                 var characterData = player.GetCharacterData();
-                if (characterData == null) 
+                if (characterData == null)
                     return;
 
                 var accountData = player.GetAccountData();
@@ -2377,7 +2378,7 @@ namespace NeptuneEvo.Core
                 var custom = player.GetCustomization();
                 if (custom == null)
                     return;
-                
+
                 if (sessionData.TempBizID == -1 || !BizList.ContainsKey(sessionData.TempBizID)) return;
 
 
@@ -2385,11 +2386,11 @@ namespace NeptuneEvo.Core
 
                 if (!ClothesComponents.TattooComponentData.ContainsKey(dictionary))
                     return;
-                if (!ClothesComponents.TattooComponentData[dictionary].ContainsKey(id)) 
+                if (!ClothesComponents.TattooComponentData[dictionary].ContainsKey(id))
                     return;
 
                 var tattooData = ClothesComponents.TattooComponentData[dictionary][id];
-                
+
                 var tattooHash = (characterData.Gender) ? tattooData.MaleHash : tattooData.FemaleHash;
 
                 var customTattoos = custom.Tattoos;
@@ -2404,14 +2405,14 @@ namespace NeptuneEvo.Core
 
                     if (t.Any(c => c.Dictionary == newTattoo.Dictionary && c.Hash == newTattoo.Hash))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ThisTattooIs), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ThisTattooIs), 3000);
                         return;
                     }
                 }
 
                 if (countTattoo >= 60)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxTattoo), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxTattoo), 3000);
                     return;
                 }
 
@@ -2419,33 +2420,33 @@ namespace NeptuneEvo.Core
                 var prod = biz.Products[1];
                 if (prod == null) return;
 
-                
+
                 int tempPrice = !isDonate ? tattooData.Price : tattooData.Donate;
                 int price = !isDonate ? Convert.ToInt32((tempPrice / 100f) * prod.Price) : tempPrice;
-                
+
                 if (!isDonate && UpdateData.CanIChange(player, price, true) != 255) return;
                 else if (isDonate && accountData.RedBucks < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return;
                 }
                 if (!isDonate)
                 {
                     int amount = Convert.ToInt32(price * 0.75 / 100);
                     if (amount <= 0) amount = 1;
-                    if (!takeProd(biz.ID, amount, "Расходники", price))
+                    if (!takeProd(biz.ID, amount, "Consumables", price))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                         return;
                     }
 
                     GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", price, $"buyBarber({name})");
                     Wallet.Change(player, -price);
-                    biz.BuyItemBusiness(characterData.UUID, "Расходники", price);
+                    biz.BuyItemBusiness(characterData.UUID, "Consumables", price);
                 }
                 else
                 {
-                    UpdateData.RedBucks(player, -price, msg:LangFunc.GetText(LangType.Ru, DataName.PremiumClothesBuy));
+                    UpdateData.RedBucks(player, -price, msg: LangFunc.GetText(LangType.En, DataName.PremiumClothesBuy));
                 }
 
                 customTattoos[TattooComponentToSlot[dictionary]].Add(newTattoo);
@@ -2458,9 +2459,9 @@ namespace NeptuneEvo.Core
                 player.SetDecoration(decoration);
 
                 player.Eval($"mp.game.audio.playSoundFrontend(-1, \"Tattooing_Oneshot\", \"TATTOOIST_SOUNDS\", true);");
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TattooBuy, tattooData.Name, price), 8000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TattooBuy, tattooData.Name, price), 8000);
                 BattlePass.Repository.UpdateReward(player, 18);
-                qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int) zdobich_quests.Stage20, 1, 2,
+                qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage20, 1, 2,
                     isUpdateHud: true);
             }
             catch (Exception e)
@@ -2493,13 +2494,13 @@ namespace NeptuneEvo.Core
                 if (characterData == null) return;
                 else if (!FunctionsAccess.IsWorking("ClothesShop"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
                 if ((sessionData.WorkData.OnDuty && Fractions.Manager.FractionTypes[memberFractionData.Id] == FractionsType.Gov) || sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Вы должны закончить рабочий день", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You must finish your shift", 3000);
                     return;
                 }
 
@@ -2643,7 +2644,7 @@ namespace NeptuneEvo.Core
                 if (!isDonate && UpdateData.CanIChange(player, price, true) != 255) return;
                 else if (isDonate && accountData.RedBucks < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return;
                 }
                 int amount = Convert.ToInt32(price * 0.75 / 100);
@@ -2654,12 +2655,12 @@ namespace NeptuneEvo.Core
                 {
                     if(type == "Mask" && !takeProd(biz.ID, (price >= 15000 ? 6 : 1), "Маски", price))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно товара на складе", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Not enough goods in stock", 3000);
                         return;
                     }
                     else if (!takeProd(biz.ID, amount, "Одежда", price))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Недостаточно товара на складе", 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Not enough goods in stock", 3000);
                         return;
                     }
                 }
@@ -2672,11 +2673,11 @@ namespace NeptuneEvo.Core
                 }
                 else
                 {
-                    GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, $"Куплена премиум одежда (-{price} RedBucks)");
+                    GameLog.AccountLog(accountData.Login, accountData.HWID, accountData.IP, accountData.SocialClub, $"Purchased premium clothing (-{price} RedBucks)");
                     UpdateData.RedBucks(player, -price);
                 }
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Вы купили новую одежду. Она была добавлена в Ваш инвентарь.", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "You bought new clothes. They have been added to your inventory.", 3000);
             }
             catch (Exception e)
             {
@@ -2764,7 +2765,7 @@ namespace NeptuneEvo.Core
                 Business biz = BizList[sessionData.TempBizID];
                 if ((id == "lipstick" || id == "blush" || id == "makeup") && characterData.Gender && style != 255)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Доступно только для персонажей женского пола", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Available only for female characters", 3000);
                     return;
                 }
                 Product prod = biz.Products.FirstOrDefault(p => p.Name == "Парики");
@@ -2780,7 +2781,7 @@ namespace NeptuneEvo.Core
                 if (UpdateData.CanIChange(player, totalprice, true) != 255) return;
                 if (!takeProd(biz.ID, 1, "Расходники", totalprice))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Этот барбер-шоп не может оказать эту услугу в данный момент", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "This barber shop cannot provide this service at this time", 3000);
                     return;
                 }
                 GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", totalprice, "buyBarber");
@@ -2828,7 +2829,7 @@ namespace NeptuneEvo.Core
                         // Not supposed to end up here. 
                         break;
                 }
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы оплатили услугу Барбер-Шопа ({totalprice}$)", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You paid for the Barber Shop service (${totalprice})", 3000);
 
                 Trigger.ClientEvent(player, "client.barber.startAnim", id);
             }
@@ -2848,7 +2849,7 @@ namespace NeptuneEvo.Core
                 var characterData = player.GetCharacterData();
                 if (characterData == null) return;
                 if (sessionData.BizID == -1 || !BizList.ContainsKey(sessionData.BizID) || !player.IsInVehicle) return;
-                var vehicle = (ExtVehicle) player.Vehicle;
+                var vehicle = (ExtVehicle)player.Vehicle;
                 if (vehicle == null) return;
                 if (player.VehicleSeat != (int)VehicleSeat.Driver) return;
                 var vehicleLocalData = vehicle.GetVehicleLocalData();
@@ -2856,23 +2857,23 @@ namespace NeptuneEvo.Core
                 {
                     if (lvl <= 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                         return;
                     }
                     if (vehicleLocalData.Petrol <= -1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantZapravit), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantZapravit), 3000);
                         return;
                     }
                     if (VehicleStreaming.GetEngineState(vehicle))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Zaglushite), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Zaglushite), 3000);
                         return;
                     }
                     int fuel = vehicleLocalData.Petrol;
                     if (fuel >= VehicleManager.VehicleTank[vehicle.Class])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FullFuel), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FullFuel), 3000);
                         return;
                     }
 
@@ -2889,7 +2890,7 @@ namespace NeptuneEvo.Core
                     int tfuel = fuel + lvl;
                     if (tfuel > VehicleManager.VehicleTank[vehicle.Class])
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                         return;
                     }
                     var fractionData = player.GetFractionData();
@@ -2899,49 +2900,49 @@ namespace NeptuneEvo.Core
                     {
                         if (fractionData == null || Fractions.Manager.FractionTypes[fractionData.Id] != FractionsType.Gov)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GosZapravit), 6000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GosZapravit), 6000);
                             return;
                         }
                         if (vehicleLocalData.Access != VehicleAccess.Fraction || vehicleLocalData.Fraction != fractionData.Id)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GosGosZapravit), 6000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GosGosZapravit), 6000);
                             return;
                         }
-                        if (lvl > fractionData.FuelLeft) 
+                        if (lvl > fractionData.FuelLeft)
                             lvl = fractionData.FuelLeft;
                         //if (lvl <= 0 || Fractions.Stocks.fracStocks[frac].FuelLeft < lvl * biz.Products[0].Price)
                         //{
-                        //    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Лимит на заправку гос. транспорта за день исчерпан", 3000);
+                        //    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"The daily limit for refueling state transport has been exhausted", 3000);
                         //    return;
                         //}
                     }
                     else if (UpdateData.CanIChange(player, price, true) != 255) return;
-                    if (!takeProd(biz.ID, lvl, "Бензин", price))
+                    if (!takeProd(biz.ID, lvl, "Gasoline", price))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ZapravkaIs, biz.Products[0].Lefts), 7000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZapravkaIs, biz.Products[0].Lefts), 7000);
                         return;
                     }
-                    biz.BuyItemBusiness(characterData.UUID, "Бензин", price);
+                    biz.BuyItemBusiness(characterData.UUID, "Gasoline", price);
                     if (isGov)
                     {
                         GameLog.Money($"frac(6)", $"biz({biz.ID})", price, "buyPetrol");
-                        
+
                         if ((fractionData.FuelLeft - price) >= 0)
                             fractionData.FuelLeft -= price;
-                        
-                        fractionData = Fractions.Manager.GetFractionData((int) Fractions.Models.Fractions.CITY);
+
+                        fractionData = Fractions.Manager.GetFractionData((int)Fractions.Models.Fractions.CITY);
                         if (fractionData != null)
                             fractionData.Money -= price;
 
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ZapravkaGos), 3000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.ZapravkaGos), DateTime.Now); 
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZapravkaGos), 3000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.ZapravkaGos), DateTime.Now);
                     }
                     else
                     {
                         GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", price, "buyPetrol");
                         MoneySystem.Wallet.Change(player, -price);
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ZapravkaSuccess, price), 6000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.ZapravkaSuccess, price), DateTime.Now); 
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZapravkaSuccess, price), 6000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.ZapravkaSuccess, price), DateTime.Now);
                         BattlePass.Repository.UpdateReward(player, 40);
                         if (vehicleLocalData.Access == VehicleAccess.Fraction)
                             player.AddTableScore(TableTaskId.Item1);
@@ -2951,16 +2952,16 @@ namespace NeptuneEvo.Core
 
                     vehicleLocalData.Petrol = tfuel;
                     vehicle.SetSharedData("PETROL", tfuel);
-                    
+
                     //qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage8, 0, 1, isUpdateHud: true);
-                    
+
                     if (vehicleLocalData.Access == VehicleAccess.Personal)
                     {
                         string number = NAPI.Vehicle.GetVehicleNumberPlate(vehicle);
                         var vehicleData = VehicleManager.GetVehicleToNumber(number);
                         if (vehicleData != null) vehicleData.Fuel = tfuel;
                     }
-                    Commands.RPChat("sme", player, $"заправил" + (characterData.Gender ? "" : "а") + LangFunc.GetText(LangType.Ru, DataName.veh));
+                    Commands.RPChat("sme", player, $"refueled" + (characterData.Gender ? "" : "a") + LangFunc.GetText(LangType.En, DataName.veh));
                 }
             }
             catch (Exception e)
@@ -2981,71 +2982,71 @@ namespace NeptuneEvo.Core
                 int id = CustomColShape.GetDataToEnum(player, ColShapeEnums.BusinessAction);
                 if (id == (int)ColShapeData.Error)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NeedBeNearBiz), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NeedBeNearBiz), 3000);
                     return;
                 }
                 var biz = BusinessManager.BizList[id];
                 if (!Main.PlayerUUIDs.ContainsKey(player.Name)) return;
                 if (characterData.BizIDs.Count >= Group.GroupMaxBusinesses[accountData.VipLvl])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantGetMoreThanBiz, Group.GroupMaxBusinesses[accountData.VipLvl]), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantGetMoreThanBiz, Group.GroupMaxBusinesses[accountData.VipLvl]), 3000);
                     return;
                 }
                 if (biz.IsAuction)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizAuc), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizAuc), 3000);
                     return;
                 }
 
                 if (Players.Phone.Auction.Repository.IsBet(characterData.UUID, AuctionType.Biz))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouBizAuc), 6000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouBizAuc), 6000);
                     return;
                 }
                 if (biz.Owner.Equals(player.Name))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizYours), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizYours), 3000);
                     return;
                 }
                 if (biz.IsOwner())
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizOtherPlayer), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizOtherPlayer), 3000);
                     return;
                 }
                 if (UpdateData.CanIChange(player, biz.SellPrice, true) != 255) return;
                 if (Main.ServerNumber != 0 && (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 6))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdminTransferRestricted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdminTransferRestricted), 3000);
                     return;
                 }
                 Wallet.Change(player, -biz.SellPrice);
                 GameLog.Money($"player({characterData.UUID})", $"server", biz.SellPrice, $"buyBiz({biz.ID})");
-                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizBuy, BusinessManager.BusinessTypeNames[biz.Type]), 3000);
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.BizBuy, BusinessManager.BusinessTypeNames[biz.Type], biz.SellPrice), DateTime.Now);
+                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizBuy, BusinessManager.BusinessTypeNames[biz.Type]), 3000);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.BizBuy, BusinessManager.BusinessTypeNames[biz.Type], biz.SellPrice), DateTime.Now);
                 Trigger.ClientEvent(player, "client.rieltagency.delBlip", 464, biz.ID);
 
-                foreach (var product in biz.Products) 
+                foreach (var product in biz.Products)
                     product.Lefts = 0;
-                
+
                 var orders = new List<Order>();
-                
+
                 foreach (var order in biz.Orders)
                 {
-                    if (order.Taked) 
+                    if (order.Taked)
                         orders.Add(order);
-                    else 
+                    else
                         Orders.TryRemove(order.UID, out _);
                 }
-                
+
                 biz.Orders = orders;
-                biz.SetOwner (player.Name);
+                biz.SetOwner(player.Name);
                 characterData.BizIDs.Add(id);
-                
+
                 int tax = Convert.ToInt32(biz.SellPrice / 100f * biz.Tax);
                 var bizBalance = Bank.Accounts[biz.BankID];
                 bizBalance.Balance = tax * 2;
                 bizBalance.IsSave = true;
-                
+
                 Character.Save.Repository.SaveBiz(player);
             }
             catch (Exception e)
@@ -3061,7 +3062,7 @@ namespace NeptuneEvo.Core
                 if (!CommandsAccess.CanUseCmd(player, AdminCommands.Createbusiness)) return;
                 if (taxes < 0.001 || taxes > 0.999)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NalogLimit), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NalogLimit), 3000);
                     return;
                 }
                 Vector3 pos = player.Position;
@@ -3077,7 +3078,7 @@ namespace NeptuneEvo.Core
                     CommandText = "INSERT INTO businesses (id, owner, sellprice, type, products, enterpoint, unloadpoint, money, mafia, orders, tax) VALUES (@val0,@val1,@val2,@val3,@val4,@val5,@val6,@val7,@val8,@val9,@val10)"
                 };
                 cmd.Parameters.AddWithValue("@val0", lastBizID);
-                cmd.Parameters.AddWithValue("@val1", "Государство");
+                cmd.Parameters.AddWithValue("@val1", "State");
                 cmd.Parameters.AddWithValue("@val2", govPrice);
                 cmd.Parameters.AddWithValue("@val3", type);
                 cmd.Parameters.AddWithValue("@val4", productlist);
@@ -3091,7 +3092,7 @@ namespace NeptuneEvo.Core
 
                 NAPI.Task.Run(() =>
                 {
-                    Business biz = new Business(lastBizID, "Государство", govPrice, type, products_list, pos, new Vector3(), bankID, -1, new List<Order>(), taxes);
+                    Business biz = new Business(lastBizID, "State", govPrice, type, products_list, pos, new Vector3(), bankID, -1, new List<Order>(), taxes);
                     biz.UpdateLabel();
                     BizList.TryAdd(lastBizID, biz);
 
@@ -3106,7 +3107,7 @@ namespace NeptuneEvo.Core
                         MySQL.Query(cmd1);
                     }
 
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizCreated, biz.ID), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizCreated, biz.ID), 3000);
                 });
             }
             catch (Exception e)
@@ -3131,7 +3132,7 @@ namespace NeptuneEvo.Core
                 cmd.Parameters.AddWithValue("@val1", bizid);
                 MySQL.Query(cmd);
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PointUnloadBuy, bizid), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PointUnloadBuy, bizid), 3000);
             }
             catch (Exception e)
             {
@@ -3146,7 +3147,7 @@ namespace NeptuneEvo.Core
 
                 if (taxes < 0.001 || taxes > 0.999)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NalogLimit), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NalogLimit), 3000);
                     return;
                 }
                 Business biz = BusinessManager.BizList.FirstOrDefault(b => b.Value.ID == id).Value;
@@ -3161,12 +3162,12 @@ namespace NeptuneEvo.Core
                     cmd.Parameters.AddWithValue("@val1", id);
                     MySQL.Query(cmd);
 
-                    ExtPlayer owner = (ExtPlayer) NAPI.Player.GetPlayerFromName(biz.Owner);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NalogChasIzmenen, id, taxes * 100), 3000);
+                    ExtPlayer owner = (ExtPlayer)NAPI.Player.GetPlayerFromName(biz.Owner);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NalogChasIzmenen, id, taxes * 100), 3000);
                     if (owner != null)
                     {
-                        Notify.Send(owner, NotifyType.Alert, NotifyPosition.Center, LangFunc.GetText(LangType.Ru, DataName.NalogIzmenen, biz.Tax * 100, taxes * 100), 10000);
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VladeletNotify, owner.Name, owner.Value), 5000);
+                        Notify.Send(owner, NotifyType.Alert, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.NalogIzmenen, biz.Tax * 100, taxes * 100), 10000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VladeletNotify, owner.Name, owner.Value), 5000);
                     }
                     biz.Tax = taxes;
                 }
@@ -3185,7 +3186,7 @@ namespace NeptuneEvo.Core
                 Business biz = BizList.FirstOrDefault(b => b.Value.ID == id).Value;
                 if (biz == null)
                 {
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizIdNotFound), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizIdNotFound), 3000);
                     return;
                 }
 
@@ -3195,7 +3196,7 @@ namespace NeptuneEvo.Core
                 };
                 cmd.Parameters.AddWithValue("@val0", id);
                 MySQL.Query(cmd);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizDeleted), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizDeleted), 3000);
                 if (biz.Type == 6)
                 {
                     using MySqlCommand cmd1 = new MySqlCommand
@@ -3206,7 +3207,7 @@ namespace NeptuneEvo.Core
                     MySQL.Query(cmd1);
                 }
 
-                ExtPlayer owner = (ExtPlayer) NAPI.Player.GetPlayerFromName(biz.Owner); 
+                ExtPlayer owner = (ExtPlayer)NAPI.Player.GetPlayerFromName(biz.Owner);
                 var ownerCharacterData = owner.GetCharacterData();
                 if (ownerCharacterData == null)
                 {
@@ -3259,7 +3260,7 @@ namespace NeptuneEvo.Core
                 SellItemData sellItemData = sessionData.SellItemData;
                 if ((sellItemData.Buyer != null || sellItemData.Seller != null) && Chars.Repository.TradeGet(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantTrade), 3000);
                     return;
                 }
                 var targetSessionData = target.GetSessionData();
@@ -3271,43 +3272,43 @@ namespace NeptuneEvo.Core
                 SellItemData targetSellItemData = targetSessionData.SellItemData;
                 if ((targetSellItemData.Buyer != null || targetSellItemData.Seller != null) && Chars.Repository.TradeGet(target))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonCantTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonCantTrade), 3000);
                     return;
                 }
                 if (player.Position.DistanceTo(target.Position) > 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
                 if (targetCharacterData.DemorganTime >= 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonCantTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonCantTrade), 3000);
                     return;
                 }
                 if (characterData.BizIDs.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBusiness), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBusiness), 3000);
                     return;
                 }
                 if (targetCharacterData.BizIDs.Count >= Group.GroupMaxBusinesses[targetAccountData.VipLvl])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizMaxPlayer), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizMaxPlayer), 3000);
                     return;
                 }
                 Business biz = BizList[characterData.BizIDs[0]];
                 if (price < biz.SellPrice)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizCantSellPrice, biz.SellPrice), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizCantSellPrice, biz.SellPrice), 3000);
                     return;
                 }
                 if (!biz.Owner.Equals(player.Name))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizNotYour), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizNotYour), 3000);
                     return;
                 }
                 if (targetCharacterData.Money < price)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                     return;
                 }
                 sellItemData.Seller = player;
@@ -3316,9 +3317,9 @@ namespace NeptuneEvo.Core
                 targetSellItemData.Seller = player;
                 targetSellItemData.Price = price;
                 targetSellItemData.Count = biz.ID;
-                Trigger.ClientEvent(target, "openDialog", "BUSINESS_BUY", LangFunc.GetText(LangType.Ru, DataName.YouWantSellBiz, player.Name, BusinessTypeNames[biz.Type], MoneySystem.Wallet.Format(price)));
-                EventSys.SendCoolMsg(player,"Предложение", "Покупка", $"{LangFunc.GetText(LangType.Ru, DataName.BizWantSellToYou, target.Value, MoneySystem.Wallet.Format(price))}", "", 10000);
-                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizWantSellToYou, target.Value, MoneySystem.Wallet.Format(price)), 3000);
+                Trigger.ClientEvent(target, "openDialog", "BUSINESS_BUY", LangFunc.GetText(LangType.En, DataName.YouWantSellBiz, player.Name, BusinessTypeNames[biz.Type], MoneySystem.Wallet.Format(price)));
+                EventSys.SendCoolMsg(player, "Offer", "Purchase", $"{LangFunc.GetText(LangType.En, DataName.BizWantSellToYou, target.Value, MoneySystem.Wallet.Format(price))}", "", 10000);
+                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizWantSellToYou, target.Value, MoneySystem.Wallet.Format(price)), 3000);
             }
             catch (Exception e)
             {
@@ -3351,7 +3352,7 @@ namespace NeptuneEvo.Core
                 {
                     sessionData.SellItemData = new SellItemData();
                     targetSessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                     return;
                 }
 
@@ -3363,7 +3364,7 @@ namespace NeptuneEvo.Core
                 }
                 else if (Main.ServerNumber != 0 && (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 6))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdminTransferRestricted), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdminTransferRestricted), 3000);
                     return;
                 }
 
@@ -3371,7 +3372,7 @@ namespace NeptuneEvo.Core
                 {
                     sessionData.SellItemData = new SellItemData();
                     targetSessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizNoBelongsTo), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizNoBelongsTo), 3000);
                     return;
                 }
                 if (!Main.PlayerUUIDs.ContainsKey(target.Name))
@@ -3384,30 +3385,30 @@ namespace NeptuneEvo.Core
                 {
                     sessionData.SellItemData = new SellItemData();
                     targetSessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BizNoBelongsTo), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BizNoBelongsTo), 3000);
                     return;
                 }
                 if (characterData.BizIDs.Count >= Group.GroupMaxBusinesses[accountData.VipLvl])
                 {
                     sessionData.SellItemData = new SellItemData();
                     targetSessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxBizAmount), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxBizAmount), 3000);
                     return;
                 }
-                
+
                 characterData.BizIDs.Add(biz.ID);
                 Character.Save.Repository.SaveBiz(player);
-                
+
                 targetCharacterData.BizIDs.Remove(biz.ID);
                 Character.Save.Repository.SaveBiz(target);
-                
+
                 biz.SetOwner(player.Name);
-                
+
                 Wallet.Change(player, -price);
                 Wallet.Change(target, price);
                 GameLog.Money($"player({characterData.UUID})", $"player({targetCharacterData.UUID})", price, $"buyBiz({biz.ID})");
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"Вы купили у {target.Name.Replace('_', ' ')} {BusinessTypeNames[biz.Type]} за {MoneySystem.Wallet.Format(price)}$", 3000);
-                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"{player.Name.Replace('_', ' ')} купил у Вас {BusinessTypeNames[biz.Type]} за {MoneySystem.Wallet.Format(price)}$", 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, $"You bought a {BusinessTypeNames[biz.Type]} from {target.Name.Replace('_', ' ')} for ${MoneySystem.Wallet.Format(price)}", 3000);
+                Notify.Send(target, NotifyType.Info, NotifyPosition.BottomCenter, $"{player.Name.Replace('_', ' ')} bought your {BusinessTypeNames[biz.Type]} for ${MoneySystem.Wallet.Format(price)}", 3000);
                 //Chars.Repository.PlayerStats(player);
                 //Chars.Repository.PlayerStats(seller);
                 sessionData.SellItemData = new SellItemData();
@@ -3436,8 +3437,8 @@ namespace NeptuneEvo.Core
                 {
                     var busProductData = BusProductsData[p.Name];
                     if (busProductData.ItemId != ItemId.Debug) jsonData.Add(new Fractions.Manager.FracMatsData(index, Chars.Repository.ItemsInfo[busProductData.ItemId].Name, Chars.Repository.ItemsInfo[busProductData.ItemId].Icon, $"{p.Price}$", (int)busProductData.ItemId));
-                    else if (p.Name == "Сим-карта") jsonData.Add(new Fractions.Manager.FracMatsData(index, "Сим-карта", "sm-icon-sim", $"{p.Price}$"));
-                    else if (p.Name == "Лотерейный билет") jsonData.Add(new Fractions.Manager.FracMatsData(index, "Лотерейный билет", "sm-icon-lotary", $"{p.Price}$"));
+                    else if (p.Name == "SIM Card") jsonData.Add(new Fractions.Manager.FracMatsData(index, "SIM Card", "sm-icon-sim", $"{p.Price}$"));
+                    else if (p.Name == "Lottery ticket") jsonData.Add(new Fractions.Manager.FracMatsData(index, "Lottery ticket", "sm-icon-lotary", $"{p.Price}$"));
                     index++;
                 }
                 Trigger.ClientEvent(player, "client.sm.openShop", JsonConvert.SerializeObject(jsonData));
@@ -3459,31 +3460,31 @@ namespace NeptuneEvo.Core
                 if (sessionData.BizID == -1 || !BizList.ContainsKey(sessionData.BizID)) return;
                 var biz = BizList[sessionData.BizID];
                 var prod = biz.Products[index];
-                
+
                 if (UpdateData.CanIChange(player, prod.Price, true) != 255) return;
-                
-                if (prod.Name == "Сим-карта")
+
+                if (prod.Name == "SIM Card")
                 {
                     if (Chars.Repository.isFreeSlots(player, ItemId.SimCard) != 0) return;
-                    
+
                     if (!takeProd(biz.ID, 1, prod.Name, prod.Price))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                         return;
                     }
 
                     var number = Players.Phone.Sim.Repository.GenerateSimCard();
-                    
+
                     Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", ItemId.SimCard, 1, number.ToString());
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы купили сим-карту с номером {number}. Она добавлена вам в инвентарь", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You bought a SIM card with the number {number}. It has been added to your inventory", 3000);
                     //Chars.Repository.PlayerStats(player);
-                    biz.BuyItemBusiness(characterData.UUID, "Сим-карта", prod.Price);
+                    biz.BuyItemBusiness(characterData.UUID, "SIM Card", prod.Price);
                     Wallet.Change(player, -prod.Price);
                     GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", prod.Price, $"buyShopSim({number})");
-                
+
                 }
-                else if (prod.Name == "Лотерейный билет")
+                else if (prod.Name == "Lottery ticket")
                 {
 
                     uint mynumb = (uint)Lottery.LotteryBought.Count() + 1;
@@ -3491,7 +3492,7 @@ namespace NeptuneEvo.Core
                     {
                         if (!takeProd(biz.ID, 1, prod.Name, prod.Price))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                             return;
                         }
                         Lottery.LotteryBought.Add(mynumb, characterData.UUID);
@@ -3508,23 +3509,23 @@ namespace NeptuneEvo.Core
                             case 2501:
                             case 3001:
                             case 5001:
-                                NAPI.Chat.SendChatMessageToAll($"~g~[ЛОТЕРЕЯ] Продано более {mynumb - 1} лотерейных билетов. Сумма джекпота: {Wallet.Format(Lottery.Price)}$!");
-                                NAPI.Chat.SendChatMessageToAll($"~g~[ЛОТЕРЕЯ] Билеты продаются во всех магазинах 24/7.");
+                                NAPI.Chat.SendChatMessageToAll($"~g~[LOTTERY] More than {mynumb - 1} lottery tickets sold. Jackpot amount: ${Wallet.Format(Lottery.Price)}!");
+                                NAPI.Chat.SendChatMessageToAll($"~g~[LOTTERY] Tickets are sold in all 24/7 stores.");
                                 break;
                             default:
                                 break;
                         }
 
-                        biz.BuyItemBusiness(characterData.UUID, "Лотерейный билет", 500);
+                        biz.BuyItemBusiness(characterData.UUID, "Lottery ticket", 500);
                         Wallet.Change(player, -500);
                         GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", prod.Price, $"buyLottery({Lottery.ID} | {mynumb})");
                         BattlePass.Repository.UpdateReward(player, 6);
-                        
+
                         Trigger.SetTask(async () =>
                         {
                             try
                             {
-                                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                                 await db.InsertAsync(new LotteryPlayers
                                 {
@@ -3538,10 +3539,10 @@ namespace NeptuneEvo.Core
                                 Debugs.Repository.Exception(e);
                             }
                         });
-                        
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы купили лотерейный билет #{mynumb}. Дополнительная информация: /lottery", 7000);
+
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You bought lottery ticket #{mynumb}. More info: /lottery", 7000);
                         qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage29, 1, isUpdateHud: true);
-                        qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage29, true);
+                        qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int)zdobich_quests.Stage29, true);
                     }
                 }
                 else
@@ -3551,27 +3552,27 @@ namespace NeptuneEvo.Core
                     {
                         /*if ((ItemId)type == ItemId.KeyRing && Chars.Repository.isItem(player, $"char_{characterData.UUID}", "inventory", ItemId.KeyRing) != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "У Вас уже есть связка ключей", 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "You already have a key ring", 3000);
                             return;
                         }
                         else */
                         if (Chars.Repository.isFreeSlots(player, busProductData.ItemId) != 0) return;
                         if (!takeProd(biz.ID, 1, prod.Name, prod.Price))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                             return;
                         }
 
                         if (ItemId.Beer == busProductData.ItemId)
                         {
-                            qMain.UpdateQuestsStage(player, "npc_granny", (int) granny_quests.Beer, 1,
+                            qMain.UpdateQuestsStage(player, "npc_granny", (int)granny_quests.Beer, 1,
                                 isUpdateHud: true);
 
                             BattlePass.Repository.UpdateReward(player, 29);
                         }
 
                         //
-                        
+
                         if (ItemId.Pickaxe1 == busProductData.ItemId) Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", busProductData.ItemId, 1, "300");
                         else if (ItemId.Pickaxe2 == busProductData.ItemId) Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", busProductData.ItemId, 1, "1248");
                         else if (ItemId.Pickaxe3 == busProductData.ItemId) Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", busProductData.ItemId, 1, "2250");
@@ -3582,61 +3583,61 @@ namespace NeptuneEvo.Core
                         else Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", busProductData.ItemId, 1, busProductData.ItemId == ItemId.Bag ? "40_0_true" : "");
 
                         var itemInfo = Chars.Repository.ItemsInfo[busProductData.ItemId];
-                        
-                        EventSys.SendCoolMsg(player,"Покупка", "Покупка предмета", $"{LangFunc.GetText(LangType.Ru, DataName.YouBuy, itemInfo.Name, prod.Price)}", "", 6000); 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"{LangFunc.GetText(LangType.Ru, DataName.YouBuy, itemInfo.Name, prod.Price)}", 1000);
+
+                        EventSys.SendCoolMsg(player, "Purchase", "Item Purchase", $"{LangFunc.GetText(LangType.En, DataName.YouBuy, itemInfo.Name, prod.Price)}", "", 6000);
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"{LangFunc.GetText(LangType.En, DataName.YouBuy, itemInfo.Name, prod.Price)}", 1000);
 
                         if (itemInfo.functionType == newItemType.Eat/* && biz.Type == 8*/)
                         {
                             qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage21, 1, isUpdateHud: true);
-                            qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage21, true);
+                            qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int)zdobich_quests.Stage21, true);
                         }
-                        
+
                         if (ItemId.GasCan == busProductData.ItemId)
                             qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage8, 0, 1, isUpdateHud: true);
-                        
+
                         if (ItemId.Wrench == busProductData.ItemId)
                             qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage8, 1, 2, isUpdateHud: true);
-                        
+
                         if (ItemId.KeyRing == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 45);
-                        
+
                         if (ItemId.Flashlight == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 104);
-                        
+
                         if (ItemId.Wrench == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 105);
-                        
+
                         if (ItemId.Hammer == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 106);
-                        
+
                         if (ItemId.Crisps == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 107);
-                        
+
                         if (ItemId.Pizza == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 108);
-                        
+
                         if (ItemId.GasCan == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 109);
-                        
+
                         if (ItemId.LoveNote == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 110);
-                            
+
                         if (ItemId.Binoculars == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 111);
-                        
+
                         if (ItemId.Vape == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 112);
-                        
+
                         if (ItemId.Umbrella == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 113);
-                        
+
                         if (ItemId.Guitar == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 114);
-                        
+
                         if (ItemId.Camera == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 115);
-                        
+
                         if (ItemId.Microphone == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 116);
 
@@ -3645,19 +3646,19 @@ namespace NeptuneEvo.Core
 
                         if (ItemId.Crowbar == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 103);
-                        
+
                         if (ItemId.Sandwich == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 127);
-                        
+
                         if (ItemId.Burger == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 118);
-                        
+
                         if (ItemId.HotDog == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 119);
-                        
+
                         if (ItemId.Sprunk == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 121);
-                        
+
                         if (ItemId.eCola == busProductData.ItemId)
                             BattlePass.Repository.UpdateReward(player, 128);
                     }
@@ -3685,9 +3686,9 @@ namespace NeptuneEvo.Core
                 Product prod = biz.Products[0];
 
                 Trigger.ClientEvent(player, "openPetrol");
-                
-                EventSys.SendCoolMsg(player,"Заправка", "Добро пожаловать!", $"Цена за литр: {prod.Price}$", "", 10000);
-               // Notify.Send(player, NotifyType.Info, NotifyPosition.Top, $"Цена за литр: {prod.Price}$", 7000);
+
+                EventSys.SendCoolMsg(player, "Gas Station", "Welcome!", $"Price per liter: ${prod.Price}", "", 10000);
+                // Notify.Send(player, NotifyType.Info, NotifyPosition.Top, $"Price per liter: ${prod.Price}", 7000);
             }
             catch (Exception e)
             {
@@ -3722,11 +3723,11 @@ namespace NeptuneEvo.Core
                     }
                     _WeaponsData.Add(_CraftsData);
                 }
-                int ammoPrice = biz.Products.FirstOrDefault(p => p.Name == "Патроны").Price;
+                int ammoPrice = biz.Products.FirstOrDefault(p => p.Name == "Ammo").Price;
                 List<int> _AmmoData = new List<int>();
                 foreach (int ammo in AmmoPrices) _AmmoData.Add(Convert.ToInt32(ammo / 100f * ammoPrice));
 
-                Trigger.ClientEvent(player, "client.gunshop.open", JsonConvert.SerializeObject(_WeaponsData), JsonConvert.SerializeObject(_AmmoData), biz.Products.FirstOrDefault(p => p.Name == "Модификации").Price);
+                Trigger.ClientEvent(player, "client.gunshop.open", JsonConvert.SerializeObject(_WeaponsData), JsonConvert.SerializeObject(_AmmoData), biz.Products.FirstOrDefault(p => p.Name == "Modifications").Price);
                 BattlePass.Repository.UpdateReward(player, 129);
             }
             catch (Exception e)
@@ -3748,17 +3749,17 @@ namespace NeptuneEvo.Core
                 int bizid = sessionData.TempBizID;
                 if (!characterData.Licenses[6])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет лицензии на оружие. Получить её можно в полицейском департаменте.", 10000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have a weapons license. You can get one at the police department.", 10000);
                     return;
                 }
                 Business biz = BizList[bizid];
-                Product prod = biz.Products.FirstOrDefault(p => p.Name == "Модификации");
+                Product prod = biz.Products.FirstOrDefault(p => p.Name == "Modifications");
                 string prodName = gunsCat[cat][index];
-                if (!WeaponComponents.WeaponsComponents.ContainsKey((uint)(Hash) WeaponRepository.GetHash(prodName))) return;
+                if (!WeaponComponents.WeaponsComponents.ContainsKey((uint)(Hash)WeaponRepository.GetHash(prodName))) return;
                 int totalPrice = 0;
                 uint componentHash = 0;
                 ItemId wType = ItemId.Debug;
-                foreach (KeyValuePair<uint, wComponentData> w in WeaponComponents.WeaponsComponents[(uint)(Hash) WeaponRepository.GetHash(prodName)].Components)
+                foreach (KeyValuePair<uint, wComponentData> w in WeaponComponents.WeaponsComponents[(uint)(Hash)WeaponRepository.GetHash(prodName)].Components)
                 {
                     if (w.Key.ToString() == componentId)
                     {
@@ -3775,14 +3776,14 @@ namespace NeptuneEvo.Core
                 if (amount <= 0) amount = 1;
                 if (!takeProd(bizid, amount, prod.Name, totalPrice))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                     return;
                 }
                 biz.BuyItemBusiness(characterData.UUID, prod.Name, totalPrice);
                 Wallet.Change(player, -totalPrice);
                 GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", totalPrice, $"buyWShop(component({1}))");
-                Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", wType, 1, $"{(uint)(Hash) WeaponRepository.GetHash(prodName)}_{componentHash}");
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы купили {Chars.Repository.ItemsInfo[wType].Name} за {totalPrice}$", 3000);
+                Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", wType, 1, $"{(uint)(Hash)WeaponRepository.GetHash(prodName)}_{componentHash}");
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You bought {Chars.Repository.ItemsInfo[wType].Name} for ${totalPrice}", 3000);
                 BattlePass.Repository.UpdateReward(player, 1);
             }
             catch (Exception e)
@@ -3804,15 +3805,15 @@ namespace NeptuneEvo.Core
                 int bizid = sessionData.TempBizID;
                 if (!characterData.Licenses[6])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет лицензии на оружие. Получить её можно в полицейском департаменте.", 10000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have a weapons license. You can get one at the police department.", 10000);
                     return;
                 }
                 Business biz = BizList[bizid];
-                Product prod = biz.Products.FirstOrDefault(p => p.Name == "Патроны");
+                Product prod = biz.Products.FirstOrDefault(p => p.Name == "Ammo");
                 if (category < 0 || category > 4) return;
                 if (ammo <= 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoInputAmmos), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoInputAmmos), 3000);
                     return;
                 }
                 if (Chars.Repository.isFreeSlots(player, AmmoTypes[category], ammo) != 0) return;
@@ -3820,17 +3821,17 @@ namespace NeptuneEvo.Core
                 if (UpdateData.CanIChange(player, totalPrice, true) != 255) return;
                 int prodamount = Convert.ToInt32(AmmoPrices[category] * ammo / 10);
                 if (prodamount <= 1) prodamount = 1;
-                
+
                 if (!takeProd(bizid, prodamount, prod.Name, totalPrice))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                     return;
                 }
                 biz.BuyItemBusiness(characterData.UUID, prod.Name, totalPrice);
                 Wallet.Change(player, -totalPrice);
                 GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", totalPrice, $"buyWShop(ammo({ammo}))");
                 Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", AmmoTypes[category], ammo);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы купили {Chars.Repository.ItemsInfo[AmmoTypes[category]].Name} x{ammo} за {totalPrice}$", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You bought {Chars.Repository.ItemsInfo[AmmoTypes[category]].Name} x{ammo} for ${totalPrice}", 3000);
             }
             catch (Exception e)
             {
@@ -3866,7 +3867,7 @@ namespace NeptuneEvo.Core
                 int bizid = sessionData.TempBizID;
                 if (!characterData.Licenses[6])
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"У Вас нет лицензии на оружие. Получить её можно в полицейском департаменте.", 10000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"You do not have a weapons license. You can get one at the police department.", 10000);
                     return;
                 }
                 Business biz = BizList[bizid];
@@ -3877,14 +3878,14 @@ namespace NeptuneEvo.Core
                 if (Chars.Repository.isFreeSlots(player, wType) != 0) return;
                 if (!takeProd(bizid, 1, prod.Name, prod.Price))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetTovaraNaSkladeBiza), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetTovaraNaSkladeBiza), 3000);
                     return;
                 }
                 Wallet.Change(player, -prod.Price);
                 biz.BuyItemBusiness(characterData.UUID, prod.Name, prod.Price);
                 GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", prod.Price, $"buyWShop({prod.Name})");
                 WeaponRepository.GiveWeapon(player, wType, WeaponRepository.GetSerial(false, biz.ID));
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы купили {prod.Name} за {prod.Price}$", 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"You bought {prod.Name} for ${prod.Price}", 3000);
                 BattlePass.Repository.UpdateReward(player, 130);
             }
             catch (Exception e)
@@ -4040,13 +4041,13 @@ namespace NeptuneEvo.Core
             {
                 if (!product.Ordered)
                     continue;
-                
+
                 if (orders.Any(o => o.Name == product.Name))
                     continue;
 
                 product.Ordered = false;
             }
-            
+
             Products = products;
             EnterPoint = enterPoint;
             UnloadPoint = unloadPoint;
@@ -4065,7 +4066,7 @@ namespace NeptuneEvo.Core
                 {
                     order.UID = random.Next(000000, 999999);
                 } while (BusinessManager.Orders.ContainsKey(order.UID));
-                
+
                 BusinessManager.Orders.TryAdd(order.UID, ID);
             }
 
@@ -4094,14 +4095,14 @@ namespace NeptuneEvo.Core
                 {
                     string text = $"~w~{BusinessManager.BusinessTypeNames[Type]}\n";
 
-                    if (IsAuction) text += $"~w~Выставлен на аукцион\n";
+                    if (IsAuction) text += $"~w~On auction\n";
                     else if (IsOwner()) text += $"~p~{Owner}\n";
-                    else text += $"~w~Цена: ~g~{Wallet.Format(SellPrice)}$\n";
-                    if (Type == 1) text += $"~w~Цена за 1л: ~g~{Products[0].Price}$\n";
+                    else text += $"~w~Price: ~g~${Wallet.Format(SellPrice)}\n";
+                    if (Type == 1) text += $"~w~Price per liter: ~g~${Products[0].Price}\n";
                     text += $"~c~ID{ID}";
                     label.Text = text;
-                    if (Mafia != -1) mafiaLabel.Text = $"~w~Мафия: ~r~{Fractions.Manager.GetName(Mafia)}";
-                    else mafiaLabel.Text = "~w~Мафия: ~w~пусто";
+                    if (Mafia != -1) mafiaLabel.Text = $"~w~Mafia: ~r~{Fractions.Manager.GetName(Mafia)}";
+                    else mafiaLabel.Text = "~w~Mafia: ~w~none";
                 }
                 catch (Exception e)
                 {
@@ -4134,7 +4135,7 @@ namespace NeptuneEvo.Core
             try
             {
                 IsSave = false;
-                
+
                 Bank.SetSave(BankID);
 
                 await db.Businesses
@@ -4146,7 +4147,7 @@ namespace NeptuneEvo.Core
                     .Set(b => b.Mafia, Mafia)
                     .Set(b => b.Orders, JsonConvert.SerializeObject(Orders))
                     .UpdateAsync();
-                
+
             }
             catch (Exception e)
             {
@@ -4166,15 +4167,15 @@ namespace NeptuneEvo.Core
             UpdateLabel();
             IsSave = true;
         }
-        
+
         public void ClearOwner()
         {
-            Owner = "Государство";
+            Owner = "State";
             UpdateLabel();
             IsSave = true;
         }
 
-        public bool IsOwner() => Owner != "Государство";
+        public bool IsOwner() => Owner != "State";
     }
 
     public class LsCustoms

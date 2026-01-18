@@ -171,7 +171,7 @@ namespace NeptuneEvo.Players.Session
                         
                         Trigger.ClientEvent(player, "client.character.accountIsSession", true);
                         
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SessionSaved), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SessionSaved), 3000);
                     }
                     else
                     {
@@ -183,7 +183,7 @@ namespace NeptuneEvo.Players.Session
                         
                         Trigger.ClientEvent(player, "client.character.accountIsSession", false);
                         
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SessionBroken), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SessionBroken), 3000);
                     }
                 }
                 catch (Exception e)

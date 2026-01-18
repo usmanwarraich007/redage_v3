@@ -118,7 +118,7 @@ namespace NeptuneEvo.Fractions.Player
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.InsertAsync(new Fracranks
                         {
@@ -209,7 +209,7 @@ namespace NeptuneEvo.Fractions.Player
                     {
                         try
                         {
-                            await using var db = new ServerBD("MainDB"); //В отдельном потоке
+                            await using var db = new ServerBD("MainDB"); //On Separate Thread
 
                             await db.Fracranks
                                 .Where(v => v.Uuid == memberFractionData.UUID && v.Id == fracId)
@@ -273,7 +273,7 @@ namespace NeptuneEvo.Fractions.Player
                     return fractionData.Ranks[memberFractionData.Rank].Name;
             }
 
-            return LangFunc.GetText(LangType.Ru, DataName.No); //String.Empty;
+            return LangFunc.GetText(LangType.En, DataName.No); //String.Empty;
         }
         
         public static bool IsFractionMemberData(this ExtPlayer player) =>
@@ -477,7 +477,7 @@ namespace NeptuneEvo.Fractions.Player
                     return true;
                 
                 if (notify) 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000);
             }
             catch (Exception e)
             {

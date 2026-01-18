@@ -153,12 +153,12 @@ namespace NeptuneEvo.Fractions
                 
                 if (!FractionMainCloakrooms.ContainsKey(memberFractionData.Id) && !FractionSecondCloakrooms.ContainsKey(memberFractionData.Id))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantGetForm), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantGetForm), 3000);
                     return;
                 }
                 
                 var frameList = new FrameListData();
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.WorkClothes);
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.WorkClothes);
                 frameList.Callback = callback_fraction_clothing_sets_menu;
                 
                 if (FractionSets.ContainsKey((Models.Fractions) memberFractionData.Id) && FractionSets[(Models.Fractions) memberFractionData.Id].ContainsKey(characterData.Gender))
@@ -179,7 +179,7 @@ namespace NeptuneEvo.Fractions
                 }
 
                 if (sessionData.WorkData.OnDuty) 
-                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.Ru, DataName.UnwearForm), "takeoff"));
+                    frameList.List.Add(new ListData(LangFunc.GetText(LangType.En, DataName.UnwearForm), "takeoff"));
 
                 Players.Popup.List.Repository.Open(player, frameList);   
             }
@@ -208,7 +208,7 @@ namespace NeptuneEvo.Fractions
 
                 if (!FractionMainCloakrooms.ContainsKey(memberFractionData.Id) && !FractionSecondCloakrooms.ContainsKey(memberFractionData.Id))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantGetForm), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantGetForm), 3000);
                     return;
                 }
 
@@ -220,7 +220,7 @@ namespace NeptuneEvo.Fractions
                         case "takeoff":
                             if (!sessionData.WorkData.OnDuty) return;
                             Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter,
-                                LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                                LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                             sessionData.WorkData.OnDuty = false;
                             sessionData.WorkData.OnDutyName = String.Empty;  
                             player.ClearAccessories();
@@ -265,7 +265,7 @@ namespace NeptuneEvo.Fractions
                                     if (setReadyCount < 3)
                                     {
                                         Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter,
-                                            LangFunc.GetText(LangType.Ru, DataName.FormNotReady),
+                                            LangFunc.GetText(LangType.En, DataName.FormNotReady),
                                             3000);
                                         return;
                                     }
@@ -281,11 +281,11 @@ namespace NeptuneEvo.Fractions
                                     
                                 }
                             }
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUseThisForm), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUseThisForm), 3000);
                             return;
                     }
                 }
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 3000);
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 3000);
             }
             catch (Exception e)
             {
@@ -357,7 +357,7 @@ namespace NeptuneEvo.Fractions
                         sessionData.WorkData.OnDuty = onDuty;
                         if (isDutySet && !onDuty)
                         {
-                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.StartWorkDay), 3000);
+                            Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.StartWorkDay), 3000);
                             sessionData.WorkData.OnDuty = true;
                         }
                         return true;
@@ -365,7 +365,7 @@ namespace NeptuneEvo.Fractions
                 }
                 
                 if (isDutySet)
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantUseThisForm), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantUseThisForm), 3000);
             }
             catch (Exception e)
             {

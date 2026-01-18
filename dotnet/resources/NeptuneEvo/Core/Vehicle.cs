@@ -399,11 +399,11 @@ namespace NeptuneEvo.Core
                 }
                 if (vehicle == CasinoVeh)
                 {
-                    player.setKick(LangFunc.GetText(LangType.Ru, DataName.KickVehNoUsing));
+                    player.setKick(LangFunc.GetText(LangType.En, DataName.KickVehNoUsing));
                     return;
                 }
                 if (characterData.DemorganTime >= 1) 
-                    player.setKick(LangFunc.GetText(LangType.Ru, DataName.KickVehWarned));
+                    player.setKick(LangFunc.GetText(LangType.En, DataName.KickVehWarned));
                 
    
                 if (!vehicleLocalData.Occupants.Contains(player))
@@ -462,14 +462,14 @@ namespace NeptuneEvo.Core
                     {
                         characterData.Achievements[18] = true;
                         
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Helper, LangFunc.GetText(LangType.Ru, DataName.Podskazka1), DateTime.Now);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int) DefaultNumber.Helper, LangFunc.GetText(LangType.Ru, DataName.Podskazka2), DateTime.Now);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Helper, LangFunc.GetText(LangType.Ru, DataName.Podskazka3), DateTime.Now);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Helper, LangFunc.GetText(LangType.En, DataName.Podskazka1), DateTime.Now);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int) DefaultNumber.Helper, LangFunc.GetText(LangType.En, DataName.Podskazka2), DateTime.Now);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Helper, LangFunc.GetText(LangType.En, DataName.Podskazka3), DateTime.Now);
                         
                         
-                        //Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Podskazka1), 5000);
-                        //Notify.SendToKey(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Podskazka2), 10000, 38);
-                        //Notify.SendToKey(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Podskazka3), 10000, 11);
+                        //Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Podskazka1), 5000);
+                        //Notify.SendToKey(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Podskazka2), 10000, 38);
+                        //Notify.SendToKey(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Podskazka3), 10000, 11);
 
                     }
                     if (vehicleLocalData.Access == VehicleAccess.Fraction)
@@ -483,22 +483,22 @@ namespace NeptuneEvo.Core
                             {
                                 if (DateTime.Now.Hour < 10)
                                 {
-                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FractionCarFrom10), 3000);
+                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FractionCarFrom10), 3000);
                                     WarpPlayerOutOfVehicle(player);
                                     return;
                                 }
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EngineONB), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EngineONB), 3000);
                                 return;
                             }
                             else if (fracId == (int)Fractions.Models.Fractions.ARMY)
                             {
                                 if (memberFractionData.Rank < vehicleLocalData.MinRank && characterData.AdminLVL <= 4 || !sessionData.WorkData.OnDuty && characterData.AdminLVL <= 4)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccessToVeh), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccessToVeh), 3000);
                                     WarpPlayerOutOfVehicle(player);
                                     return;
                                 }
-                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EngineONB), 3000);
+                                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EngineONB), 3000);
                                 return;
                             }
                             else WarpPlayerOutOfVehicle(player);
@@ -507,27 +507,27 @@ namespace NeptuneEvo.Core
                         {
                             if (memberFractionData.Rank < vehicleLocalData.MinRank && characterData.AdminLVL <= 4 || (fracId == (int) Fractions.Models.Fractions.EMS || fracId == (int) Fractions.Models.Fractions.FIB || fracId == (int) Fractions.Models.Fractions.CITY || fracId == (int) Fractions.Models.Fractions.LSNEWS || fracId == (int) Fractions.Models.Fractions.POLICE || fracId == (int) Fractions.Models.Fractions.SHERIFF || fracId == (int) Fractions.Models.Fractions.ARMY) && !sessionData.WorkData.OnDuty && characterData.AdminLVL <= 4)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccessToVeh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccessToVeh), 3000);
                                 WarpPlayerOutOfVehicle(player);
                                 return;
                             }
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EngineONB), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EngineONB), 3000);
                         }
                         else if (characterData.AdminLVL <= 4)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccessToVeh), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccessToVeh), 3000);
                             WarpPlayerOutOfVehicle(player);
                             return;
                         }
                         else if (vehicleLocalData.Fraction != fracId && characterData.AdminLVL <= 4)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccessToVeh), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccessToVeh), 3000);
                             WarpPlayerOutOfVehicle(player);
                             return;
                         }
                     }
                     else if (vehicleLocalData.Access == VehicleAccess.Work && vehicleLocalData.WorkDriver == characterData.UUID) 
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EngineONB), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EngineONB), 3000);
 
                     if (vehicle.Model == (uint)VehicleHash.Flatbed && !sessionData.IsTicketRender && player.IsFractionAccess(RankToAccess.VehicleTicket, false))
                     {
@@ -723,7 +723,7 @@ namespace NeptuneEvo.Core
                 };
                 string number = GenerateNumber();
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 int itemSqlID = await db.InsertWithInt32IdentityAsync(new Vehicles
                 {
@@ -784,14 +784,14 @@ namespace NeptuneEvo.Core
                                         garage.GetVehicleFromGarage(number);
                                 }
                                 
-                                EventSys.SendCoolMsg(player,"Транспорт", "Покупка транспорта", $"{LangFunc.GetText(LangType.Ru, DataName.VehSoonGarage)}", "", 12000);
-                                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehSoonGarage), 5000);
-                                //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.VehSoonGarage), DateTime.Now);
+                                EventSys.SendCoolMsg(player, "Transport", "Vehicle Purchase", $"{LangFunc.GetText(LangType.En, DataName.VehSoonGarage)}", "", 12000);
+                                //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehSoonGarage), 5000);
+                                //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.VehSoonGarage), DateTime.Now);
                             }
                             else
-                                EventSys.SendCoolMsg(player,"Транспорт", "Покупка транспорта", $"{LangFunc.GetText(LangType.Ru, DataName.VehWhenHome)}", "", 12000);
-                                    // Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehWhenHome), 5000);
-                            //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.VehWhenHome), DateTime.Now);
+                                EventSys.SendCoolMsg(player, "Transport", "Vehicle Purchase", $"{LangFunc.GetText(LangType.En, DataName.VehWhenHome)}", "", 12000);
+                                    // Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehWhenHome), 5000);
+                            //Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.VehWhenHome), DateTime.Now);
 
                         });
                     }
@@ -837,7 +837,7 @@ namespace NeptuneEvo.Core
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Vehicles
                             .Where(v => v.AutoId == vehicleData.SqlId)
@@ -901,7 +901,7 @@ namespace NeptuneEvo.Core
                     if (vehicleData == null) 
                         return;
                 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Vehicles
                         .Where(v => v.AutoId == vehicleData.SqlId)
@@ -924,7 +924,7 @@ namespace NeptuneEvo.Core
                     if (vehicleData == null) 
                         return;
                 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.Vehicles
                         .Where(v => v.AutoId == vehicleData.SqlId)
@@ -1095,7 +1095,7 @@ namespace NeptuneEvo.Core
                 SellItemData sellItemData = sessionData.SellItemData;
                 if ((sellItemData.Buyer != null || sellItemData.Seller != null) && Chars.Repository.TradeGet(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantTrade), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantTrade), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
@@ -1122,12 +1122,12 @@ namespace NeptuneEvo.Core
                 if (vehiclesNumber.Count == 0)
                 {
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoCar), 3000);
                     return;
                 }
                 
                 var frameList = new FrameListData();  
-                frameList.Header = LangFunc.GetText(LangType.Ru, DataName.sellcar); 
+                frameList.Header = LangFunc.GetText(LangType.En, DataName.sellcar); 
                 frameList.Callback = callback_sellcar; 
                 
                 foreach (string number in vehiclesNumber)
@@ -1166,14 +1166,14 @@ namespace NeptuneEvo.Core
                 if (vehicleData == null) return;
                 if (Ticket.IsVehicleTickets(vehicleData.SqlId))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOnShtrafSell, vehicleData.Model, vehicleData.Number), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOnShtrafSell, vehicleData.Model, vehicleData.Number), 3000);
                     return;
                 }
                 
                 SellItemData sellItemData = sessionData.SellItemData;
                 sellItemData.Seller = player;
                 sellItemData.Number = number;
-                Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.Ru, DataName.ProdazhaVeh), LangFunc.GetText(LangType.Ru, DataName.VvediteCenu), 8, "sellcar");
+                Trigger.ClientEvent(player, "openInput", LangFunc.GetText(LangType.En, DataName.ProdazhaVeh), LangFunc.GetText(LangType.En, DataName.VvediteCenu), 8, "sellcar");
             }
             catch (Exception e)
             {
@@ -1438,52 +1438,52 @@ namespace NeptuneEvo.Core
                         case VehicleAccess.Hotel:
                             if (vehicleLocalData.Owner != player && characterData.AdminLVL < 3)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                 return;
                             }
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, false);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOpenDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOpenDoor), 3000);
                             }
                             else
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, true);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehCloseDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehCloseDoor), 3000);
                             }
                             break;
                         case VehicleAccess.Rent:
                             if (vehicleLocalData.WorkDriver != characterData.UUID && characterData.AdminLVL < 3)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                 return;
                             }
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, false);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOpenDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOpenDoor), 3000);
                             }
                             else
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, true);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehCloseDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehCloseDoor), 3000);
                             }
                             break;
                         case VehicleAccess.Work:
                             if (vehicleLocalData.WorkDriver != characterData.UUID && characterData.AdminLVL < 3)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                 return;
                             }
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, false);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOpenDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOpenDoor), 3000);
                             }
                             else
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, true);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehCloseDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehCloseDoor), 3000);
                             }
                             break;
                         case VehicleAccess.OrganizationGarage:
@@ -1493,30 +1493,30 @@ namespace NeptuneEvo.Core
                                 var memberOrganizationData = player.GetOrganizationMemberData();
                                 if (memberOrganizationData == null) 
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                     return;
                                 }
                                 if (memberOrganizationData.Id != vehicleLocalData.Fraction)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                     return;
                                 }
                                 if (vehicleLocalData.MinRank > memberOrganizationData.Rank)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccessToVeh), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccessToVeh), 3000);
                                     return;
                                 }
                             }
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, false);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOpenDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOpenDoor), 3000);
                                 return;
                             }
                             else
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, true);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehCloseDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehCloseDoor), 3000);
                                 return;
                             }
                         case VehicleAccess.Garage:
@@ -1524,57 +1524,57 @@ namespace NeptuneEvo.Core
                             bool access = canAccessByNumber(player, vehicle.NumberPlate);
                             if (!access && characterData.AdminLVL < 3)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                 return;
                             }
 
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, false);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOpenDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOpenDoor), 3000);
                                 return;
                             }
                             else
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, true);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehCloseDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehCloseDoor), 3000);
                                 return;
                             }
                         case VehicleAccess.Admin:
                             if (characterData.AdminLVL == 0)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                 return;
                             }
 
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, false);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOpenDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOpenDoor), 3000);
                                 return;
                             }
                             else
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, true);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehCloseDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehCloseDoor), 3000);
                                 return;
                             }
                         default:
                             if (characterData.AdminLVL <= 3)
                             {
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehNoLock), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehNoLock), 3000);
                                 return;
                             }
                             if (VehicleStreaming.GetLockState(vehicle))
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, false);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehOpenDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehOpenDoor), 3000);
                                 return;
                             }
                             else
                             {
                                 VehicleStreaming.SetLockStatus(vehicle, true);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehCloseDoor), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehCloseDoor), 3000);
                                 return;
                             }
                     }
@@ -1632,7 +1632,7 @@ namespace NeptuneEvo.Core
                         if (!NAPI.Player.IsPlayerInAnyVehicle(sender)) return;
                         if (sender.VehicleSeat != (int)VehicleSeat.Driver)
                         {
-                            Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeDriver), 3000);
+                            Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeDriver), 3000);
                             return;
                         }
                         var vehicle = (ExtVehicle) sender.Vehicle;
@@ -1643,7 +1643,7 @@ namespace NeptuneEvo.Core
                             if (vehicle.Class == 13 && characterData.InsideGarageID == -1) return;
                             if (vehicleLocalData.Petrol <= 0)
                             {
-                                Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoGasVeh), 3000);
+                                Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoGasVeh), 3000);
                                 return;
                             }
                             switch (vehicleLocalData.Access)
@@ -1651,28 +1651,28 @@ namespace NeptuneEvo.Core
                                 case VehicleAccess.Hotel:
                                     if (vehicleLocalData.Owner != sender && characterData.AdminLVL < 3)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     break;
                                 case VehicleAccess.School:
                                     if (vehicleLocalData.WorkDriver != characterData.UUID && characterData.AdminLVL < 3)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     break;
                                 case VehicleAccess.Rent:
                                     if (vehicleLocalData.WorkDriver != characterData.UUID && characterData.AdminLVL < 3)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     break;
                                 case VehicleAccess.Work:
                                     if (vehicleLocalData.WorkDriver != characterData.UUID && characterData.AdminLVL < 3)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     break;
@@ -1680,12 +1680,12 @@ namespace NeptuneEvo.Core
                                     var fracId = sender.GetFractionId();
                                     if (fracId != vehicleLocalData.Fraction && characterData.AdminLVL < 5)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     if (!sessionData.WorkData.OnDuty && Manager.FractionTypes[fracId] == FractionsType.Gov)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WorkDayNotStarted), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WorkDayNotStarted), 3000);
                                         return;
                                     }
                                     break;
@@ -1694,18 +1694,18 @@ namespace NeptuneEvo.Core
                                     var memberOrganizationData = sender.GetOrganizationMemberData();
                                     if (memberOrganizationData == null) 
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     if (memberOrganizationData.Id != vehicleLocalData.Fraction && characterData.AdminLVL < 5)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     else if (vehicleLocalData.MinRank > memberOrganizationData.Rank)
                                     {
 
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccessToVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccessToVeh), 3000);
                                         return;
                                     }
                                     if (vehicleLocalData.Access == VehicleAccess.OrganizationGarage)
@@ -1720,13 +1720,13 @@ namespace NeptuneEvo.Core
                                     bool access = canAccessByNumber(sender, number);
                                     if (!access && characterData.AdminLVL < 3)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     var vehicleData = GetVehicleToNumber(number);
                                     if (vehicleData == null || vehicleData.Health == 0)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarDestroyed), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarDestroyed), 3000);
                                         return;
                                     }
                                     break;
@@ -1736,7 +1736,7 @@ namespace NeptuneEvo.Core
                                     vehicleData = GetVehicleToNumber(number);
                                     if (vehicleData == null || vehicleData.Health == 0)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CarDestroyed), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CarDestroyed), 3000);
                                         return;
                                     }
                                     var garage = Houses.GarageManager.Garages[characterData.InsideGarageID];
@@ -1747,7 +1747,7 @@ namespace NeptuneEvo.Core
                                 case VehicleAccess.Admin:
                                     if (characterData.AdminLVL == 0)
                                     {
-                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoKeysFromVeh), 3000);
+                                        Notify.Send(sender, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoKeysFromVeh), 3000);
                                         return;
                                     }
                                     break;
@@ -1755,14 +1755,14 @@ namespace NeptuneEvo.Core
                             if (VehicleStreaming.GetEngineState(vehicle))
                             {
                                 VehicleStreaming.SetEngineState(vehicle, false);
-                                Notify.Send(sender, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehEngineON), 3000);
-                                Commands.RPChat("sme", sender, $"заглушил" + (characterData.Gender ? "" : "а") + " транспортное средство");
+                                Notify.Send(sender, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehEngineON), 3000);
+                                Commands.RPChat("sme", sender, "turned off the vehicle");
                             }
                             else
                             {
                                 VehicleStreaming.SetEngineState(vehicle, true);
-                                Notify.Send(sender, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehEngineOFF), 3000);
-                                Commands.RPChat("sme", sender, $"завел" + (characterData.Gender ? "" : "а") + " транспортное средство");
+                                Notify.Send(sender, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehEngineOFF), 3000);
+                                Commands.RPChat("sme", sender, "started the vehicle");
                             }
                         }
                         return;
@@ -1893,7 +1893,7 @@ namespace NeptuneEvo.Core
                                         var owner = (ExtPlayer) NAPI.Player.GetPlayerFromName(vehicleData.Holder);
                                         if (owner != null)
                                             Notify.Send(owner, NotifyType.Alert, NotifyPosition.BottomCenter,
-                                                LangFunc.GetText(LangType.Ru, DataName.CarDestroyed), 3000);
+                                                LangFunc.GetText(LangType.En, DataName.CarDestroyed), 3000);
                                         
                                         return;
                                     }
@@ -1903,7 +1903,7 @@ namespace NeptuneEvo.Core
                                         var owner = (ExtPlayer) NAPI.Player.GetPlayerFromName(vehicleData.Holder);
                                         if (owner != null)
                                             Notify.Send(owner, NotifyType.Alert, NotifyPosition.BottomCenter,
-                                                LangFunc.GetText(LangType.Ru, DataName.CarDestroyed), 3000);
+                                                LangFunc.GetText(LangType.En, DataName.CarDestroyed), 3000);
                                     }
                                 }
                                 VehicleStreaming.DeleteVehicle(vehicle);
@@ -1975,7 +1975,7 @@ namespace NeptuneEvo.Core
                 Task.Run(async () => {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Vehicles
                             .Where(v => v.Holder == oldName)

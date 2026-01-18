@@ -96,7 +96,7 @@ namespace NeptuneEvo.Core.FakeCars
             if (characterData.AdminLVL < 9) return;
             if (!NAPI.Player.IsPlayerInAnyVehicle(player))
             {
-                player.SendChatMessage("Дима, сядь блять в машину!");
+                player.SendChatMessage("Get in the damn car!");
                 return;
             }
             var vehicle = (ExtVehicle)player.Vehicle;

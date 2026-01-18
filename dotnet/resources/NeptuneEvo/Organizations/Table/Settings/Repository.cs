@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using GTANetworkAPI;
 using Localization;
@@ -27,13 +27,13 @@ namespace NeptuneEvo.Organizations.Table.Settings
 
                 if (organizationData.IsOpenStock)
                 {
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Вы открыли склад семьи",
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FamilyWarehouseOpened),
                         3000);
                     Organizations.Table.Logs.Repository.AddLogs(player, OrganizationLogsType.OpenStock, "Открыл склад");
                 }
                 else
                 {
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, "Вы закрыли склад семьи", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FamilyWarehouseClosed), 3000);
                     Organizations.Table.Logs.Repository.AddLogs(player, OrganizationLogsType.CloseStock, "Закрыл склад");
                 }
 
@@ -55,7 +55,7 @@ namespace NeptuneEvo.Organizations.Table.Settings
                 
                 if (DateTime.Now < sessionData.TimingsData.NextGlobalChat)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Block10Min), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Block10Min), 4500);
                     return;
                 }
                 
@@ -69,7 +69,7 @@ namespace NeptuneEvo.Organizations.Table.Settings
                 slogan = Main.BlockSymbols(Main.RainbowExploit(slogan));
                 if (slogan.Length > 65)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, "Слоган слишком длинный", 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SloganTooLong), 4500);
                     return;
                 }
                 
@@ -77,8 +77,8 @@ namespace NeptuneEvo.Organizations.Table.Settings
                 if (Main.stringGlobalBlock.Any(c => testmsg.Contains(c)))
                 {
                     sessionData.TimingsData.NextGlobalChat = DateTime.Now.AddMinutes(10);
-                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.Ru, DataName.AdminAlertFTableNews, player.Name, player.Value, slogan));
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RestrictedWordsTableNews), 15000);
+                    Trigger.SendToAdmins(3, "!{#636363}[A] " + LangFunc.GetText(LangType.En, DataName.AdminAlertFTableNews, player.Name, player.Value, slogan));
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RestrictedWordsTableNews), 15000);
                     return;
                 }
                 

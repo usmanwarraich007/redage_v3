@@ -27,7 +27,7 @@ namespace NeptuneEvo.Fractions.Table.Logs
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.InsertAsync(new Fractionlogs
                         {
@@ -57,7 +57,7 @@ namespace NeptuneEvo.Fractions.Table.Logs
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     db.Insert(new Fractionlogs
                     {
@@ -89,7 +89,7 @@ namespace NeptuneEvo.Fractions.Table.Logs
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         var test = db.Fractionlogs
                             .Select(v => new

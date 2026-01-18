@@ -33,17 +33,17 @@ namespace NeptuneEvo.Jobs
                 if (targetCharacterData == null) return;
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkCar), 3000);
                     return;
                 }
                 if (characterData.WorkID != (int)JobsId.CarMechanic || !sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YourNotAutoMech), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YourNotAutoMech), 3000);
                     return;
                 }
                 if (player == target)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantRepairYourVehicle), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantRepairYourVehicle), 3000);
                     return;
                 }
                 var vehicle = (ExtVehicle) player.Vehicle;
@@ -52,38 +52,38 @@ namespace NeptuneEvo.Jobs
                 {
                     if ((sessionData.SellItemData.Buyer != null || sessionData.SellItemData.Seller != null) && Chars.Repository.TradeGet(player))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantTrade), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantTrade), 3000);
                         return;
                     }
                     if (vehicleLocalData.WorkId != JobsId.CarMechanic)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkCar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkCar), 3000);
                         return;
                     }
                     if (!target.IsInVehicle)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerMustBeInVeh), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerMustBeInVeh), 3000);
                         return;
                     }
                     if (player.Vehicle.Position.DistanceTo(target.Vehicle.Position) > 5)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                         return;
                     }
                     if (price < 1000 || price > 1500)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Price5to30), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Price5to30), 3000);
                         return;
                     }
                     if (targetCharacterData.Money < price)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                         return;
                     }
                     SellItemData sellItemData = targetSessionData.SellItemData;
                     if ((sellItemData.Buyer != null || sellItemData.Seller != null) && Chars.Repository.TradeGet(target))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonCantTrade), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonCantTrade), 3000);
                         return;
                     }
                     sellItemData.Seller = player;
@@ -92,9 +92,9 @@ namespace NeptuneEvo.Jobs
                     sessionData.SellItemData.Seller = player;
                     sessionData.SellItemData.Buyer = target;
                     sessionData.SellItemData.Price = price;
-                    Trigger.ClientEvent(target, "openDialog", "REPAIR_CAR", LangFunc.GetText(LangType.Ru, DataName.MechanikRepairTo, player.Value, MoneySystem.Wallet.Format(price)));
-                    //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MechanikRepairFrom, target.Value, MoneySystem.Wallet.Format(price)), 3000);
-                    EventSys.SendCoolMsg(player,"Предложение", "Механик", LangFunc.GetText(LangType.Ru, DataName.MechanikRepairFrom, target.Value, MoneySystem.Wallet.Format(price)), "", 5000);
+                    Trigger.ClientEvent(target, "openDialog", "REPAIR_CAR", LangFunc.GetText(LangType.En, DataName.MechanikRepairTo, player.Value, MoneySystem.Wallet.Format(price)));
+                    //Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MechanikRepairFrom, target.Value, MoneySystem.Wallet.Format(price)), 3000);
+                    EventSys.SendCoolMsg(player,"Предложение", "Механик", LangFunc.GetText(LangType.En, DataName.MechanikRepairFrom, target.Value, MoneySystem.Wallet.Format(price)), "", 5000);
                     BattlePass.Repository.UpdateReward(player, 91);
                     BattlePass.Repository.UpdateReward(player, 58);
                 }
@@ -150,14 +150,14 @@ namespace NeptuneEvo.Jobs
                 if (driverCharacterData == null)
                 {
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SellerNotOnline), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SellerNotOnline), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
                 {
                     driverSessionData.SellItemData = new SellItemData();
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                     return;
                 }
 
@@ -174,9 +174,9 @@ namespace NeptuneEvo.Jobs
                 MoneySystem.Wallet.Change(player, -price);
                 MoneySystem.Wallet.Change(driver, price);
                 GameLog.Money($"player({characterData.UUID})", $"player({driverCharacterData.UUID})", price, $"mechanicRepair");
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RepairPayed), 3000);
-                Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerPayedRepair, player.Value), 3000);
-                Commands.RPChat("sme", driver, LangFunc.GetText(LangType.Ru, DataName.RepairVehi));
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RepairPayed), 3000);
+                Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerPayedRepair, player.Value), 3000);
+                Commands.RPChat("sme", driver, LangFunc.GetText(LangType.En, DataName.RepairVehi));
                 driverSessionData.SellItemData = new SellItemData();
                 sessionData.SellItemData = new SellItemData();
 
@@ -190,7 +190,7 @@ namespace NeptuneEvo.Jobs
                     {
                         qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                         qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                        Trigger.SendChatMessage(driver, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                        Trigger.SendChatMessage(driver, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                     }
                     else
                     {
@@ -229,26 +229,26 @@ namespace NeptuneEvo.Jobs
                 var rentData = sessionData.RentData;
                 if (rentData == null || characterData.WorkID != (int)JobsId.CarMechanic || !sessionData.WorkData.OnWork || !player.IsInVehicle || rentData.Vehicle != player.Vehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeMechanikAndWorkCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeMechanikAndWorkCar), 3000);
                     return;
                 }
 
                 (byte, float) jobLevelInfo = characterData.JobSkills.ContainsKey(5) ? Main.GetPlayerJobLevelBonus(5, characterData.JobSkills[5]) : (0, 1);
                 if (jobLevelInfo.Item1 < 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Command3lvl), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Command3lvl), 3000);
                     return;
                 }
 
                 int BizID = CustomColShape.GetDataToEnum(player, ColShapeEnums.BusinessAction);
                 if (BizID == (int)ColShapeData.Error || !BusinessManager.BizList.ContainsKey(BizID) || BusinessManager.BizList[BizID].Type != 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustBeAtGas), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustBeAtGas), 3000);
                     return;
                 }
                 if (fuel <= 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VvedireCorrect), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VvedireCorrect), 3000);
                     return;
                 }
                 Business biz = BusinessManager.BizList[BizID];
@@ -258,23 +258,23 @@ namespace NeptuneEvo.Jobs
                 var vehicleLocalData = vehicle.GetVehicleLocalData();
                 if (vehicleLocalData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.UnavaibleForThisVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.UnavaibleForThisVeh), 3000);
                     return;
                 }
                 if (vehicleLocalData.VehLoadedFuel + fuel > 1000)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FillCanFuel), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FillCanFuel), 3000);
                     return;
                 }
                 if (!BusinessManager.takeProd(biz.ID, fuel, biz.Products[0].Name, amount))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoFuelAtGasStation), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoFuelAtGasStation), 3000);
                     return;
                 }
                 MoneySystem.Wallet.Change(player, -amount);
                 GameLog.Money($"player({characterData.UUID})", $"biz({biz.ID})", amount, $"mechanicBuyFuel");
                 vehicleLocalData.VehLoadedFuel += fuel;
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouFillBack, vehicleLocalData.VehLoadedFuel), 5000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouFillBack, vehicleLocalData.VehLoadedFuel), 5000);
             }
             catch (Exception e)
             {
@@ -296,19 +296,19 @@ namespace NeptuneEvo.Jobs
                 if (targetCharacterData == null) return;
                 if (characterData.WorkID != (int)JobsId.CarMechanic || !sessionData.WorkData.OnWork)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YourNotAutoMech), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YourNotAutoMech), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkCar), 3000);
                     return;
                 }
 
                 (byte, float) jobLevelInfo = characterData.JobSkills.ContainsKey(5) ? Main.GetPlayerJobLevelBonus(5, characterData.JobSkills[5]) : (0, 1);
                 if (jobLevelInfo.Item1 < 3)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Command3lvl), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Command3lvl), 3000);
                     return;
                 }
 
@@ -318,43 +318,43 @@ namespace NeptuneEvo.Jobs
                 {
                     if (vehicleLocalData.WorkId != JobsId.CarMechanic)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkCar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkCar), 3000);
                         return;
                     }
                     if ((sessionData.SellItemData.Buyer != null || sessionData.SellItemData.Seller != null) && Chars.Repository.TradeGet(player))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantTrade), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantTrade), 3000);
                         return;
                     }
                     if (!target.IsInVehicle)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerMustBeInVeh), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerMustBeInVeh), 3000);
                         return;
                     }
                     if (player.Vehicle.Position.DistanceTo(target.Vehicle.Position) > 5)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerTooFar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerTooFar), 3000);
                         return;
                     }
                     if (fuel < 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FillErrorLiter), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FillErrorLiter), 3000);
                         return;
                     }
                     if (pricePerLitr < 1 || pricePerLitr > 10)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FillPriceError), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FillPriceError), 3000);
                         return;
                     }
                     if (targetCharacterData.Money < pricePerLitr * fuel)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerNotEnoughMoney), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerNotEnoughMoney), 3000);
                         return;
                     }
                     SellItemData sellItemData = targetSessionData.SellItemData;
                     if ((sellItemData.Buyer != null || sellItemData.Seller != null) && Chars.Repository.TradeGet(target))
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PersonCantTrade), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PersonCantTrade), 3000);
                         return;
                     }
                     sellItemData.Seller = player;
@@ -363,8 +363,8 @@ namespace NeptuneEvo.Jobs
                     sessionData.SellItemData.Seller = player;
                     sessionData.SellItemData.Price = pricePerLitr;
                     sessionData.SellItemData.Count = fuel;
-                    Trigger.ClientEvent(target, "openDialog", "FUEL_CAR", LangFunc.GetText(LangType.Ru, DataName.PlayerOfferFill, player.Value, fuel, fuel * pricePerLitr));
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouOfferFill, target.Value, fuel, fuel * pricePerLitr), 7000);
+                    Trigger.ClientEvent(target, "openDialog", "FUEL_CAR", LangFunc.GetText(LangType.En, DataName.PlayerOfferFill, player.Value, fuel, fuel * pricePerLitr));
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouOfferFill, target.Value, fuel, fuel * pricePerLitr), 7000);
                 }
             }
             catch (Exception e)
@@ -390,14 +390,14 @@ namespace NeptuneEvo.Jobs
                 if (driverCharacterData == null)
                 {
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SellerNotOnline), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SellerNotOnline), 3000);
                     return;
                 }
                 if (!player.IsInVehicle)
                 {
                     driverSessionData.SellItemData = new SellItemData();
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustInCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustInCar), 3000);
                     return;
                 }
                 price = price * fuel;
@@ -412,7 +412,7 @@ namespace NeptuneEvo.Jobs
                 {
                     driverSessionData.SellItemData = new SellItemData();
                     sessionData.SellItemData = new SellItemData();
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MechanikMustBeInJobCar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MechanikMustBeInJobCar), 3000);
                     return;
                 }
                 var veh = (ExtVehicle) driver.Vehicle;
@@ -426,7 +426,7 @@ namespace NeptuneEvo.Jobs
                     {
                         driverSessionData.SellItemData = new SellItemData();
                         sessionData.SellItemData = new SellItemData();
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MechanikMustBeInJobCar), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MechanikMustBeInJobCar), 3000);
                         return;
                     }
                     
@@ -434,16 +434,16 @@ namespace NeptuneEvo.Jobs
                     {
                         driverSessionData.SellItemData = new SellItemData();
                         sessionData.SellItemData = new SellItemData();
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MechanikNoFuel), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MechanikNoFuel), 3000);
                         return;
                     }
                     sessionData.WorkData.Player = null;
                     MoneySystem.Wallet.Change(player, -price);
                     MoneySystem.Wallet.Change(driver, price);
                     GameLog.Money($"player({characterData.UUID})", $"player({driverCharacterData.UUID})", price, $"mechanicFuel");
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouPayFillRepairVeh), 3000);
-                    Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlayerPayedFillVeh, player.Value), 3000);
-                    Commands.RPChat("sme", driver, LangFunc.GetText(LangType.Ru, DataName.FilledVeh));
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouPayFillRepairVeh), 3000);
+                    Notify.Send(driver, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlayerPayedFillVeh, player.Value), 3000);
+                    Commands.RPChat("sme", driver, LangFunc.GetText(LangType.En, DataName.FilledVeh));
                     int carFuel = (vehicleLocalData2.Petrol + fuel > vehicleLocalData2.MaxPetrol) ? vehicleLocalData2.MaxPetrol : vehicleLocalData2.Petrol + fuel;
 
                     player.Vehicle.SetSharedData("PETROL", carFuel);

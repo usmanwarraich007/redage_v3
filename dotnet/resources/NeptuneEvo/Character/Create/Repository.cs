@@ -32,12 +32,12 @@ namespace NeptuneEvo.Character.Create
                 if (accountData == null) return -1;
                 if (firstName.Length < 1 || lastName.Length < 1)
                 {
-                    Trigger.ClientEvent(player, "client.characters.create.error", LangFunc.GetText(LangType.Ru, DataName.ErrorLenghtName));
+                    Trigger.ClientEvent(player, "client.characters.create.error", LangFunc.GetText(LangType.En, DataName.ErrorLenghtName));
                     return -1;
                 }
                 if (Main.PlayerNames.Values.Contains($"{firstName}_{lastName}"))
                 {
-                    Trigger.ClientEvent(player, "client.characters.create.error", LangFunc.GetText(LangType.Ru, DataName.NameUsed), 3000);
+                    Trigger.ClientEvent(player, "client.characters.create.error", LangFunc.GetText(LangType.En, DataName.NameUsed), 3000);
                     return -1;
                 }
 
@@ -60,7 +60,7 @@ namespace NeptuneEvo.Character.Create
 
                 characterData.Money = Main.MoneySettings.CreateCharMoney;
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 characterData.UUID = await db.InsertWithInt32IdentityAsync(new Characters
                 {

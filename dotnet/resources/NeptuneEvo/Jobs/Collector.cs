@@ -27,7 +27,7 @@ namespace NeptuneEvo.Jobs
             {
                 CustomColShape.CreateCylinderColShape(TakeMoneyPos, 1, 3, 0, ColShapeEnums.TakeMoney);
                 NAPI.Marker.CreateMarker(1, TakeMoneyPos - new Vector3(0, 0, 0.7), new Vector3(), new Vector3(), 1, new Color(255, 255, 255, 220), false, 0);
-                NAPI.TextLabel.CreateTextLabel(Main.StringToU16(LangFunc.GetText(LangType.Ru, DataName.TakeMeshki)), TakeMoneyPos + new Vector3(0, 0, 0.3), 30f, 0.4f, 0, new Color(255, 255, 255), true, 0);
+                NAPI.TextLabel.CreateTextLabel(Main.StringToU16(LangFunc.GetText(LangType.En, DataName.TakeMeshki)), TakeMoneyPos + new Vector3(0, 0, 0.3), 30f, 0.4f, 0, new Color(255, 255, 255), true, 0);
             }
             catch (Exception e)
             {
@@ -64,7 +64,7 @@ namespace NeptuneEvo.Jobs
                 ClothesComponents.SetSpecialClothes(player, 8, 159, 0);
             }
             Chars.Repository.LoadAccessories(player);
-            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.InkassStart), 3000);
+            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.InkassStart), 3000);
             
             sessionData.WorkData.Packages = Main.ServerNumber == 0 ? 2 : 15;
             Attachments.AddAttachment(player, Attachments.AttachmentsName.MoneyBag);
@@ -81,7 +81,7 @@ namespace NeptuneEvo.Jobs
             
             if (sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                 sessionData.WorkData.OnWork = false;
                 Customization.ApplyCharacter(player);                    
                 Trigger.ClientEvent(player, "deleteCheckpoint", 16, 0);
@@ -165,14 +165,14 @@ namespace NeptuneEvo.Jobs
                 if (player.IsInVehicle || characterData.WorkID != (int)JobsId.CashCollector || !sessionData.WorkData.OnWork) return;
                 if (sessionData.WorkData.Packages != 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveBags, sessionData.WorkData.Packages), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveBags, sessionData.WorkData.Packages), 3000);
                     return;
                 }
                 
                 sessionData.WorkData.Packages = Main.ServerNumber == 0 ? 2 : 15;
                 Attachments.AddAttachment(player, Attachments.AttachmentsName.MoneyBag);
                 SetAtmPoint(player);
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GotNewBags), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GotNewBags), 3000);
             }
             catch (Exception e)
             {
@@ -204,7 +204,7 @@ namespace NeptuneEvo.Jobs
                 DateTime lastTime = sessionData.WorkData.Time;
                 if (Main.ServerNumber != 0 && DateTime.Now < lastTime.AddSeconds(coef * 2))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AtmFull), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AtmFull), 3000);
                     return;
                 }
                 
@@ -213,7 +213,7 @@ namespace NeptuneEvo.Jobs
                 if (MyColCar == null || !MyColCar.Exists) return;
                 if (player.Position.DistanceTo(MyColCar.Position) >= 50)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.JobVehFar), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.JobVehFar), 3000);
                     return;
                 }
 
@@ -235,7 +235,7 @@ namespace NeptuneEvo.Jobs
                 Attachments.RemoveAttachment(player, Attachments.AttachmentsName.MoneyBag);
                 if (sessionData.WorkData.Packages == 0)
                 {
-                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BackToBaza), 3000);
+                    Notify.Send(player, NotifyType.Alert, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BackToBaza), 3000);
                     Trigger.ClientEvent(player, "createWaypoint", TakeMoneyPos.X, TakeMoneyPos.Y);
                     Trigger.ClientEvent(player, "deleteCheckpoint", 16);
                     Trigger.ClientEvent(player, "deleteWorkBlip");
@@ -243,7 +243,7 @@ namespace NeptuneEvo.Jobs
                 else
                 {
                     SetAtmPoint(player);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GoNextAtm), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GoNextAtm), 3000);
                 }
                 
                 //
@@ -258,13 +258,13 @@ namespace NeptuneEvo.Jobs
                     {
                         qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                         qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                        Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                     }
                     else
                     {
                         qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                         //todo translate (было DataName.PointsQuestGot)
-                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                        Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                     }
                 }
 

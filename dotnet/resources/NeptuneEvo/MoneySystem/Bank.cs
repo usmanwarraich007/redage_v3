@@ -202,22 +202,22 @@ namespace NeptuneEvo.MoneySystem
                 switch (type)
                 {
                     case BankNotifyType.InputError:
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorInput), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorInput), 3000);
                         return;
                     case BankNotifyType.PayError:
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ErrorWithdraw), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ErrorWithdraw), 3000);
                         return;
                     case BankNotifyType.PayIn:
                         int money = Convert.ToInt32(info);
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MoneyIncome, Wallet.Format(money)), 3000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.MoneyIncome, Wallet.Format(money)), DateTime.Now);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MoneyIncome, Wallet.Format(money)), 3000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.MoneyIncome, Wallet.Format(money)), DateTime.Now);
                         if (money >= 10)
                             BattlePass.Repository.UpdateReward(player, 5);
                         return;
                     case BankNotifyType.PayOut:
                         money = Convert.ToInt32(info);
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MoneyOutcome, Wallet.Format(money)), 3000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.MoneyOutcome, Wallet.Format(money)), DateTime.Now);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MoneyOutcome, Wallet.Format(money)), 3000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.MoneyOutcome, Wallet.Format(money)), DateTime.Now);
                         return;
                     default:
                         // Not supposed to end up here. 
@@ -234,7 +234,7 @@ namespace NeptuneEvo.MoneySystem
         {
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 int moneyId = await db.InsertWithInt32IdentityAsync(new Moneys
                 {
@@ -417,12 +417,12 @@ namespace NeptuneEvo.MoneySystem
                 if (characterData.DemorganTime >= 1) return;
                 if (characterData.WantedLVL != null && characterData.WantedLVL.Level > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WantedNOATM), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WantedNOATM), 3000);
                     return;
                 }
                 if (characterData.Bank == 0 || !Bank.Accounts.ContainsKey(characterData.Bank))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBanks), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBanks), 3000);
                     return;
                 }
                 Trigger.ClientEvent(player, "setatm", characterData.Bank.ToString(), player.Name, Bank.GetBalance(characterData.Bank).ToString(), "");
@@ -457,7 +457,7 @@ namespace NeptuneEvo.MoneySystem
                 else
                 {
                     Trigger.ClientEvent(player, "atmOpen", "[1,0,0]");
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoBusiness), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoBusiness), 3000);
                 }
             }
             catch (Exception e)
@@ -479,7 +479,7 @@ namespace NeptuneEvo.MoneySystem
                 if (characterData == null) return;
                 if (Admin.IsServerStoping)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ServerCant), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ServerCant), 3000);
                     return;
                 }
                 int type = sessionData.ATMData.Type;
@@ -549,7 +549,7 @@ namespace NeptuneEvo.MoneySystem
                         myamount = Math.Abs(amount);
                         if (myamount <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CanNotTransact), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CanNotTransact), 3000);
                             return;
                         }
                         var bankBalance = Bank.GetBalance(house.BankID);
@@ -557,19 +557,19 @@ namespace NeptuneEvo.MoneySystem
                             myamount = maxMoney - (int)bankBalance;
                         if (myamount <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CanNotTransact), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CanNotTransact), 3000);
                             return;
                         }
                         if (!Wallet.Change(player, -myamount))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                             return;
                         }
                         Bank.Change(house.BankID, +myamount);
                         GameLog.Money($"player({characterData.UUID})", $"bank({house.BankID})", myamount, $"atmHouse");
                         //BattlePass.Repository.UpdateReward(player, 41);
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucTransact), 3000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.SucTransactH, myamount, (bankBalance+myamount), maxMoney), DateTime.Now);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucTransact), 3000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.SucTransactH, myamount, (bankBalance+myamount), maxMoney), DateTime.Now);
 
                         switch (accountData.VipLvl)
                         {
@@ -621,7 +621,7 @@ namespace NeptuneEvo.MoneySystem
                         myamount = Math.Abs(amount);
                         if (myamount <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CanNotTransact), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CanNotTransact), 3000);
                             return;
                         }
 
@@ -631,18 +631,18 @@ namespace NeptuneEvo.MoneySystem
                         
                         if (myamount <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CanNotTransact), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CanNotTransact), 3000);
                             return;
                         }
                         if (!Wallet.Change(player, -myamount))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoMoney), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoMoney), 3000);
                             return;
                         }
                         Bank.Change(biz.BankID, +myamount);
                         GameLog.Money($"player({characterData.UUID})", $"bank({biz.BankID})", myamount, $"atmBiz");
-                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucTransact), 3000);
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.Ru, DataName.SucTransactB, myamount, (bankBalance+myamount), maxMoney), DateTime.Now);
+                        //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucTransact), 3000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.Bank, LangFunc.GetText(LangType.En, DataName.SucTransactB, myamount, (bankBalance+myamount), maxMoney), DateTime.Now);
                         switch (accountData.VipLvl)
                         {
                             case 0:
@@ -667,7 +667,7 @@ namespace NeptuneEvo.MoneySystem
                     case 4:
                         if (!Bank.Accounts.ContainsKey(amount) || amount <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindBankAccount), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindBankAccount), 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             Trigger.StopAnimation(player);
                             return;
@@ -679,37 +679,37 @@ namespace NeptuneEvo.MoneySystem
                     case 44:
                         if (!FunctionsAccess.IsWorking("atmtransfer"))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                             return;
                         }
                         if (characterData.LVL < 1)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.flvltotransact), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.flvltotransact), 3000);
                             return;
                         }   
                         if (DateTime.Now < sessionData.TimingsData.NextBankTransfer)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NextTransactionSoon), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NextTransactionSoon), 3000);
                             return;
                         }
                         int bank = sessionData.ATMData.Amount;
                         if (!Bank.Accounts.ContainsKey(bank) || bank <= 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindBankAccount), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindBankAccount), 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             Trigger.StopAnimation(player);
                             return;
                         }
                         if (Bank.Accounts[bank].Type != 1 && characterData.AdminLVL == 0)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindBankAccount), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindBankAccount), 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             Trigger.StopAnimation(player);
                             return;
                         }
                         /*if (characterData.Bank == bank || (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 5))
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TransactionCancelled), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TransactionCancelled), 3000);
                             Trigger.ClientEvent(player, "closeatm");
                             Trigger.StopAnimation(player);
                             return;
@@ -723,7 +723,7 @@ namespace NeptuneEvo.MoneySystem
 
                         Trigger.ClientEvent(player, "closeatm");
                         Trigger.StopAnimation(player);
-                        Trigger.ClientEvent(player, "openDialog", "AcceptBankTransfer", LangFunc.GetText(LangType.Ru, DataName.TransactionConfirm1, myamount) + (Bank.Accounts[bank].Holder.Length > 3 ? LangFunc.GetText(LangType.Ru, DataName.TransactionConfirm2, Bank.Accounts[bank].Holder) : "на неизвестный счет?"));
+                        Trigger.ClientEvent(player, "openDialog", "AcceptBankTransfer", LangFunc.GetText(LangType.En, DataName.TransactionConfirm1, myamount) + (Bank.Accounts[bank].Holder.Length > 3 ? LangFunc.GetText(LangType.En, DataName.TransactionConfirm2, Bank.Accounts[bank].Holder) : "на неизвестный счет?"));
 
                         //Bank.Transfer(acc.Bank, bank, myamount);
                         if (characterData.AdminLVL == 0) sessionData.TimingsData.NextBankTransfer = DateTime.Now.AddSeconds(10);
@@ -825,7 +825,7 @@ namespace NeptuneEvo.MoneySystem
                             case 2:
                                 if (Houses.HouseManager.GetHouse(player, true) == null)
                                 {
-                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoHome), 3000);
+                                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoHome), 3000);
                                     return;
                                 }
                                 var house = Houses.HouseManager.GetHouse(player, true);
@@ -851,7 +851,7 @@ namespace NeptuneEvo.MoneySystem
                                         Trigger.ClientEvent(player, "atmOpen", $"[2,'{bankBalance}/{Convert.ToInt32(house.Price / 100 * 0.026 * 24 * 7)}$','Сумма внесения наличных']");
                                         break;
                                 }
-                                Trigger.ClientEvent(player, "setatm", LangFunc.GetText(LangType.Ru, DataName.House), $"Недвижимость #{house.ID}", bankBalance, "");
+                                Trigger.ClientEvent(player, "setatm", LangFunc.GetText(LangType.En, DataName.House), $"Недвижимость #{house.ID}", bankBalance, "");
                                 sessionData.ATMData.Type = index;
                                 break;
                             case 3:

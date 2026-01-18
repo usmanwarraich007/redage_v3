@@ -130,13 +130,13 @@ namespace NeptuneEvo.Fractions.LSNews
                 {
                     case 1:
                         if (player.GetFractionId() == (int) Models.Fractions.LSNEWS) FractionClothingSets.OpenFractionClothingSetsMenu(player);
-                        else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoNEWS), 3000);
+                        else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoNEWS), 3000);
                         return;
                     case 2:
                     case 3:
                         if (sessionData.Following != null) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsFollowing), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsFollowing), 3000); 
                             return; 
                         } 
  
@@ -167,7 +167,7 @@ namespace NeptuneEvo.Fractions.LSNews
                 { 
                     if (player.Position.DistanceTo(FirstNewsLiftTP[index]) <= 2) 
                     { 
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAtFloor), 3000); 
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAtFloor), 3000); 
                         return; 
                     } 
  
@@ -177,14 +177,14 @@ namespace NeptuneEvo.Fractions.LSNews
                 { 
                     if (player.Position.DistanceTo(SecondNewsLiftTP[index]) <= 2) 
                     { 
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAtFloor), 3000); 
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAtFloor), 3000); 
                         return; 
                     } 
  
                     player.Position = SecondNewsLiftTP[index]; 
                 }
  
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GoingToFloor, index + 1), 3000); 
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GoingToFloor, index + 1), 3000); 
             } 
             catch (Exception e) 
             { 
@@ -263,17 +263,17 @@ namespace NeptuneEvo.Fractions.LSNews
  
                 if (sessionData.CuffedData.Cuffed) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000); 
                     return; 
                 } 
                 else if (sessionData.DeathData.InDeath) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000); 
                     return; 
                 } 
                 else if (Main.IHaveDemorgan(player, true)) return; 
  
-                Trigger.ClientEvent(player, "openDialog", "CallNewsMemberDialog", LangFunc.GetText(LangType.Ru, DataName.AreYouWantToCallGov)); 
+                Trigger.ClientEvent(player, "openDialog", "CallNewsMemberDialog", LangFunc.GetText(LangType.En, DataName.AreYouWantToCallGov)); 
             } 
             catch (Exception e) 
             { 
@@ -304,7 +304,7 @@ namespace NeptuneEvo.Fractions.LSNews
                 }
                 else if (AdvertList.Values.Any(a => a.Editor == player.Name && a.ID != index))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdAlreadyTaken), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdAlreadyTaken), 3000);
                     return;
                 }
 
@@ -348,7 +348,7 @@ namespace NeptuneEvo.Fractions.LSNews
                 if (!AdvertList[ID].Status) UpdateAnswer(player, ID, answer);
                 else
                 {
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.AdUnavaibleForEdit));
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.AdUnavaibleForEdit));
                     Remove(ID, player);
                 }
             }
@@ -387,10 +387,10 @@ namespace NeptuneEvo.Fractions.LSNews
                 text = Main.BlockSymbols(text);
                 GameLog.Money($"bank({characterData.Bank})", $"server", price, "ad");
                 sessionData.TimingsData.NextAD = DateTime.Now.AddMinutes(15);
-                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdDone), 3000);
-                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.News, LangFunc.GetText(LangType.Ru, DataName.AdDone), DateTime.Now);
+                //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdDone), 3000);
+                Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.News, LangFunc.GetText(LangType.En, DataName.AdDone), DateTime.Now);
                 BattlePass.Repository.UpdateReward(player, 11);
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var advert = new AdvertData
                 {
@@ -447,19 +447,19 @@ namespace NeptuneEvo.Fractions.LSNews
                 if (characterData.AdminLVL == 0 && memberFractionData.Id == (int) Models.Fractions.LSNEWS && memberFractionData.Rank <= 1)
                 {
                     AdvertTake(player, repID);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoAccess), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoAccess), 3000);
                     return;
                 }
                 if (!AdvertList.ContainsKey(repID))
                 {
-                    if (deleted) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindAdNumber), 3000);
+                    if (deleted) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindAdNumber), 3000);
                     return;
                 }
                 response = Main.BlockSymbols(response);
                 if (response.Length >= 150)
                 {
                     AdvertTake(player, repID);
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdMustBe150), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdMustBe150), 3000);
                     return;
                 }
 
@@ -470,27 +470,27 @@ namespace NeptuneEvo.Fractions.LSNews
                     MoneySystem.Bank.Change(characterData.Bank, moneyad, false);
                     CompletedAdverts.Enqueue(new CompletedAdvert(advert.Author.Replace('_', ' '), advert.AuthorSIM, response, player.Name.Replace('_', ' '), advert.IsPremium));
                     Players.Phone.News.Repository.AddList(advert, response);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AdToList, advert.Author, CompletedAdverts.Count), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AdToList, advert.Author, CompletedAdverts.Count), 3000);
                     player.AddTableScore(TableTaskId.Item34);
                     var target = (ExtPlayer) NAPI.Player.GetPlayerFromName(advert.Author);
                     if (target.IsCharacterData()) 
-                        Players.Phone.Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.News, LangFunc.GetText(LangType.Ru, DataName.AdToList, advert.Author, CompletedAdverts.Count), DateTime.Now);
+                        Players.Phone.Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.News, LangFunc.GetText(LangType.En, DataName.AdToList, advert.Author, CompletedAdverts.Count), DateTime.Now);
                 }
                 else
                 {
                     if (characterData.AdminLVL != 0) GameLog.Admin($"{player.Name}", $"delAd", $"{advert.Author}");
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.DelAd, advert.Author), 3000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.DelAd, advert.Author), 3000);
                     var target = (ExtPlayer) NAPI.Player.GetPlayerFromName(advert.Author);
-                    response += LangFunc.GetText(LangType.Ru, DataName.deletedad);
+                    response += LangFunc.GetText(LangType.En, DataName.deletedad);
                     if (target.IsCharacterData())
-                        Players.Phone.Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.News, LangFunc.GetText(LangType.Ru, DataName.DelAdReason, player.Name, response), DateTime.Now);
+                        Players.Phone.Messages.Repository.AddSystemMessage(target, (int)DefaultNumber.News, LangFunc.GetText(LangType.En, DataName.DelAdReason, player.Name, response), DateTime.Now);
                 }
                 Remove(repID);
                 Trigger.SetTask(async () =>
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
                     
                         await db.Advertised
                             .Where(a => a.ID == repID)
@@ -560,9 +560,9 @@ namespace NeptuneEvo.Fractions.LSNews
                     var color = ad.IsPremium ? "!{#f5a952}" : "!{#00CC00}";
                     var color2 = ad.IsPremium ? "!{#bf7c39}" : "!{#009900}";
 
-                    if (ad.AuthorSIM >= 1) NAPI.Chat.SendChatMessageToAll(color + LangFunc.GetText(LangType.Ru, DataName.AdWithPhone, ad.EditedAD, ad.AuthorSIM));
-                    else NAPI.Chat.SendChatMessageToAll(color + LangFunc.GetText(LangType.Ru, DataName.Ad, ad.EditedAD));
-                    NAPI.Chat.SendChatMessageToAll(color2 + LangFunc.GetText(LangType.Ru, DataName.AdRewriter, ad.Editor));
+                    if (ad.AuthorSIM >= 1) NAPI.Chat.SendChatMessageToAll(color + LangFunc.GetText(LangType.En, DataName.AdWithPhone, ad.EditedAD, ad.AuthorSIM));
+                    else NAPI.Chat.SendChatMessageToAll(color + LangFunc.GetText(LangType.En, DataName.Ad, ad.EditedAD));
+                    NAPI.Chat.SendChatMessageToAll(color2 + LangFunc.GetText(LangType.En, DataName.AdRewriter, ad.Editor));
                 }
                 
                 //
@@ -656,7 +656,7 @@ namespace NeptuneEvo.Fractions.LSNews
                 try
                 {
                     int skip = 20;
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var logs = await db.Advertised
                         .Where(v => v.Status == true)

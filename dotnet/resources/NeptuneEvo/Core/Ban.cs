@@ -25,7 +25,7 @@ namespace NeptuneEvo.Core
         {
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 return await db.Banned
                     .Where(b => b.Hwid == hwid)
@@ -39,7 +39,7 @@ namespace NeptuneEvo.Core
             return null;
         }
 
-        // Поиск по UUID персонажа
+        // Search by character UUID
         public static async Task<Banneds> GetBanToUUID(ServerBD db, int UUID)
         {
             try
@@ -59,7 +59,7 @@ namespace NeptuneEvo.Core
         {
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 return await db.Banned
                     .Where(b => b.Account.ToLower() == Login.ToLower())
@@ -91,7 +91,7 @@ namespace NeptuneEvo.Core
                         return;
                     }
 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     await db.InsertAsync(new Banneds
                     {
@@ -122,7 +122,7 @@ namespace NeptuneEvo.Core
                 {
                     if (!Main.PlayerUUIDs.ContainsKey(nickname)) return;
 
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var isBan = await db.Banned
                         .AnyAsync(b => b.Name.ToLower() == nickname.ToLower());
@@ -190,7 +190,7 @@ namespace NeptuneEvo.Core
             {
                 try
                 {
-                    await using var db = new ServerBD("MainDB");//В отдельном потоке
+                    await using var db = new ServerBD("MainDB");//On Separate Thread
 
                     var isBan = await db.Banned
                         .AnyAsync(b => b.Account.ToLower() == login.ToLower());
@@ -248,7 +248,7 @@ namespace NeptuneEvo.Core
         {
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var isBan = await db.Banned
                     .AnyAsync(b => b.Name.ToLower() == nickname.ToLower());
@@ -273,7 +273,7 @@ namespace NeptuneEvo.Core
         {
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var isBan = await db.Banned
                     .AnyAsync(b => b.Name.ToLower() == nickname.ToLower());
@@ -296,7 +296,7 @@ namespace NeptuneEvo.Core
         {
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var isBan = await db.Banned
                     .AnyAsync(b => b.Account.ToLower() == login.ToLower());
@@ -319,7 +319,7 @@ namespace NeptuneEvo.Core
         {
             try
             {
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 db.Banned
                     .Where(b => DateTime.Now > b.Until)

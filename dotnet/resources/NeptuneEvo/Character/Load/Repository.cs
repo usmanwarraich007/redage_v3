@@ -47,7 +47,7 @@ namespace NeptuneEvo.Character.Load
                     //return;
                 }
 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var ban = await db.Banned
                     .AnyAsync(v => v.Uuid == uuid && v.Until > DateTime.Now);

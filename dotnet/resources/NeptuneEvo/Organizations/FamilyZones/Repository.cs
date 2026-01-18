@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Database;
 using GTANetworkAPI;
+using Localization;
 using NeptuneEvo.Functions;
 using NeptuneEvo.Handles;
 using NeptuneEvo.Organizations.FamilyZones.Models;
@@ -127,7 +128,7 @@ namespace NeptuneEvo.Organizations.FamilyZones
         public static void OnResource()
         {
             
-            using var db = new ServerBD("MainDB");//В отдельном потоке
+            using var db = new ServerBD("MainDB");//On Separate Thread
 
             var familyZones = db.Familyzones.ToList();
 
@@ -347,7 +348,7 @@ namespace NeptuneEvo.Organizations.FamilyZones
                 
                 if (warsCount > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На данное время вы не можете забить стрелку.", 8000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantScheduleWarNow), 8000);
                     //Trigger.ClientEvent(player, "client.closeWar");
                     return false;
                 }
@@ -440,7 +441,7 @@ namespace NeptuneEvo.Organizations.FamilyZones
 
                 if (familyZone.OrganizationId == memberOrganizationData.Id)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"Эта зона и так ваша", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZoneIsYours), 3000);
                     return;
                 }
 
@@ -449,7 +450,7 @@ namespace NeptuneEvo.Organizations.FamilyZones
                 
                 if (war!= null && war.AttackingId > 0 && war.ProtectingId > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На данную зону уже идет захват", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZoneBeingCaptured), 3000);
                     Trigger.ClientEvent(player, "client.closeWar");
                     return;
                 }
@@ -518,7 +519,7 @@ namespace NeptuneEvo.Organizations.FamilyZones
                 
                 if (war.AttackingId > 0 && war.ProtectingId > 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, $"На данную зону уже идет захват", 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ZoneBeingCaptured), 3000);
                     Trigger.ClientEvent(player, "client.closeWar");
                     return;
                 }
@@ -528,7 +529,7 @@ namespace NeptuneEvo.Organizations.FamilyZones
                     war.AttackingId = (ushort) memberOrganizationData.Id;
                     war.Update();
                     
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вы забили стрелку", 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouScheduledWar), 3000);
                     return;
                 }
             }

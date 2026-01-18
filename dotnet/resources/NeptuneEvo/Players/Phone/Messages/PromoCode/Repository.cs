@@ -45,7 +45,7 @@ namespace NeptuneEvo.Players.Phone.Messages.PromoCode
                         {
                             try
                             {
-                                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                                 await db.PromocodesNew
                                     .Where(v => v.Promo == text)
@@ -58,10 +58,10 @@ namespace NeptuneEvo.Players.Phone.Messages.PromoCode
                             }
                         });
                         
-                        return LangFunc.GetText(LangType.Ru, DataName.PromoAddedToAcc);
+                        return LangFunc.GetText(LangType.En, DataName.PromoAddedToAcc);
                     }
 
-                    return LangFunc.GetText(LangType.Ru, DataName.AlreadyPromoEntered);
+                    return LangFunc.GetText(LangType.En, DataName.AlreadyPromoEntered);
                 }
                 else if (Main.RefCodes.ContainsKey(text))
                 {
@@ -70,7 +70,7 @@ namespace NeptuneEvo.Players.Phone.Messages.PromoCode
                         uuid = Main.RefCodes[text];
                         if (accountData.Chars[0] == uuid || accountData.Chars[1] == uuid || accountData.Chars[2] == uuid)
                         {
-                            return LangFunc.GetText(LangType.Ru, DataName.CantEnterPromoPersa);
+                            return LangFunc.GetText(LangType.En, DataName.CantEnterPromoPersa);
                         }
                         accountData.RefferalId = uuid;
                         
@@ -78,7 +78,7 @@ namespace NeptuneEvo.Players.Phone.Messages.PromoCode
                         {
                             try
                             {
-                                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                                 await db.Accounts
                                     .Where(v => v.Login == accountData.Login)
@@ -103,23 +103,23 @@ namespace NeptuneEvo.Players.Phone.Messages.PromoCode
                             }
                         });
                         
-                        return LangFunc.GetText(LangType.Ru, DataName.RefCodeUsed, text);
+                        return LangFunc.GetText(LangType.En, DataName.RefCodeUsed, text);
                     }
 
-                    return LangFunc.GetText(LangType.Ru, DataName.RefCodeAlreadyUsed);
+                    return LangFunc.GetText(LangType.En, DataName.RefCodeAlreadyUsed);
                 }
                 
-                return LangFunc.GetText(LangType.Ru, DataName.NoCodeThisServ);
+                return LangFunc.GetText(LangType.En, DataName.NoCodeThisServ);
             }
             if (accountData.RefferalId == 0)
             {
                 if (!Main.UUIDs.Contains(uuid))
                 {
-                    return LangFunc.GetText(LangType.Ru, DataName.NoCodeThisServ);
+                    return LangFunc.GetText(LangType.En, DataName.NoCodeThisServ);
                 }
                 if (accountData.Chars[0] == uuid || accountData.Chars[1] == uuid || accountData.Chars[2] == uuid)
                 {
-                    return LangFunc.GetText(LangType.Ru, DataName.CantEnterPromoPersa);
+                    return LangFunc.GetText(LangType.En, DataName.CantEnterPromoPersa);
                 }
                 accountData.RefferalId = uuid;
                 
@@ -127,7 +127,7 @@ namespace NeptuneEvo.Players.Phone.Messages.PromoCode
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.Accounts
                             .Where(v => v.Login == accountData.Login)
@@ -152,10 +152,10 @@ namespace NeptuneEvo.Players.Phone.Messages.PromoCode
                     }
                 });
                 
-                return LangFunc.GetText(LangType.Ru, DataName.RefCodeUsed, uuid);
+                return LangFunc.GetText(LangType.En, DataName.RefCodeUsed, uuid);
             }
 
-            return LangFunc.GetText(LangType.Ru, DataName.RefCodeAlreadyUsed);
+            return LangFunc.GetText(LangType.En, DataName.RefCodeAlreadyUsed);
         }
         
     }

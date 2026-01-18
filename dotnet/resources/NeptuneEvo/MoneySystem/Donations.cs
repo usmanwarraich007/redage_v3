@@ -101,7 +101,7 @@ namespace NeptuneEvo.MoneySystem
                     var targetAccountData = target.GetAccountData();
                     if (targetAccountData == null)
                     {
-                        GameLog.AccountLog(dlogin, "-", "-", "-", LangFunc.GetText(LangType.Ru, DataName.RefTopUp, login, reds));
+                        GameLog.AccountLog(dlogin, "-", "-", "-", LangFunc.GetText(LangType.En, DataName.RefTopUp, login, reds));
                         using MySqlCommand cmd = new MySqlCommand
                         {
                             CommandText = "update `accounts` set `redbucks`=`redbucks`+@val0 where `login`=@val1; UPDATE `promocodes_new` SET `donreceived`=`donreceived`+@val2 WHERE `promo`=@val3"
@@ -115,8 +115,8 @@ namespace NeptuneEvo.MoneySystem
                     else
                     {
                         UpdateData.RedBucks(target, (int)reds, msg: "Пополнение за реферала");
-                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.ComeRbFromRef, reds, login), DateTime.Now);
-                        //Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ComeRbFromRef, reds, login), 3000);
+                        Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.ComeRbFromRef, reds, login), DateTime.Now);
+                        //Notify.Send(target, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ComeRbFromRef, reds, login), 3000);
                         using MySqlCommand cmd = new MySqlCommand
                         {
                             CommandText = "update `accounts` set `redbucks`=@val0 where `login`=@val1; UPDATE `promocodes_new` SET `donreceived`=`donreceived`+@val2 WHERE `promo`=@val3"
@@ -204,7 +204,7 @@ namespace NeptuneEvo.MoneySystem
                                     cmd.Parameters.AddWithValue("@val1", accountData.Login);
                                     MySQL.Query(cmd);
                                     //Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, $"Вам пришли {reds} RedBucks", 3000);
-                                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.Ru, DataName.UvGotReds, reds), DateTime.Now);
+                                    Players.Phone.Messages.Repository.AddSystemMessage(player, (int)DefaultNumber.RedAge, LangFunc.GetText(LangType.En, DataName.UvGotReds, reds), DateTime.Now);
                                 }
                             }
                             command.CommandText = $"delete from completed where id={id}";
@@ -264,17 +264,17 @@ namespace NeptuneEvo.MoneySystem
                 if (login.Equals(accountData.Login)) return;
                 if (sum < 25 || sum > 9999)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RbTransferLimit), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RbTransferLimit), 3000);
                     return;
                 }
                 if (accountData.RedBucks < sum)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                     return;
                 }
                 if (DateTime.Now < sessionData.TimingsData.NextGiftDonate)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Cooldown5min), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Cooldown5min), 3000);
                     return;
                 }
                 if (characterData.AdminLVL <= 5) sessionData.TimingsData.NextGiftDonate = DateTime.Now.AddMinutes(5);
@@ -287,7 +287,7 @@ namespace NeptuneEvo.MoneySystem
                 using DataTable result = MySQL.QueryRead(cmd);
                 if (result == null || result.Rows.Count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RecoveryCantFind), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RecoveryCantFind), 3000);
                     return;
                 }
                 int targetrb = Convert.ToInt32(result.Rows[0]["redbucks"]);
@@ -316,7 +316,7 @@ namespace NeptuneEvo.MoneySystem
                     cmdAccounts.Parameters.AddWithValue("@val3", login);
                 }
                 MySQL.Query(cmdAccounts);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucGiftRb, sum, login), 5000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucGiftRb, sum, login), 5000);
             }
             catch (Exception e)
             {
@@ -340,31 +340,31 @@ namespace NeptuneEvo.MoneySystem
                             int slotId = 0;
                             if (!Int32.TryParse(data, out slotId))
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RecoveryError), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RecoveryError), 3000);
                                 return;
                             }
                             slotId -= 1;
                             if (accountData.Chars[slotId] != -2)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Already3Slot), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Already3Slot), 3000);
                                 return;
                             }
                             if (accountData.RedBucks < 1000)
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NetRB), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NetRB), 3000);
                                 return;
                             }
-                            UpdateData.RedBucks(player, -1000, msg: LangFunc.GetText(LangType.Ru, DataName.Buy3Slot));
+                            UpdateData.RedBucks(player, -1000, msg: LangFunc.GetText(LangType.En, DataName.Buy3Slot));
                             if (accountData.VipLvl <= 3)
                             {
                                 accountData.VipDate = (accountData.VipLvl == 0) ? DateTime.Now.AddDays(30) : accountData.VipDate.AddDays(30);
                                 accountData.VipLvl = 3;
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlatinumVIP30d), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlatinumVIP30d), 3000);
                             }
                             else
                             {
                                 accountData.VipDate = accountData.VipDate.AddDays(7);
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PlattoVip7d), 5000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PlattoVip7d), 5000);
                             }
 
                             accountData.Chars[slotId] = -1;

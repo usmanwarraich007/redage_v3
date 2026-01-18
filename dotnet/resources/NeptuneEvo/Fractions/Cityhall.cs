@@ -103,12 +103,12 @@ namespace NeptuneEvo.Fractions
             if (sessionData == null) return; 
             else if (sessionData.CuffedData.Cuffed) 
             { 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000); 
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000); 
                 return; 
             } 
             else if (sessionData.DeathData.InDeath) 
             { 
-                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000); 
+                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000); 
                 return; 
             } 
             else if (Main.IHaveDemorgan(player, true)) return; 
@@ -188,17 +188,17 @@ namespace NeptuneEvo.Fractions
  
                 if (sessionData.CuffedData.Cuffed) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000); 
                     return; 
                 } 
                 else if (sessionData.DeathData.InDeath) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000); 
                     return; 
                 } 
                 else if (Main.IHaveDemorgan(player, true)) return; 
  
-                Trigger.ClientEvent(player, "openDialog", "CallGovMemberDialog", LangFunc.GetText(LangType.Ru, DataName.AreYouWantToCallGov)); 
+                Trigger.ClientEvent(player, "openDialog", "CallGovMemberDialog", LangFunc.GetText(LangType.En, DataName.AreYouWantToCallGov)); 
             } 
             catch (Exception e) 
             { 
@@ -224,17 +224,17 @@ namespace NeptuneEvo.Fractions
                         var fractionData = player.GetFractionData();
                         if (fractionData == null || fractionData.Id != (int) Models.Fractions.CITY) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotGOV), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotGOV), 3000); 
                             return; 
                         } 
                         if (!sessionData.WorkData.OnDuty) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000); 
                             return; 
                         } 
                         if (!fractionData.IsOpenGunStock) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Warehouse2Closed), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Warehouse2Closed), 3000); 
                             return; 
                         } 
                         if (!player.IsFractionAccess(RankToAccess.OpenWeaponStock)) return; 
@@ -247,7 +247,7 @@ namespace NeptuneEvo.Fractions
                     case 13: 
                         if (sessionData.Following != null) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsFollowing), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsFollowing), 3000); 
                             return; 
                         } 
  
@@ -281,7 +281,7 @@ namespace NeptuneEvo.Fractions
                 { 
                     if (player.Position.DistanceTo(FirstCityhallLiftTP[index]) <= 2) 
                     { 
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAtFloor), 3000); 
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAtFloor), 3000); 
                         return; 
                     } 
  
@@ -291,7 +291,7 @@ namespace NeptuneEvo.Fractions
                 { 
                     if (player.Position.DistanceTo(SecondCityhallLiftTP[index]) <= 2) 
                     { 
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAtFloor), 3000); 
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAtFloor), 3000); 
                         return; 
                     } 
  
@@ -301,7 +301,7 @@ namespace NeptuneEvo.Fractions
                 { 
                     if (player.Position.DistanceTo(CourtLiftTP[index]) <= 2) 
                     { 
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAtFloor), 3000); 
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAtFloor), 3000); 
                         return; 
                     } 
  
@@ -312,7 +312,7 @@ namespace NeptuneEvo.Fractions
                 { 
                     if (player.Position.DistanceTo(SecondGovLiftCoords[index]) <= 2) 
                     { 
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyAtFloor), 3000); 
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyAtFloor), 3000); 
                         return; 
                     } 
  
@@ -320,7 +320,7 @@ namespace NeptuneEvo.Fractions
                     index = index == 0 ? index += 1 : index += 2; 
                 } 
  
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GoingToFloor, index), 3000); 
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GoingToFloor, index), 3000); 
             } 
             catch (Exception e) 
             { 
@@ -334,7 +334,7 @@ namespace NeptuneEvo.Fractions
             try 
             { 
                 if (player.GetFractionId() == (int) Models.Fractions.CITY) FractionClothingSets.OpenFractionClothingSetsMenu(player);
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotGOV), 3000); 
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotGOV), 3000); 
             } 
             catch (Exception e) 
             { 
@@ -350,12 +350,12 @@ namespace NeptuneEvo.Fractions
                 var fractionData = player.GetFractionData();
                 if (fractionData == null || fractionData.Id != (int) Models.Fractions.CITY) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoDostup), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoDostup), 3000); 
                     return; 
                 } 
                 if (!fractionData.IsOpenStock) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseClosed), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseClosed), 3000); 
                     return; 
                 } 
                 Manager.OpenFractionSM(player, "gov"); 
@@ -375,7 +375,7 @@ namespace NeptuneEvo.Fractions
  
                 if (player.Position.DistanceTo(GiveGunPosition) >= 5) 
                 { 
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.TooFar), 3000); 
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.TooFar), 3000); 
                     return; 
                 } 
 
@@ -404,30 +404,30 @@ namespace NeptuneEvo.Fractions
                         if (!Manager.canGetWeapon(player, "Armor")) return; 
                         if (fractionData.Materials < 250) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseNoMats), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseNoMats), 3000); 
                             return; 
                         } 
                         else if (Chars.Repository.itemCount(player, "inventory", ItemId.BodyArmor) >= Chars.Repository.maxItemCount) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AlreadyHaveBronik), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AlreadyHaveBronik), 3000); 
                             return; 
                         } 
                         else if (Chars.Repository.AddNewItem(player, $"char_{player.GetUUID()}", "inventory", ItemId.BodyArmor, 1, 100.ToString()) == -1) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000); 
                             return; 
                         } 
                         fractionData.Materials -= 250; 
                         fractionData.UpdateLabel(); 
                         GameLog.Stock((int) Models.Fractions.CITY, player.GetUUID(), player.Name, "armor", 1, "out"); 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GetBronik), 3000); 
-                        Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.Ru, DataName.CraftedBronik)); 
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GetBronik), 3000); 
+                        Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMats, LangFunc.GetText(LangType.En, DataName.CraftedBronik)); 
                         return; 
                     case 5: 
                         if (!Manager.canGetWeapon(player, "Medkits")) return; 
                         if (fractionData.MedKits == 0) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseNoAptekas), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseNoAptekas), 3000); 
                             return; 
                         } 
                         else if (Chars.Repository.isFreeSlots(player, ItemId.HealthKit, 1) != 0) return; 
@@ -435,8 +435,8 @@ namespace NeptuneEvo.Fractions
                         fractionData.MedKits--; 
                         fractionData.UpdateLabel(); 
                         GameLog.Stock((int) Models.Fractions.CITY, player.GetUUID(), player.Name, "medkit", 1, "out"); 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.GotApteka), 3000); 
-                        Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.Ru, DataName.GetApteka)); 
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.GotApteka), 3000); 
+                        Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeMedkits, LangFunc.GetText(LangType.En, DataName.GetApteka)); 
                         return; 
                     case 6: 
                         if (Manager.canGetWeapon(player, "PistolAmmo")) Manager.giveAmmo(player, ItemId.PistolAmmo, 12); 
@@ -452,7 +452,7 @@ namespace NeptuneEvo.Fractions
                         ItemStruct aItem = Chars.Repository.isItem(player, "inventory", ItemId.BodyArmor); 
                         if (aItem == null) 
                         { 
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoBronik), 3000); 
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoBronik), 3000); 
                             return; 
                         } 
                         int armorp; 
@@ -475,7 +475,7 @@ namespace NeptuneEvo.Fractions
                         sessionData.ArmorHealth = -1; 
                         ClothesComponents.SetSpecialClothes(player, 9, 0, 0); 
                         ClothesComponents.UpdateClothes(player); 
-                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.BronikReturn, armorp, matstoadd), 5000); 
+                        Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.BronikReturn, armorp, matstoadd), 5000); 
                         return; 
                     default: 
                         // Not supposed to end up here.  

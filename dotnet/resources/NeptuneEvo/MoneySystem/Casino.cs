@@ -85,7 +85,7 @@ namespace NeptuneEvo.MoneySystem
                         if (player.IsInVehicle) return;
                         if (sessionData.Following != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                             return;
                         }
                         characterData.InCasino = true;     
@@ -95,7 +95,7 @@ namespace NeptuneEvo.MoneySystem
                         if (player.IsInVehicle) return;
                         if (sessionData.Following != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                             return;
                         }
                         characterData.InCasino = false;
@@ -105,7 +105,7 @@ namespace NeptuneEvo.MoneySystem
                         if (player.IsInVehicle) return;
                         if (sessionData.Following != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                             return;
                         }
                         characterData.InCasino = true;
@@ -115,7 +115,7 @@ namespace NeptuneEvo.MoneySystem
                         if (player.IsInVehicle) return;
                         if (sessionData.Following != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                             return;
                         }
                         characterData.InCasino = false;
@@ -125,12 +125,12 @@ namespace NeptuneEvo.MoneySystem
                         if (player.IsInVehicle) return;
                         if (sessionData.Following != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                             return;
                         }
                         if ((!Main.DoorsControl.ContainsKey("am_3") || Main.DoorsControl["am_3"]) && player.GetFractionId() != (int)Fractions.Models.Fractions.ARMENIAN)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubDoorClosed), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubDoorClosed), 3000);
                             return;
                         }
                         Trigger.ClientEvent(player, "pentload");
@@ -140,12 +140,12 @@ namespace NeptuneEvo.MoneySystem
                         if (player.IsInVehicle) return;
                         if (sessionData.Following != null)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyYouFollow), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyYouFollow), 3000);
                             return;
                         }
                         if ((!Main.DoorsControl.ContainsKey("am_3") || Main.DoorsControl["am_3"]) && player.GetFractionId() != (int)Fractions.Models.Fractions.ARMENIAN)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.ClubDoorClosed), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.ClubDoorClosed), 3000);
                             return;
                         }
                         NAPI.Entity.SetEntityPosition(player, casinoChecks[5] + new Vector3(0, 0, 1.12));

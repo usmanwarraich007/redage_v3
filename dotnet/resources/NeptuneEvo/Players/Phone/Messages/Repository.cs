@@ -73,7 +73,7 @@ namespace NeptuneEvo.Players.Phone.Messages
                 if (characterData == null) 
                     return returnMessages;
             
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var messages = await db.Phonemessage
                     .Where(pm =>

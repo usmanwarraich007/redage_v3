@@ -201,7 +201,7 @@ namespace NeptuneEvo.Fractions.Table.Player
                     ExtPlayer target = Main.GetPlayerByID(id);
                     if (!target.IsCharacterData())
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerWithId), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerWithId), 3000);
                         return;
                     }
                     FractionCommands.InviteToFraction(player, target);
@@ -211,7 +211,7 @@ namespace NeptuneEvo.Fractions.Table.Player
                     ExtPlayer target = (ExtPlayer) NAPI.Player.GetPlayerFromName(name);
                     if (!target.IsCharacterData())
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindMan), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindMan), 3000);
                         return;
                     }
                     FractionCommands.InviteToFraction(player, target);
@@ -260,7 +260,7 @@ namespace NeptuneEvo.Fractions.Table.Player
                 if (!player.IsFractionAccess(RankToAccess.Reprimand)) return;
                 if (text.Length > 100)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MaxVigovorLength), 4500);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MaxVigovorLength), 4500);
                     return;
                 }
 
@@ -271,15 +271,15 @@ namespace NeptuneEvo.Fractions.Table.Player
                 var targetMemberFractionData = Manager.GetFractionMemberData(uuid, memberFractionData.Id);
                 if (targetMemberFractionData == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantFindPlayerFraction, name), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantFindPlayerFraction, name), 3000);
                     return;
                 }
                 if (targetMemberFractionData.Rank >= memberFractionData.Rank)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouCantVigovor, name), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouCantVigovor, name), 3000);
                     return;
                 };
-                Logs.Repository.AddLogs(player, FractionLogsType.Reprimand, LangFunc.GetText(LangType.Ru, DataName.GivenVigovor, name, uuid, text));
+                Logs.Repository.AddLogs(player, FractionLogsType.Reprimand, LangFunc.GetText(LangType.En, DataName.GivenVigovor, name, uuid, text));
             }
             catch (Exception e)
             {
@@ -318,17 +318,17 @@ namespace NeptuneEvo.Fractions.Table.Player
                     
                 if (fractionData.IsLeader(memberFractionData.Rank))
                 {
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LeaderCantUval), 5000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LeaderCantUval), 5000);
                     return;
                 }
                 Manager.sendFractionMessage(memberFractionData.Id, "!{#FF8C00}[F] " + $"{player.Name} ({player.Value}) уволился по собственному желанию.", true);
-                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.UnInvite, LangFunc.GetText(LangType.Ru, DataName.SelfUval));
+                Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.UnInvite, LangFunc.GetText(LangType.En, DataName.SelfUval));
                     
                 player.RemoveFractionMemberData();
                 player.ClearAccessories();
                 Customization.ApplyCharacter(player);
                     
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouLeaveFraction), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouLeaveFraction), 3000);
             }
             catch (Exception e)
             {

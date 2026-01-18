@@ -130,12 +130,12 @@ namespace NeptuneEvo.Jobs
                 if (!player.IsCharacterData()) return;
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 else if (Main.IHaveDemorgan(player, true)) return;
@@ -185,7 +185,7 @@ namespace NeptuneEvo.Jobs
 
                 if (!FunctionsAccess.IsWorking("GovMineStockLoad"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 		
@@ -194,13 +194,13 @@ namespace NeptuneEvo.Jobs
 
                 if (!sessionData.WorkData.OnDuty)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PickaxeBroken), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PickaxeBroken), 3000);
                     return;
                 }
 
                 if (!player.IsInVehicle)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouMustBeInVeh), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouMustBeInVeh), 3000);
                     return;
                 }
 
@@ -210,26 +210,26 @@ namespace NeptuneEvo.Jobs
                 {
                     if (!vehicleLocalData.CanMats)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehNoResources), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehNoResources), 3000);
                         return;
                     }
 
                     if (vehicleLocalData.Fraction != (int)Fractions.Models.Fractions.ARMY)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantGruzitVehResc), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantGruzitVehResc), 3000);
                         return;
                     }
 
                     int count = Chars.Repository.getCountItem(VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), GetItems());
                     if (count >= 3200)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.VehMaxResc), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.VehMaxResc), 3000);
                         return;
                     }
 
                     if (MineStockOres[0] == 0 && MineStockOres[1] == 0 && MineStockOres[2] == 0 && MineStockOres[3] == 0 && MineStockOres[4] == 0 && MineStockOres[5] == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.WarehouseEmpty), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.WarehouseEmpty), 3000);
                         return;
                     }
 
@@ -251,10 +251,10 @@ namespace NeptuneEvo.Jobs
                             {
                                 Chars.Repository.AddNewItem(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", item_type, MineStockOres[i]);
 
-                                if (item_type == ItemId.Coal) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Puglya, MineStockOres[i]);
-                                else if (item_type == ItemId.Iron) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Piron, MineStockOres[i]);
-                                else if (item_type == ItemId.Sulfur) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Psera, MineStockOres[i]);
-                                else if (item_type == ItemId.Emerald) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Pizumrud, MineStockOres[i]);
+                                if (item_type == ItemId.Coal) LoadInfo += LangFunc.GetText(LangType.En, DataName.Puglya, MineStockOres[i]);
+                                else if (item_type == ItemId.Iron) LoadInfo += LangFunc.GetText(LangType.En, DataName.Piron, MineStockOres[i]);
+                                else if (item_type == ItemId.Sulfur) LoadInfo += LangFunc.GetText(LangType.En, DataName.Psera, MineStockOres[i]);
+                                else if (item_type == ItemId.Emerald) LoadInfo += LangFunc.GetText(LangType.En, DataName.Pizumrud, MineStockOres[i]);
 
                                 MineStockOres[i] = 0;
                             }
@@ -262,21 +262,21 @@ namespace NeptuneEvo.Jobs
                             {
                                 Chars.Repository.AddNewItem(null, VehicleManager.GetVehicleToInventory(vehicle.NumberPlate), "vehicle", item_type, (3200 - count));
 
-                                if (item_type == ItemId.Coal) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Puglya, 3200 - count);
-                                else if (item_type == ItemId.Iron) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Piron, 3200 - count);
-                                else if (item_type == ItemId.Sulfur) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Psera, 3200 - count);
-                                else if (item_type == ItemId.Emerald) LoadInfo += LangFunc.GetText(LangType.Ru, DataName.Pizumrud, 3200 - count);
+                                if (item_type == ItemId.Coal) LoadInfo += LangFunc.GetText(LangType.En, DataName.Puglya, 3200 - count);
+                                else if (item_type == ItemId.Iron) LoadInfo += LangFunc.GetText(LangType.En, DataName.Piron, 3200 - count);
+                                else if (item_type == ItemId.Sulfur) LoadInfo += LangFunc.GetText(LangType.En, DataName.Psera, 3200 - count);
+                                else if (item_type == ItemId.Emerald) LoadInfo += LangFunc.GetText(LangType.En, DataName.Pizumrud, 3200 - count);
 
                                 MineStockOres[i] -= (3200 - count);
                             }
                         }
                     }
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucLoadResToVeh), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucLoadResToVeh), 3000);
                     SaveMineStocks(1);
 
                     LoadInfo = LoadInfo.Remove(LoadInfo.Length - 2);
-                    Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeOre, LangFunc.GetText(LangType.Ru, DataName.LoadedFromWarehouse, LoadInfo));
+                    Fractions.Table.Logs.Repository.AddLogs(player, FractionLogsType.TakeOre, LangFunc.GetText(LangType.En, DataName.LoadedFromWarehouse, LoadInfo));
                 }
             }
             catch (Exception e)
@@ -295,13 +295,13 @@ namespace NeptuneEvo.Jobs
                 var memberFractionData = player.GetFractionMemberData();
                 if (memberFractionData == null || memberFractionData.Id != (int)Fractions.Models.Fractions.ARMY) 
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OnlyGosMine), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OnlyGosMine), 3000);
                     return;
                 }
 
                 if (!sessionData.WorkData.OnDuty)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.MustWorkDay), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.MustWorkDay), 3000);
                     return;
                 }
 
@@ -324,18 +324,18 @@ namespace NeptuneEvo.Jobs
 
                 if (!FunctionsAccess.IsWorking("PlayerStartedMining"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 if (sessionData.AnimationUse != null || Main.IHaveDemorgan(player, true)) return;
                 else if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 else if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
 
@@ -347,7 +347,7 @@ namespace NeptuneEvo.Jobs
                 
                 /*if (DateTime.Now.Hour > 10 && DateTime.Now.Hour != 22 && DateTime.Now.Hour != 23)
                 { // todo translate
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OgranVremyaMiner), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OgranVremyaMiner), 3000);
                     return;
                 }*/
 
@@ -358,7 +358,7 @@ namespace NeptuneEvo.Jobs
                     else if (Repository.isItem(player, "inventory", ItemId.Pickaxe1) != null) Trigger.ClientEvent(player, "mineJob_updateToolInfo", 1);
                     else
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoPickaxe), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoPickaxe), 3000);
                         return;
                     }*/
                     Trigger.StopAnimation(player);
@@ -369,7 +369,7 @@ namespace NeptuneEvo.Jobs
 
                     Trigger.ClientEvent(player, "mineJob_startMining");
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantStartJobNow), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantStartJobNow), 3000);
             }
             catch (Exception e)
             {
@@ -428,18 +428,18 @@ namespace NeptuneEvo.Jobs
                 if (MainPickaxe == null) MainPickaxe = Chars.Repository.isItem(player, "inventory", ItemId.Pickaxe1);
                 if (MainPickaxe == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoPickaxe), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoPickaxe), 3000);
                     return;
                 }
 
                 if (MainPickaxe.Item.Data == "" || MainPickaxe.Item.Data.Length < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PickaxeBroken), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PickaxeBroken), 3000);
                     Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", MainPickaxe.Item.ItemId, 1);
                 }
                 else if (MainPickaxe.Item.ItemId == ItemId.Pickaxe1 && (Convert.ToInt32(MainPickaxe.Item.Data) - 1) <= 0 || MainPickaxe.Item.ItemId == ItemId.Pickaxe2 && (Convert.ToInt32(MainPickaxe.Item.Data) - 1) <= 0 || MainPickaxe.Item.ItemId == ItemId.Pickaxe3 && (Convert.ToInt32(MainPickaxe.Item.Data) - 1) <= 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PickaxeBroken), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PickaxeBroken), 3000);
                     Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", MainPickaxe.Item.ItemId, 1);
                 }
                 else
@@ -476,7 +476,7 @@ namespace NeptuneEvo.Jobs
                     else MinerJobPlayersOreTypeInfo[player.Value] = 0;
                 }
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucResDobil), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucResDobil), 3000);
                 player.AddTableScore(TableTaskId.Item19);
                 Trigger.ClientEvent(player, "mineJob_updateOreCarryStatus", true);
 
@@ -507,26 +507,26 @@ namespace NeptuneEvo.Jobs
                 if (mainPickaxe == null) mainPickaxe = Chars.Repository.isItem(player, "inventory", ItemId.Pickaxe1);
                 if (mainPickaxe == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouHaveNoPickaxe), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouHaveNoPickaxe), 3000);
                     return;
                 }
                 
                 /*if (DateTime.Now.Hour > 10 && DateTime.Now.Hour != 22 && DateTime.Now.Hour != 23)
                 { // todo translate
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.OgranVremyaMiner), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.OgranVremyaMiner), 3000);
                     Trigger.ClientEvent(player, "mineJob_stopMining");
                     return;
                 }*/
 
                 if (mainPickaxe.Item.Data == "" || mainPickaxe.Item.Data.Length < 1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PickaxeBroken), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PickaxeBroken), 3000);
                     Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", mainPickaxe.Item.ItemId, 1);
                     Trigger.ClientEvent(player, "mineJob_stopMining");
                 }
                 else if (mainPickaxe.Item.ItemId == ItemId.Pickaxe1 && (Convert.ToInt32(mainPickaxe.Item.Data) - 1) <= 0 || mainPickaxe.Item.ItemId == ItemId.Pickaxe2 && (Convert.ToInt32(mainPickaxe.Item.Data) - 1) <= 0 || mainPickaxe.Item.ItemId == ItemId.Pickaxe3 && (Convert.ToInt32(mainPickaxe.Item.Data) - 1) <= 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PickaxeBroken), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PickaxeBroken), 3000);
                     Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", mainPickaxe.Item.ItemId, 1);
                     Trigger.ClientEvent(player, "mineJob_stopMining");
                 }
@@ -567,7 +567,7 @@ namespace NeptuneEvo.Jobs
 
                 if (Chars.Repository.AddNewItem(player, $"char_{characterData.UUID}", "inventory", item_type, 1) == -1)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoSpaceInventory), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoSpaceInventory), 3000);
                     return;
                 }
             }
@@ -595,7 +595,7 @@ namespace NeptuneEvo.Jobs
                     MinerJobPlayersOreTypeInfo.Remove(player.Value);
                 }
 
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SklafFulled), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SklafFulled), 3000);
                 Trigger.ClientEvent(player, "mineJob_updateOreCarryStatus", false);
 
                 Trigger.ClientEventInRange(player.Position, 250f, "PlayAnimToKey", player, false, "mineJob");
@@ -682,7 +682,7 @@ namespace NeptuneEvo.Jobs
             {
                 if (!FunctionsAccess.IsWorking("PlayerSellOres"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 
@@ -699,7 +699,7 @@ namespace NeptuneEvo.Jobs
                 ItemStruct oreamount = Chars.Repository.isItem(player, "inventory", item_type);
                 int count = (oreamount == null) ? 0 : oreamount.Item.Count;
 
-                if (count < amount) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotEnoughRes), 3000);
+                if (count < amount) Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotEnoughRes), 3000);
                 else
                 {
                     Chars.Repository.Remove(player, $"char_{characterData.UUID}", "inventory", item_type, amount);
@@ -708,7 +708,7 @@ namespace NeptuneEvo.Jobs
                     Wallet.Change(player, totalmoney);
                     GameLog.Money($"server", $"player({characterData.UUID})", totalmoney, $"sellOre({stock_item_index},{amount})");
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SellResources, Wallet.Format(totalmoney)), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SellResources, Wallet.Format(totalmoney)), 3000);
                     //BattlePass.Repository.UpdateReward(player, 58);
 
                     PlantStockOres[stock_item_index] += amount;
@@ -726,13 +726,13 @@ namespace NeptuneEvo.Jobs
                         {
                             qMain.UpdateQuestsStage(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, 1, isUpdateHud: true);
                             qMain.UpdateQuestsComplete(player, Zdobich.QuestName, (int) zdobich_quests.Stage11, true);
-                            Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.Ru, DataName.QuestPartComplete));
+                            Trigger.SendChatMessage(player, "!{#fc0}" + LangFunc.GetText(LangType.En, DataName.QuestPartComplete));
                         }
                         else
                         {
                             qMain.UpdateQuestsData(player, Zdobich.QuestName, (int)zdobich_quests.Stage11, sessionData.WorkData.PointsCount.ToString());
                             //todo translate (было DataName.PointsQuestGot)
-                            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
+                            Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.YouEarnedJob, sessionData.WorkData.PointsCount, 500 - sessionData.WorkData.PointsCount));
                         }
                     }
                 }
@@ -751,7 +751,7 @@ namespace NeptuneEvo.Jobs
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB");//В отдельном потоке
+                        await using var db = new ServerBD("MainDB");//On Separate Thread
 
                         await db.MineStocks
                             .Where(v => v.Id == mine_index)

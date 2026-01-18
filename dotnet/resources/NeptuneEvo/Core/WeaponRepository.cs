@@ -356,7 +356,7 @@ namespace NeptuneEvo.Core
                 {
                     try
                     {
-                        await using var db = new ServerBD("MainDB"); //В отдельном потоке
+                        await using var db = new ServerBD("MainDB"); //On Separate Thread
 
                         db.Insert(new Weapons
                         {
@@ -612,7 +612,7 @@ namespace NeptuneEvo.Core
             }
         }
         [RemoteEvent("TakeWeapon")]
-        public static void TakeWeapon(ExtPlayer player) // Пока что думаем как реализовать instant переменную.
+        public static void TakeWeapon(ExtPlayer player) // Still deciding how to implement the 'instant' variable.
         {
             try
             {
@@ -634,8 +634,8 @@ namespace NeptuneEvo.Core
                 {
                     if (ItemInfo.functionType == newItemType.Weapons)
                         OnStartTimerWeaponUpdate(player, ItemStruct.Item.SqlId);
-                    
-                    Commands.RPChat("sme", player, $"убрал" + (characterData.Gender ? "" : "а") + $" {Chars.Repository.ItemsInfo[Item].Name}");
+
+                    Commands.RPChat("sme", player, $"put away {Chars.Repository.ItemsInfo[Item].Name}");
                     Trigger.ClientEvent(player, "client.weapon.take", true);
                     sessionData.LastActiveWeap = 0;
                     WeaponComponents.Remove(player);
@@ -644,7 +644,7 @@ namespace NeptuneEvo.Core
                 else
                 {
                     int isUseItem = Chars.Repository.ItemsHands(player, ItemStruct.Location, ItemStruct.Index, ItemStruct.Item);
-                    if (isUseItem == 1) Commands.RPChat("sme", player, $"убрал" + (characterData.Gender ? "" : "а") + $" {Chars.Repository.ItemsInfo[Item].Name}");
+                    if (isUseItem == 1) Commands.RPChat("sme", player, $"put away {Chars.Repository.ItemsInfo[Item].Name}");
                 }
             }
             catch (Exception e)
@@ -716,20 +716,20 @@ namespace NeptuneEvo.Core
                 int reas = 500 + reason;
                 if (!type)
                 {
-                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.Ru, DataName.WasKickedAC, player.Name, player.Value, reas));
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.Ru, DataName.YouWasKickedAc), 30000);
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.Ru, DataName.AcIfUsure), 30000);
+                    Trigger.SendToAdmins(1, LangFunc.GetText(LangType.En, DataName.WasKickedAC, player.Name, player.Value, reas));
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.YouWasKickedAc), 30000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.AcIfUsure), 30000);
                     GameLog.Admin($"server", $"ACKick(0{reas})", $"{player.Name}");
                 }
                 else
                 {
                     if (sessionData.AccBanned) return;
                     sessionData.AccBanned = true;
-                    Trigger.SendToAdmins(1,"!{#DF5353}" + LangFunc.GetText(LangType.Ru, DataName.AutoACBan2, player.Name, reas));
+                    Trigger.SendToAdmins(1,"!{#DF5353}" + LangFunc.GetText(LangType.En, DataName.AutoACBan2, player.Name, reas));
                     //DateTime until = DateTime.Now.AddYears(100);
                    // Ban.Online(player, until, true, $"Cheats(0{reas})", "AntiCheat");
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.Ru, DataName.YouBannedPerm), 30000);
-                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.Ru, DataName.ReasonCheats), 30000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.YouBannedPerm), 30000);
+                    Notify.Send(player, NotifyType.Warning, NotifyPosition.Center, LangFunc.GetText(LangType.En, DataName.ReasonCheats), 30000);
                     GameLog.Admin($"server", $"ACBan(0{reas})", $"{player.Name}");
                 }
                 player.Kick();
@@ -814,8 +814,8 @@ namespace NeptuneEvo.Core
                 {
                     InventoryItemData _hItem = Chars.Repository.GetItemData(player, "accessories", 1);
                     if (Item.ItemId != ItemId.Mask && _hItem.ItemId != ItemId.Mask) return;
-                    if (Item.ItemId == ItemId.Mask) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouPutOnMask), 3000);
-                    else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.YouPutOffMask), 3000);
+                    if (Item.ItemId == ItemId.Mask) Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouPutOnMask), 3000);
+                    else Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.YouPutOffMask), 3000);
                     Chars.Repository.SetItemData(player, "accessories", 1, Item, true);
                     Chars.Repository.SetItemData(player, "fastSlots", 4, _hItem, true);
                     return;
@@ -827,23 +827,23 @@ namespace NeptuneEvo.Core
                     {
                         if (player.VehicleSeat == (int)VehicleSeat.Driver)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoWeaponOnVeh), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoWeaponOnVeh), 3000);
                             return;
                         }
                         else if (Item.ItemId == ItemId.Revolver || Item.ItemId == ItemId.RevolverMk2 || Item.ItemId == ItemId.NavyRevolver)
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoRevolverCar), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoRevolverCar), 3000);
                             return;
                         }
                     }*/
                     if (characterData.LVL == 0)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoTimeWeapon), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoTimeWeapon), 3000);
                         return;
                     }
                     if (characterData.ArrestTime >= 1)
                     {
-                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.CantDoKPZ), 3000);
+                        Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.CantDoKPZ), 3000);
                         return;
                     }
                     int index = sessionData.ActiveWeap.Index;
@@ -867,7 +867,7 @@ namespace NeptuneEvo.Core
                         else Trigger.ClientEvent(player, "client.weapon.give", (int)wHash, 1, false, Item.ItemId);
                     }
                     BattlePass.Repository.UpdateReward(player, 99);
-                    Commands.RPChat("sme", player, $"достал" + (characterData.Gender ? "" : "а") + $" {ItemInfo.Name}");
+                    Commands.RPChat("sme", player, $"took out {ItemInfo.Name}");
                     sessionData.LastActiveWeap = Item.SqlId;
                 }
                 else

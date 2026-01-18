@@ -532,7 +532,7 @@ namespace NeptuneEvo.Events.HeliCrash
                     if (hack_chance <= 50)
                     {
                         Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter,
-                            LangFunc.GetText(LangType.Ru, DataName.SucZamok), 3000);
+                            LangFunc.GetText(LangType.En, DataName.SucZamok), 3000);
                         var position = heliBox.Obj.Position;
                         ParticleFx.PlayFXonPos(position, 500f, position.X, position.Y, position.Z, "scr_indep_fireworks",
                             "scr_indep_firework_shotburst", 5000);
@@ -543,7 +543,7 @@ namespace NeptuneEvo.Events.HeliCrash
                     {
                         heliBox.Health = MaxHealth;
                         Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter,
-                            LangFunc.GetText(LangType.Ru, DataName.FailZamok), 3000);
+                            LangFunc.GetText(LangType.En, DataName.FailZamok), 3000);
                     }
 
                     var armylockpick = Chars.Repository.isItem(player, "inventory", ItemId.ArmyLockpick);
@@ -583,7 +583,7 @@ namespace NeptuneEvo.Events.HeliCrash
             
                 if (Chars.Repository.isItem(player, "inventory", ItemId.ArmyLockpick) == null)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoArmyLockpick), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoArmyLockpick), 3000);
                     return (0, 0);
                 }
             

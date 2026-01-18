@@ -231,8 +231,8 @@ namespace NeptuneEvo.Events.AirDrop
 
                     foreach (var foreachPlayer in Character.Repository.GetPlayers())
                     {
-                        Trigger.SendChatMessage(foreachPlayer, "~o~" + LangFunc.GetText(LangType.Ru, DataName.AirDropZakazan));
-                        EventSys.SendCoolMsg(foreachPlayer,"AirDrop", $"Скоро начнётся!", LangFunc.GetText(LangType.Ru, DataName.AirDropZakazan), "", 10000);
+                        Trigger.SendChatMessage(foreachPlayer, "~o~" + LangFunc.GetText(LangType.En, DataName.AirDropZakazan));
+                        EventSys.SendCoolMsg(foreachPlayer,"AirDrop", $"Скоро начнётся!", LangFunc.GetText(LangType.En, DataName.AirDropZakazan), "", 10000);
 
                         if (!IsPlayerToEvents(foreachPlayer)) continue;
                         //Notify.Send(foreachPlayer, NotifyType.Info, NotifyPosition.BottomCenter, $"[AirDrop] В течение 20 минут ожидается сброс {dropCount} " + (dropCount == 1 ? "ящика. " : "ящиков. ") + "Введи /airdrop.", 30000); 
@@ -456,7 +456,7 @@ namespace NeptuneEvo.Events.AirDrop
                     Trigger.Dimension(player, 100);
                     sessionData.IsInAirDropZone = true;
                     Trigger.ClientEvent(player, "client.AirDrop.isZone", true);
-                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirGo), 15000);
+                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirGo), 15000);
 
                     if (TeamsInfo.ContainsKey(player.GetFractionName())) 
                         TeamsInfo[player.GetFractionName()].TeammatesInZone += 1;
@@ -502,7 +502,7 @@ namespace NeptuneEvo.Events.AirDrop
                             Trigger.ClientEvent(player, "client.blipZone.remove");
                         }
 
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.LeaveAirTer), 3000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.LeaveAirTer), 3000);
                     }
                 }
             }
@@ -531,7 +531,7 @@ namespace NeptuneEvo.Events.AirDrop
                     {
                         if (airDropData.AirdropLockHealth > 0)
                         {
-                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.PressEtoLockPick), 3000);
+                            Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.PressEtoLockPick), 3000);
                             Trigger.ClientEvent(player, "client.updateAirdropHackStatus", true, airDropData.AirdropLockHealth);
                         }
                         else Trigger.ClientEvent(player, "client.updateAirdropHackStatus", false, 0);
@@ -569,7 +569,7 @@ namespace NeptuneEvo.Events.AirDrop
 
                             if (hack_chance <= 50)
                             {
-                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SucZamok), 3000);
+                                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SucZamok), 3000);
                                 var position = airDropData.Position;
                                 ParticleFx.PlayFXonPos(position, 500f, position.X, position.Y, position.Z, "scr_indep_fireworks", "scr_indep_firework_shotburst", 5000);
                                 Trigger.ClientEventInRange(position, 2.5f, "client.updateAirdropHackStatus", false, 0);
@@ -578,7 +578,7 @@ namespace NeptuneEvo.Events.AirDrop
                             {
                                 airDropData.AirdropLockHealth = 20;
                                 Trigger.ClientEvent(player, "client.updateAirdropHackStatus", true, airDropData.AirdropLockHealth);
-                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FailZamok), 3000);
+                                Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FailZamok), 3000);
                             }
 
                             ItemStruct armylockpick = Chars.Repository.isItem(player, "inventory", ItemId.ArmyLockpick);
@@ -614,7 +614,7 @@ namespace NeptuneEvo.Events.AirDrop
                                 else if (airDropData.Position.DistanceTo(airDropData.AirdropHackPlayerInfo.Position) > 3) airDropData.AirdropHackPlayerInfo = null;
                                 else
                                 {
-                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyHacking), 3000);
+                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyHacking), 3000);
                                     return;
                                 }
                             }
@@ -648,13 +648,13 @@ namespace NeptuneEvo.Events.AirDrop
 
                 if (!FunctionsAccess.IsWorking("AirDrop_StartedHack"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
                 if (characterData.AdminLVL >= 1 && characterData.AdminLVL <= 5)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.RestrictedForAdmin), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.RestrictedForAdmin), 3000);
                     return;
                 }
 
@@ -663,7 +663,7 @@ namespace NeptuneEvo.Events.AirDrop
 
                 if (count == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoArmyLockpick), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoArmyLockpick), 3000);
                     return;
                 }
 
@@ -680,7 +680,7 @@ namespace NeptuneEvo.Events.AirDrop
                                 else if (airDropData.Position.DistanceTo(airDropData.AirdropHackPlayerInfo.Position) > 3) airDropData.AirdropHackPlayerInfo = null;
                                 else
                                 {
-                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.SomebodyHacking), 3000);
+                                    Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.SomebodyHacking), 3000);
                                     return;
                                 }
                             }
@@ -717,18 +717,18 @@ namespace NeptuneEvo.Events.AirDrop
                 if (characterData == null) return;
                 if (sessionData.CuffedData.Cuffed)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsCuffed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsCuffed), 3000);
                     return;
                 }
                 if (sessionData.DeathData.InDeath)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.IsDying), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.IsDying), 3000);
                     return;
                 }
                 if (Main.IHaveDemorgan(player, true)) return;
                 if (!FunctionsAccess.IsWorking("PedAirDrop_Open"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
 
@@ -765,25 +765,25 @@ namespace NeptuneEvo.Events.AirDrop
                 if (!player.IsCharacterData()) return;
                 else if (!FunctionsAccess.IsWorking("PedAirDrop_BuyInfo"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 else if (IsPlayerToEvents(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropBuyed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropBuyed), 3000);
                     return;
                 }
                 else if (AirDropEventStatus == 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropAlready), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropAlready), 3000);
                     return;
                 }
                 else if (UpdateData.CanIChange(player, Main.PricesSettings.AirdropInfoPrice, true) != 255) return;
 
                 if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour <= 23 || DateTime.Now.Hour == 0 && DateTime.Now.Minute <= 10)
-                    Trigger.ClientEvent(player, "openDialog", "PAY_AIRDROP_INFO", LangFunc.GetText(LangType.Ru, DataName.AidropOffer, Main.PricesSettings.AirdropInfoPrice));
+                    Trigger.ClientEvent(player, "openDialog", "PAY_AIRDROP_INFO", LangFunc.GetText(LangType.En, DataName.AidropOffer, Main.PricesSettings.AirdropInfoPrice));
                 else
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AidropTime), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AidropTime), 3000);
             }
             catch (Exception e)
             {
@@ -797,21 +797,21 @@ namespace NeptuneEvo.Events.AirDrop
                 if (!player.IsCharacterData()) return;
                 else if (!FunctionsAccess.IsWorking("PedAirDrop_Perform"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 else if (UpdateData.CanIChange(player, Main.PricesSettings.AirdropOrderPrice, true) != 255) return;
                 else if (AirDropEventStatus > 0)
                 {
                     string nextAirDropTime = "Следующий AirDrop можно будет заказать в " + (AirDropEndEventTime.Hour < 10 ? $"0{AirDropEndEventTime.Hour}" : $"{AirDropEndEventTime.Hour}") + ":" + (AirDropEndEventTime.Minute < 10 ? $"0{AirDropEndEventTime.Minute}" : $"{AirDropEndEventTime.Minute}");
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropWaiting, nextAirDropTime), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropWaiting, nextAirDropTime), 3000);
                     return;
                 }
 
                 if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour <= 23)
-                    Trigger.ClientEvent(player, "openDialog", "PAY_AIRDROP_ORDER", LangFunc.GetText(LangType.Ru, DataName.AirdropBuyingg, Main.PricesSettings.AirdropOrderPrice));
+                    Trigger.ClientEvent(player, "openDialog", "PAY_AIRDROP_ORDER", LangFunc.GetText(LangType.En, DataName.AirdropBuyingg, Main.PricesSettings.AirdropOrderPrice));
                 else
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AidropTime), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AidropTime), 3000);
             }
             catch (Exception e)
             {
@@ -825,19 +825,19 @@ namespace NeptuneEvo.Events.AirDrop
             {
                 if (!FunctionsAccess.IsWorking("PedAirDrop_BuyInfo"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 var characterData = player.GetCharacterData();
                 if (characterData == null) return;
                 else if (IsPlayerToEvents(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropBuyed), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropBuyed), 3000);
                     return;
                 }
                 else if (AirDropEventStatus == 2)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropAlready), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropAlready), 3000);
                     return;
                 }
                 else if (UpdateData.CanIChange(player, Main.PricesSettings.AirdropInfoPrice, true) != 255) return;
@@ -898,7 +898,7 @@ namespace NeptuneEvo.Events.AirDrop
                         }
                         else
                         {
-                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropSub), 3000);
+                            Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropSub), 3000);
                             return;
                         }
                     }
@@ -906,12 +906,12 @@ namespace NeptuneEvo.Events.AirDrop
                     Wallet.Change(player, -Main.PricesSettings.AirdropInfoPrice);
                     GameLog.Money($"player({characterData.UUID})", $"server", Main.PricesSettings.AirdropInfoPrice, $"buyAirDropInfo");
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropSubbed), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropSubbed), 3000);
 
                     if (AirDropEventStatus == 1)
-                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AidropFractions), 10000);
+                        Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AidropFractions), 10000);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AidropTime), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AidropTime), 3000);
             }
             catch (Exception e)
             {
@@ -926,14 +926,14 @@ namespace NeptuneEvo.Events.AirDrop
                 if (characterData == null) return;
                 else if (!FunctionsAccess.IsWorking("PedAirDrop_Perform"))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.FunctionOffByAdmins), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.FunctionOffByAdmins), 3000);
                     return;
                 }
                 else if (UpdateData.CanIChange(player, Main.PricesSettings.AirdropOrderPrice, true) != 255) return;
                 else if (AirDropEventStatus > 0)
                 {
                     string nextAirDropTime = "Следующий AirDrop можно будет заказать в " + (AirDropEndEventTime.Hour < 10 ? $"0{AirDropEndEventTime.Hour}" : $"{AirDropEndEventTime.Hour}") + ":" + (AirDropEndEventTime.Minute < 10 ? $"0{AirDropEndEventTime.Minute}" : $"{AirDropEndEventTime.Minute}");
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropWaiting, nextAirDropTime), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropWaiting, nextAirDropTime), 3000);
                     return;
                 }
 
@@ -955,7 +955,7 @@ namespace NeptuneEvo.Events.AirDrop
                             }
                             else
                             {
-                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropSub), 3000);
+                                Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropSub), 3000);
                                 return;
                             }
                         }
@@ -964,13 +964,13 @@ namespace NeptuneEvo.Events.AirDrop
                     Wallet.Change(player, -Main.PricesSettings.AirdropOrderPrice);
                     GameLog.Money($"player({characterData.UUID})", $"server", Main.PricesSettings.AirdropOrderPrice, $"buyAirDropOrder");
 
-                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirdropZakazan), 3000);
+                    Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirdropZakazan), 3000);
                     
                     //Trigger.ClientEvent(player, "phone.notify", 99999999, $"Прррррриветик! Спасибо за заказ! Подготовлю для тебя AirDrop в лучшем виде. Скоро дам инфу, пока просто жди :innocent:", 13);
 
                     StartEvent(true, false);
                 }
-                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AidropTime), 3000);
+                else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AidropTime), 3000);
             }
             catch (Exception e)
             {
@@ -1085,7 +1085,7 @@ namespace NeptuneEvo.Events.AirDrop
 
                 if (AirDropEventStatus == 0)
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AirNeZapushen), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AirNeZapushen), 3000);
                     return;
                 }
 
@@ -1115,7 +1115,7 @@ namespace NeptuneEvo.Events.AirDrop
                 if (characterData == null) return;
                 if (characterData.AdminLVL < 8) return;
                 StartEvent(true, true);
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Adminstopaird), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Adminstopaird), 3000);
             }
             catch (Exception e)
             {
@@ -1131,7 +1131,7 @@ namespace NeptuneEvo.Events.AirDrop
                 if (characterData == null) return;
                 if (characterData.AdminLVL < 8) return;
                 StopAirDropEvent();
-                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.Adminstopped), 3000);
+                Notify.Send(player, NotifyType.Success, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.Adminstopped), 3000);
             }
             catch (Exception e)
             {
@@ -1147,7 +1147,7 @@ namespace NeptuneEvo.Events.AirDrop
 
                 if (!IsPlayerToEvents(player))
                 {
-                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoUchastnik), 3000);
+                    Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoUchastnik), 3000);
                     return;
                 }
 
@@ -1166,13 +1166,13 @@ namespace NeptuneEvo.Events.AirDrop
                     for (int i = 0; i < airDropsTimeInfo.Count; i++)
                         Trigger.SendChatMessage(player, $"№{i + 1} | " + (airDropsTimeInfo[i].Hour < 10 ? $"0{airDropsTimeInfo[i].Hour}" : $"{airDropsTimeInfo[i].Hour}") + ":" + (airDropsTimeInfo[i].Minute < 10 ? $"0{airDropsTimeInfo[i].Minute}" : $"{airDropsTimeInfo[i].Minute}"));
 
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.Air1));
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.Air2));
-                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.Ru, DataName.Air3));
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.Air1));
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.Air2));
+                    Trigger.SendChatMessage(player, LangFunc.GetText(LangType.En, DataName.Air3));
 
                     Trigger.SendChatMessage(player, "=== AIRDROP TIME ===");
                 }
-                else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NoInfo), 3000);
+                else Notify.Send(player, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NoInfo), 3000);
             }
             catch (Exception e)
             {

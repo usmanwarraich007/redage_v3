@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Localization;
 using NeptuneEvo.Character;
@@ -66,7 +66,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic.Orders
 
             if (sessionData.WorkData.OnWork)
             {
-                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.EndWorkDay), 3000);
+                Notify.Send(player, NotifyType.Info, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.EndWorkDay), 3000);
                 sessionData.WorkData.OnWork = false;
                 
                 Trigger.ClientEvent(player, "client.phone.mechjob.jobEnd");
@@ -75,7 +75,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic.Orders
                     var target = sessionData.WorkData.Player;
                     var targetSessionData = target.GetSessionData();
                     if (targetSessionData == null) return;
-                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.AutomechLeave), 3000);
+                    Notify.Send(target, NotifyType.Warning, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.AutomechLeave), 3000);
                 }
             }
         }
@@ -106,7 +106,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic.Orders
                 
                 
             }                                                                                                                                    
-            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.Ru, DataName.NotWorkTaxi), 3000);  
+            else Notify.Send(player, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(LangType.En, DataName.NotWorkTaxi), 3000);  
             
             Trigger.ClientEvent(player, "client.phone.mechjob.initSelect", JsonConvert.SerializeObject(selectedOrders), isTake);
         }
@@ -164,7 +164,7 @@ namespace NeptuneEvo.Players.Phone.Mechanic.Orders
 
             if (player.Position.DistanceTo2D(target.Position) < 10f)
             {
-                //Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, "Механик подъехал.", 8000);
+                //Notify.Send(target, NotifyType.Error, NotifyPosition.BottomCenter, LangFunc.GetText(target.Lang, DataName.MechanicArrived), 8000);
                 Trigger.ClientEvent(target, "phone.notify", (int) DefaultNumber.Mech, $"Механик подъехал!", 8); 
                 BattlePass.Repository.UpdateReward(player, 24);
                 Phone.Mechanic.Repository.OnCancel(target, isNotRemove: false);

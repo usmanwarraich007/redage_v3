@@ -135,7 +135,7 @@ namespace NeptuneEvo.Players.Phone.Forbes
                 }
                 
                 
-                await using var db = new ServerBD("MainDB");//В отдельном потоке
+                await using var db = new ServerBD("MainDB");//On Separate Thread
 
                 var characters = await db.Characters
                     .ToListAsync();
